@@ -105,7 +105,7 @@ export const ShopVerticalPage = () => {
     setLoading(true);
     const payload = {
       store_id: parseInt(enviroment.STORE_ID),
-      vertical_id: verticalSlug,
+      vertical_slug: verticalSlug,
       category_name_url: categorySlug,
       result_per_page: 10,
       page: 1,
