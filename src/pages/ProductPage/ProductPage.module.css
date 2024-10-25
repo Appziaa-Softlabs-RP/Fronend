@@ -135,7 +135,7 @@
 }
 .productDescHeader{
     padding: 15px;
-    border-bottom: 1px solid #999;
+    /* border-bottom: 1px solid #999; */
 }
 .productDescTitle{
     color: #151515;

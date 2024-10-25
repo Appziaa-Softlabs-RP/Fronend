@@ -722,39 +722,6 @@ export const ProductPage = () => {
                   className={`${styles.productCollapseBox} col-12 d-inline-block p-0`}
                   onClick={openProductColpse(this)}
                 >
-                  <div
-                    className={`${styles.productTabBox} col-12 d-inline-flex align-items-center justify-content-between`}
-                    style={{
-                      height: "fit-content",
-                      background: "rgba(207, 16, 46, 0.12)",
-                    }}
-                  >
-                    <button
-                      aria-label="specifications"
-                      style={{
-                        borderRadius: "4px",
-                        border: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        background: "none",
-                      }}
-                    >
-                      <span>Specifications</span>&nbsp;
-                    </button>
-                    <button
-                      aria-label="specifications"
-                      style={{
-                        borderRadius: "4px",
-                        border: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        background: "none",
-                      }}
-                      onClick={() => setIsSpecilization(!isSpecilization)}
-                    >
-                      {isSpecilization ? "-" : "+"}
-                    </button>
-                  </div>
                   {isSpecilization && (
                     <div
                       className={`${styles.productDetailText} d-inline-flex flex-column gap-3 col-12`}
@@ -1070,17 +1037,6 @@ export const ProductPage = () => {
                           Product Description
                         </h3>
                       )}
-                    {otherInfo === true && (
-                      <h3
-                        className={`${descActive === "Specifications" && styles.tabActive
-                          } ${styles.productDescTitle
-                          } col-4 justify-content-center d-inline-flex m-0`}
-                        onClick={() => setDescActive("Specifications")}
-                        role="button"
-                      >
-                        Specifications
-                      </h3>
-                    )}
                     {featuresInfo === true && (
                       <h3
                         className={`${descActive === "Features" && styles.tabActive
@@ -1093,86 +1049,11 @@ export const ProductPage = () => {
                       </h3>
                     )}
                   </div>
-                  {descActive === "Description" && (
+                  {descActive === "Description" && (prodDesc?.__html !== 'Not available') && (
                     <div
                       className={`${styles.prodDescAnswer} d-inline-flex flex-column col-12`}
                       dangerouslySetInnerHTML={prodDesc}
                     ></div>
-                  )}
-                  {descActive === "Specifications" && (
-                    <div
-                      className={`${styles.productDetailText} d-inline-flex flex-column gap-3 col-12 p-3`}
-                    >
-                      {ProductData?.specifications?.type && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Type:</strong>{" "}
-                          {ProductData?.specifications?.type}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.model_name && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Model Name: </strong>
-                          {ProductData?.specifications?.model_name}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.container_type && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Container Type: </strong>
-                          {ProductData?.specifications?.container_type}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications
-                        ?.package_dimension_length && (
-                          <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                            <strong>Dimension: </strong>
-                            <span>{"L " +
-                              ProductData?.specifications
-                                ?.package_dimension_length +
-                              " x B " +
-                              ProductData?.specifications
-                                ?.package_dimension_width +
-                              " x H " +
-                              ProductData?.specifications
-                                ?.package_dimension_height}{" "}
-                              {
-                                ProductData?.specifications
-                                  ?.package_dimension_unit === 2
-                                  ? <span>inch</span> :
-                                  ProductData?.specifications
-                                    ?.package_dimension_unit === 3
-                                    ? <span>cm</span> :
-                                    ProductData?.specifications
-                                      ?.package_dimension_unit === 4
-                                      ? <span>mm</span> : ''
-                              }{" "}
-                            </span>
-                          </p>
-                        )}
-
-                      {ProductData?.specifications?.manufactured_by && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Manufactured By: </strong>
-                          {ProductData?.specifications?.manufactured_by}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.packed_by && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Packed By: </strong>
-                          {ProductData?.specifications?.packed_by}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.exp_date && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Exp Date: </strong>
-                          {ProductData?.specifications?.exp_date}{" "}
-                        </p>
-                      )}
-                    </div>
                   )}
 
                   {descActive === "Features" && (
