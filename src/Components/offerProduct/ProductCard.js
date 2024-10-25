@@ -244,9 +244,9 @@ export const ProductCard = ({ item, index }) => {
               src={
                 item?.image
                   ? item.image?.replace(
-                      "https://rewardsplus.in/uploads/app/public/cogendermpany",
-                      "https://merchant.rewardsplus.in/uploads/app/public/company"
-                    )
+                    "https://rewardsplus.in/uploads/app/public/cogendermpany",
+                    "https://merchant.rewardsplus.in/uploads/app/public/company"
+                  )
                   : item?.image_url
               }
               alt="--"
@@ -272,8 +272,8 @@ export const ProductCard = ({ item, index }) => {
         </Link>
         <div>
           <Link
-          to={`/product/${item?.name_url}`}
-          style={{
+            to={`/product/${item?.name_url}`}
+            style={{
               textDecoration: "none",
             }}
             className={`${styles.offerItemName} col-12 p-0 mb-1`}
