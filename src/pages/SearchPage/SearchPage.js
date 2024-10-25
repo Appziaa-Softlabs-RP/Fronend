@@ -1,16 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { SearchFilter } from "../../Components/Filter/SearchFilter";
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
 import { ProductListLoader } from "../../Components/Loader/Loader";
 import { PageHeader } from "../../Components/PageHeader/PageHeader";
 import { ProductCard } from "../../Components/ProductCard/ProductCard";
-import {
-  BackArrowIcon,
-  FilterIcon,
-  SortByIcon,
-} from "../../Components/siteIcons";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
@@ -119,20 +113,6 @@ export const SearchPage = () => {
                 id="scrollableDiv"
               >
                 <div className={`d-inline-flex align-items-start col-12 gap-2`}>
-                  {windowWidth === "desktop" && (
-                    <div
-                      className={`${styles.filterSticky} col-3 position-sticky flex-shrink-1 d-inline-flex overflow-y-auto`}
-                    >
-                      <SearchFilter
-                        filterVert={filterVert}
-                        filterCatg={filterCatg}
-                        setProductData={setProductData}
-                        setProductActualData={setProductActualData}
-                        setProductDataLen={setProductDataLen}
-                        keyword={keyword}
-                      />
-                    </div>
-                  )}
                   <div
                     className={`${
                       windowWidth === "mobile"
@@ -178,28 +158,6 @@ export const SearchPage = () => {
                         </span>
                       </div>
                     </div>
-
-                    {windowWidth === "mobile" && (
-                      <div
-                        className={`${styles.productBtnBox} d-inline-flex align-items-stretch col-12 bottom-0 start-0`}
-                      >
-                        <span
-                          className={`${styles.goCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
-                          onClick={() => setSortPopup(true)}
-                        >
-                          {" "}
-                          <SortByIcon />
-                          Sort By
-                        </span>
-                        <span
-                          className={`${styles.AddCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
-                          onClick={() => setFilterPopup(true)}
-                        >
-                          <FilterIcon /> Filters
-                        </span>
-                      </div>
-                    )}
-
                     <div className={`d-inline-flex flex-wrap col-12 mb-3`}>
                       {ProductData?.length > 0 &&
                         ProductData?.map((item, index) => {
@@ -226,103 +184,6 @@ export const SearchPage = () => {
             )}
           </div>
         </div>
-
-        {sortPopup === true && (
-          <div
-            className={`${styles.actionSheet} position-fixed d-inline-flex flex-column justify-content-end gap-2 col-12 p-2 h-100 bottom-0 start-0`}
-          >
-            <div
-              className={`${styles.actionSheetBox} d-inline-flex flex-column col-12 overflow-hidden`}
-            >
-              <div
-                className={`${styles.actionSheetTitle} col-12 d-inline-flex align-items-center justify-content-center`}
-              >
-                Sort By
-              </div>
-              <button
-                aria-label="Price: Low to High"
-                onClick={() => {
-                  priceDescending();
-                  setSortPopup(false);
-                }}
-                className={`${styles.actionSheetBtn} col-12 d-inline-flex align-items-center justify-content-center`}
-              >
-                Price: Low to High
-              </button>
-              <button
-                aria-label="Price: High to Low"
-                onClick={() => {
-                  priceAscending();
-                  setSortPopup(false);
-                }}
-                className={`${styles.actionSheetBtn} col-12 d-inline-flex align-items-center justify-content-center`}
-              >
-                Price: High to Low
-              </button>
-              <button
-                aria-label="Clear All"
-                onClick={() => {
-                  resetSortFilter();
-                  setSortPopup(false);
-                }}
-                className={`${styles.actionSheetBtn} col-12 d-inline-flex align-items-center justify-content-center`}
-              >
-                Clear All
-              </button>
-            </div>
-            <button
-              aria-label="Cancel"
-              onClick={() => setSortPopup(false)}
-              className={`${styles.actionSheetCnclBtn} col-12 d-inline-flex align-items-center justify-content-center`}
-            >
-              Cancel
-            </button>
-          </div>
-        )}
-
-        {windowWidth === "mobile" && (
-          <div
-            className={`${
-              styles.filterPopup
-            } top-0 start-0 h-100 col-12 position-fixed ${
-              filterPopup === true ? "d-inline-flex" : "d-none"
-            } flex-column overflow-y-auto`}
-          >
-            <div
-              className={`${styles.PageHeader} position-sticky top-0 start-0 col-12 d-inline-flex gap-2`}
-            >
-              <div
-                className={`${styles.backBox} d-inline-flex align-items-center justify-content-center flex-shrink-0`}
-                onClick={() => setFilterPopup(false)}
-              >
-                <BackArrowIcon color="#FFF" />
-              </div>
-              <div className="d-inline-flex align-items-center mw-100 flex-shrink-1 col-6 me-auto">
-                <label
-                  className={`${styles.currentName} text-truncate col-12 d-inline-block`}
-                >
-                  Filter
-                </label>
-              </div>
-            </div>
-            <SearchFilter
-              filterVert={filterVert}
-              filterCatg={filterCatg}
-              setProductData={setProductData}
-              setProductActualData={setProductActualData}
-            />
-            <div
-              className={`${styles.productBtnBox} d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}
-            >
-              <span
-                className={`${styles.saveFilterBtn} position-relative col-12 d-inline-flex align-items-center justify-content-center gap-2`}
-                onClick={() => setFilterPopup(false)}
-              >
-                Apply Filter
-              </span>
-            </div>
-          </div>
-        )}
       </div>
       <Footer />
     </React.Fragment>

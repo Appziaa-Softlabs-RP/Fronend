@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ReactOwlCarousel from "react-owl-carousel";
 import { useNavigate } from "react-router-dom";
-import { useApp } from "../../context/AppContextProvider";
 import styles from "./LookingFor.module.css";
 
 import { ArrowRight } from "react-bootstrap-icons";
@@ -14,7 +13,7 @@ export const LookingFor = () => {
   const navigate = useNavigate();
 
   const subCatProduts = (categorySlug, verticalSlug) => {
-    navigate(`/store-product/vertical/${verticalSlug}/category/${categorySlug}`);
+    navigate(`/store-product/${categorySlug}`);
   };
 
   useEffect(() => {

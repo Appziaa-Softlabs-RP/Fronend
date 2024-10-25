@@ -36,12 +36,18 @@
 .productCardBox {
     position: relative;
     border-radius: 8px;
-    width: 33%;
+    width: 25%;
     background: #fff;
 }
 
 .superContainerCards{
     margin-top: 1rem;
+}
+
+@media screen and (max-width: 1000px) {
+    .productCardBox {
+        width: 33%;
+    }
 }
 
 @media screen and (max-width: 560px) {
