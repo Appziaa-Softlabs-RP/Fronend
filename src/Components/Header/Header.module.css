@@ -249,7 +249,7 @@
     background: white;
     z-index: 30;
     transition: all ease 400ms;
-    transform: translateY(-8px);
+    transform: translateY(-1px);
     top: 86px;
     border-radius: 0px 0px 5px 5px;
     padding: 12px;

@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styles from './NewArrival.module.css';
 import ReactOwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ApiService from "../../services/ApiService";
 import { ProductCard } from "../ProductCard/ProductCard";
 
 export const NewArrival = () => {
     const appData = useApp();
+    const carouselRef = useRef(null);
     let windowWidth = appData.appData.windowWidth;
     const [productData, setProductData] = useState([]);
 
@@ -44,30 +45,48 @@ export const NewArrival = () => {
                     background: "#522627"
                 }}>
                     <div className={`${windowWidth === "mobile" && 'p-0'} container`}>
-                        <div className={`col-12 ${windowWidth === 'mobile' ? 'p-3' : 'mt-3'} d-inline-flex flex-column`}>
+                        <div className={`col-12 position-relative ${windowWidth === 'mobile' ? 'p-3' : 'mt-3'} d-inline-flex flex-column`}>
                             <h2 className={`${styles.title} textSpecial text-center mb-4`}>
                                 <span className="text-white" style={{
                                     textDecoration: 'underline',
                                 }}>Season's</span>{' '}
                                 <span style={{ color: "#ffa500" }}>flavour</span>
                             </h2>
-                            <ReactOwlCarousel className={`${styles.brandSilder} brandSilder col-12 owl-theme`}
-                                margin={10}
-                                dots={false}
-                                items={responsiveItems}
-                                loop={false}
-                                nav={true}
-                                stagePadding={`${windowWidth === 'mobile' ? 50 : 0}`}>
-                                {/* {productData?.map((item, index) => { */}
-                                {/* show in descending order according sort by stock */}
-                                {productData?.sort((a, b) => b.stock - a.stock).map((item, index) => {
-                                    return (
-                                        <div key={index} className={`${styles.brandItemCard} item flex-shrink-1 d-inline-block position-relative text-decoration-none col-12 overflow-hidden mouse-cursor`}>
-                                            <ProductCard item={item} index={index} />
-                                        </div>
-                                    );
-                                })}
-                            </ReactOwlCarousel>
+                            <div className="d-md-flex align-items-center">
+                                <ReactOwlCarousel ref={carouselRef} className={`${styles.brandSilder} brandSilder col-12 my-4 owl-theme`}
+                                    margin={10}
+                                    dots={false}
+                                    items={responsiveItems}
+                                    loop={false}
+                                    nav={false}
+                                    stagePadding={`${windowWidth === 'mobile' ? 50 : 0}`}>
+                                    {/* {productData?.map((item, index) => { */}
+                                    {/* show in descending order according sort by stock */}
+                                    {productData?.sort((a, b) => b.stock - a.stock).map((item, index) => {
+                                        return (
+                                            <div key={index} className={`${styles.brandItemCard} item flex-shrink-1 d-inline-block position-relative text-decoration-none col-12 overflow-hidden mouse-cursor`}>
+                                                <ProductCard item={item} index={index} />
+                                            </div>
+                                        );
+                                    })}
+                                </ReactOwlCarousel>
+                                {/* Custom Navigation Buttons */}
+                                <div className={styles.customNav}>
+                                    <button className={`${styles.navButton} ${styles.prev}`} onClick={() => carouselRef.current.prev()}>
+                                        ‹
+                                    </button>
+                                    <button className={`${styles.navButton} ${styles.next}`} onClick={() => carouselRef.current.next()}>
+                                        ›
+                                    </button>
+                                </div>
+                            </div>
+                            <Link to="/store-product/vertical/chaina-ram/category/sweets" className="mx-auto" style={{
+                                width: "fit-content",
+                            }}>
+                                <button className={`btn ${styles.exploreBtn} px-5`}>
+                                    EXPLORE MORE
+                                </button>
+                            </Link>
                         </div>
                     </div>
                 </div>

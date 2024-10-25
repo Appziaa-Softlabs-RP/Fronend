@@ -97,28 +97,3 @@ export const specials = {
         },
     ],
 }
-
-export const aboutUs = {
-    "heading": `About ${process.env.REACT_APP_BUSINESS_NAME} &ndash; Your Premium Toy Destination`,
-
-    "description": `${process.env.REACT_APP_BUSINESS_NAME} is where the joy of childhood comes alive. We&#39;re a premium toy store dedicated to bringing the world&#39;s best playthings to your doorstep. Whether you&#39;re searching for a classic wooden puzzle, the latest tech-powered robot, or a beloved character from your favorite story, you&#39;ll find it at ${process.env.REACT_APP_BUSINESS_NAME}.`,
-
-    "keyDifference": `The ${process.env.REACT_APP_BUSINESS_NAME} Difference`,
-
-    "keyDifferencePoints": [
-        {
-            "heading": "Curated Collection:",
-            "description": "&nbsp;We carefully handpick toys from around the world and India, ensuring a mix of both internationally renowned brands and exceptional local craftsmanship."
-        },
-        {
-            "heading": "Premium Experience:",
-            "description": "&nbsp;From the moment you explore our website to the day your little one unwraps their new treasure, we strive to provide a delightful and seamless shopping experience."
-        },
-        {
-            "heading": "Passion for Play:",
-            "description": "&nbsp;Our founder, Varun Behl, is a toy enthusiast at heart. His dynamic vision drives {process.env.REACT_APP_BUSINESS_NAME}&#39;s mission to make us the preferred destination for all things toys in India."
-        }
-    ],
-
-    "otherInfo": `<p>Discover the Wonders of Play</p><p> Come explore the endless possibilities of imagination and creativity at {process.env.REACT_APP_BUSINESS_NAME}.</p><p> Let us help you find the perfect toy that will spark joy and wonder in your child&#39;s life!</p>`
-}

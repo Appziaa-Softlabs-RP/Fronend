@@ -207,13 +207,13 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
 
   return (
     <React.Fragment>
-      <div className={`col-12 d-inline-flex shadow-sm flex-column px-2 px-md-5 `} style={{
+      <div className={`col-12 d-inline-flex shadow-sm flex-column px-2 d-flex justify-content-center align-items-center`} style={{
         position: 'relative',
         zIndex: '1000',
         background: 'var(--PRIMARY_COLOR)'
       }}>
         <div
-          className={`${styles.headerRow} m-0 col-12 p-0 row d-inline-flex align-items-center mx-md-4`}
+          className={`${styles.headerRow} m-0 col-10 mx-auto p-0 row d-inline-flex align-items-center mx-md-4`}
         >
           <div className="container-fluid p-0 w-100 mx-auto col-11 d-flex align-items-stretch">
             <div

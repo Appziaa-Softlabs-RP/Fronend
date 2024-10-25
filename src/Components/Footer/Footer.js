@@ -1,26 +1,26 @@
-import React from 'react'
-import { Button, Col, Container, Form, Row } from 'react-bootstrap'
+import React from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
+import { Link } from "react-router-dom";
+import siteLogo from "../../assets/images/site_logo.png";
+import { enviroment } from "../../enviroment";
 import {
   FacebookIcon,
   InstagramIcon,
   LinkedInIcon,
-  TwitterIcon,
   YoutubeIcon
-} from "../siteIcons"
-import styles from "./Footer.module.css"
-import { enviroment } from "../../enviroment";
-import { Link } from "react-router-dom";
-import siteLogo from "../../assets/images/site_logo.png";
+} from "../siteIcons";
 import Specials from "../Specials/Specials";
+import styles from "./Footer.module.css";
 
 export const Footer = () => {
 
   return (
     <div>
       <footer className={`${styles.footer}`}>
-        <Container fluid className={styles.container}>
-          <div className={styles.borderTop}></div>
-          <Row className="gy-4">
+        <Container fluid className={`${styles.container}`}>
+          <Row>
+          <Col xs={10} className='mx-auto'>
+          <Row className="gy-4 d-flex flex-wrap justify-content-between">
             <Col lg={4} md={6} className="mb-4 mb-md-0">
               <div className={styles.logoWrapper}>
                 <img
@@ -61,17 +61,6 @@ export const Footer = () => {
                 <li><Link to="/return-policy" className={styles.link}>Return Policies</Link></li>
                 <li><Link to="/sitemap" className={styles.link}>Sitemap</Link></li>
               </ul>
-            </Col>
-            <Col lg={2} md={6}>
-              <h5 className={styles.heading}>Newsletter</h5>
-              <Form className={styles.newsletterForm}>
-                <Form.Group controlId="footerEmail">
-                  <Form.Control type="email" placeholder="Your email" className={styles.emailInput} />
-                </Form.Group>
-                <Button variant="primary" type="submit" className={styles.submitButton}>
-                  Subscribe
-                </Button>
-              </Form>
             </Col>
           </Row>
           <hr className={styles.divider} />
@@ -145,6 +134,8 @@ export const Footer = () => {
               </small>
             </p>
           </div>
+          </Col>
+          </Row>
         </Container>
       </footer>
       <Specials />

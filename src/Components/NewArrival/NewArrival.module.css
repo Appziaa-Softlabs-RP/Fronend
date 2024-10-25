@@ -18,6 +18,58 @@
   line-height: 16px;
 }
 
+
+.customNav {
+  position: absolute;
+  width: 108%;
+transform: translateX(-4%);
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem; /* Adjust as necessary */
+}
+
+.navButton {
+  background-color: #fff; /* Customize background color */
+  border: none; /* Remove border */
+  border-radius: 50%; /* Round buttons */
+  width: 40px; /* Button width */
+  height: 40px; /* Button height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem; /* Font size */
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  color: #522627; /* Text color */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s, color 0.3s; /* Transition effects */
+}
+
+.navButton:hover {
+  background-color: #ffa500; /* Change background on hover */
+  color: #fff; /* Change text color on hover */
+}
+
+.exploreBtn{
+  font-size: 1.2rem;
+  color: var(--PRIMARY_COLOR);
+  background: white;
+  white-space: nowrap;
+}
+
+.exploreBtn:hover{
+  background-color: #ffa500;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .customNav {
+    position: absolute;
+    width: 100%;
+    transform: translateX(-12px) translateY(-220px);
+  }
+}
+
 @media screen and (min-width: 568px) {
   .brandInTitle {
     font-size: 25px;

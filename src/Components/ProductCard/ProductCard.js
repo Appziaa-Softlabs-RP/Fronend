@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import noImage from "../../assets/images/image-not-available.jpg";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { AppNotification } from "../../utils/helper";
 import styles from "./ProductCard.module.css";
-import noImage from "../../assets/images/image-not-available.jpg";
-import { ProductPage } from "../../pages/ProductPage/ProductPage";
 
 export const ProductCard = ({ item, index }) => {
   const [prodAdded, setProdAdded] = useState(false);
   const [prodAddedQty, setProdAddedQty] = useState(0);
   const [userInfo, setUserInfo] = useState({});
-  const navigate = useNavigate();
   const appData = useApp();
 
   const setNoImage = (e) => {
@@ -281,7 +279,7 @@ export const ProductCard = ({ item, index }) => {
           style={{
             textDecoration: "none",
           }}
-          className={`${styles.featuredImageBox} position-relative col-12 mt-1 float-left mb-1 d-flex justify-content-center align-items-center w-full`}
+          className={`${styles.featuredImageBox} p-0 position-relative col-12 mt-1 float-left mb-1 d-flex justify-content-center align-items-center w-full`}
         >
           {item.stock === 0 || item.stock < 0 ? (
             <span className={`${styles.soldOutText} position-absolute d-block`}>
@@ -291,7 +289,7 @@ export const ProductCard = ({ item, index }) => {
             ""
           )}
           <div
-            className={`d-flex align-items-center  justify-content-center ${styles.productImgContainer}`}
+            className={`d-flex align-items-center w-100 justify-content-center ${styles.productImgContainer}`}
           >
             <img
               onError={(e) => setNoImage(e)}
@@ -308,7 +306,7 @@ export const ProductCard = ({ item, index }) => {
                       "https://rewardsplus.in/uploads/app/public/cogendermpany",
                       "https://merchant.rewardsplus.in/uploads/app/public/company"
                     )
-                  : item?.image_url
+                  : item?.image_url ?? noImage
               }
               alt="--"
               className={`${styles.productImg}`}
@@ -346,7 +344,7 @@ export const ProductCard = ({ item, index }) => {
               whiteSpace: "normal",
               lineHeight: "15px",
             }}
-            className={`${styles.offerItemName} col-12 p-0 mb-1`}
+            className={`${styles.offerItemName} col-12 fw-bold p-0 mb-1`}
           >
             {item.name}
           </Link>

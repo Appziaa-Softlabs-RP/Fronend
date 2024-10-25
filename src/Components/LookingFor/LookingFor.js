@@ -66,7 +66,7 @@ export const LookingFor = () => {
       {loading ? (
         <LookingForBannerLoader />
       ) : (
-        <div className={`${styles.shopAgeBox} px-3 col-12 d-inline-flex my-3`}>
+        <div className={`${styles.shopAgeBox} px-3 col-12 d-inline-flex my-5`}>
           <div className={`container d-flex flex-column m-auto`}>
             <h2 style={{
               marginBottom: "20px",
@@ -75,7 +75,9 @@ export const LookingFor = () => {
               alignItems: "end",
               gap: "20px",
             }}>
-              <span className="textSpecial">Mithaas</span>
+              <span className="textSpecial" style={{
+                textDecoration: 'underline',
+              }}>Mithaas</span>
               <img
                 src="/images/chana-ram.png"
                 alt="Chana Ram"
@@ -84,13 +86,20 @@ export const LookingFor = () => {
                 }}
               />
             </h2>
-            <div className="col-12 d-inline-flex">
+            <div className="col-12 row d-inline-flex" style={{
+              maxWidth: '1200px',
+              margin: 'auto',
+            }}>
               <ReactOwlCarousel
                 className={`carousel-looking-for col-12 brandSilder owl-theme`}
                 margin={10}
                 loop={false}
                 dots={false}
-                responsive={responsiveSettings} // Use responsive settings directly
+                responsive={responsiveSettings}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
                 nav={true}
               >
                 {categories?.map((item, idx) => {
@@ -123,7 +132,7 @@ export const LookingFor = () => {
                         <span>
                           {item?.category?.name}
                         </span>
-                        <span style={{
+                        <span className={styles.arrow} style={{
                           background: getColors(idx + 1, 'text'),
                           color: "white",
                           padding: "3px 10px",
