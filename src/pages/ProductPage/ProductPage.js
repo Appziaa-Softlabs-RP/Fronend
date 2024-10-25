@@ -1482,7 +1482,7 @@ export const ProductPage = () => {
           </div>
         </div>
         <div className={`col-12 d-inline-block mb-5`}>
-          <FeaturedProducts product={ProductData?.featured} />
+          {/* <FeaturedProducts product={ProductData?.featured} /> */}
           <SimilarProduct product={ProductData?.similar} />
         </div>
         <Footer />

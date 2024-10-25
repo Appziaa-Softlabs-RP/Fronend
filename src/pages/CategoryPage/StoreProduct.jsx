@@ -7,9 +7,7 @@ import { ProductListLoader } from "../../Components/Loader/Loader";
 import { PageHeader } from "../../Components/PageHeader/PageHeader";
 import { ProductCard } from "../../Components/ProductCard/ProductCard";
 import {
-    FilterIcon,
-    OrderIcon,
-    SortByIcon
+    OrderIcon
 } from "../../Components/siteIcons";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
@@ -81,25 +79,25 @@ export const StoreProductCategory = () => {
     };
 
     const LoadMoreProducts = () => {
-        let pageCount = apiPayload?.page;
-        pageCount = pageCount + 1;
+        let pageCount = apiPayload?.page + 1;
         ApiService.CategoryByProd(apiPayload)
             .then((res) => {
                 if (res.message === "Fetch successfully.") {
-                    let prevProdArr = [];
-                    prevProdArr = ProductData;
-                    let newProd = res.payload_CategoryByProduct;
-                    for (let i = 0; i < newProd.length; i++) {
-                        prevProdArr.push(newProd[i]);
-                    }
-                    let newProduct = [...prevProdArr];
-                    setProductData(newProduct);
-                    setProductActualData(newProduct);
+                    const newProd = res.payload_CategoryByProduct?.products;
+                    console.log(newProd)
+                    // Use a callback to work with the latest state of ProductData
+                    setProductData((prevProductData) => {
+                        const updatedProducts = [...prevProductData, ...newProd];
+                        setProductActualData(updatedProducts);
+                        return updatedProducts;
+                    });
                     setLoading(false);
                     setApiPayload((prev) => ({ ...prev, page: pageCount }));
                 }
             })
-            .catch((err) => { });
+            .catch((err) => {
+                console.error(err); // log any errors for debugging
+            });
     };
 
     useEffect(() => {
@@ -109,8 +107,6 @@ export const StoreProductCategory = () => {
             category_slug: category,
         };
         setFilterVert(category)
-        // setFilterVert(locationState?.state?.verticalId);
-        // setFilterCatg(locationState?.state?.categoryId);
         payload.page = 1;
         payload.result_per_page = 10;
         console.log(payload);

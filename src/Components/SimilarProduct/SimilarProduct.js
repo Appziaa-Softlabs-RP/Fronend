@@ -17,19 +17,12 @@ export const SimilarProduct = ({ product }) => {
           <h2
             className={`${
               styles.availSizeTitle
-            } mt-0 col-12 d-inline-flex align-items-center justify-content-between ${
+            } mt-0 col-12 d-inline-flex align-items-center justify-content-between pb-3 ${
               windowWidth === "mobile" && "px-4 m-0"
             }`}
           >
-            Similar Products
+            You may like this
           </h2>
-          {windowWidth === "mobile" && (
-            <span
-              className={`${styles.smallTitle} col-12 mb-3 d-inline-block float-left px-4`}
-            >
-              Explore similar products
-            </span>
-          )}
           <ReactOwlCarousel
             className={`${styles.allFeaturedProduct} ${
               windowWidth === "mobile" && "px-3"
