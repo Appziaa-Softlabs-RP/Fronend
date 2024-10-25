@@ -2,6 +2,32 @@
     border-radius: 10px;
 }
 
+.customNav {
+    position: absolute;
+    width: 95%;
+    left: 2.5%;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+}
+
+.navButton {
+    border: none;
+    width: 60px;
+    height: 60px;
+    /* Button height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    background: none;
+    font-size: 100px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+
 @media screen and (min-width: 1250px) {
     .heroBannerContainer {
         margin-top: 0px;
