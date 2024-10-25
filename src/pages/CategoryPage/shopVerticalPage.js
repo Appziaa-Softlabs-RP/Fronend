@@ -80,32 +80,33 @@ export const ShopVerticalPage = () => {
   };
 
   const LoadMoreProducts = () => {
-    let pageCount = apiPayload?.page;
-    pageCount = pageCount + 1;
-    ApiService.StoreCategoryProd(apiPayload)
+    const pageCount = (apiPayload?.page || 1) + 1;
+
+    const updatedPayload = { ...apiPayload, page: pageCount };
+
+    ApiService.StoreCategoryProd(updatedPayload)
       .then((res) => {
         if (res.message === "Fetch successfully.") {
-          let prevProdArr = [];
-          prevProdArr = ProductData;
-          let newProd = res.payload_VerticalByProduct;
-          for (let i = 0; i < newProd.length; i++) {
-            prevProdArr.push(newProd[i]);
-          }
-          let newProduct = [...prevProdArr];
-          setProductData(newProduct);
-          setProductActualData(newProduct);
-          setLoading(false);
+          const newProd = res.payload_VerticalByProduct;
+          // Append new products to current list
+          setProductData((prevData) => [...prevData, ...newProd]);
+          setProductActualData((prevData) => [...prevData, ...newProd]);
+
+          // Update the `apiPayload` with the new page count
           setApiPayload((prev) => ({ ...prev, page: pageCount }));
         }
+        setLoading(false);
       })
-      .catch((err) => { });
+      .catch((err) => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
     setLoading(true);
     const payload = {
       store_id: parseInt(enviroment.STORE_ID),
-      vertical_id: verticalSlug,
+      vertical_slug: verticalSlug,
       category_name_url: categorySlug,
       result_per_page: 10,
       page: 1,
@@ -134,7 +135,7 @@ export const ShopVerticalPage = () => {
       <div
         className={`mt-4 col-12 d-inline-flex flex-column`}>
         <div className="hero">
-        {/* {locationState?.state?.banner !== "" &&
+          {/* {locationState?.state?.banner !== "" &&
             locationState?.state?.banner !== null &&
             locationState?.state?.banner !== undefined && (
               <div
@@ -171,38 +172,38 @@ export const ShopVerticalPage = () => {
                   className={`${styles.productContainer
                     } flex-shrink-1 d-inline-flex flex-wrap`}>
 
-                    <div
-                      className={`${styles.sortContainer} hideInMobile col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}
+                  <div
+                    className={`${styles.sortContainer} hideInMobile col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}
+                  >
+                    <span
+                      onClick={() => resetSortFilter()}
+                      role="button"
+                      className={`${styles.clearAllBtn} d-inline-flex`}
                     >
-                      <span
-                        onClick={() => resetSortFilter()}
-                        role="button"
-                        className={`${styles.clearAllBtn} d-inline-flex`}
-                      >
-                        Clear All
+                      Clear All
+                    </span>
+                    <div className="col-12 d-inline-flex justify-content-end align-items-center">
+                      <span className={`${styles.sortBy} d-inline-flex me-2`}>
+                        Sort By
                       </span>
-                      <div className="col-12 d-inline-flex justify-content-end align-items-center">
-                        <span className={`${styles.sortBy} d-inline-flex me-2`}>
-                          Sort By
-                        </span>
-                        <span
-                          onClick={() => priceDescending()}
-                          role="button"
-                          className={`${styles.priceLow} ${isDescendingOrder ? "fw-bold" : ""
-                            } d-inline-flex px-1`}
-                        >
-                          Price: Low to High
-                        </span>
-                        <span
-                          onClick={() => priceAscending()}
-                          role="button"
-                          className={`${styles.priceLow} d-inline-flex px-1 ${isAscendingOrder ? "fw-bold" : ""
-                            }`}
-                        >
-                          Price: High to Low
-                        </span>
-                      </div>
+                      <span
+                        onClick={() => priceDescending()}
+                        role="button"
+                        className={`${styles.priceLow} ${isDescendingOrder ? "fw-bold" : ""
+                          } d-inline-flex px-1`}
+                      >
+                        Price: Low to High
+                      </span>
+                      <span
+                        onClick={() => priceAscending()}
+                        role="button"
+                        className={`${styles.priceLow} d-inline-flex px-1 ${isAscendingOrder ? "fw-bold" : ""
+                          }`}
+                      >
+                        Price: High to Low
+                      </span>
                     </div>
+                  </div>
 
                   {ProductData?.length > 0 ? (
                     <InfiniteScroll
