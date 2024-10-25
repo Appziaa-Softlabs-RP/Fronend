@@ -1235,6 +1235,8 @@ export const ProductPage = () => {
                       {ProductData?.name}
                     </h2>
                 }
+                {
+                  ProductData?.total_rating &&
                 <div
                   className={``}
                 >
@@ -1248,6 +1250,7 @@ export const ProductPage = () => {
                       />
                   }
                 </div>
+}
                 {
                   productLoading ?
                     <Skeleton height={25} width={300} />
@@ -1255,20 +1258,6 @@ export const ProductPage = () => {
                     <div
                       className={`${styles.productSubLine} d-inline-flex align-items-center gap-2 col-12 mb-0`}
                     >
-                      {ProductData?.age_type ? ProductData?.age_type : ""}
-                      {ProductData?.age_type !== null &&
-                        ProductData?.gender_name !== null && (
-                          <span className={`${styles.spaceLine} d-inline-flex`}>
-                            |
-                          </span>
-                        )}
-                      {ProductData?.gender_name ? ProductData?.gender_name : ""}
-                      {ProductData?.category_name !== null &&
-                        ProductData?.gender_name !== null && (
-                          <span className={`${styles.spaceLine} d-inline-flex`}>
-                            |
-                          </span>
-                        )}
                       {ProductData?.category_name
                         ? ProductData?.category_name
                         : ""}
