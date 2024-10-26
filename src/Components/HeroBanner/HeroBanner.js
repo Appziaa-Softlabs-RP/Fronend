@@ -1,6 +1,6 @@
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactOwlCarousel from "react-owl-carousel";
 import styles from "./HeroBanner.module.css";
 
@@ -10,7 +10,6 @@ import ApiService from "../../services/ApiService";
 import { useAppStore } from "../../store";
 import { AppNotification } from "../../utils/helper";
 import { HeroBannerLoader } from "../Loader/Loader";
-import 'owl.carousel/dist/assets/owl.carousel.css';
 
 export const HeroBanner = ({ allBanner }) => {
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ export const HeroBanner = ({ allBanner }) => {
   const setHeroBanners = useAppStore((state) => state.setHeroBanners);
   const setPromoBanners = useAppStore((state) => state.setPromoBanners);
   const setOfferBanners = useAppStore((state) => state.setOfferBanners);
-  const carouselRef = useRef(null);
 
   const openBannerProd = (
     verticalId,
@@ -101,15 +99,13 @@ export const HeroBanner = ({ allBanner }) => {
     <React.Fragment>
       {/* Mobile Structure */}
       <div
-        className={`${styles.heroBannerContainer} hideInDesktop heroBannerMobile col-12 d-inline-flex m-0`}
+        className={`${styles.heroBannerContainer} hideInDesktop heroBannerMobile col-12 d-inline-flex`}
       >
         {loading ? (
           <HeroBannerLoader />
         ) : (
-          <div className="d-flex jsutify-content-center align-items-center">
           <ReactOwlCarousel
-            ref={carouselRef}
-            className={`${styles.bannerContainer} col-12 d-inline-block owl-theme`}
+            className={`${styles.bannerContainer} col-12 d-inline-block owl-theme p-0 m-0`}
             margin={5}
             loop={true}
             dots={true}
@@ -122,7 +118,10 @@ export const HeroBanner = ({ allBanner }) => {
                   <React.Fragment key={index}>
                     {item?.mobile_image !== "" && (
                       <div
-                        className={styles.item}
+                        className={`${styles.item} p-0 rounded-none m-0`}
+                        style={{
+                          borderRadius: 0,
+                        }}
                         onClick={() =>
                           openBannerProd(
                             item?.vertical_id,
@@ -138,7 +137,9 @@ export const HeroBanner = ({ allBanner }) => {
                           alt={item?.name}
                           className="object-fit-cover col-12 d-inline-block"
                           style={{
-                            borderRadius: "0px",
+                            width: '100vw',
+                            maxHeight: '800px',
+                            borderRadius: 0,
                           }}
                         />
                       </div>
@@ -147,40 +148,24 @@ export const HeroBanner = ({ allBanner }) => {
                 );
               })}
           </ReactOwlCarousel>
-            {/* Custom Navigation Buttons */}
-            <div className={styles.customNav}>
-              <button className={`${styles.navButton} ${styles.prev}`} onClick={() => carouselRef.current.prev()}>
-                ‹
-              </button>
-              <button className={`${styles.navButton} ${styles.next}`} onClick={() => carouselRef.current.next()}>
-                ›
-              </button>
-            </div>
-            </div>
         )}
       </div>
 
       {/* Desktop Structure */}
-      <div className={`${styles.heroBannerContainer} hideInMobile`}>
+      <div className={`hideInMobile`}>
         {loading ? (
           <HeroBannerLoader />
         ) : (
-          <div className={`col-12 d-inline-flex position-relative d-flex jsutify-content-center align-items-center`}>
+          <div className={`col-12 d-inline-flex`}>
             <ReactOwlCarousel
-              ref={carouselRef}
-              className={`owl-theme`}
-              style={{
-                position: 'relative',
-                maxWidth: '100%',
-                width: '100%',
-              }}
-              dots={true}
-              items={1}
+              className={`${styles.desktopBanner} heroBanner col-12 d-inline-block owl-theme`}
+              margin={0}
               loop={true}
+              dots={false}
+              nav={true}
+              stagePadding={0}
+              items={1}
               autoplay={true}
-              autoplayTimeout={3000}
-              autoplayHoverPause={true}
-              nav={false}
             >
               {heroBanners.map((item, index) => {
                 return (
@@ -212,19 +197,9 @@ export const HeroBanner = ({ allBanner }) => {
                 );
               })}
             </ReactOwlCarousel>
-            {/* Custom Navigation Buttons */}
-            <div className={styles.customNav}>
-              <button className={`${styles.navButton} ${styles.prev}`} onClick={() => carouselRef.current.prev()}>
-                ‹
-              </button>
-              <button className={`${styles.navButton} ${styles.next}`} onClick={() => carouselRef.current.next()}>
-                ›
-              </button>
-            </div>
           </div>
         )}
       </div>
-
     </React.Fragment>
   );
 };
