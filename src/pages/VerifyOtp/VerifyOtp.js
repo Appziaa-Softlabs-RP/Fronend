@@ -74,7 +74,8 @@ export const VerifyOtp = () => {
             const payload = {
                 otp_id:mobileOTPId,
                 otp:matchOTP,
-                otp_type:"mobile"
+                otp_type:"mobile",
+                company_id: parseInt(enviroment.COMPANY_ID)
             }
             ApiService.VerifyOTP(payload).then((res) => {
                 if(res.message === "Registration successfully."){
