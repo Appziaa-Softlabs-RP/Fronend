@@ -96,6 +96,7 @@ const [btnDisable, setBtnDisable] = useState(true);
         otp_id: mobileOTPId,
         otp: matchOTP,
         otp_type: "mobile",
+        company_id: parseInt(enviroment.COMPANY_ID),
       };
       ApiService.VerifyOTP(payload)
         .then((res) => {
