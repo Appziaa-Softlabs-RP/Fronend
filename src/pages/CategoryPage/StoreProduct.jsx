@@ -67,7 +67,7 @@ export const StoreProductCategory = () => {
                 }
                 setProductData(res.payload_getProductByCategory?.products);
                 setProductActualData(res.payload_getProductByCategory?.products);
-                setApiPayload((prev) => ({ ...prev, page: 2, is_fetched: true }));
+                setApiPayload((prev) => ({ ...prev, page: 2 }));
             })
             .catch((err) => { })
             .finally(() => {

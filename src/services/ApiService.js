@@ -222,17 +222,25 @@ ApiService.StoreCategoryProd = function (data) {
   );
 };
 
+// ApiService.CategoryByProd = function (data) {
+//   const cacheKey = "/store/category-by-product" + JSON.stringify(data);
+//   return cacheFetch(
+//     "/store/category-by-product",
+//     {
+//       method: "post",
+//       body: data,
+//       headers: { "Content-Type": "application/json" },
+//     },
+//     cacheKey
+//   );
+// };
+
 ApiService.CategoryByProd = function (data) {
-  const cacheKey = "/store/category-by-product" + JSON.stringify(data);
-  return cacheFetch(
-    "/store/category-by-product",
-    {
-      method: "post",
-      body: data,
-      headers: { "Content-Type": "application/json" },
-    },
-    cacheKey
-  );
+  return fetch({
+    url: "store/category-by-product",
+    method: "post",
+    data: data,
+  });
 };
 
 ApiService.CategoryBySubProd = function (data) {
