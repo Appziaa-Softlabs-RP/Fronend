@@ -15,7 +15,6 @@ const setCache = (cache) => {
   localStorage.setItem(storageKey, JSON.stringify(cache));
 };
 
-// Only works until the page is refreshed
 // Enhanced cacheFetch function that uses localStorage
 const cacheFetch = async (url, options, cacheKey, ttl = 500000) => {
   const currentTime = new Date().getTime();

@@ -198,8 +198,6 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
   // if click outside of headerNavBox or SubMenuList then call handleMouseLeave
   useEffect(() => {
     document.addEventListener("click", handleMouseLeave);
-    // if click inside of headerNavBox or SubMenuList then don't do any thing
-    // if click outside of headerNavBox or SubMenuList or leavethen call handleMouseLeave
     return () => {
       document.removeEventListener("click", handleMouseLeave);
     };
@@ -207,13 +205,25 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
 
   return (
     <React.Fragment>
+      <div className="text-white py-1 w-100 text-center" style={{
+        background: "#621728",
+        fontSize: '14px',
+        borderBottom: '1px solid #ffa500',
+      }}>
+        <span style={{
+          color: "#ffa500",
+          fontWeight: '500',
+        }}>
+          Same Day Delivery Across Delhi-NCR
+        </span>
+      </div>
       <div className={`col-12 d-inline-flex shadow-sm flex-column px-2 d-flex justify-content-center align-items-center`} style={{
         position: 'relative',
         zIndex: '1000',
         background: 'var(--PRIMARY_COLOR)'
       }}>
         <div
-          className={`${styles.headerRow} m-0 col-10 mx-auto p-0 row d-inline-flex align-items-center mx-md-4`}
+          className={`${styles.headerRow} m-0 col-12 col-md-10 mx-auto p-0 row d-inline-flex align-items-center mx-md-4`}
         >
           <div className="container-fluid p-0 w-100 mx-auto col-11 d-flex align-items-stretch">
             <div
@@ -441,7 +451,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                       <span className="visually-hidden">Account</span>
                     </div>
                     {userInfo?.name !== "" && (
-                      <span className={`${styles.userName} d-flex`}>
+                      <span className={`${styles.userName} d-flex text-white`}>
                         {userInfo.name}
                       </span>
                     )}
@@ -476,7 +486,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                           onClick={() => userLoggedOut()}
                           className={`${styles.accountOption} col-12 d-flex align-items-center`}
                         >
-                          Logged Out
+                          Log Out
                         </span>
                       </div>
                     )}
@@ -511,8 +521,9 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
               </div>
             </div>
           </div>
-          {/* Search box */}
-          <div
+        </div>
+         {/* Search box */}
+         <div
             className={`${styles.supportDrop} p-0 mb-3 d-flex align-items-center gap-1 position-relative hideInDesktop`}
             style={{
               width: '100%',
@@ -527,7 +538,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
           >
             <div className="d-flex w-100 align-items-center gap-2">
               <div
-                className={`d-inline-flex col-6 align-items-center`}
+                className={`d-inline-flex col-6  align-items-center`}
                 style={{
                   width: '100%',
                   zIndex: '25',
@@ -575,7 +586,6 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
               </div>
             </div>
           </div>
-        </div>
         {loginPop === true && <LoginPopup setLoginPop={setLoginPop} />}
         {cartPop === true && <CartAside setCartPop={setCartPop} />}
       </div>

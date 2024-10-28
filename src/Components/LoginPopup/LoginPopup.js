@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import styles from './LoginPopup.module.css';
+import { Link, useNavigate } from "react-router-dom";
+import { useApp } from '../../context/AppContextProvider';
+import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { AppNotification } from '../../utils/helper';
-import { useApp } from '../../context/AppContextProvider';
-import { useNavigate } from 'react-router-dom';
-import { enviroment } from "../../enviroment";
+import styles from './LoginPopup.module.css';
 
 const LoginPassword = ({ setLoginType, setLoginPop }) => {
     const [mobileVal, setMobileVal] = useState('');
@@ -135,7 +134,6 @@ const LoginOTP = ({ setLoginType, mobileVal, setMobileVal, setOTPObj }) => {
                 setLoginType('VerifyOTP');
             }
         }).catch((err) => {
-
             AppNotification('Error', 'Unable to send OTP to your number', 'danger');
         })
     }
@@ -166,7 +164,6 @@ const LoginOTP = ({ setLoginType, mobileVal, setMobileVal, setOTPObj }) => {
 
 const LoginVerifyOTP = ({ setLoginType, mobileVal, mobileOTP, setMobileOTP, otpObj, setOTPObj, setLoginPop }) => {
     const appData = useApp();
-    const navigate = useNavigate();
 
     const sendMobileOtp = () => {
         const payload = {
@@ -179,7 +176,6 @@ const LoginVerifyOTP = ({ setLoginType, mobileVal, mobileOTP, setMobileOTP, otpO
                 setOTPObj({ otp: res.payload.otp, otpID: res.payload.otp_id });
             }
         }).catch((err) => {
-
             AppNotification('Error', 'Unable to send OTP to your number', 'danger');
         })
     }
@@ -192,7 +188,8 @@ const LoginVerifyOTP = ({ setLoginType, mobileVal, mobileOTP, setMobileOTP, otpO
                 const payload = {
                     otp_id: otpObj.otpID,
                     otp: matchOTP,
-                    otp_type: "mobile"
+                    otp_type: "mobile",
+                    company_id: parseInt(enviroment.COMPANY_ID),
                 }
                 ApiService.VerifyOTP(payload).then((res) => {
                     if (res.message === "Registration successfully.") {

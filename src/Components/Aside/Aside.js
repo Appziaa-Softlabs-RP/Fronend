@@ -9,7 +9,7 @@ export const Aside = ({ asideOpen, setAsideOpen, navItems, setNavItems }) => {
   const navigate = useNavigate();
   const appData = useApp();
   const userInfo = appData?.appData?.user;
-  const [activeIndex, setActiveIndex] = useState(null)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   const handleClick = (index) => {
     setActiveIndex(activeIndex === index ? null : index)
@@ -31,6 +31,9 @@ export const Aside = ({ asideOpen, setAsideOpen, navItems, setNavItems }) => {
       >
         <div
           className={`${styles.menuDrawerInnerContainer} position-absolute h-100 d-inline-flex flex-column`}
+          style={{
+            // background: "var(--PRIMARY_COLOR)",
+          }}
         >
           <div
             className={`${styles.menuDrawerNavigationContainer} position-relative d-inline-block col-12 p-0`}
@@ -71,6 +74,9 @@ export const Aside = ({ asideOpen, setAsideOpen, navItems, setNavItems }) => {
               <div
                 className={`${styles.loginSignup} d-inline-flex gap-2 col-12 align-items-center text-decoration-none`}
                 role="button"
+                style={{
+                  background: "rgba(207, 16, 45, 0.101)"
+                }}
                 onClick={() => openLoginPage()}
               >
                 <svg
@@ -84,14 +90,14 @@ export const Aside = ({ asideOpen, setAsideOpen, navItems, setNavItems }) => {
                   ></path>
                 </svg>
                 <span
-                  className={`${styles.loginText} text-left col-12 d-inline-block`}
+                  className={`${styles.loginText} fs-5 text-left col-12 d-inline-block`}
                 >
                   Login / Signup
                 </span>
               </div>
             )}
             <span
-              className={`${styles.rightDrwaerClose} position-absolute d-inline-flex align-items-center justify-content-center`}
+              className={`${styles.rightDrwaerClose} position-absolute mt-1 me-2 d-inline-flex align-items-center justify-content-center`}
               onClick={() => setAsideOpen(false)}
             >
               <svg className="icon icon-close" viewBox="0 0 18 17">
@@ -105,17 +111,6 @@ export const Aside = ({ asideOpen, setAsideOpen, navItems, setNavItems }) => {
               className={`${styles.menuDrawerNavigation} col-12 d-inline-flex`}
             >
               <ul className={`${styles.menuDrawerMenu} list-unstyled col-12`}>
-                {/* <li>
-                  <Link
-                    className={`${styles.menuDrawerMenuItem} text-decoration-none d-inline-flex align-items-center`}
-                    aria-current="page"
-                  >
-                    <svg viewBox="0 0 100 100">
-                      <path d="m83.5 100h-67c-9 0-16.5-7.6-16.5-16.7v-36.5c0-4.6 2-9.1 5.5-12.2l33.5-30.4c6.5-5.6 15.5-5.6 22 0l33.5 30.4c3.5 3 5.5 7.6 5.5 12.2v36.5c-.5 9.6-7.5 16.7-16.5 16.7zm-33.5-89.7c-1.5 0-3 .5-4.5 1.5l-33.5 30.4c-1.5 1-2 3-2 5.1v36.5c0 3.5 3 6.6 6.5 6.6h66.5c3.5 0 6.5-3 6.5-6.6v-36.5c0-2-1-3.5-2-5.1l-33.5-30.4c-1-1-2.5-1.5-4-1.5z"></path>
-                    </svg>
-                    <span className="menu-text">Home</span>
-                  </Link> */}
-                {/* </li> */}
                 <li className="ps-4">
                   <ul className="list-unstyled m-0 p-0">
                     {navItems?.map((item, index) => (
@@ -127,9 +122,9 @@ export const Aside = ({ asideOpen, setAsideOpen, navItems, setNavItems }) => {
                             className="d-flex align-items-center btn justify-content-between gap-2 mb-2"
                             onClick={() => handleClick(index)}
                             style={{
-                              color: '#333',
+                              color: "black",
                               fontWeight: activeIndex === index ? 'bold' : 'normal',
-                              fontSize: '16px',
+                              fontSize: '20px',
                               textDecoration: 'none',
                               cursor: 'pointer',
                             }}
@@ -143,7 +138,7 @@ export const Aside = ({ asideOpen, setAsideOpen, navItems, setNavItems }) => {
                                     rotate: activeIndex === index ? '90deg' : '0deg',
                                   }}
                                 >
-                                <ChevronRight />
+                                  <ChevronRight />
                                 </span>
                               )
                             }
@@ -166,8 +161,10 @@ export const Aside = ({ asideOpen, setAsideOpen, navItems, setNavItems }) => {
                                   onMouseEnter={(e) => e.target.style.color = '#007bff'}
                                   onMouseLeave={(e) => e.target.style.color = '#333'}
                                 >
-                                  <span className="text-black" style={{
-                                    fontSize: '14px',
+                                  <span className="" style={{
+                                    color: "black",
+                                    fontSize: '18px',
+                                    fontWeight: "500"
                                   }}>{subNme.name}</span>
                                 </Link>
                               ))}
