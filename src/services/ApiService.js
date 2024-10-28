@@ -99,6 +99,19 @@ ApiService.sendOTP = function (data) {
   });
 };
 
+ApiService.productVariantInfo = function (data) {
+  const cacheKey = "/store/product-variants-info" + JSON.stringify(data);
+  return cacheFetch(
+    "/store/product-variants-info",
+    {
+      method: "post",
+      body: data,
+      headers: { "Content-Type": "application/json" },
+    },
+    cacheKey
+  );
+};
+
 ApiService.getPaymentFees = function (data) {
   return fetch({
     url: "payments/get-company-payment-fees",

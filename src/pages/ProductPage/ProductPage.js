@@ -3,10 +3,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { ThreeDots } from "react-loader-spinner";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import noImage from "../../assets/images/image-not-available.jpg";
-import ReactOwlCarousel from "react-owl-carousel";
+import Skeleton from "react-loading-skeleton";
 import {
   Link,
   useLocation,
@@ -16,12 +13,15 @@ import {
 } from "react-router-dom";
 import replacement from "../../assets/images/7-days-money-back-guarantee-icon.png";
 import delivery from "../../assets/images/free-delivery.png";
+import noImage from "../../assets/images/image-not-available.jpg";
 import orignal from "../../assets/images/original.png";
+import AddReview from "../../Components/AddReview/AddReview";
 import ShowReviews from "../../Components/AddReview/ShowReviews";
 import { FeaturedProducts } from "../../Components/FeaturedProducts/FeaturedProducts";
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
 import { PageHeader } from "../../Components/PageHeader/PageHeader";
+import ProductGallery from "../../Components/ShowProduct/Gallery";
 import { SimilarProduct } from "../../Components/SimilarProduct/SimilarProduct";
 import {
   CopyIcon,
@@ -29,17 +29,14 @@ import {
   FacebookIcon,
   LocationIcon,
   PinterestIcon,
-  ShareIcon,
   TwitterIcon,
-  WhatsAppIcon,
+  WhatsAppIcon
 } from "../../Components/siteIcons";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { AppNotification } from "../../utils/helper";
 import styles from "./ProductPage.module.css";
-import AddReview from "../../Components/AddReview/AddReview";
-import ProductGallery from "../../Components/ShowProduct/Gallery";
 
 export const ProductPage = () => {
   const appData = useApp();
@@ -70,6 +67,8 @@ export const ProductPage = () => {
   const [isSpecilization, setIsSpecilization] = useState(false);
   const userInfo = appData?.appData?.user;
   const pageCurrentURL = encodeURIComponent(window.location.href);
+  const [productVariants, setProductVariants] = useState([]);
+  const [productVariantsLoading, setProductVariantsLoading] = useState(true);
   const [productLoading, setProductLoading] = useState(true);
 
   const setMainImage = (image, count) => {
@@ -426,6 +425,29 @@ export const ProductPage = () => {
               }
             });
           }
+
+          // Fetching Similar Products
+          const similarProdPayload = {
+            product_id: res.payload.product_id,
+            store_id: parseInt(enviroment.STORE_ID),
+          };
+
+          setProductVariantsLoading(true);
+          ApiService.productVariantInfo(similarProdPayload)
+            .then((res) => {
+              if (res.message === "Product Variant") {
+                setProductVariants(res?.payload);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() => {
+              setProductVariantsLoading(false);
+            });
+
+
+
         } else {
           AppNotification(
             "Error",
@@ -596,9 +618,9 @@ export const ProductPage = () => {
           </div>
 
           <div className="ms-2">
-            <span className="mb-2">Item Code: {ProductData?.barcode} </span>
+            <span className="my-2">Item Code: {ProductData?.article_name} </span>
             <div
-              className={`d-inline-flex align-items-center col-12 mb-0 position-relative`}
+              className={`d-inline-flex align-items-center col-12 mb-0 position-relative pt-2`}
             >
               {ProductData?.selling_price === ProductData?.mrp ? (
                 <span className={`${styles.offerPrice}`}>
@@ -623,6 +645,55 @@ export const ProductPage = () => {
             <span className={`${styles.inclusivTax} col-12 d-inline-block`}>
               (Inclusive of all taxes)
             </span>
+            {/* Available Quantaties */}
+            <div className="row mb-3 d-flex mt-2 flex-column gap-3">
+              <div className="col-md-12">
+                <h2 className={`${styles.specialTitle} d-inline-flex m-0 mb-2`}>Available In</h2>
+                {
+                  productVariantsLoading ?
+                    <div>
+                      <Skeleton
+                        height={40}
+                        width={300}
+                      />
+                    </div>
+                    :
+                    <div className="d-flex gap-2">
+                      {productVariants
+                        .map((variant) => (
+                          <div key={variant.color_code} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: "column", marginRight: '10px' }}>
+                            {
+                              variant?.name_url === ProductData?.name_url ?
+                                <p className={`btn m-0 d-flex align-items-center justify-content-center`}
+                                  style={{
+                                    border: '2px solid var(--PRIMARY_COLOR)',
+                                    color: 'white',
+                                    fontWeight: '500',
+                                    background: 'var(--PRIMARY_COLOR)'
+                                  }}>{variant?.q_number}{variant?.q_unit_name}</p>
+                                :
+                                <a
+                                  href={`/product/${variant.name_url}`}
+                                  className={`btn d-flex align-items-center justify-content-center`}
+                                  style={{
+                                    border: '2px solid var(--PRIMARY_COLOR)',
+                                    textDecoration: 'none',
+                                    color: 'var(--PRIMARY_COLOR)',
+                                    fontWeight: '500',
+                                    background: "rgba(207, 16, 45, 0.101)"
+                                  }}
+                                >
+                                  <span style={{
+                                    fontSize: '16px',
+                                  }}>{variant?.q_number}{variant?.q_unit_name}</span>
+                                </a>
+                            }
+                          </div>
+                        ))}
+                    </div>
+                }
+              </div>
+            </div>
           </div>
         </div>
 
@@ -904,7 +975,6 @@ export const ProductPage = () => {
         />
 
         <div className={`col-12 d-inline-block mb-5`}>
-          <FeaturedProducts product={ProductData?.featured} />
           <SimilarProduct product={ProductData?.similar} />
         </div>
         <div
@@ -1118,20 +1188,20 @@ export const ProductPage = () => {
                 }
                 {
                   ProductData?.total_rating &&
-                <div
-                  className={``}
-                >
-                  {
-                    productLoading ?
-                      <Skeleton width={100} height={25} />
-                      :
-                      <ShowReviews
-                        product_id={ProductData?.product_id}
-                        total_rating={ProductData?.total_rating}
-                      />
-                  }
-                </div>
-}
+                  <div
+                    className={``}
+                  >
+                    {
+                      productLoading ?
+                        <Skeleton width={100} height={25} />
+                        :
+                        <ShowReviews
+                          product_id={ProductData?.product_id}
+                          total_rating={ProductData?.total_rating}
+                        />
+                    }
+                  </div>
+                }
                 {
                   productLoading ?
                     <Skeleton height={25} width={300} />
@@ -1150,6 +1220,55 @@ export const ProductPage = () => {
                     Item Code: {ProductData?.article_name ?? ''}{" "}
                   </span>
                 }
+                {/* Available Quantaties */}
+                <div className="row mb-3 d-flex flex-column gap-3">
+                  <div className="col-md-12">
+                    <h2 className={`${styles.specialTitle} d-inline-flex m-0 mb-2`}>Available In</h2>
+                    {
+                      productVariantsLoading ?
+                        <div>
+                          <Skeleton
+                            height={40}
+                            width={300}
+                          />
+                        </div>
+                        :
+                        <div className="d-flex gap-2">
+                          {productVariants
+                            .map((variant) => (
+                              <div key={variant.color_code} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: "column", marginRight: '10px' }}>
+                                {
+                                  variant?.name_url === ProductData?.name_url ?
+                                    <p className={`btn m-0 d-flex align-items-center justify-content-center`}
+                                      style={{
+                                        border: '2px solid var(--PRIMARY_COLOR)',
+                                        color: 'white',
+                                        fontWeight: '500',
+                                        background: 'var(--PRIMARY_COLOR)'
+                                      }}>{variant?.q_number}{variant?.q_unit_name}</p>
+                                    :
+                                    <a
+                                      href={`/product/${variant.name_url}`}
+                                      className={`btn d-flex align-items-center justify-content-center`}
+                                      style={{
+                                        border: '2px solid var(--PRIMARY_COLOR)',
+                                        textDecoration: 'none',
+                                        color: 'var(--PRIMARY_COLOR)',
+                                        fontWeight: '500',
+                                        background: "rgba(207, 16, 45, 0.101)"
+                                      }}
+                                    >
+                                      <span style={{
+                                        fontSize: '16px',
+                                      }}>{variant?.q_number}{variant?.q_unit_name}</span>
+                                    </a>
+                                }
+                              </div>
+                            ))}
+                        </div>
+                    }
+                  </div>
+                </div>
                 <div
                   className={`d-inline-flex align-items-start flex-column gap-2 col-12 mb-4`}
                 >
