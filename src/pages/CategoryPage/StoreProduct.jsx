@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
@@ -22,6 +21,7 @@ export const StoreProductCategory = () => {
     const [apiPayload, setApiPayload] = useState(null);
     const [isDescendingOrder, setIsDscendingOrder] = useState(false);
     const [isAscendingOrder, setIsAscendingOrder] = useState(false);
+    const [isEndOfProducts, setIsEndOfProducts] = useState(false);
     const observerRef = useRef(); // Create a ref for the observer
 
     const resetSortFilter = () => {
@@ -62,11 +62,12 @@ export const StoreProductCategory = () => {
     const fetchProductsList = (data) => {
         ApiService.CategoryByProd(data)
             .then((res) => {
-                if (res.message === "Fetch successfully.") {
-                    setProductData(res.payload_getProductByCategory?.products);
-                    setProductActualData(res.payload_getProductByCategory?.products);
-                    setApiPayload((prev) => ({ ...prev, page: 2 }));
+                if (res.payload_getProductByCategory?.products.length === 0) {
+                    return;
                 }
+                setProductData(res.payload_getProductByCategory?.products);
+                setProductActualData(res.payload_getProductByCategory?.products);
+                setApiPayload((prev) => ({ ...prev, page: 2 }));
             })
             .catch((err) => { })
             .finally(() => {
@@ -75,22 +76,29 @@ export const StoreProductCategory = () => {
     };
 
     const LoadMoreProducts = () => {
+        if(isEndOfProducts) return;
         if (!apiPayload) return; // Prevent API call if payload is not set
         let pageCount = apiPayload?.page + 1;
         ApiService.CategoryByProd(apiPayload)
             .then((res) => {
-                if (res.message === "Fetch successfully.") {
-                    const newProd = res.payload_getProductByCategory?.products;
-                    setProductData((prevProductData) => {
-                        const updatedProducts = [...prevProductData, ...newProd];
-                        setProductActualData(updatedProducts);
-                        return updatedProducts;
-                    });
-                    setApiPayload((prev) => ({ ...prev, page: pageCount }));
+                if (res.payload_getProductByCategory?.products.length === 0) {
+                    setIsEndOfProducts(true);
+                    return;
                 }
+                const newProd = res.payload_getProductByCategory?.products;
+                setProductData((prevProductData) => {
+                    const updatedProducts = [...prevProductData, ...newProd];
+                    setProductActualData(updatedProducts);
+                    return updatedProducts;
+                });
+                setApiPayload((prev) => ({ ...prev, page: pageCount }));
+                setLoading(false);
             })
             .catch((err) => {
                 console.error(err); // log any errors for debugging
+            })
+            .finally(() => {
+                setLoading(false);
             });
     };
 
@@ -101,7 +109,7 @@ export const StoreProductCategory = () => {
             category_slug: category,
         };
         payload.page = 1;
-        payload.result_per_page = 20;
+        payload.result_per_page = 40;
         setApiPayload(payload);
         fetchProductsList(payload);
     }, [category, navigate]);
@@ -113,7 +121,7 @@ export const StoreProductCategory = () => {
                 LoadMoreProducts();
             }
         }, {
-            threshold: 0.7 // Trigger when 70% of the target is visible
+            threshold: 0.4 // Trigger when 50% of the target is visible
         });
 
         if (observerRef.current) {
@@ -186,11 +194,8 @@ export const StoreProductCategory = () => {
                                         </div>
 
                                         {ProductData?.length > 0 ? (
-                                            <InfiniteScroll
+                                            <div
                                                 className="d-inline-flex col-12 flex-wrap"
-                                                dataLength={ProductData.length}
-                                                hasMore={true}
-                                                loader={<h4 className="w-100 text-center py-5 my-5">Loading...</h4>}
                                             >
                                                 {ProductData?.map((item, index) => {
                                                     return (
@@ -209,7 +214,7 @@ export const StoreProductCategory = () => {
                                                 })}
                                                 {/* This div is the target for the observer */}
                                                 <div ref={observerRef} style={{ height: '20px' }} />
-                                            </InfiniteScroll>
+                                            </div>
                                         ) : (
                                             <React.Fragment>
                                                 <div
