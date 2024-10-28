@@ -31,7 +31,7 @@ export const HeroBanner = ({ allBanner }) => {
       if (window !== undefined) window.open(siteLink, "_blank");
     } else if (prodId !== null) {
       const payload = {
-        product_id: prodId,
+        product_slug: prodId,
         company_id: parseInt(enviroment.COMPANY_ID),
         store_id: parseInt(enviroment.STORE_ID),
       };
