@@ -31,14 +31,14 @@ export const HeroBanner = ({ allBanner }) => {
       if (window !== undefined) window.open(siteLink, "_blank");
     } else if (prodId !== null) {
       const payload = {
-        product_id: prodId,
+        product_slug: prodId,
         company_id: parseInt(enviroment.COMPANY_ID),
         store_id: parseInt(enviroment.STORE_ID),
       };
       ApiService.productDetails(payload)
         .then((res) => {
           if (res.message === "Product Detail") {
-            navigate(`/product?id=${prodId}`, {
+            navigate(`/product/${prodId}`, {
               state: { product: res.payload },
             });
           } else {
@@ -162,7 +162,7 @@ export const HeroBanner = ({ allBanner }) => {
               margin={0}
               loop={true}
               dots={false}
-              nav={true}
+              nav={false}
               stagePadding={0}
               items={1}
               autoplay={true}

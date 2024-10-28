@@ -47,7 +47,7 @@ export const SimilarProduct = ({ product }) => {
             dots={false}
             responsive={responsive}
             loop={false}
-            nav={true}
+            // nav={true}
           >
             {product?.map((item, index) => {
               return <ProductCard key={index} item={item} index={index} />;
