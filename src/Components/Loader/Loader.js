@@ -64,12 +64,12 @@ export const ProductCardLoader = () => {
 export const ProductListLoader = () => {
   return (
     <div className='d-flex flex-column w-full'>
-      <div className={`${styles.ageBannerRow} col-12 d-inline-flex mb-4`}>
+      {/* <div className={`${styles.ageBannerRow} col-12 d-inline-flex mb-4`}>
         <Skeleton
           height={200}
           className={styles.productListBanner}
         />
-      </div>
+      </div> */}
       <div className='d-flex w-full'
         style={{
           position: "relative",
@@ -77,40 +77,6 @@ export const ProductListLoader = () => {
           overflowX: "hidden",
         }}
       >
-        <div className='hideInMobile' style={{
-          position: 'sticky',
-          borderRadius: '10px',
-          top: "10",
-          background: 'white',
-          height: "100vh",
-          display: 'grid',
-          gridTemplateColumns: '1fr',
-          // minWidth: 'calc(100vw - 77%)',
-          width: '25%',
-          margin: '0px 10px',
-        }}>
-          <Skeleton
-            style={{
-              borderRadius: '10px',
-              width: '90%',
-              margin: "5%",
-              height: '200px',
-            }} />
-          <Skeleton
-            style={{
-              borderRadius: '10px',
-              width: '90%',
-              margin: "5%",
-              height: '200px',
-            }} />
-          <Skeleton
-            style={{
-              borderRadius: '10px',
-              width: '90%',
-              margin: "5%",
-              height: '200px',
-            }} />
-        </div>
         <div className={styles.productCardsContainer}>
           {Array.apply(null, { length: 10 }).map((e, i) => (
             <ProductCardLoader key={i} />

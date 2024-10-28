@@ -18,12 +18,14 @@
   display: flex;
   flex-wrap: wrap;
   border-radius: 8px;
-  width: 70%;
+  width: 100%;
+  justify-content: center;
   background: #fff;
 }
 
 .productCardLoaderWrapper {
   padding: 10px;
+  max-width: 300px;
   background: #FFF;
 }
 
@@ -70,10 +72,6 @@
 }
 
 @media screen and (max-width: 560px) {
-  .productCardsContainer {
-    width: 100%;
-  }
-
   .superCardsContainer {
     margin-top: 2rem;
   }

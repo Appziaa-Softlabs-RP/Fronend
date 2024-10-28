@@ -223,9 +223,9 @@ ApiService.StoreCategoryProd = function (data) {
 };
 
 ApiService.CategoryByProd = function (data) {
-  const cacheKey = "/store/CategoryByProduct" + JSON.stringify(data);
+  const cacheKey = "/store/category-by-product" + JSON.stringify(data);
   return cacheFetch(
-    "/store/CategoryByProduct",
+    "/store/category-by-product",
     {
       method: "post",
       body: data,
