@@ -77,8 +77,7 @@ export const StoreProductCategory = () => {
     const LoadMoreProducts = () => {
         if(isEndOfProducts) return;
         if (!apiPayload) return; // Prevent API call if payload is not set
-        let pageCount = apiPayload?.page + 1;
-        setApiPayload((prev) => ({ ...prev, page: pageCount }));
+        setApiPayload((prev) => ({ ...prev, page: prev.page + 1 }));
         ApiService.CategoryByProd(apiPayload)
             .then((res) => {
                 if (res.payload_getProductByCategory?.products.length === 0) {
