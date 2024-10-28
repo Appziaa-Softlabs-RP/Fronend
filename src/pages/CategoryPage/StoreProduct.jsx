@@ -67,7 +67,6 @@ export const StoreProductCategory = () => {
                 }
                 setProductData(res.payload_getProductByCategory?.products);
                 setProductActualData(res.payload_getProductByCategory?.products);
-                setApiPayload((prev) => ({ ...prev, page: 2 }));
             })
             .catch((err) => { })
             .finally(() => {
@@ -79,6 +78,7 @@ export const StoreProductCategory = () => {
         if(isEndOfProducts) return;
         if (!apiPayload) return; // Prevent API call if payload is not set
         let pageCount = apiPayload?.page + 1;
+        setApiPayload((prev) => ({ ...prev, page: pageCount }));
         ApiService.CategoryByProd(apiPayload)
             .then((res) => {
                 if (res.payload_getProductByCategory?.products.length === 0) {
@@ -91,7 +91,6 @@ export const StoreProductCategory = () => {
                     setProductActualData(updatedProducts);
                     return updatedProducts;
                 });
-                setApiPayload((prev) => ({ ...prev, page: pageCount }));
                 setLoading(false);
             })
             .catch((err) => {
