@@ -110,7 +110,7 @@ const [btnDisable, setBtnDisable] = useState(true);
             localStorage.setItem("loggedIn", true);
             AppNotification("Welcome", "OTP verified successfully.", "success");
             getAddCartList(res.payload);
-            navigate("/");
+            window.location.href = "/";
           }
         })
         .catch((err) => {
