@@ -104,7 +104,7 @@ export const Footer = () => {
           </div>
           <div className={`${styles.copyright}`}>
             <p>
-              © Copyright Anand Kand Pure Naturals Pvt Ltd. All Rights Reserved
+              © Copyright Anandkand Paramount Products Pvt Ltd. All Rights Reserved
               <br />
               <small>
                 {" "}
