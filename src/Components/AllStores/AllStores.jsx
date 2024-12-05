@@ -34,6 +34,7 @@ export const AllStores = () => {
     }, []);
 
     if (loading) return null;
+
     if (storeData.length === 0) return null;
 
     return (
@@ -43,8 +44,7 @@ export const AllStores = () => {
                 maxWidth: '800px',
                 margin: "0 auto"
             }}
-        >
-            <Container>
+        >            <Container>
                 <Row className="mb-4">
                     <Col>
                         <Nav className="justify-content-center" activeKey={activeLocation?.city_id} onSelect={(selectedKey) => handleLocationChange(selectedKey)}>

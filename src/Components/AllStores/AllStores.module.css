@@ -4,7 +4,7 @@
 	border-radius: 10px;
 	top: -400px;
 	right: 30px;
-	background-color: #ff0000c5;
+	background-color: #212656db;
 	max-width: 400px;
 }
 
@@ -21,7 +21,7 @@
 @media screen and (max-width: 500px) {
 	.activeLocatoin{
 		position: relative;
-		background-color: #FF0000;
+		background-color: #212656db;
 		left: 0px;
 		top: 0;
 		border-radius: 0px;
