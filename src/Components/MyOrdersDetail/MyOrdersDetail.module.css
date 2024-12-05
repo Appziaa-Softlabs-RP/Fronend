@@ -68,7 +68,7 @@
     right: 0;
 }
 .progressTrack .step.stepActive, .progressTrack .step.stepActive::before{
-    background: #CF102E;
+    background: #1E2247;
 }
 .progressTrack .step.stepActive+.step:after{
     content: '';
@@ -78,7 +78,7 @@
     height: 2px;
     display: inline-block;
     position: absolute;
-    background: #CF102E;
+    background: #1E2247;
 }
 .progressTrack .step.stepActive .stepName{
     color: #000;

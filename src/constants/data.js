@@ -1,43 +1,67 @@
 export const reviews = [
     {
         id: 1,
-        name: "Manav Verma",
-        date: "1 day ago",
-        image: "https://lh3.googleusercontent.com/a/ACg8ocJatwL8_irMwuyHBScTSXIWOA_NHugzs6gImgXAM5OmO4pq9Q=w36-h36-p-rp-mo-br100",
+        name: "Santanu Sardal",
+        date: "1 year ago",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjWvGsp1hx2l_MilPhor7xAPlFVvbplKctgfcQnUtsloxMYnUZmNWw=w72-h72-p-rp-mo-ba4-br100",
         rating: 5,
-        review: `${process.env.REACT_APP_BUSINESS_NAME} is the ultimate toy store! From Barbie to LEGO, they have it all. Friendly staff, eazy shopping, and quick delivery. Highly recommend for quality toys at great prices!`
+        review: "Overall experience of shopping at MRPC Store Govindpuri. Products fresh and high quality. The prices at MRPC Store Govindpuri average."
     },
     {
         id: 2,
-        name: "Nisha Rawat",
-        date: "1 day ago",
-        image: "https://lh3.googleusercontent.com/a/ACg8ocKaL_Ty63cRYIBQH3t0WyWpl8zO8YfXeKdOl4AXfvi6ZBuc5Q=w36-h36-p-rp-mo-br100",
+        name: "Zoya Surana",
+        date: "3 years ago",
+        image: "https://lh3.googleusercontent.com/a/ACg8ocIQ2eGB5F0rckzHbeagLd9O68ZEfdG5EotY2b00AX2pFNN5lGk=w72-h72-p-rp-mo-br100",
         rating: 5,
-        review: `${process.env.REACT_APP_BUSINESS_NAME} is simply fantastic! I found all my favorite toy brands. The staff was incredibly welcoming and knowledgeable, making my shopp experience a breeze.`
+        review: "Once I discovered this store an year back, I haven't gone to any other store. It's organised, has stable pricing, smooth service, good discounts, high to low end items available and very helpful staff. They also home delivered stuff during COVID."
     },
     {
         id: 3,
-        name: "kiran. rawat_194",
-        date: "1 day ago",
-        image: "https://lh3.googleusercontent.com/a-/ALV-UjXhFLJ4YJvqfTseY6mP4jFhLFRz_-5Hy7VftJz8m7YQGIeLTHY=w36-h36-p-rp-mo-br100",
+        name: "Rakesh Sharma",
+        date: "3 years ago",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjXpTdklJYwYS8PoQvxc3mU6vl5WWSv4v6tTFu306kiIAyesUdV4=w72-h72-p-rp-mo-ba6-br100",
         rating: 5,
-        review: `${process.env.REACT_APP_BUSINESS_NAME} is a dream come true for toy lovers like me! They've got an incredible selection of top brands like Hot Wheels and LEGO, all at prices that won't break the bank. The staff was super friendly and helpful, making my shopping experience a delight. ${process.env.REACT_APP_BUSINESS_NAME} has definitely earned my loyalty as the go-to spot for quality toys!`
+        review: "One of the best grocery stores around the area in Govindpuri and Kalkaji. All items are available at a discount on MRP. Also, there are varieties and a wide range of products under one roof."
+    },
+    {
+        id: 4,
+        name: "Priyanshi Aggarwal",
+        date: "2 years ago",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjW8S-z086HYADhmn8JsMRIPxsR7mc9MfEguqqhCRnXb4dNjugx-=w72-h72-p-rp-mo-br100",
+        rating: 5,
+        review: "MRPC has a very old history, the full name of MRPC is Mange Ram Prem Chand, a very popular name in the Govindpuri extension market. Now their son Atul is running MRPC in memory of Late Shri Mange Ram Prem Chandji. Very honest and hardworking Atul Ji has great business experience."
     },
     {
         id: 5,
-        name: "Zaid Khan",
-        date: "1 day ago",
-        image: "https://lh3.googleusercontent.com/a-/ALV-UjVwBqMVy_pcC1Anf5NP2I0i0UT8lPfzQho172ODNXPdQsnLGQ9I=w36-h36-p-rp-mo-br100",
+        name: "Ajit Bhambra",
+        date: "3 years ago",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjUgdAjx0z3Y72afLzfCq6ZNXaKt0DhAA0x9hB1riyHJsnCW71UL=w72-h72-p-rp-mo-br100",
         rating: 5,
-        review: `Absolutely thrilled with my ${process.env.REACT_APP_BUSINESS_NAME} experience! Found all my favorite brands like Barbie and LEGO at fantastic prices. The staff was super helpful, making my shopping trip a breeze. Online ordering was a snap, and my delivery arrived right on time. ${process.env.REACT_APP_BUSINESS_NAME} is now my go-to for top-quality toys!`
+        review: "Traditional and modern store, mixture of both, seven-star delivery, supportive and polite staff."
     },
     {
-        id: 6,
-        name: "avinash Jha",
-        date: "1 day ago",
-        image: "https://lh3.googleusercontent.com/a-/ALV-UjVCGA_5Ye68OglcKE_ClzE6i7ajS_93JV_IGLPlsWrjJQelpRwu=w36-h36-p-rp-mo-ba4-br100",
+        id: 7,
+        name: "Tuhin Majumder",
+        date: "3 years ago",
+        image: "https://lh3.googleusercontent.com/a/ACg8ocJEruGf4moChPBndMOKaExKO8STbnq4ckcTZq6SjdC12_IRqA=w72-h72-p-rp-mo-br100",
         rating: 5,
-        review: `${process.env.REACT_APP_BUSINESS_NAME} is an absolute treasure trove for toy enthusiasts of all ages! As a parent, I'm always on the lookout for high-quality toys that spark creativity and keep my kids entertained for hours. ${process.env.REACT_APP_BUSINESS_NAME} exceeded all my expectations with its extensive collection of branded toys, including favorites like Barbie, LEGO, Hot Wheels, and PlayShifu.`
+        review: "Cooperation was very nice and the service to payment was very good."
+    },
+    {
+        id: 10,
+        name: "Priyanka Guleria",
+        date: "3 years ago",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjVB4FqRWfnrD6BX17r0a7r3pISsc5XWf3qg6UfsjjP1Ei7YqHi2zQ=w72-h72-p-rp-mo-ba3-br100",
+        rating: 5,
+        review: "One shop for all."
+    },
+    {
+        id: 11,
+        name: "Pavan Kumar Sharma",
+        date: "2 years ago",
+        image: "https://lh3.googleusercontent.com/a/ACg8ocIe8RWpgZgaig6U6ivS_ZAOQlGy_3qmDP5aqpXkx55iYlV_Ww=w72-h72-p-rp-mo-ba4-br100",
+        rating: 5,
+        review: "Best store in Kalkaji and Govindpuri."
     },
 ];
 

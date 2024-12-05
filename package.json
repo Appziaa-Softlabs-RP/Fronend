@@ -1,5 +1,5 @@
 {
-  "name": "knicknak-app",
+  "name": "mrpc-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -49,5 +49,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-bootstrap": "^2.10.6",
+    "react-bootstrap-icons": "^1.11.4"
   }
 }

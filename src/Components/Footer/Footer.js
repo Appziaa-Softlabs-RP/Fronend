@@ -15,7 +15,6 @@ import {
   SpecialOfferIcon,
 } from "../siteIcons";
 import { useApp } from "../../context/AppContextProvider";
-import Specials from "../Specials/Specials";
 
 export const Footer = () => {
   const [currentYear, setCurrentYear] = useState("");
@@ -608,7 +607,7 @@ export const Footer = () => {
       ) : (
         ""
       )}
-      <Specials />
+      {/* <Specials /> */}
     </React.Fragment>
   );
 };

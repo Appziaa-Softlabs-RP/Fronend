@@ -64,7 +64,7 @@
 }
 
 .topHeaderSale {
-    background: #93071c;
+    background: #1E2247;
     height: 30px;
 }
 
@@ -96,7 +96,7 @@
 }
 
 .supportDrop:hover {
-    color: #FAC100;
+    color: #00C2FF;
 }
 
 .supportDropDown {
@@ -266,7 +266,7 @@
 
 .subMenuName:hover {
     font-weight: 500;
-    background: #FAC100;
+    background: #00C2FF;
 }
 
 .userAccountDrop {

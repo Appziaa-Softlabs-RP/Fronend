@@ -97,7 +97,7 @@ export const Return = () => {
                 &nbsp;You may return items purchased in-store to our location at{" "}
               </span>
               <span className="c14 c18">
-                42, Cycle Market, Jhandewalan Extension, New Delhi 110055.
+                MRPC, Govindpuri Extension, Delhi - 110019 (Beside Corporation Bank)
                 India,{" "}
               </span>
               <span className="c4">

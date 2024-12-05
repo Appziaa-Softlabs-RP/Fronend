@@ -124,13 +124,11 @@ export const BrandCategoryPage = () => {
       <Helmet>
         <meta charSet="utf-8" />
         <title>
-          Shop the latest&nbsp;
-          {ProductData ? (ProductData[0] ? ProductData[0].brand_name : "") : ""}
-          &nbsp;merchandise at {process.env.REACT_APP_URL}, their official store!
+          {ProductData ? (ProductData[0] ? ProductData[0].brand_name : "") : ""} - {process.env.REACT_APP_BUSINESS_NAME}
         </title>
         <meta
           name="description"
-          content={`From action figures to musical instruments, ${process.env.REACT_APP_URL} has all the official <Band Name> toys to inspire creativity and rockstar dreams!`}
+          content={`Shop at MRPC Wholesale Mart for unbeatable deals on groceries, household items, and more. Save big with our wholesale prices and stock up on your monthly essentials today!`}
         />
       </Helmet>
 
@@ -312,46 +310,46 @@ export const BrandCategoryPage = () => {
           </div>
         )}
 
+        <div
+          className={`${styles.filterPopup
+            } hideInDesktop top-0 start-0 h-100 col-12 position-fixed ${filterPopup === true ? "d-inline-flex" : "d-none"
+            } flex-column overflow-y-auto`}
+        >
+          <div
+            className={`${styles.PageHeader} position-sticky top-0 start-0 col-12 d-inline-flex gap-2`}
+          >
             <div
-              className={`${styles.filterPopup
-                } hideInDesktop top-0 start-0 h-100 col-12 position-fixed ${filterPopup === true ? "d-inline-flex" : "d-none"
-                } flex-column overflow-y-auto`}
+              className={`${styles.backBox} d-inline-flex align-items-center justify-content-center flex-shrink-0`}
+              onClick={() => setFilterPopup(false)}
             >
-              <div
-                className={`${styles.PageHeader} position-sticky top-0 start-0 col-12 d-inline-flex gap-2`}
-              >
-                <div
-                  className={`${styles.backBox} d-inline-flex align-items-center justify-content-center flex-shrink-0`}
-                  onClick={() => setFilterPopup(false)}
-                >
-                  <BackArrowIcon color="#FFF" />
-                </div>
-                <div className="d-inline-flex align-items-center mw-100 flex-shrink-1 col-6 me-auto">
-                  <label
-                    className={`${styles.currentName} text-truncate col-12 d-inline-block`}
-                  >
-                    Filter
-                  </label>
-                </div>
-              </div>
-              <SearchBrandFilter
-                    brandNameUrl={brandId}
-                    filterVert={filterVert}
-                    filterCatg={filterCatg}
-                    setProductData={setProductData}
-                    setProductActualData={setProductActualData}
-                  />
-              <div
-                className={`${styles.productBtnBox} d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}
-              >
-                <span
-                  className={`${styles.saveFilterBtn} position-relative col-12 d-inline-flex align-items-center justify-content-center gap-2`}
-                  onClick={() => setFilterPopup(false)}
-                >
-                  Apply Filter
-                </span>
-              </div>
+              <BackArrowIcon color="#FFF" />
             </div>
+            <div className="d-inline-flex align-items-center mw-100 flex-shrink-1 col-6 me-auto">
+              <label
+                className={`${styles.currentName} text-truncate col-12 d-inline-block`}
+              >
+                Filter
+              </label>
+            </div>
+          </div>
+          <SearchBrandFilter
+            brandNameUrl={brandId}
+            filterVert={filterVert}
+            filterCatg={filterCatg}
+            setProductData={setProductData}
+            setProductActualData={setProductActualData}
+          />
+          <div
+            className={`${styles.productBtnBox} d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}
+          >
+            <span
+              className={`${styles.saveFilterBtn} position-relative col-12 d-inline-flex align-items-center justify-content-center gap-2`}
+              onClick={() => setFilterPopup(false)}
+            >
+              Apply Filter
+            </span>
+          </div>
+        </div>
 
         <div
           className={`${styles.productBtnBox} hideInDesktop d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}

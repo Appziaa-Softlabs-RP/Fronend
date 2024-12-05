@@ -12,6 +12,7 @@ export const Terms = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   return (
     <React.Fragment>
       {windowWidth === "mobile" ? (
@@ -22,267 +23,95 @@ export const Terms = () => {
       <div className="min-vh-100 col-12 d-inline-flex flex-column my-5">
         <div className="container">
           <h1>Terms & Conditions</h1>
-          <p className="c6">
-            <span className="c4">
-              Here&#39;s a comprehensive Terms &amp; Conditions document for
-              {process.env.REACT_APP_URL}, covering important aspects for an online toy
-              store operating in India.
-            </span>
+          <p>
+            Welcome to MRPC, your trusted omnichannel grocery supermarket serving customers since 1972. These Terms & Conditions ("Terms") govern your use of our website ("the Site") and the purchase of products from MRPC ("we," "us," or "our"). Please read these Terms carefully before using our services.
           </p>
-          <p className="c6">
-            <span className="c1">{process.env.REACT_APP_URL} Terms &amp; Conditions</span>
-          </p>
-          <p className="c6">
-            <span className="c2">Effective Date:</span>
-            <span className="c4">&nbsp;February 29, 2024</span>
-          </p>
-          <p className="c6">
-            <span className="c2">
-              Welcome to {process.env.REACT_APP_URL} (&quot;the Site&quot;). These Terms
-              &amp; Conditions (&quot;Terms&quot;) govern your use of the Site
-              and the purchase of products from {process.env.REACT_APP_BUSINESS_NAME}.
-            </span>
-            <span className="c8">&nbsp;</span>
-            <span className="c1">
-              Please read these Terms carefully before using the Site.
-            </span>
-          </p>
-          <p className="c6">
-            <span className="c1">
-              By accessing or using the Site, you agree to be bound by these
-              Terms. If you do not agree to these Terms, please do not use the
-              Site.
-            </span>
-          </p>
-          <p className="c6">
-            <span className="c1">1. Account Creation and Use</span>
-          </p>
-          <ul className="c10 lst-kix_41vytponpesc-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                To purchase products on the Site, you will need to create an
-                account. You must provide accurate and complete information
-                during account creation.
-              </span>
+          <h2>1. Account Creation and Use</h2>
+          <ul>
+            <li>
+              To shop with us online, you must create an account with accurate and up-to-date information.
             </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                You are responsible for keeping your account information
-                confidential and secure.
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                You are responsible for all activities that occur under your
-                account.
-              </span>
+            <li>You are responsible for maintaining the confidentiality of your account details.</li>
+            <li>
+              All activities carried out under your account are your responsibility.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">2. Orders and Payments</span>
-          </p>
-          <ul className="c10 lst-kix_x9trviihoyda-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                All prices displayed on the Site are in Indian Rupees (INR).
-              </span>
+          <h2>2. Orders and Payments</h2>
+          <ul>
+            <li>All prices on the Site are listed in Indian Rupees (INR).</li>
+            <li>
+              We accept a variety of payment methods, including credit cards, debit cards, net banking, and other online options.
             </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                We accept various payment methods, including credit cards, debit
-                cards, net banking, and other online payment options.
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                Orders are subject to our acceptance and product availability.
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                We reserve the right to refuse or cancel any order for any
-                reason.
-              </span>
+            <li>
+              Orders are subject to acceptance and availability. We reserve the right to refuse or cancel orders at our discretion.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">3. Shipping and Delivery</span>
-          </p>
-          <ul className="c10 lst-kix_hys2k6nfua2y-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                Shipping costs and delivery times will vary based on your
-                location and the products ordered.
-              </span>
+          <h2>3. Shipping and Delivery</h2>
+          <ul>
+            <li>
+              Delivery times and charges depend on your location and the items ordered.
             </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                Orders gets delivered within 0 to 7 days.
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                We provide estimated shipping and delivery times, but delays may
-                occur.
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                We are not responsible for delays caused by shipping carriers or
-                circumstances beyond our control.
-              </span>
+            <li>
+              We aim to deliver orders within 0-7 days; however, delays may occur due to factors beyond our control.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">4. Returns and Refunds</span>
-          </p>
-          <ul className="c10 lst-kix_vlvevcfz125y-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                Please refer to our Return Policy for details on returns and
-                refunds.
-              </span>
+          <h2>4. Returns and Refunds</h2>
+          <ul>
+            <li>
+              Please refer to our detailed <Link to="/return-policy">Return Policy</Link> for information regarding returns and refunds.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">5. Intellectual Property</span>
-          </p>
-          <ul className="c10 lst-kix_ui22japon8s6-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                All content on the Site, including text, graphics, logos,
-                images, and software is the property of {process.env.REACT_APP_BUSINESS_NAME} or its
-                licensors and is protected by copyright and trademark laws.
-              </span>
+          <h2>5. Intellectual Property</h2>
+          <ul>
+            <li>
+              All content on our Site, including text, images, and designs, is the property of MRPC or its licensors and protected by copyright laws.
             </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                You may not use any content from the Site without our express
-                written permission.
-              </span>
+            <li>
+              Unauthorized use of our content is strictly prohibited.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">6. User Conduct</span>
-          </p>
-          <ul className="c10 lst-kix_t7wxppec3y21-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                You may not use the Site for any unlawful purpose.
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                You may not post or transmit any content that is harmful,
-                threatening, abusive, hateful, or defamatory.
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                You may not infringe on the privacy or intellectual property
-                rights of others.
-              </span>
+          <h2>6. User Conduct</h2>
+          <ul>
+            <li>You agree not to use the Site for any unlawful or harmful activities.</li>
+            <li>
+              Any content that violates the rights of others, including intellectual property or privacy, is prohibited.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">7. Disclaimer of Warranties</span>
-          </p>
-          <ul className="c10 lst-kix_9wcnank9vdef-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                THE SITE AND ALL PRODUCTS ARE PROVIDED &quot;AS IS&quot; WITHOUT
-                WARRANTY OF ANY KIND. WE DISCLAIM ALL WARRANTIES, EXPRESS OR
-                IMPLIED, INCLUDING WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-                A PARTICULAR PURPOSE.
-              </span>
+          <h2>7. Disclaimer of Warranties</h2>
+          <ul>
+            <li>
+              The Site and all products are provided "as is." We disclaim all warranties, express or implied, including those of merchantability and fitness for a particular purpose.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">8. Limitation of Liability</span>
-          </p>
-          <ul className="c10 lst-kix_p13n24n4ehlw-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                WE WILL NOT BE LIABLE FOR ANY DAMAGES ARISING FROM YOUR USE OF
-                THE SITE, INCLUDING DIRECT, INDIRECT, INCIDENTAL, OR
-                CONSEQUENTIAL DAMAGES.
-              </span>
+          <h2>8. Limitation of Liability</h2>
+          <ul>
+            <li>
+              MRPC is not liable for any damages arising from your use of the Site, including indirect or incidental damages.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">9. Indemnification</span>
-          </p>
-          <ul className="c10 lst-kix_28a2ovzdh5yk-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                You agree to indemnify and hold {process.env.REACT_APP_BUSINESS_NAME} harmless from any
-                claims or damages that arise from your use of the Site or your
-                violation of these Terms.
-              </span>
+          <h2>9. Changes to Terms & Conditions</h2>
+          <ul>
+            <li>
+              We may update these Terms from time to time. Continued use of the Site implies acceptance of the updated Terms.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">10. Changes to Terms &amp; Conditions</span>
-          </p>
-          <ul className="c10 lst-kix_3hwx62c9dori-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                We may update these Terms at any time. We will post the updated
-                Terms on the Site. Your continued use of the Site after any
-                changes are made constitutes your acceptance of the updated
-                Terms.
-              </span>
+          <h2>10. Governing Law</h2>
+          <ul>
+            <li>
+              These Terms are governed by the laws of India, with jurisdiction in Delhi.
             </li>
           </ul>
-          <p className="c6">
-            <span className="c1">11. Governing Law</span>
+          <h2>11. Contact Us</h2>
+          <p>
+            For questions or support, please reach out to us:
           </p>
-          <ul className="c10 lst-kix_5fuohnhegco1-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c4">
-                These Terms will be governed by and construed in accordance with
-                the laws of India.
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c4">We follow the Delhi High Court</span>
-            </li>
+          <ul>
+            <li>Email: <Link to={`mailto:${process.env.REACT_APP_EMAIL_ADDRESS}`}>{process.env.REACT_APP_EMAIL_ADDRESS}</Link></li>
+            <li>Phone: +91-99997 56468</li>
+            <li>Address: MRPC, Govindpuri Extension, Delhi - 110019, India</li>
           </ul>
-          <p className="c6">
-            <span className="c1">12. Contact Us</span>
-          </p>
-          <p className="c6">
-            <span className="c4">
-              For any questions or concerns, please contact us:
-            </span>
-          </p>
-          <ul className="c10 lst-kix_pcvdgx2icjy4-0 start">
-            <li className="c0 li-bullet-0">
-              <span className="c2">Email:</span>
-              <span className="c15">
-                <Link className="c17" to={`mailto:${process.env.REACT_APP_EMAIL_ADDRESS}`}>
-                {process.env.REACT_APP_EMAIL_ADDRESS}
-                </Link>
-              </span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c2">Phone:</span>
-              <span className="c4">&nbsp;+91-99997 56468</span>
-            </li>
-            <li className="c0 li-bullet-0">
-              <span className="c2">Address:</span>
-              <span className="c8">&nbsp;</span>
-              <span className="c14">
-                42, Cycle Market, Jhandewalan Extension, New Delhi 110055.,
-                India,{" "}
-              </span>
-            </li>
-          </ul>
-          <p className="c6">
-            <span className="c1">
-              By using the {process.env.REACT_APP_URL} website, you acknowledge and agree
-              to these Terms &amp; Conditions.
-            </span>
+          <p>
+            By using our Site, you agree to these Terms & Conditions. Thank you for choosing MRPC!
           </p>
         </div>
       </div>
