@@ -37,7 +37,7 @@ export function useMouseOverZoom(
   source,
   target,
   cursor,
-  radius = 100
+  radius = 150
 ) {
   // Capture Mouse position
   const { x, y, isActive } = useMouse(source);

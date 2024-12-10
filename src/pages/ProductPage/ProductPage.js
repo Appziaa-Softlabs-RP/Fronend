@@ -1598,7 +1598,10 @@ export const ProductPage = () => {
                     </div>
                   )}
 
-                <div className="col-12 d-inline-block mt-3 mb-3">
+                <div className="col-12 d-inline-block mt-3 mb-3" style={{
+                  position: "relative",
+                  zIndex: "0"
+                }}>
                   <h3
                     className={`${styles.deliveryHeading} col-12 d-inline-block mt-0 mb-4`}
                   >
