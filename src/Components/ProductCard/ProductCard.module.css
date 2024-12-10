@@ -1,5 +1,5 @@
 .singleFeaturedProduct {
-  background: #fff;
+  background: #f4f3f3;
   border-radius: 10px;
 }
 .featureOffBox {
@@ -134,9 +134,11 @@
 }
 .galleryImage {
   opacity: 0;
-  transition: all ease 200ms;
+  /* transition: all ease-in-out 400ms; */
 }
+
 .featuredImageBox:hover .galleryImage {
+  /* transition: all ease-in-out 400ms; */
   opacity: 1;
 }
 
@@ -152,10 +154,18 @@
   margin: auto;
 }
 
+.itemName {
+  font-size: 14px;
+}
+
 /* Desktop CSS */
 @media screen and (min-width: 568px) {
   .productImgContainer {
     height: 250px;
+  }
+
+  .itemName {
+    font-size: 16px !important
   }
 
   .productImg {
@@ -172,11 +182,12 @@
     height: 45px;
   }
   .singleFeaturedProduct {
-    padding-bottom: 60px;
+    padding-bottom: 10px;
     transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .singleFeaturedProduct:hover{
+    /* transition: transform 600ms scale(0.95); */
     transform: scale(0.95);
   }
 

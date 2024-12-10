@@ -124,7 +124,7 @@ export const ProductCard = ({ item, index }) => {
           style={{
             textDecoration: "none",
           }}
-          className={`${styles.featuredImageBox} position-relative col-12 mt-1 float-left mb-1 d-flex justify-content-center align-items-center w-full`}
+          className={`${styles.featuredImageBox} position-relative col-12 float-left mb-1 d-flex justify-content-center align-items-center w-full`}
         >
           {item.stock === 0 || item.stock < 0 ? (
             <span className={`${styles.soldOutText} position-absolute d-block`}>
@@ -176,82 +176,80 @@ export const ProductCard = ({ item, index }) => {
             ""
           )}
         </Link>
-        <div style={{
-          fontSize: "13px",
-          margin: "6px",
-          fontWeight: "500",
-        }} className="mt-1" >
-          {getGenderName(item?.gender_name)}
-        </div>
-        <div>
-          <Link
-            to={`/product/${item?.name_url}`}
-            style={{
-              textDecoration: "none",
-              margin: "6px",
-              minHeight: "25px",
-              display: "-webkit-box",
-              WebkitLineClamp: "2",
-              WebkitBoxOrient: "vertical",
-              fontSize: "16px",
-              fontWeight: "600",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "normal",
-              lineHeight: "15px",
-            }}
-            className={`${styles.offerItemName} col-12 p-0`}
-          >
-            <span style={{
-              color: "#000",
-              fontSize: "14px",
-            }}>
-              {item.name}
-            </span>
-          </Link>
-          {item?.is_deal === 1 && item.deals_price !== 0 ? (
-            <div className="col-12 p-0 d-inline-flex align-items-center gap-2 flex-wrap" style={{
-              margin: "6px",
-            }}>
-              <span className={`${styles.offerPrice} d-inline-flex`}>
-                <b>₹{Math.round(item.deals_price)}</b>
-              </span>
-              <del className={`${styles.offerDiscountPrice} d-inline-flex`}>
-                ₹{Math.round(item.mrp)}
-              </del>
-            </div>
-          ) : item.mrp > item.selling_price ? (
-            <div
+        <div className="m-3" style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "8px",
+        }}>
+          <div style={{
+            fontSize: "14px",
+            fontWeight: "500",
+          }} >
+            {getGenderName(item?.gender_name)}
+          </div>
+          <div>
+            <Link
+              to={`/product/${item?.name_url}`}
               style={{
-                margin: "10px 6px",
-                fontWeight: "400",
+                textDecoration: "none",
+                minHeight: "25px",
+                display: "-webkit-box",
+                WebkitLineClamp: "2",
+                WebkitBoxOrient: "vertical",
+                fontSize: "16px",
+                fontWeight: "600",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+                whiteSpace: "normal",
+                lineHeight: "15px",
               }}
-              className="col-12 p-0 d-inline-flex align-items-center gap-2 flex-wrap"
+              className={`${styles.offerItemName} col-12 p-0`}
             >
-              <span className={`${styles.offerPrice} d-inline-flex`}>
-                ₹{Math.round(item.selling_price)}
+              <span className={styles.itemName} style={{
+                color: "#000",
+                fontWeight: "700",
+              }}>
+                {item.name}
               </span>
-              <del className={`${styles.offerDiscountPrice} d-inline-flex`}>
-                ₹{Math.round(item.mrp)}
-              </del>
-            </div>
-          ) : (
-            <div
-              style={{
-                margin: "6px",
-              }}
-              className="col-12 float-left p-0 d-inline-block"
-            >
-              <span
-                className={`${styles.offerPrice} col-12 p-0 d-inline-block float-left`}
+            </Link>
+            {item?.is_deal === 1 && item.deals_price !== 0 ? (
+              <div className="col-12 p-0 d-inline-flex align-items-center gap-2 flex-wrap">
+                <span className={`${styles.offerPrice} d-inline-flex`}>
+                  <b>₹{Math.round(item.deals_price)}</b>
+                </span>
+                <del className={`${styles.offerDiscountPrice} d-inline-flex`}>
+                  ₹{Math.round(item.mrp)}
+                </del>
+              </div>
+            ) : item.mrp > item.selling_price ? (
+              <div
                 style={{
                   fontWeight: "400",
                 }}
+                className="col-12 p-0 d-inline-flex align-items-center gap-2 flex-wrap"
               >
-                ₹{Math.round(item.mrp)}
-              </span>
-            </div>
-          )}
+                <span className={`${styles.offerPrice} d-inline-flex`}>
+                  ₹{Math.round(item.selling_price)}
+                </span>
+                <del className={`${styles.offerDiscountPrice} d-inline-flex`}>
+                  ₹{Math.round(item.mrp)}
+                </del>
+              </div>
+            ) : (
+              <div
+                className="col-12 float-left p-0 d-inline-block"
+              >
+                <span
+                  className={`${styles.offerPrice} col-12 p-0 d-inline-block float-left`}
+                  style={{
+                    fontWeight: "400",
+                  }}
+                >
+                  ₹{Math.round(item.mrp)}
+                </span>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </React.Fragment>
