@@ -95,13 +95,13 @@
 }
 .productGalleryRow .galleryBox{
     border: 1px solid #EEE;
-    height: 80px;
-    max-height: 83px;
-    width: 83px;
-    max-width: 83px;
+    height: 70px;
+    max-height: 70px;
+    width: 70px;
+    max-width: 70px;
 }
 .productGalleryRow .galleryBox.activeGallery{
-    border: 2px solid red;
+    border: 1px solid red;
     padding: 0px;
     height: 100%;
 }
