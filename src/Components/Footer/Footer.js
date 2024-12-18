@@ -78,8 +78,8 @@ export const Footer = () => {
             </Form>
           </Col>
           <Col md={4}>
-            <h5 className={styles.sectionTitle}>OPEN BOX INC</h5>
-            <p>32, Chandan Hulla,<br />Chhatarpur Main Road,<br />New Delhi - 110074 GSTIN - 07AAHFO963R1ZA</p>
+            <h5 className={styles.sectionTitle}>AshiElectronics</h5>
+            <p>Sector 17, Sukhrali Gurgaon Haryana</p>
           </Col>
           <Col md={4}>
             <h5 className={styles.sectionTitle}>CUSTOMER CARE</h5>
@@ -89,13 +89,13 @@ export const Footer = () => {
         <Row className={styles.bottomSection}>
           <Col md={4}>
             <h5 className={styles.sectionTitle}>LET'S DO BUSINESS TOGETHER!</h5>
-            <p>Be a part of Open Box - Recommence Retail revolution and own a profitable online + offline business. Reach out to us at info@neverowned.in or Whatsapp 9911163300</p>
+            <p>Be a part of Open Box - Recommence Retail revolution and own a profitable online + offline business. Reach out to us at info@ashielectronics.com.in or Whatsapp 9911163300</p>
           </Col>
         </Row>
         <Row className={styles.copyrightSection}>
           <Col>
-            <p className={styles.sectionTitle}>© NEVEROWNED INDIA</p>
-            <p>© 2022 NeverOwned.in is a property of Open Box Inc. Developed & Marketed by Rare Fusion Marcom</p>
+            <p className={styles.sectionTitle}>© AshiElectronics INDIA</p>
+            <p>© 2022 AshiElectronics.in is a property of AshiElectronics. Developed & Marketed by Rare Fusion Marcom</p>
             <p>Powered by RewardsPlus</p>
           </Col>
         </Row>

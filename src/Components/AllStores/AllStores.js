@@ -13,7 +13,7 @@ export const AllStores = () => {
   const [loading, setLoading] = useState(true);
 
   const handleLocationChange = (city_id) => {
-    const newLocation = storeData.find(loc => loc.city_id === city_id);
+    const newLocation = storeData.find(loc => loc?.city_id === city_id);
     if (newLocation) setActiveLocation(newLocation);
   };
 
@@ -25,7 +25,7 @@ export const AllStores = () => {
     ApiService.getAllStores(payload)
       .then((res) => {
         if (res.payload.length === 0) return;
-        const removeDuplicateCityId = res.payload.filter((v, i, a) => a.findIndex(t => (t.city_id === v.city_id)) === i);
+        const removeDuplicateCityId = res.payload.filter((v, i, a) => a.findIndex(t => (t?.city_id === v?.city_id)) === i);
         setStoreData(removeDuplicateCityId);
         // remove duplicate city_id
         setActiveLocation(res.payload[0]);
@@ -49,21 +49,21 @@ export const AllStores = () => {
         <Container fluid style={{ fontFamily: 'Arial, sans-serif' }} className='container'>
           <Row>
             <Col md={6} style={{ padding: 0 }}>
-              <img src={activeLocation.photo} alt="Location" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <img src={activeLocation?.photo} alt="Location" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </Col>
             <Col md={6} style={{ backgroundColor: '#fff', padding: '2rem', paddingTop: '6rem' }}>
               <div style={{ marginBottom: '2rem', display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '15px', height: "300px" }}>
-                <h6 className='subTitleLarge text-start' style={{ color: '#666' }}>{activeLocation.city_id}</h6>
+                <h6 className='subTitleLarge text-start' style={{ color: '#666' }}>{activeLocation?.city_id}</h6>
                 {/* <h2 className='subTitleLarge text-start'>{activeLocation.store_name}</h2> */}
-                <p>{activeLocation.address}</p>
+                <p>{activeLocation?.address}</p>
                 <p>Call Us:&nbsp;
-                    <a href={`tel:${activeLocation.contact}`} style={{ color: '#a1a1a1', textDecoration: 'underline' }}>
-                      {activeLocation.contact}
+                    <a href={`tel:${activeLocation?.contact}`} style={{ color: '#a1a1a1', textDecoration: 'underline' }}>
+                      {activeLocation?.contact}
                     </a>
                   </p>
                 <p>Email: &nbsp;
-                    <a href={`mailto:${activeLocation.email}`} style={{ color: '#a1a1a1', textDecoration: 'underline' }}>
-                    {activeLocation.email}
+                    <a href={`mailto:${activeLocation?.email}`} style={{ color: '#a1a1a1', textDecoration: 'underline' }}>
+                    {activeLocation?.email}
                   </a>
                 </p>
                 <a href="#" style={{ color: '#a1a1a1', textDecoration: 'underline' }}>MAP</a>
@@ -74,21 +74,21 @@ export const AllStores = () => {
             <Col>
               <Nav
                 className="justify-content-center"
-                // activeKey={activeLocation.city_id}
+                // activeKey={activeLocation?.city_id}
                 onSelect={(selectedKey) => handleLocationChange(selectedKey)}
               >
                 {storeData.map((loc, index) => (
                   <Nav.Item key={index}>
                     <Nav.Link
-                      eventKey={loc.city_id}
+                      eventKey={loc?.city_id}
                       style={{
                         color: '#000',
-                        borderBottom: loc.city_id === activeLocation.city_id ? '2px solid #000' : 'none',
+                        borderBottom: loc?.city_id === activeLocation?.city_id ? '2px solid #000' : 'none',
                         padding: '1rem',
                         margin: '0 0.5rem'
                       }}
                     >
-                      {loc.city_id}
+                      {loc?.city_id}
                     </Nav.Link>
                   </Nav.Item>
                 ))}

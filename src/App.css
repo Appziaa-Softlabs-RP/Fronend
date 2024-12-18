@@ -1,7 +1,7 @@
 :root{
-  --PRIMARY_COLOR : #34AF91;
-  --SECONDARY_COLOR : #307360;
-  --MENU_HOVER_COLOR : #C9F8E1;
+  --PRIMARY_COLOR : #1F3461;
+  --SECONDARY_COLOR : #f0b562;
+  --MENU_HOVER_COLOR : #7493d5;
   --ADD_BUTTON_COLOR : #1C1B1B;
   --breakpoint-mobile: 560px;
 }

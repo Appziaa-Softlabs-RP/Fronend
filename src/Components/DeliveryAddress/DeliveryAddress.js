@@ -65,7 +65,7 @@ const AddressDelivery = ({ allAddress, setCheckoutType, checkoutType, setAddress
                                                 <input className={`${styles.deliveryRadio} position-absolute d-inline-block`} id={`delivery${idx}`} type="radio" name="delivery" />
                                                 <label className={`col-10 d-inline-flex flex-column`} htmlFor={`delivery${idx}`} role="button">
                                                     <h6 className={`${styles.addressName} col-12 d-inline-flex align-items-center flex-wrap gap-2 mb-1`}>{item.name}<span className={`${styles.addressTag} d-inline-flex align-items-center px-1`}>{item.address_type}</span></h6>
-                                                    <label className={`${styles.addressdetail} col-12 d-inline-flex mb-0`}>{item.contact}</label>
+                                                    <label className={`${styles.addressdetail} col-12 d-inline-flex mb-0`}>{item?.contact}</label>
                                                     <label className={`${styles.addressdetail} col-12 d-inline-flex mb-0`}>{item.house_no}, {item?.street}, {item?.city}, {item?.state} - {item.pincode}</label>
                                                 </label>
                                                 <div className="position-absolute p-3 top-0 end-0 d-inline-flex justify-content-end gap-3">
@@ -89,7 +89,7 @@ const AddressDelivery = ({ allAddress, setCheckoutType, checkoutType, setAddress
                     <div className={`col-12 p-3 rounded d-inline-flex flex-column position-relative`} role="button">
                         <label className={`col-10 d-inline-flex flex-column`} role="button">
                             <label className={`${styles.addressdetail} col-12 d-inline-flex align-items-center flex-wrap mb-1`}><span className={`${windowWidth === 'mobile' ? 'col-3' : 'col-1'}`}>Name:&nbsp;</span><b>{selectAddress.name}</b></label>
-                            <label className={`${styles.addressdetail} col-12 d-inline-flex mb-1`}><span className={`${windowWidth === 'mobile' ? 'col-3' : 'col-1'}`}>Mobile:&nbsp;</span><b>{selectAddress.contact}</b></label>
+                            <label className={`${styles.addressdetail} col-12 d-inline-flex mb-1`}><span className={`${windowWidth === 'mobile' ? 'col-3' : 'col-1'}`}>Mobile:&nbsp;</span><b>{selectAddress?.contact}</b></label>
                             <label className={`${styles.addressdetail} col-12 d-inline-flex mb-1`}><span className={`${windowWidth === 'mobile' ? 'col-3' : 'col-1'}`}>Address:&nbsp;</span><b>{selectAddress.house_no}, {selectAddress?.street}, {selectAddress?.city}, {selectAddress?.state} - {selectAddress.pincode}</b></label>
                         </label>
                     </div>
@@ -134,7 +134,7 @@ const PaymentMode = ({ checkoutType, userInfo, addressId, shopcartID, cartPriceT
             currency: "INR",
             name: enviroment.BUSINESS_NAME,
             description: "Order Purchase",
-            image: "https://neverused.in/favicon.ico",
+            image: "https://ashielectronics.com/favicon.ico",
             order_id: orderId,
             handler: (res) => {
                 onlinePaymentSuccess(orderId,res.razorpay_payment_id, res.razorpay_order_id);

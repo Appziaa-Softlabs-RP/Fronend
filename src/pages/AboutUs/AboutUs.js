@@ -27,7 +27,7 @@ export const AboutUs = () => {
 
           <p className="c6">
             <span className="c1">
-              About Neverused &ndash; Your Ultimate Destination for Quality
+              About AshiElectronics &ndash; Your Ultimate Destination for Quality
               Re-Commerce!
             </span>
           </p>
@@ -61,12 +61,12 @@ export const AboutUs = () => {
             <br />
             <br />
             Whether you're looking for the latest gadgets or essential household
-            items, Neverused is your trusted destination for premium
+            items, AshiElectronics is your trusted destination for premium
             re-commerce products. Join us in embracing sustainable consumption
             while enjoying top-notch products at unbeatable prices.
             <br />
             <br />
-            Discover the difference with Neverused today!
+            Discover the difference with AshiElectronics today!
           </p>
         </div>
       </div>

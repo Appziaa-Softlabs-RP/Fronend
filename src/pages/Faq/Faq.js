@@ -18,7 +18,7 @@ export const Faq = () => {
     {
       heading: "What is Never Owned?",
       answer:
-        "Never Owned is a premium brand associated with the re-commerce of branded Electronics and other household items. We are customer obsessed, technology first company committed to provide comprehensively quality checked products, at deep discounts to the market prices, in a condition as good as new with complete service guarantee either directly from the OEM brand or our own exclusive Warranty/Warranty++ offerings.<br /> <br />Through our brand Neverused, we are solving core value-for-money problems faced by individual and institutional consumers while buying overhyped and overpriced new large appliances. Our unique low-cost business model leverages technology and brings the benefits of re-Commerce to consumers.",
+        "Never Owned is a premium brand associated with the re-commerce of branded Electronics and other household items. We are customer obsessed, technology first company committed to provide comprehensively quality checked products, at deep discounts to the market prices, in a condition as good as new with complete service guarantee either directly from the OEM brand or our own exclusive Warranty/Warranty++ offerings.<br /> <br />Through our brand AshiElectronics, we are solving core value-for-money problems faced by individual and institutional consumers while buying overhyped and overpriced new large appliances. Our unique low-cost business model leverages technology and brings the benefits of re-Commerce to consumers.",
     },
     {
       heading: "Are the items on Never Owned brand new?",
@@ -28,17 +28,17 @@ export const Faq = () => {
     {
       heading: "How much can I save by buying from Never Owned?",
       answer:
-        "Neverused offers unbeatable pricing with up to 80%* discounts on MRP depending on the product type.  We are more or less certain that our pricing remains the best across online or offline platforms pan India. To buy the products of your choice and check our amazing offers and discounts, click here: <a href='https://neverused.in/' target='_blank'>https://neverused.in/</a>.",
+        "AshiElectronics offers unbeatable pricing with up to 80%* discounts on MRP depending on the product type.  We are more or less certain that our pricing remains the best across online or offline platforms pan India. To buy the products of your choice and check our amazing offers and discounts, click here: <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a>.",
     },
     {
       heading: "Is Never Owned a recognized company?",
       answer:
-        "Yes, Never Owned is a registered business entity having its head office in Delhi with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal <a href='https://neverused.in/' target='_blank'>https://neverused.in/</a>. We use secure online e-commerce platform India's leading payment gateway Razorpay and deploy robust SSL security measures strictly following government regulations/compliances to keep our customers data privacy as the top most priority",
+        "Yes, Never Owned is a registered business entity having its head office in Delhi with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a>. We use secure online e-commerce platform India's leading payment gateway Razorpay and deploy robust SSL security measures strictly following government regulations/compliances to keep our customers data privacy as the top most priority",
     },
     {
       heading: "How do I place an order?",
       answer:
-        "<ul><li>Go to our website: <a href='https://neverused.in/' target='_blank'>https://neverused.in/</a></li><li>Use the search bar or browse through product categories to find the product of your choice</li><li>Click on the product you would like to purchase</li><li>If you like the product, click the '<strong>Add to Cart</strong>' button.</li><li>Once you are ready, click the '<strong>Proceed to Checkout</strong>' button.</li><li>You will be prompted to enter your email address and delivery address. Make sure all your information is accurate to avoid delays.</li><li>Provide additional phone number in the billing address if you have one</li><li>Select your preferred payment method from the available options</li><li>We offer secure payment gateways for credit cards, debit cards, net banking, and UPI</li><li>Review and Place Order: Review your order summary carefully, including product details, pricing, and delivery address</li><li>Once everything looks good, click the '<strong>Place Order</strong>' button.</li></ul>",
+        "<ul><li>Go to our website: <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a></li><li>Use the search bar or browse through product categories to find the product of your choice</li><li>Click on the product you would like to purchase</li><li>If you like the product, click the '<strong>Add to Cart</strong>' button.</li><li>Once you are ready, click the '<strong>Proceed to Checkout</strong>' button.</li><li>You will be prompted to enter your email address and delivery address. Make sure all your information is accurate to avoid delays.</li><li>Provide additional phone number in the billing address if you have one</li><li>Select your preferred payment method from the available options</li><li>We offer secure payment gateways for credit cards, debit cards, net banking, and UPI</li><li>Review and Place Order: Review your order summary carefully, including product details, pricing, and delivery address</li><li>Once everything looks good, click the '<strong>Place Order</strong>' button.</li></ul>",
     },
     {
       heading: "Which payment methods do you accept?",
@@ -48,7 +48,7 @@ export const Faq = () => {
     {
       heading: "Is my payment information secure?",
       answer:
-        "We use Razorpay <a href='https://neverused.in/' target='_blank'>https://neverused.in/</a> payment gateway for processing all the transactions. Razorpay is India's first full-stack financial solutions company compliant with leading industry standards such as ISO 27001, PCI DSS and SOC2.<br /><br />They are RBI Authorised Payment Aggregator, and fully ensures that your transactions are secure.",
+        "We use Razorpay <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a> payment gateway for processing all the transactions. Razorpay is India's first full-stack financial solutions company compliant with leading industry standards such as ISO 27001, PCI DSS and SOC2.<br /><br />They are RBI Authorised Payment Aggregator, and fully ensures that your transactions are secure.",
     },
     {
       heading: "How long does it take to receive my order?",
@@ -73,7 +73,7 @@ export const Faq = () => {
     {
       heading: "What all I need to do while accepting the delivery?",
       answer:
-        "We take utmost care to ensure that your orders are processed and delivered safely and within the committed delivery timelines.<br /><br /><ul><li>We kindly request that you inspect the product and its accessories carefully upon delivery.</li><li>Pls make a complete unboxing video without any breaks in between.</li><li>If you discover any discrepancies, defects, or damages in the product or its accessories, please bring it to our attention immediately on the very same day within 24 hours after accepting the delivery.</li><li>You can contact us at +91 9911163300 or email us at info@neverused.in to report any issues with your order within 24 hours after you accept the delivery.</li></ul>",
+        "We take utmost care to ensure that your orders are processed and delivered safely and within the committed delivery timelines.<br /><br /><ul><li>We kindly request that you inspect the product and its accessories carefully upon delivery.</li><li>Pls make a complete unboxing video without any breaks in between.</li><li>If you discover any discrepancies, defects, or damages in the product or its accessories, please bring it to our attention immediately on the very same day within 24 hours after accepting the delivery.</li><li>You can contact us at +91 9911163300 or email us at info@ashielectronics.com to report any issues with your order within 24 hours after you accept the delivery.</li></ul>",
     },
     {
       heading:
@@ -99,7 +99,7 @@ export const Faq = () => {
     {
       heading: "Do you offer warranty on your products?",
       answer:
-        "All large appliances available on our website get 100% coverage for one year warranty without an exception. A significant percentage of large appliances from leading Brands are covered under their respective brand warranty. Those not covered under the brand warranty or other large appliances from smaller/purely online brands are covered under Neverused one-year comprehensive onsite service warranty.<br /><br />Small home appliances and other lifestyle products may be covered under their respective brand warranties which are generally off site in nature. We do not take any responsibility for these categories of products and nor we cover them under our own warranty.",
+        "All large appliances available on our website get 100% coverage for one year warranty without an exception. A significant percentage of large appliances from leading Brands are covered under their respective brand warranty. Those not covered under the brand warranty or other large appliances from smaller/purely online brands are covered under AshiElectronics one-year comprehensive onsite service warranty.<br /><br />Small home appliances and other lifestyle products may be covered under their respective brand warranties which are generally off site in nature. We do not take any responsibility for these categories of products and nor we cover them under our own warranty.",
     },
     {
       heading: "How are you able to offer such heavy discounts?",
@@ -109,7 +109,7 @@ export const Faq = () => {
     {
       heading: "How can I contact customer service?",
       answer:
-        "You can reach us by phone - 9911163300 or email us at info@neverused.in",
+        "You can reach us by phone - 9911163300 or email us at info@ashielectronics.com",
     },
     {
       heading: "What are your customer service hours?",

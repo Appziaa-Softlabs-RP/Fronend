@@ -43,13 +43,13 @@ export const AddAddressForm = ({
         }
         if (addressObj.name === "") {
             AppNotification("Error", "Enter your first name.", "danger");
-        } else if (addressObj.email === "") {
+        } else if (addressObj?.email === "") {
             AppNotification("Error", "Enter your email address.", "danger");
-        } else if (addressObj.contact === "") {
+        } else if (addressObj?.contact === "") {
             AppNotification("Error", "Enter your contact number.", "danger");
         } else if (
-            addressObj.contact.length > 10 ||
-            addressObj.contact.length < 9
+            addressObj?.contact.length > 10 ||
+            addressObj?.contact.length < 9
         ) {
             AppNotification(
                 "Error",
@@ -151,8 +151,8 @@ export const AddAddressForm = ({
                             ...addressObj,
                             pincode: editAddressObj.pincode,
                             name: editAddressObj.name,
-                            contact: editAddressObj.contact,
-                            email: editAddressObj.email,
+                            contact: editAddressObj?.contact,
+                            email: editAddressObj?.email,
                             city: editAddressObj.city,
                             state: editAddressObj.state,
                             house_no: editAddressObj.house_no,
@@ -252,7 +252,7 @@ export const AddAddressForm = ({
                             className={`${styles.formInput} d-inline-block col-12`}
                             type="tel"
                             name="phone"
-                            value={addressObj.contact}
+                            value={addressObj?.contact}
                             onChange={(e) =>
                                 setAddressObj({ ...addressObj, contact: e.target.value })
                             }
@@ -272,7 +272,7 @@ export const AddAddressForm = ({
                             className={`${styles.formInput} d-inline-block col-12`}
                             type="email"
                             name="email"
-                            value={addressObj.email}
+                            value={addressObj?.email}
                             onChange={(e) =>
                                 setAddressObj({ ...addressObj, email: e.target.value })
                             }

@@ -28,12 +28,12 @@ export const Terms = () => {
           <p className="c6">
             <span className="c4">
               Explore our comprehensive Terms & Conditions document tailored for
-              Neverused owned and operated by Iksh Retail Private Limited, covering essential aspects for our online re-commerce
+              AshiElectronics owned and operated by Iksh Retail Private Limited, covering essential aspects for our online re-commerce
               platform operating in India.
             </span>
           </p>
           <p className="c6">
-            <span className="c1">Neverused.in owned and operated by Iksh Retail Private Limited Terms &amp; Conditions</span>
+            <span className="c1">ashielectronics.com owned and operated by Iksh Retail Private Limited Terms &amp; Conditions</span>
           </p>
           <p className="c6">
             <span className="c2">Effective Date:</span>
@@ -41,9 +41,9 @@ export const Terms = () => {
           </p>
           <p className="c6">
             <span className="c2">
-              Welcome to Neverused.in owned and operated by Iksh Retail Private Limited (&quot;the Site&quot;). These Terms
+              Welcome to ashielectronics.com owned and operated by Iksh Retail Private Limited (&quot;the Site&quot;). These Terms
               &amp; Conditions (&quot;Terms&quot;) govern your use of the Site
-              and the purchase of products from Neverused owned and operated by Iksh Retail Private Limited.
+              and the purchase of products from AshiElectronics owned and operated by Iksh Retail Private Limited.
             </span>
             <span className="c8">&nbsp;</span>
             <span className="c1">
@@ -154,7 +154,7 @@ export const Terms = () => {
             <li className="c0 li-bullet-0">
               <span className="c4">
                 All content on the Site, including text, graphics, logos,
-                images, and software is the property of Neverused owned and operated by Iksh Retail Private Limited or its
+                images, and software is the property of AshiElectronics owned and operated by Iksh Retail Private Limited or its
                 licensors and is protected by copyright and trademark laws.
               </span>
             </li>
@@ -218,7 +218,7 @@ export const Terms = () => {
           <ul className="c10 lst-kix_28a2ovzdh5yk-0 start">
             <li className="c0 li-bullet-0">
               <span className="c4">
-                You agree to indemnify and hold Neverused owned and operated by Iksh Retail Private Limited harmless from any
+                You agree to indemnify and hold AshiElectronics owned and operated by Iksh Retail Private Limited harmless from any
                 claims or damages that arise from your use of the Site or your
                 violation of these Terms.
               </span>
@@ -283,7 +283,7 @@ export const Terms = () => {
           </ul>
           <p className="c6">
             <span className="c1">
-              By using the Neverused.in owned and operated by Iksh Retail Private Limited website, you acknowledge and agree
+              By using the ashielectronics.com owned and operated by Iksh Retail Private Limited website, you acknowledge and agree
               to these Terms &amp; Conditions.
             </span>
           </p>

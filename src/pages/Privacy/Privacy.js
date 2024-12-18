@@ -116,7 +116,7 @@ export const Privacy = () => {
         <div className="container">
           <div className="col-md-12 d-flex flex-row flex-wrap d-inline-block align-items-start  mt-4">
             <div className="col-md-8 d-inline-block pull-left">
-              <h1>Neverused Privacy Policy</h1>
+              <h1>AshiElectronics Privacy Policy</h1>
               <p className="c13">
                 <span className="c6">Effective Date:</span>
                 <span className="c2">&nbsp;2024-02-29</span>
@@ -126,10 +126,10 @@ export const Privacy = () => {
               </h3>
               <p className="c0">
                 <span className="c2">
-                  This Privacy Policy describes how Neverused owned and operated by Iksh Retail Private Limited (&quot;we,&quot;
+                  This Privacy Policy describes how AshiElectronics owned and operated by Iksh Retail Private Limited (&quot;we,&quot;
                   &quot;us,&quot; or &quot;our&quot;) collects, uses, and
                   discloses your personal information when you visit our website
-                  at Neverused.in owned and operated by Iksh Retail Private Limited (the &quot;Site&quot;) or make purchases
+                  at ashielectronics.com owned and operated by Iksh Retail Private Limited (the &quot;Site&quot;) or make purchases
                   at our physical store located at 42, Cycle Market, Jhandewalan
                   Extension, New Delhi 110055. (the &quot;Store&quot;).
                 </span>

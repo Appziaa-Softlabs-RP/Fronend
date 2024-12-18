@@ -369,7 +369,7 @@ const RegisterVerifyOTP = ({ setLoginType, mobileVal, mobileOTP, setMobileOTP, o
             AppNotification('Error', 'Please enter the OTP.', 'danger');
         } else if (registrationVal.mobile === '' || mobileNumberPattern.test(registrationVal.mobile) === false) {
             AppNotification('Error', 'Mobile number is not valid. Enter valid mobile number.', 'danger');
-        } else if (registrationVal.email === '' || emailPattern.test(registrationVal.email) === false) {
+        } else if (registrationVal?.email === '' || emailPattern.test(registrationVal?.email) === false) {
             AppNotification('Error', 'Email address is not valid. Enter valid email address.', 'danger');
         } else if (registrationVal.name === '') {
             AppNotification('Error', 'Please enter your full name.', 'danger');
@@ -386,7 +386,7 @@ const RegisterVerifyOTP = ({ setLoginType, mobileVal, mobileOTP, setMobileOTP, o
                     otp: matchOTP,
                     otp_type: registerType,
                     company_id: parseInt(enviroment.COMPANY_ID),
-                    email: registrationVal.email,
+                    email: registrationVal?.email,
                     password: registrationVal.password,
                     name: registrationVal.name,
                     phone: registrationVal.phone
@@ -478,7 +478,7 @@ const RegisterVerifyOTP = ({ setLoginType, mobileVal, mobileOTP, setMobileOTP, o
                         </div>
                         : registerType !== 'email' ?
                             <div className="col-12 d-inline-flex position-relative">
-                                <input type="email" placeholder="Enter your email address" className={`${styles.inputField} col-12 d-inline-flex px-3`} value={registrationVal.email} onChange={(e) => setRegistrationVal((prev) => ({ ...prev, email: e.target.value }))} />
+                                <input type="email" placeholder="Enter your email address" className={`${styles.inputField} col-12 d-inline-flex px-3`} value={registrationVal?.email} onChange={(e) => setRegistrationVal((prev) => ({ ...prev, email: e.target.value }))} />
                             </div>
                             : ''}
                     <div className="col-12 d-inline-flex position-relative">

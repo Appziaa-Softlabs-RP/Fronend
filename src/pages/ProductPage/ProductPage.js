@@ -296,7 +296,7 @@ export const ProductPage = () => {
     if (val.length === 6) {
       const payload = {
         pincode: val,
-        store_email: "info@neverowned.in"
+        store_email: "info@ashielectronics.com.in"
       };
       try {
         const response = await fetch(`https://company.aspl.tech/api/pincode-status`,
