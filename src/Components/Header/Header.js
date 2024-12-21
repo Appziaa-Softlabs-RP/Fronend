@@ -385,8 +385,9 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   left: '0',
                   top: '0',
                   right: '0',
+                  padding: '0 2rem',
                 }}
-                className={`${styles.siteLogoBox} m-0 d-inline-flex justify-content-center col-2 w-100`}
+                className={`${styles.siteLogoBox} m-0 d-inline-flex justify-content-start col-2 w-100`}
               >
                 <span class="visually-hidden">
                   {enviroment.REACT_APP_BUSINESS_NAME}

@@ -36,6 +36,8 @@ export const AllStores = () => {
 
   if (loading) return <div>Loading...</div>;
 
+  if(storeData.length === 0) return null;
+
   return (
     <div style={{
       background: 'rgb(242, 242, 242)'
