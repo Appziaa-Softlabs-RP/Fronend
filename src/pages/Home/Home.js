@@ -57,7 +57,7 @@ export const Home = () => {
 
         {/* <TopBrands /> */}
 
-        <OurProcess />
+        {/* <OurProcess /> */}
 
         <AllStores />
 
