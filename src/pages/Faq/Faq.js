@@ -73,7 +73,7 @@ export const Faq = () => {
     {
       heading: "What all I need to do while accepting the delivery?",
       answer:
-        "We take utmost care to ensure that your orders are processed and delivered safely and within the committed delivery timelines.<br /><br /><ul><li>We kindly request that you inspect the product and its accessories carefully upon delivery.</li><li>Pls make a complete unboxing video without any breaks in between.</li><li>If you discover any discrepancies, defects, or damages in the product or its accessories, please bring it to our attention immediately on the very same day within 24 hours after accepting the delivery.</li><li>You can contact us at +91 9911163300 or email us at info@ashielectronics.com to report any issues with your order within 24 hours after you accept the delivery.</li></ul>",
+        "We take utmost care to ensure that your orders are processed and delivered safely and within the committed delivery timelines.<br /><br /><ul><li>We kindly request that you inspect the product and its accessories carefully upon delivery.</li><li>Pls make a complete unboxing video without any breaks in between.</li><li>If you discover any discrepancies, defects, or damages in the product or its accessories, please bring it to our attention immediately on the very same day within 24 hours after accepting the delivery.</li><li>You can contact us at +91 9654502991 or email us at info@ashielectronics.com to report any issues with your order within 24 hours after you accept the delivery.</li></ul>",
     },
     {
       heading:
@@ -109,7 +109,7 @@ export const Faq = () => {
     {
       heading: "How can I contact customer service?",
       answer:
-        "You can reach us by phone - 9911163300 or email us at info@ashielectronics.com",
+        "You can reach us by phone - 9654502991 or email us at info@ashielectronics.com",
     },
     {
       heading: "What are your customer service hours?",
