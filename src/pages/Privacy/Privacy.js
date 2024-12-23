@@ -126,12 +126,12 @@ export const Privacy = () => {
               </h3>
               <p className="c0">
                 <span className="c2">
-                  This Privacy Policy describes how AshiElectronics owned and operated by Iksh Retail Private Limited (&quot;we,&quot;
+                  This Privacy Policy describes how AshiElectronics owned and operated by ASHI RETAIL ENTERPRISES (&quot;we,&quot;
                   &quot;us,&quot; or &quot;our&quot;) collects, uses, and
                   discloses your personal information when you visit our website
-                  at ashielectronics.com owned and operated by Iksh Retail Private Limited (the &quot;Site&quot;) or make purchases
-                  at our physical store located at 42, Cycle Market, Jhandewalan
-                  Extension, New Delhi 110055. (the &quot;Store&quot;).
+                  at ashielectronics.com owned and operated by ASHI RETAIL ENTERPRISES (the &quot;Site&quot;) or make purchases
+                  at our physical store located at SHOP NO. -4, KAUSHIK COMPLEX, SECTOR-17,NEAR PNB BANK
+                  SUKHRALI, SUKHRALI, Gurgaon, Haryana, 122001. (the &quot;Store&quot;).
                 </span>
               </p>
               <h3 ref={infoRefs["info-collect"]} className="c0 fw-bold fs-5">

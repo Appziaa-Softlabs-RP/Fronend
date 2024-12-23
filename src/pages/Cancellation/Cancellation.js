@@ -102,7 +102,7 @@ export const Cancellation = () => {
                 location at{" "}
               </span>
               <span className="c14 c18">
-                42, Cycle Market, Jhandewalan Extension, New Delhi 110055.
+                SHOP NO. -4, KAUSHIK COMPLEX, SECTOR-17,NEAR PNB BANK SUKHRALI, SUKHRALI, Gurgaon, Haryana, 122001.
                 India,{" "}
               </span>
               <span className="c4">

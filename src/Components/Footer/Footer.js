@@ -12,7 +12,7 @@ export const Footer = () => {
           <Col md={4}>
             <h5 className={`${styles.sectionTitle}`}>ABOUT THE SHOP</h5>
             <p className={styles.aboutText}>
-              Never Owned is a premium brand associated with the re-commerce of branded Electronics and other household items which either have been directly procured from the OEM under excess inventory, transit damage, service return &  end of life categories or simply unboxed items returned by the customers on leading eCommerce portals. These items have never been owned by anyone, and are unused but may have their packaging boxes opened or minor scratches or dents. We have an extremely efficient procurement channel to source such items at large scale from OEMs and e-com portals, with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal.
+              AshiElectronics is a premium brand associated with the re-commerce of branded Electronics and other household items which either have been directly procured from the OEM under excess inventory, transit damage, service return &  end of life categories or simply unboxed items returned by the customers on leading eCommerce portals. These items have never been owned by anyone, and are unused but may have their packaging boxes opened or minor scratches or dents. We have an extremely efficient procurement channel to source such items at large scale from OEMs and e-com portals, with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal.
             </p>
             <div className={styles.socialIcons}>
               <Facebook className={styles.icon} />
@@ -79,23 +79,27 @@ export const Footer = () => {
           </Col>
           <Col md={4}>
             <h5 className={styles.sectionTitle}>AshiElectronics</h5>
-            <p>Sector 17, Sukhrali Gurgaon Haryana</p>
+            <p>SHOP NO. -4, KAUSHIK COMPLEX, SECTOR-17,NEAR PNB BANK SUKHRALI, SUKHRALI, Gurgaon, Haryana, 122001</p>
           </Col>
           <Col md={4}>
             <h5 className={styles.sectionTitle}>CUSTOMER CARE</h5>
-            <p>+91 9911163300<br />Wednesday to Monday 11:00 AM to 7:00 PM<br />Tuesday Closed</p>
+            <p>
+              <span>+91 9654502991</span><br />
+              <span>+91 9811931938</span><br />
+              <span>+91 9599727547</span><br />
+              Wednesday to Monday 11:00 AM to 7:00 PM<br />Tuesday Closed</p>
           </Col>
         </Row>
         <Row className={styles.bottomSection}>
           <Col md={4}>
             <h5 className={styles.sectionTitle}>LET'S DO BUSINESS TOGETHER!</h5>
-            <p>Be a part of Open Box - Recommence Retail revolution and own a profitable online + offline business. Reach out to us at info@ashielectronics.com.in or Whatsapp 9911163300</p>
+            <p>Be a part of AshiElectronics - Recommence Retail revolution and own a profitable online + offline business. Reach out to us at info@ashielectronics.com.in or Whatsapp 9654502991</p>
           </Col>
         </Row>
         <Row className={styles.copyrightSection}>
           <Col>
             <p className={styles.sectionTitle}>© AshiElectronics INDIA</p>
-            <p>© 2022 AshiElectronics.in is a property of AshiElectronics. Developed & Marketed by Rare Fusion Marcom</p>
+            <p>© 2022 AshiElectronics.in is a property of AshiElectronics. Developed & Marketed by RewardsPlus</p>
             <p>Powered by RewardsPlus</p>
           </Col>
         </Row>

@@ -32,9 +32,9 @@ export const AboutUs = () => {
             </span>
           </p>
           <p className="c6">
-            Welcome to Neveused!
+            Welcome to AshiElectronics!
             <br />
-            At Neveused, we pride ourselves on being a premium brand
+            At AshiElectronics, we pride ourselves on being a premium brand
             dedicated to re-commerce. We specialize in the resale of branded
             electronics and household items, offering our customers quality
             products at exceptional value.

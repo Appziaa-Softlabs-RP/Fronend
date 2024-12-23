@@ -26,7 +26,7 @@ export const Return = () => {
       }}>
         <div className="container">
           <p className="c6">
-            <span className="c7">AshiElectronics owned and operated by Iksh Retail Private Limited Return Policy</span>
+            <span className="c7">AshiElectronics owned and operated by ASHI RETAIL ENTERPRISES Return Policy</span>
           </p>
           <p className="c6">
             <span className="c2">Effective Date:</span>
@@ -36,7 +36,7 @@ export const Return = () => {
             <span className="c1">Return Window:</span>
           </p>
           <p className="c6">
-            <span className="c8">AshiElectronics owned and operated by Iksh Retail Private Limited offers a </span>
+            <span className="c8">AshiElectronics owned and operated by ASHI RETAIL ENTERPRISES offers a </span>
             <span className="c2">7-day return policy</span>
             <span className="c4">
               &nbsp;for all online and in-store purchases. This means you have 7
@@ -100,7 +100,7 @@ export const Return = () => {
                 &nbsp;You may return items purchased in-store to our location at{" "}
               </span>
               <span className="c14 c18">
-                42, Cycle Market, Jhandewalan Extension, New Delhi 110055.
+                SHOP NO. -4, KAUSHIK COMPLEX, SECTOR-17,NEAR PNB BANK SUKHRALI, SUKHRALI, Gurgaon, Haryana, 122001.
                 India,{" "}
               </span>
               <span className="c4">
@@ -116,7 +116,7 @@ export const Return = () => {
             <li className="c0 li-bullet-0">
               <span className="c4">
                 You are responsible for the cost of shipping the returned
-                item(s) back to AshiElectronics owned and operated by Iksh Retail Private Limited.
+                item(s) back to AshiElectronics owned and operated by ASHI RETAIL ENTERPRISES.
               </span>
             </li>
             <li className="c0 li-bullet-0">
@@ -151,7 +151,7 @@ export const Return = () => {
             <li className="c0 li-bullet-0">
               <span className="c4">
                 This return policy applies only to purchases made from
-                AshiElectronics owned and operated by Iksh Retail Private Limited. Items purchased from other retailers or through
+                AshiElectronics owned and operated by ASHI RETAIL ENTERPRISES. Items purchased from other retailers or through
                 third-party marketplaces may have different return policies.
               </span>
             </li>

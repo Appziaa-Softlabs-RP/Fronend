@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { getContactUsAdminEmailTemplate, getContactUsUserEmailTemplate } from '../../assets/email-templates/contact-us'
 import SupportImage from "../../assets/images/support.jpg"
 import { Footer } from '../../Components/Footer/Footer'
 import { Header } from '../../Components/Header/Header'
@@ -7,7 +8,6 @@ import { EmailIcon, LocationIcon, PhoneIcon, ServiceIcon } from '../../Component
 import { enviroment } from "../../enviroment"
 import ApiService from '../../services/ApiService'
 import { AppNotification } from '../../utils/helper'
-import { getContactUsUserEmailTemplate, getContactUsAdminEmailTemplate } from '../../assets/email-templates/contact-us'
 
 export default function ContactUsPage() {
     const [name, setName] = useState('')
