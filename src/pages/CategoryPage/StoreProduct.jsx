@@ -152,10 +152,10 @@ export const StoreProductCategory = () => {
                     {loading && <ProductListLoader />}
                     {loading === false && (
                         <div
-                            className={`d-inline-flex flex-column col-12 mb-3`}
+                            className={`d-inline-flex  flex-column col-12 mb-3`}
                             id="scrollableDiv"
                         >
-                            <div className={`d-inline-flex align-items-start col-12 gap-2`}>
+                            <div className={`d-inline-flex  align-items-start col-12 gap-2`}>
                                 {filterVert !== null &&
                                     filterVert !== undefined && (
                                         <div
@@ -173,7 +173,7 @@ export const StoreProductCategory = () => {
                                     )}
                                 <div
                                     className={`${styles.productContainer
-                                        } flex-shrink-1 d-inline-flex flex-wrap`}>
+                                        } flex-shrink-1  w-100 d-inline-flex flex-wrap`}>
 
                                     <div
                                         className={`${styles.sortContainer} hideInMobile col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}

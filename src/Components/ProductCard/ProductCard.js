@@ -84,7 +84,7 @@ export const ProductCard = ({ item, index }) => {
                     opacity: item.stock <= 0 ? "0.5" : "1",
                     height: "100%",
                     width: "100%",
-                    objectFit: "cover",
+                    objectFit: "contain",
                   }}
                   src={
                     item?.image
@@ -139,7 +139,7 @@ export const ProductCard = ({ item, index }) => {
                       opacity: item.stock <= 0 ? "0.5" : "1",
                       height: "100%",
                       width: "100%",
-                      objectFit: "cover",
+                      objectFit: "contain",
                     }}
                     src={
                       item?.image

@@ -212,7 +212,7 @@ export const SearchCategoryFilter = ({
                     </div>
                 )}
 
-                {allBrandLen?.gender?.length > 0 && (
+                {/* {allBrandLen?.gender?.length > 0 && (
                     <div
                         className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
                     >
@@ -270,9 +270,9 @@ export const SearchCategoryFilter = ({
                                 })}
                         </ul>
                     </div>
-                )}
+                )} */}
 
-                {allBrandLen?.gender?.length > 0 && (
+                {/* {allBrandLen?.gender?.length > 0 && (
                     <div
                         className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
                     >
@@ -330,7 +330,7 @@ export const SearchCategoryFilter = ({
                                 })}
                         </ul>
                     </div>
-                )}
+                )} */}
 
                 <div
                     className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}

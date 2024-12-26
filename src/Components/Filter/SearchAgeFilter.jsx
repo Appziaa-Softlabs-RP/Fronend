@@ -199,7 +199,7 @@ export const SearchAgeFilter = ({
                     </ul>
                 </div>
 
-                <div
+                {/* <div
                     className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}>
                     <div className="mb-4 d-flex align-items-center justify-content-between">
                         <h5 className={`${styles.filterTitle}`}>Gender</h5>
@@ -254,7 +254,7 @@ export const SearchAgeFilter = ({
                                 );
                             })}
                     </ul>
-                </div>
+                </div> */}
 
                 <div
                     className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
