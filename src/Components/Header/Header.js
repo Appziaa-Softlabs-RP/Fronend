@@ -592,11 +592,12 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
+                            fontSize: '1rem',
                           }}
                         >
                           <img src={getCatIcon(item.name)} alt={item.name} style={{
-                            height: '1.5rem',
-                            width: '1.5rem',
+                            height: '2rem',
+                            width: '2rem',
                           }} />
                           <span
                             className={`${styles.menuNameText}`}

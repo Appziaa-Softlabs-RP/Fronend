@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styles from './DealShop.module.css';
-import ApiService from "../../services/ApiService";
 import ReactOwlCarousel from "react-owl-carousel";
-import { enviroment } from "../../enviroment";
 import { useApp } from "../../context/AppContextProvider";
+import { enviroment } from "../../enviroment";
+import ApiService from "../../services/ApiService";
 import { ProductCard } from "../ProductCard/ProductCard";
+import styles from './DealShop.module.css';
 
 export const DealShop = () => {
     const [dealsProd, setDealsProd] = useState(null);
@@ -16,7 +16,7 @@ export const DealShop = () => {
             store_id: parseInt(enviroment.STORE_ID)
         }
         ApiService.DealsOfProduct(payload).then((res) => {
-            if(res.message === "Fetch successfully."){
+            if (res.message === "Fetch successfully.") {
                 setDealsProd(res.payload_normalDeals.product);
             }
         }).catch((err) => {

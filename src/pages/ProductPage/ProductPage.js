@@ -2,9 +2,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect, useState } from "react";
 import { Helmet } from "react-helmet";
-import { ThreeDots } from "react-loader-spinner";
 import Skeleton from "react-loading-skeleton";
-import ReactOwlCarousel from "react-owl-carousel";
 import {
   Link,
   useLocation,
@@ -27,17 +25,16 @@ import {
   FacebookIcon,
   LocationIcon,
   PinterestIcon,
-  ShareIcon,
   TwitterIcon,
-  WhatsAppIcon,
+  WhatsAppIcon
 } from "../../Components/siteIcons";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { AppNotification } from "../../utils/helper";
-import styles from "./ProductPage.module.css";
 import ProductGalleryDesktop from "./ProdGalleryDesktop";
 import ProdGalleryMobile from "./ProdGalleryMobile";
+import styles from "./ProductPage.module.css";
 
 export const ProductPage = () => {
   const appData = useApp();
@@ -1211,7 +1208,7 @@ export const ProductPage = () => {
       <div className="hideInMobile" style={{
         maxWidth: "100vw",
         overflowX: "hidden",
-        background: "#EEEEEE",
+        background: "white",
         display: "flex",
         justifyContent: "center",
         flexDirection: "column",

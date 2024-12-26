@@ -25,9 +25,11 @@ export const NewArrival = () => {
         });
     }, []);
     return (
-        <div className='border-section'>
+        <div style={{
+            marginTop: '3rem'
+        }}>
             {productData?.length > 0 &&
-                <div className={`col-12 ${windowWidth === "desktop" && 'px-3'} d-inline-flex`}>
+                <div className={`col-12  ${windowWidth === "desktop" && 'px-3'} d-inline-flex`}>
                     <div className={`${windowWidth === "mobile" && 'p-0'} container`}>
                         <div className={`col-12 ${windowWidth === 'mobile' ? 'px-3' : 'm-0'} d-inline-flex flex-column`}>
                             <div className="titlesWrapper">
@@ -51,7 +53,7 @@ export const NewArrival = () => {
                                 nav={true}
                                 stagePadding={isMobile ? 50 : 0}
                                 responsive={{
-                                    0: { items: 1 },
+                                    0: { items: 1.5 },
                                     768: { items: 2 },
                                     992: { items: 3 },
                                     1210: { items: 4 },

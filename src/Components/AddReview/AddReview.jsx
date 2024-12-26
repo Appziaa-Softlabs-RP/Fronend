@@ -97,7 +97,7 @@ export default function AddReview({ product_id, total_rating = null }) {
                 />
 
                 <button
-                    className="btn btn-success"
+                    className="btn btn-danger"
                     disabled={!selectedStar || !reviewText.trim() || loading || isReviewSubmitted}
                     onClick={() => {
                         handleSubmit();

@@ -12,6 +12,9 @@ export const ProductCard = ({ item, index }) => {
     }
   };
 
+  const mrp = parseFloat(item?.mrp);
+  const selling_price = parseFloat(item?.selling_price);
+
   return (
     <React.Fragment>
       <div
@@ -23,7 +26,7 @@ export const ProductCard = ({ item, index }) => {
         key={index}
       >
         {item?.is_deal
-          ? parseFloat(item.mrp) > parseFloat(item.deals_price) && (
+          ? parseFloat(mrp) > parseFloat(item.deals_price) && (
             <span
               className={`${styles.featureOffBox} position-absolute d-inline-flex align-items-center`}
             >
@@ -31,7 +34,7 @@ export const ProductCard = ({ item, index }) => {
               % OFF
             </span>
           )
-          : parseFloat(item.mrp) > parseFloat(item.selling_price) && (
+          : parseFloat(mrp) > parseFloat(item.selling_price) && (
             <span
               className={`${styles.featureOffBox} position-absolute d-inline-flex align-items-center`}
               style={{
@@ -49,7 +52,7 @@ export const ProductCard = ({ item, index }) => {
                 margin: "1px"
               }}>
                 {Math.ceil(
-                  ((item?.mrp - item?.selling_price) * 100) / item?.mrp
+                  ((item?.mrp - selling_price) * 100) / item?.mrp
                 )}
                 %
               </span>{" "}
@@ -219,10 +222,10 @@ export const ProductCard = ({ item, index }) => {
                 <b>₹{Math.round(item.deals_price)}</b>
               </span>
               <del className={`${styles.offerDiscountPrice} d-inline-flex`}>
-                ₹{Math.round(item.mrp)}
+                ₹{Math.round(mrp)}
               </del>
             </div>
-          ) : item.mrp > item.selling_price ? (
+          ) : mrp > item.selling_price ? (
             <div
               style={{
                 margin: "10px 0px",
@@ -231,19 +234,12 @@ export const ProductCard = ({ item, index }) => {
               }}
               className="col-12 p-0 d-inline-flex align-items-center gap-2 flex-wrap"
             >
-              <span className={`${styles.offerPrice} d-inline-flex text-danger`}>
+              <span className={`${styles.offerPrice} fw-bold d-inline-flex`}>
                 ₹{Math.round(item.selling_price)}
               </span>
               <del className={`${styles.offerDiscountPrice} d-inline-flex`}>
-                ₹{Math.round(item.mrp)}
+                ₹{Math.round(mrp)}
               </del>
-              {/* percentage off value */}
-              <span className={`${styles.offerDiscountPrice} text-danger`}>
-                {Math.ceil(
-                  ((item?.mrp - item?.selling_price) * 100) / item?.mrp
-                )}
-                % OFF
-              </span>
             </div>
           ) : (
             <div
@@ -258,7 +254,7 @@ export const ProductCard = ({ item, index }) => {
                   fontWeight: "400",
                 }}
               >
-                ₹{Math.round(item.mrp)}
+                ₹{Math.round(mrp)}
               </span>
             </div>
           )}

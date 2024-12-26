@@ -55,7 +55,7 @@ export const HomeCategories = () => {
                                     nav={true}
                                     stagePadding={isMobile ? 50 : 0}
                                     responsive={{
-                                        0: { items: 1 },
+                                        0: { items: 1.5 },
                                         768: { items: 2 },
                                         992: { items: 3 },
                                         1210: { items: 4 },

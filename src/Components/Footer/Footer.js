@@ -1,108 +1,117 @@
 import React from 'react';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-import { Facebook, Instagram, Youtube, Linkedin } from 'react-bootstrap-icons';
-import styles from './Footer.module.css';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
+import { enviroment } from '../../enviroment';
+import { useAppStore } from '../../store';
+import styles from './Footer.module.css';
 
 export const Footer = () => {
+
+  const navItems = useAppStore((state) => state.navItems);
+
   return (
-    <footer className={styles.footer} style={{ backgroundColor: 'var(--PRIMARY_COLOR)', color: 'white', padding: '2rem 0' }}>
+    <footer className={styles.footer}>
       <Container>
-        <Row>
-          <Col md={4}>
-            <h5 className={`${styles.sectionTitle}`}>ABOUT THE SHOP</h5>
+        <Row className={styles.mainContent}>
+          <Col lg={3} md={6} className={styles.footerColumn}>
+            <h3 className={styles.columnTitle}>About the Shop</h3>
             <p className={styles.aboutText}>
-              AshiElectronics is a premium brand associated with the re-commerce of branded Electronics and other household items which either have been directly procured from the OEM under excess inventory, transit damage, service return &  end of life categories or simply unboxed items returned by the customers on leading eCommerce portals. These items have never been owned by anyone, and are unused but may have their packaging boxes opened or minor scratches or dents. We have an extremely efficient procurement channel to source such items at large scale from OEMs and e-com portals, with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal.
+              Ashi Electronics specializes in selling open-box home and electronic appliances, offering high-quality products at deeply discounted prices. The brand ensures that all items are thoroughly tested and certified for functionality and reliability, providing customers with excellent value for money. With a focus on affordability and sustainability, Ashi Electronics caters to smart shoppers looking for premium appliances at unbeatable deals.
             </p>
             <div className={styles.socialIcons}>
-              <Facebook className={styles.icon} />
-              <Instagram className={styles.icon} />
-              <Youtube className={styles.icon} />
-              <Linkedin className={styles.icon} />
+              {
+                enviroment.FACEBOOK_LINK &&
+                <a href={enviroment.FACEBOOK_LINK} className={styles.socialLink}><Facebook /></a>
+              }
+              {
+                enviroment.TWITTER_LINK &&
+                <a href={enviroment.TWITTER_LINK} className={styles.socialLink}><Twitter /></a>
+              }
+              {
+                enviroment.INSTAGRAM_LINK &&
+                <a href={enviroment.INSTAGRAM_LINK} className={styles.socialLink}><Instagram /></a>
+              }
+              {
+                enviroment.YOUTUBE_LINK &&
+                <a href={enviroment.YOUTUBE_LINK} className={styles.socialLink}><Youtube /></a>
+              }
+              {
+                enviroment.LINKEDIN_LINK &&
+                <a href={enviroment.LINKEDIN_LINK} className={styles.socialLink}><Linkedin /></a>
+              }
             </div>
           </Col>
-          <Col md={4}>
-            <h5 className={styles.sectionTitle}>MAIN MENU</h5>
-            <ul className={styles.menuList}>
-              <li>TELEVISIONS</li>
-              <li>REFRIGERATOR</li>
-              <li>WASHING MACHINES</li>
-              <li>AIR CARE</li>
-              <li>HOME APPLIANCES</li>
-              <li>LIFESTYLE</li>
-              <li>MOBILES & LAPTOPS</li>
-              <li>SOUND SYSTEMS</li>
+
+          <Col lg={3} md={6} className={styles.footerColumn}>
+            <h3 className={styles.columnTitle}>Main Menu</h3>
+            {/* {JSON.stringify(navItems)} */}
+            <ul className={styles.footerLinks}>
+              {navItems?.map((item, index) => (
+                <li
+                  key={index}
+                ><Link to="/">
+                    {item?.name}
+                  </Link></li>
+              ))}
             </ul>
           </Col>
-          <Col md={4}>
-            <h5 className={styles.sectionTitle}>IMPORTANT LINKS</h5>
-            <ul className={styles.menuList}>
-              <li>
-                <Link to="/about-us">ABOUT US</Link>
-              </li>
-              <li>
-                <Link to="/contact-us">CONTACT US</Link>
-              </li>
-              <li>
-                <Link to="/privacy-policy">PRIVACY POLICY</Link>
-              </li>
-              <li>
-                <Link to="/return-policy">REFUND & RETURN POLICY</Link>
-              </li>
-              <li>
-                <Link to="/shipping-information-policy">SHIPPING POLICY</Link>
-              </li>
-              <li>
-                <Link to="/terms">TERMS OF SERVICE</Link>
-              </li>
-              <li>
-                <Link to="/Cancellation-policy">Cancellation Policy</Link>
-              </li>
-              <li>
-                <Link to="/faq">FAQ's</Link>
-              </li>
+
+          <Col lg={3} md={6} className={styles.footerColumn}>
+            <h3 className={styles.columnTitle}>Important Links</h3>
+            <ul className={styles.footerLinks}>
+              <li><Link to="/about-us">About Us</Link></li>
+              <li><Link to="/contact-us">Contact Us</Link></li>
+              <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+              <li><Link to="/return-policy">Refund & Return Policy</Link></li>
+              <li><Link to="/shipping-information-policy">Shipping Policy</Link></li>
+              <li><Link to="/terms">Terms of Service</Link></li>
+              <li><Link to="/cancellation-policy">Cancellation Policy</Link></li>
+              <li><Link to="/faq">FAQ's</Link></li>
             </ul>
           </Col>
-        </Row>
-        <Row className={styles.bottomSection}>
-          <Col md={4}>
-            <h5 className={styles.sectionTitle}>NEWSLETTER</h5>
-            <p>Stay in touch with us, get product updates, offers, discounts directly to your inbox. Please provide your email address here (in a band). We'll never share your email address with a third party.</p>
-            <Form>
-              <Form.Group controlId="formBasicEmail">
-                <Form.Control type="email" placeholder="Enter your email address" className={styles.emailInput} />
-              </Form.Group>
-              <Button variant="dark" type="submit" className={styles.subscribeButton}>
-                SUBSCRIBE
+
+          <Col lg={3} md={6} className={styles.footerColumn}>
+            <h3 className={styles.columnTitle}>Newsletter</h3>
+            <p className={styles.newsletterText}>
+              Stay updated with our latest offers and product news. Subscribe to our newsletter.
+            </p>
+            <Form className={styles.newsletterForm}>
+              <Form.Control
+                type="email"
+                placeholder="Enter your email"
+                className={styles.emailInput}
+              />
+              <Button className={styles.subscribeButton}>
+                Subscribe
               </Button>
             </Form>
-          </Col>
-          <Col md={4}>
-            <h5 className={styles.sectionTitle}>AshiElectronics</h5>
-            <p>SHOP NO. -4, KAUSHIK COMPLEX, SECTOR-17,NEAR PNB BANK SUKHRALI, SUKHRALI, Gurgaon, Haryana, 122001</p>
-          </Col>
-          <Col md={4}>
-            <h5 className={styles.sectionTitle}>CUSTOMER CARE</h5>
-            <p>
-              <span>+91 9654502991</span><br />
-              <span>+91 9811931938</span><br />
-              <span>+91 9599727547</span><br />
-              Wednesday to Monday 11:00 AM to 7:00 PM<br />Tuesday Closed</p>
+
+            <div className={styles.contactInfo}>
+              <h3 className={styles.columnTitle}>Contact Us</h3>
+              <p>+91 9654502991</p>
+              <p>+91 9811931938</p>
+              <p>Wednesday to Saturday: 11:00 AM - 7:00 PM</p>
+              <p>Sunday: Closed</p>
+            </div>
           </Col>
         </Row>
-        <Row className={styles.bottomSection}>
-          <Col md={4}>
-            <h5 className={styles.sectionTitle}>LET'S DO BUSINESS TOGETHER!</h5>
-            <p>Be a part of AshiElectronics - Recommence Retail revolution and own a profitable online + offline business. Reach out to us at info@ashielectronics.com.in or Whatsapp 9654502991</p>
-          </Col>
-        </Row>
-        <Row className={styles.copyrightSection}>
-          <Col>
-            <p className={styles.sectionTitle}>© AshiElectronics INDIA</p>
-            <p>© 2022 AshiElectronics.in is a property of AshiElectronics. Developed & Marketed by RewardsPlus</p>
-            <p>Powered by RewardsPlus</p>
-          </Col>
-        </Row>
+
+        <div className={styles.businessSection}>
+          <h3 className={styles.columnTitle} style={{
+            width: 'fit-content',
+            margin: 'auto'
+          }}>Let's Do Business Together!</h3>
+          <p>
+            Be a part of AshiElectronics - Recommence Retail revolution and own a profitable online + offline business.
+            Contact us at info@ashielectronics.com or WhatsApp 9654502991
+          </p>
+        </div>
+
+        <div className={styles.copyrightSection}>
+          <p>© {(new Date()).getFullYear()} AshiElectronics India</p>
+          <p>AshiElectronics.in is a property of AshiElectronics. Developed & Marketed by RewardsPlus</p>
+        </div>
       </Container>
     </footer>
   );
