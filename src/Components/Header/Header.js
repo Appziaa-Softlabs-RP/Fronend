@@ -361,7 +361,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
             className={`d-inline-block text-decoration-none ${styles.dealsLink}`}
             title="Superdeals"
           >
-            Delivering Across India
+            Shop Smart, Save Big! Explore Our Open-Box Collection Today!
           </span>
         </div>
       </div>
@@ -415,6 +415,9 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   role="button"
                 >
                   <SupportIcon color="#000" />
+                  <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
+                    Support
+                  </span>
                   <div
                     className={`${styles.supportDropDown} position-absolute d-inline-block`}
                   >
@@ -544,8 +547,11 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   role="button"
                   onClick={() => setCartPop(true)}
                 >
-                  <span className="position-relative d-inline-flex">
+                  <span className="position-relative d-inline-flex gap-2">
                     <CartIcon color="#000" />
+                    <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
+                      Cart
+                    </span>
                     {appData?.appData?.cartCount > 0 && (
                       <span
                         className={`${styles.cartCount} position-absolute d-inline-flex align-items-center`}

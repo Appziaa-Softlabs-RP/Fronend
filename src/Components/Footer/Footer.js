@@ -91,26 +91,26 @@ export const Footer = () => {
               <h3 className={styles.columnTitle}>Contact Us</h3>
               <p>+91 9654502991</p>
               <p>+91 9811931938</p>
-              <p>Wednesday to Saturday: 11:00 AM - 7:00 PM</p>
+              <p>Monday to Saturday: 11:00 AM - 7:00 PM</p>
               <p>Sunday: Closed</p>
             </div>
           </Col>
         </Row>
 
-        <div className={styles.businessSection}>
+        {/* <div className={styles.businessSection}>
           <h3 className={styles.columnTitle} style={{
             width: 'fit-content',
             margin: 'auto'
           }}>Let's Do Business Together!</h3>
           <p>
-            Be a part of AshiElectronics - Recommence Retail revolution and own a profitable online + offline business.
+            Be a part of Ashi Electronics - Recommence Retail revolution and own a profitable online + offline business.
             Contact us at info@ashielectronics.com or WhatsApp 9654502991
           </p>
-        </div>
+        </div> */}
 
         <div className={styles.copyrightSection}>
-          <p>© {(new Date()).getFullYear()} AshiElectronics India</p>
-          <p>AshiElectronics.in is a property of AshiElectronics. Developed & Marketed by RewardsPlus</p>
+          <p>© {(new Date()).getFullYear()} Ashi Electronics India</p>
+          <p>ashielectronics.com is a property of Ashi Electronics. Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
         </div>
       </Container>
     </footer>

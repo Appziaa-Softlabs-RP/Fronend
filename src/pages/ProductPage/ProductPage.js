@@ -35,6 +35,7 @@ import { AppNotification } from "../../utils/helper";
 import ProductGalleryDesktop from "./ProdGalleryDesktop";
 import ProdGalleryMobile from "./ProdGalleryMobile";
 import styles from "./ProductPage.module.css";
+import { Card, Col, ListGroup, Row } from "react-bootstrap";
 
 export const ProductPage = () => {
   const appData = useApp();
@@ -48,7 +49,7 @@ export const ProductPage = () => {
   const [deliveryDetail, setDeliveryDetail] = useState({});
   const [activeImg, setActiveImg] = useState("");
   const [prodDiscount, setProdDiscount] = useState(0);
-  const [descActive, setDescActive] = useState("");
+  const [descActive, setDescActive] = useState("Description");
   const [prodDesc, setProdDesc] = useState({
     __html: ProductData?.description,
   });
@@ -295,7 +296,7 @@ export const ProductPage = () => {
     if (val.length === 6) {
       const payload = {
         pincode: val,
-        store_email: "info@ashielectronics.com.in"
+        store_email: "ashiretailggn@gmail.com"
       };
       try {
         const response = await fetch(`https://company.aspl.tech/api/pincode-status`,
@@ -549,7 +550,7 @@ export const ProductPage = () => {
 
       <div className="hideInDesktop" style={{
         maxWidth: "100vw",
-        overflowX: "hidden",
+        // overflowX: "hidden",
       }}>
         <PageHeader title={ProductData?.name} />
         <ProdGalleryMobile
@@ -1207,7 +1208,6 @@ export const ProductPage = () => {
 
       <div className="hideInMobile" style={{
         maxWidth: "100vw",
-        overflowX: "hidden",
         background: "white",
         display: "flex",
         justifyContent: "center",
@@ -1219,11 +1219,9 @@ export const ProductPage = () => {
           margin: "auto",
         }}>
           <div className="container-fluid">
-            <div
-              className={`col-12 d-inline-flex align-items-start position-relative gap-4 mb-4`}
-            >
+            <div className="col-12 d-flex position-relative gap-2 h-100 mb-4">
               <div
-                className={`d-inline-flex flex-column gap-3 col-6 flex-shrink-1 position-sticky top-0 mt-5`}
+                className={`shadow-sm col-4 position-relative mt-5`}
               >
                 <ProductGalleryDesktop
                   styles={styles}
@@ -1236,10 +1234,118 @@ export const ProductPage = () => {
                   activeImg={activeImg}
                   setMainImage={setMainImage}
                 />
-
-                <div className="col-12 d-flex flex-column m-3">
+              </div>
+              <div
+                className={`shadow-sm d-inline-flex flex-column gap-2 col-5 flex-shrink-1 align-items-start justify-content-start px-2 pt-5`}
+              >
+                <div
+                  className={`${styles.productSubLine} d-inline-flex align-items-center gap-2 col-12 mb-0 position-relative`}
+                >
+                  {
+                    productLoading ?
+                      <Skeleton width={100} height={20} />
+                      :
+                      <div className="d-inline-flex align-items-center gap-2 fs-6 fw-light mb-3">
+                        {ProductData?.category_name ? (
+                          <span className={`${styles.categoryName} titleMainSmall d-inline-flex m-0`}>
+                            {ProductData?.category_name}
+                          </span>
+                        ) : null}
+                      </div>
+                  }
+                </div>
+                <h2
+                  className={`${styles.productDetailName} col-12 mb-1`}
+                >
+                  {
+                    productLoading ?
+                      <Skeleton width={200} height={30} />
+                      :
+                      ProductData?.name
+                  }
+                </h2>
+                <div
+                  className={``}
+                >
+                  {
+                    productLoading ?
+                      <Skeleton width={100} height={25} />
+                      :
+                      <ShowReviews
+                        product_id={ProductData?.product_id}
+                        total_rating={ProductData?.total_rating}
+                      />
+                  }
+                </div>
+                {
+                  productLoading ?
+                    <Skeleton width={100} height={20} />
+                    :
+                    <span>
+                      {
+                        ProductData?.stock > 0 ? (
+                          <span
+                            className="rounded"
+                            style={{
+                              padding: "5px 10px",
+                              background: "hsla(0, 0%, 87%, 1)",
+                              color: "#4CAF50",
+                              fontWeight: "bold",
+                            }}
+                          >
+                            In stock
+                          </span>
+                        ) : (
+                          <span
+                            className="rounded"
+                            style={{
+                              padding: "5px 10px",
+                              background: "hsla(0, 0%, 87%, 1)",
+                              color: "red",
+                              fontWeight: "bold",
+                            }}>
+                            Out of stock
+                          </span>
+                        )
+                      }
+                    </span>
+                }
+                <ProdPrice
+                  productLoading={productLoading}
+                  ProductData={ProductData}
+                  prodDiscount={prodDiscount}
+                />
+                {ProductData?.description &&
+                  ProductData?.description !== "Not available" &&
+                  (
+                    <div
+                      className={`col-4 p-3 m-0 text-center ${descActive === "Description" ? styles.tabActive : ""
+                        } ${styles.productDescTitle}`}
+                      onClick={() => {
+                        if (descActive === "Description") {
+                          setDescActive("")
+                          return;
+                        }
+                        setDescActive("Description")
+                      }}
+                      role="button"
+                    >
+                      <h4>Product Description</h4>
+                      <span>
+                        {descActive === "Description" ? "-" : "+"}
+                      </span>
+                    </div>
+                  )}
+                {descActive === "Description" &&
+                  ProductData?.description !== "Not available" && (
+                    <div
+                      className={`d-flex flex-column col-12 p-1`}
+                      dangerouslySetInnerHTML={prodDesc}
+                    ></div>
+                  )}
+                <div className="col-12 d-flex flex-column">
                   <div className="d-flex align-items-center justify-content-between flex-column gap-2">
-                    {(ProductData?.specifications) && (
+                    {(ProductData?.specifications && ProductData?.specifications != '') && (
                       <div
                         className={`col-4 p-3 m-0 text-center ${descActive === "Specifications" ? styles.tabActive : ""
                           } ${styles.productDescTitle}`}
@@ -1345,417 +1451,87 @@ export const ProductPage = () => {
                     )}
                   </div>
                 </div>
-              </div>
-              <div
-                className={` d-inline-flex flex-column gap-2 col-6 flex-shrink-1 align-items-start justify-content-start px-4 pt-5`}
-              >
-                {/* {ProductData?.brand_name !== null && (
-                  <h6 className={`${styles.brandName} d-inline-flex m-0`}>
-                    {ProductData?.brand_name}
-                  </h6>
-                )} */}
-                <div
-                  className={`${styles.productSubLine} d-inline-flex align-items-center gap-2 col-12 mb-0 position-relative`}
-                >
-                  {
-                    productLoading ?
-                      <Skeleton width={100} height={20} />
-                      :
-                      <div className="d-inline-flex align-items-center gap-2 fs-6 fw-light mb-3">
-                        {ProductData?.category_name ? (
-                          <span className={`${styles.categoryName} titleMainSmall d-inline-flex m-0`}>
-                            {ProductData?.category_name}
-                          </span>
-                        ) : null}
-                      </div>
-                  }
-                </div>
-                <h2
-                  className={`${styles.productDetailName} col-12 mb-1`}
-                >
-                  {
-                    productLoading ?
-                      <Skeleton width={200} height={30} />
-                      :
-                      ProductData?.name
-                  }
-                </h2>
-                {/* <span className="ml-3 mb-0">
-                  Item Code: {ProductData?.article_name}
-                </span> */}
-                <div
-                  className={``}
-                >
-                  {
-                    productLoading ?
-                      <Skeleton width={100} height={25} />
-                      :
-                      <ShowReviews
-                        product_id={ProductData?.product_id}
-                        total_rating={ProductData?.total_rating}
-                      />
-                  }
-                </div>
-                <div
-                  className={`d-inline-flex align-items-start flex-column gap-4 col-12 position-relative`}
-                >
-                  {
-                    productLoading ?
-                      <Skeleton width={100} height={20} />
-                      :
-                      <span>
-                        {
-                          ProductData?.stock > 0 ? (
-                            <span
-                              className="rounded"
-                              style={{
-                                padding: "5px 10px",
-                                background: "hsla(0, 0%, 87%, 1)",
-                                color: "#4CAF50",
-                                fontWeight: "bold",
-                              }}
-                            >
-                              In stock
-                            </span>
-                          ) : (
-                            <span
-                              className="rounded"
-                              style={{
-                                padding: "5px 10px",
-                                background: "hsla(0, 0%, 87%, 1)",
-                                color: "red",
-                                fontWeight: "bold",
-                              }}>
-                              Out of stock
-                            </span>
-                          )
-                        }
-                      </span>
-                  }
-                  {ProductData?.selling_price === ProductData?.mrp ? (
-                    <span className={`${styles.offerPrice}`}>
-                      {
-                        productLoading ?
-                          <Skeleton width={100} height={20} />
-                          : <span
-                            style={{
-                              color: '#f94c43'
-                            }}
-                          >₹{ProductData?.mrp}</span>
-                      }
-                    </span>
-                  ) : (
-                    <div className="col-12 d-inline-flex align-items-center gap-4">
-                      {
-                        productLoading ?
-                          <Skeleton width={'300px'} height={24} />
-                          :
-                          <div
-                            className={`${styles.offerPrice} d-flex align-items-center gap-2`}
-                          >
-                            <span style={{
-                              fontSize: '26px',
-                              margin: '0',
-                              color: '#f94c43'
-                            }}>₹{ProductData?.selling_price}</span>
-                            <p className="text-secondary"
-                              style={{
-                                fontSize: '20px',
-                                display: 'flex',
-                                gap: '5px',
-                                margin: '0',
-                              }}><span style={{
-                                fontWeight: 'bold'
-                              }}>MRP</span><del>₹{ProductData?.mrp}</del>
-                            </p>
-                            {prodDiscount !== "" && (
-                              <span
-                                className={`${styles.offerPercentage} d-inline-flex`}
-                              >
-                                ({prodDiscount}% &nbsp;OFF)
-                              </span>
-                            )}
-                          </div>
-                      }
-                    </div>
-                  )}
-                </div>
-                {ProductData?.description &&
-                  ProductData?.description !== "Not available" &&
-                  (
-                    <div
-                      className={`col-4 p-3 m-0 text-center ${descActive === "Description" ? styles.tabActive : ""
-                        } ${styles.productDescTitle}`}
-                      onClick={() => {
-                        if (descActive === "Description") {
-                          setDescActive("")
-                          return;
-                        }
-                        setDescActive("Description")
-                      }}
-                      role="button"
-                    >
-                      <h4>Product Description</h4>
-                      <span>+</span>
-                    </div>
-                  )}
-                {descActive === "Description" &&
-                  ProductData?.description !== "Not available" && (
-                    <div
-                      className={`d-flex flex-column col-12 p-1`}
-                      dangerouslySetInnerHTML={prodDesc}
-                    ></div>
-                  )}
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: '1fr',
-                  width: '100%',
-                  margin: '20px 0',
-                  gap: '10px',
-                }}>
-                  {!prodAdded ? (
-                    ProductData?.stock <= 0 ? (
-                      <button
-                        style={{
-                          border: "none",
-                          background: "black",
-                          cursor: "not-allowed",
-                          opacity: "0.5",
-                        }}
-                        disabled={true}
-                        type="button"
-                        className={`${styles.continueShop} col-12 d-inline-flex align-items-center justify-content-center text-uppercase`}
-                      >
-                        Out of stock
-                      </button>
-                    ) : (
-                      <button
-                        disabled={productLoading || ProductData?.stock === 0 || ProductData?.stock < 0}
-                        className={`${styles.continueShop} ${ProductData?.stock === 0 || ProductData?.stock < 0
-                          ? styles.disableCartBtn
-                          : ""
-                          } col-12 d-inline-flex align-items-center justify-content-center`}
-                        onClick={(e) => addToCart(e, ProductData)}
-                      >
-                        Add to Cart
-                      </button>
-                    )
-                  ) : (
-                    <AddProductQuantity
-                      prodAddedQty={prodAddedQty}
-                      ProductData={ProductData}
-                      updateProdQty={updateProdQty}
-                    />
-                  )}
-                </div>
-                {ProductData?.bank_offer !== null &&
-                  ProductData?.bank_offer?.length > 0 &&
-                  ProductData?.bank_offer !== undefined && (
-                    <div
-                      className={`${styles.bankOffer} mt-2 col-12 d-inline-flex flex-column gap-2`}
-                    >
-                      <h2
-                        className={`${styles.bankOfferTitle} d-inline-flex mt-0 mb-1`}
-                      >
-                        Offers
-                      </h2>
-                      {ProductData?.bank_offer.length > 0 &&
-                        ProductData?.bank_offer?.map((item, index) => {
-                          return (
-                            <span
-                              key={index}
-                              className={`${styles.bankOfferText} col-12 d-inline-flex align-items-center gap-3`}
-                            >
-                              <img src={item.logo} alt={item.description}
-                                onError={(e) => setNoImage(e)}
-                              />
-                              {item.description}
-                            </span>
-                          );
-                        })}
-                    </div>
-                  )}
-
-                <div className="col-12 d-inline-block pt-3 mb-3">
-                  <img src={'/images/quality-insurance.webp'} alt={ProductData?.name} />
-                </div>
-                <div className="col-12 d-inline-block mt-3 mb-3">
-                  <h3
-                    className={`${styles.deliveryHeading} col-12 d-inline-block mt-0 mb-4`}
-                  >
-                    Delivery &amp; Services
-                  </h3>
-                  <div className={`col-12 d-inline-block`}>
-                    <div
-                      className={`${styles.deliveryInputBox} d-inline-flex align-items-center col-12 position-relative mb-1`}
-                    >
-                      <p style={{
-                        width: '30px',
-                        height: '30px',
-                      }}>
-                        <LocationIcon color={'gray'} />
-                      </p>
-                      <input
-                        type="number"
-                        className={`${styles.deliveryInput} w-100 d-inline-block position-relative`}
-                        maxLength="6"
-                        minLength="6"
-                        placeholder="Enter Delivery Pincode"
-                        disabled={deliveryShowed}
-                        onChange={(e) => {
-                          if (e.target.value.length > 6) {
-                            AppNotification("Error", "Please enter a valid pincode.", "danger");
-                            return;
-                          }
-                          setPincode(e.target.value)
-                        }}
-                        value={pincode || ""}
-                      />
-                      {
-                        deliveryShowed ?
-                          <button
-                            aria-label="Check Delivery"
-                            onClick={() => {
-                              setDeliveryShowed(false);
-                              setPincode("");
-                              setDeliveryDetail({});
-                            }}
-                            type="button"
-                            className={`${styles.deliveryBtn} d-inline-flex align-items-center justify-content-center border-success text-success`}
-                          >
-                            Change
-                          </button>
-                          :
-                          <button
-                            aria-label="Check Delivery"
-                            onClick={() => getDeliveyPincode(pincode)}
-                            type="button"
-                            className={`${styles.deliveryBtn} d-inline-flex align-items-center justify-content-center`}
-                          >
-                            Check
-                          </button>
-                      }
-                    </div>
-                    <span
-                      className={`${styles.checkZiperror} col-12 d-inline-block`}
-                    ></span>
-                    {Object.keys(deliveryDetail)?.length > 0 && (
-                      <div
-                        className={`${styles.checkDeliveryResponse} d-inline-flex flex-column col-12 gap-2 mt-3 p-3`}
-                      >
-                        {deliveryDetail.max_days !== "" ||
-                          deliveryDetail.min_days !== "" ? (
-                          <p
-                            className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
-                            style={{
-                              display: 'grid',
-                              gridTemplateColumns: '180px 1fr',
-                            }}
-                          >
-                            <span
-                              className={`${styles.checkDeliveryLabel} d-inline-flex`}
-                            >
-                              Expected Delivery Date:
-                            </span>
-                            <span>
-                              {deliveryDetail.min_days !== "" ? (
-                                <span>
-                                  <strong
-                                    className={`${styles.checkDeliveryDate} d-inline-flex`}
-                                  >
-                                    {
-                                      formatDeliveryDate(new Date().setDate(new Date().getDate() + deliveryDetail.min_days))
-                                    }
-                                  </strong>
-                                </span>
-                              ) : null}
-                              {deliveryDetail.max_days !== "" &&
-                                deliveryDetail.min_days !== "" && (
-                                  <span>&nbsp;-&nbsp;</span>
-                                )}
-                              {deliveryDetail.max_days !== "" ? (
-                                <span>
-                                  <strong
-                                    className={`${styles.checkDeliveryDate} d-inline-flex`}
-                                  >
-                                    {
-                                      formatDeliveryDate(new Date().setDate(new Date().getDate() + deliveryDetail.max_days))
-                                    }
-                                  </strong>
-                                </span>
-                              ) : null}
-                            </span>
-                          </p>
-                        ) : (
-                          ""
-                        )}
-
-                        <p
-                          className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
-                          style={{
-                            display: 'grid',
-                            gridTemplateColumns: '180px 1fr',
-                          }}
-                        >
-                          <span>Available for Pickup at: </span>
-                          <strong
-                            id="deliveryLoc"
-                            className={`${styles.checkDeliveryLabel} d-inline-flex`}
-                          >
-                            Shop No - 01, Old Delhi Road Opposite Hudda Office Gurugram Haryana - 122015
-                          </strong>
-                        </p>
-                        <p
-                          className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
-                          style={{
-                            display: 'grid',
-                            gridTemplateColumns: '180px 1fr',
-                          }}
-                        >
-                          <span>Store Contact: </span>
-                          <span
-                            className={`${styles.checkDeliveryLabel} d-inline-flex`}
-                          >
-                            <Link
-                              className={`${styles.checkDeliveryDateOuter} d-inline-flex fw-bold text-black`}
-                              to={`tel:${enviroment.PHONE_NUMBER}`}
-                              id="storeTel"
-                            >
-                              {enviroment.PHONE_NUMBER}
-                            </Link>
-                          </span>
-                        </p>
-                        <p
-                          className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
-                          style={{
-                            display: 'grid',
-                            gridTemplateColumns: '180px 1fr',
-                          }}
-                        >
-                          <span>Locate Store: </span>
-                          <span
-                            className={`${styles.checkDeliveryLabel} d-inline-flex`}
-                          >
-                            <a
-                              href="https://g.co/kgs/t5Z1TUd"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`${styles.checkDeliveryDateOuter} d-inline-flex fw-bold text-black`}
-                            >
-                              Google Map
-                            </a>
-                          </span>
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
                 <AddReview
                   product_id={ProductData?.product_id}
                   total_rating={ProductData?.total_rating}
                 />
+              </div>
+              <div
+                className={`col-3 px-1 pt-2 shadow-sm`}
+              >
+                <div
+                  className={`d-inline-flex flex-column gap-2 flex-shrink-1 align-items-start justify-content-start pt-5`}
+                  style={{
+                    position: "sticky",
+                    top: "140px",
+                    height: 'fit-content'
+                  }}
+                >
+                  <ProdPrice
+                    productLoading={productLoading}
+                    ProductData={ProductData}
+                    prodDiscount={prodDiscount}
+                  />
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr',
+                    width: '100%',
+                    margin: '0 0 10px 0',
+                    gap: '10px',
+                  }}>
+                    {!prodAdded ? (
+                      ProductData?.stock <= 0 ? (
+                        <button
+                          style={{
+                            border: "none",
+                            background: "black",
+                            cursor: "not-allowed",
+                            opacity: "0.5",
+                          }}
+                          disabled={true}
+                          type="button"
+                          className={`${styles.continueShop} col-12 d-inline-flex align-items-center justify-content-center text-uppercase`}
+                        >
+                          Out of stock
+                        </button>
+                      ) : (
+                        <button
+                          disabled={productLoading || ProductData?.stock === 0 || ProductData?.stock < 0}
+                          className={`${styles.continueShop} ${ProductData?.stock === 0 || ProductData?.stock < 0
+                            ? styles.disableCartBtn
+                            : ""
+                            } col-12 d-inline-flex align-items-center justify-content-center`}
+                          onClick={(e) => addToCart(e, ProductData)}
+                        >
+                          Add to Cart
+                        </button>
+                      )
+                    ) : (
+                      <AddProductQuantity
+                        prodAddedQty={prodAddedQty}
+                        ProductData={ProductData}
+                        updateProdQty={updateProdQty}
+                      />
+                    )}
+                  </div>
+                  <BankOffers
+                    offers={ProductData?.bank_offer}
+                    setNoImage={setNoImage}
+                  />
 
+                  <ProdFeatures />
+
+                  <DeliveryService
+                    deliveryDetail={deliveryDetail}
+                    deliveryShowed={deliveryShowed}
+                    setPincode={setPincode}
+                    pincode={pincode}
+                    setDeliveryShowed={setDeliveryShowed}
+                    getDeliveyPincode={getDeliveyPincode}
+                    setDeliveryDetail={setDeliveryDetail}
+                    formatDeliveryDate={formatDeliveryDate}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -1858,3 +1634,320 @@ export const ProductPage = () => {
     </React.Fragment>
   );
 };
+
+const ProdPrice = ({
+  productLoading,
+  ProductData,
+  prodDiscount
+}) => {
+
+  const sellingPrice = parseFloat(ProductData?.selling_price);
+  const mrp = parseFloat(ProductData?.mrp);
+
+  return <>
+    <div
+      className={`d-inline-flex align-items-start gap-2 col-12 position-relative`}
+    >
+      {sellingPrice === mrp ? (
+        <span className={`${styles.offerPrice}`}>
+          {
+            productLoading ?
+              <Skeleton width={100} height={20} />
+              : <span
+                className="fw-bold"
+              >₹{ProductData?.mrp}</span>
+          }
+        </span>
+      ) : (
+        <div className="col-12 d-inline-flex align-items-center gap-4">
+          {
+            productLoading ?
+              <Skeleton width={'300px'} height={24} />
+              :
+              <div
+                className={`${styles.offerPrice} d-flex fw-bold align-items-cente my-3 flex-column`}
+              >
+                <span style={{
+                  fontSize: '26px',
+                  margin: '0',
+                }}>₹{sellingPrice}</span>
+                <p
+                  className={`${styles.offerPrice} d-flex align-items-center gap-2`}
+                >
+                  <p className="text-secondary"
+                    style={{
+                      fontSize: '16px',
+                      display: 'flex',
+                      gap: '5px',
+                      margin: '0',
+                    }}><span style={{
+                      fontWeight: 'bold'
+                    }}>MRP</span><del>₹{mrp}</del>
+                  </p>
+                  {prodDiscount !== "" && (
+                    <span
+                      className={`${styles.offerPercentage} fw-bold text-success d-inline-flex`}
+                      style={{
+                        fontSize: '16px',
+                      }}
+                    >
+                      ({prodDiscount}% &nbsp;OFF)
+                    </span>
+                  )}
+                </p>
+              </div>
+          }
+        </div>
+      )}
+    </div>
+  </>
+}
+
+const BankOffers = ({ offers, setNoImage }) => {
+  if (!offers || offers.length === 0) {
+    return null;
+  }
+
+  return (
+    <Card className="mt-3 w-100">
+      <Card.Header as="h5" className="text-success fw-bold" style={{
+        fontSize: '16px',
+        backgroundColor: '#e8f5e9'
+      }}>Offers and Coupons</Card.Header>
+      <ListGroup variant="flush">
+        {offers.map((offer, index) => (
+          <ListGroup.Item key={index} className="d-flex align-items-center border-0 bg-transparent">
+            <img
+              src={offer.logo}
+              alt=""
+              onError={setNoImage}
+              className="me-3"
+              style={{ width: '40px', height: '40px', objectFit: 'contain' }}
+            />
+            <span style={{
+              fontSize: '14px'
+            }}>{offer.description}</span>
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
+    </Card>
+  );
+};
+
+const ProdFeatures = () => {
+  const features = [
+    { img: "/icons/quality.svg", text: '100% Original' },
+    { img: "/icons/certified.svg", text: 'QC Passed' },
+    { img: "/icons/warranty.svg", text: '1 Year Warranty' },
+    { img: "/icons/delivery.svg", text: 'Home Delivery' },
+  ];
+  return (
+    <Card className="mt-3 w-100">
+      <Card.Header as="h5" className="text-success fw-bold" style={{
+        fontSize: '16px',
+        backgroundColor: '#e8f5e9'
+      }}>Ashi Promise</Card.Header>
+      <Row className="g-2">
+        {features.map((feature, index) => (
+          <Col key={index} xs={6} md={3}>
+            <Card className="h-100 border-0">
+              <Card.Body className="d-flex flex-column align-items-center justify-content-center p-2">
+                <img src={feature.img} alt="" style={{ width: '30px', height: '30px' }} />
+                <Card.Text className="text-center mb-0 small text-success" style={{ fontSize: '12px' }}>{feature.text}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Card>
+  );
+};
+
+const DeliveryService = ({
+  deliveryDetail,
+  deliveryShowed,
+  setPincode,
+  pincode,
+  setDeliveryShowed,
+  getDeliveyPincode,
+  setDeliveryDetail,
+  formatDeliveryDate
+}) => {
+
+  return (
+    <Card className="mt-3 w-100">
+      <Card.Header as="h5" className="text-success fw-bold" style={{
+        fontSize: '16px',
+      backgroundColor: '#e8f5e9'
+      }}>Delivery &amp; Services</Card.Header>
+      <Row className="g-2 p-2">
+        <div className={`col-12 d-inline-block`}>
+          <div
+            className={`${styles.deliveryInputBox} d-inline-flex align-items-center col-12 position-relative mb-1`}
+          >
+            <p style={{
+              width: '30px',
+              height: '30px',
+            }}>
+              <LocationIcon color={'gray'} />
+            </p>
+            <input
+              type="number"
+              className={`${styles.deliveryInput} w-100 d-inline-block position-relative`}
+              maxLength="6"
+              minLength="6"
+              placeholder="Enter Delivery Pincode"
+              disabled={deliveryShowed}
+              onChange={(e) => {
+                if (e.target.value.length > 6) {
+                  AppNotification("Error", "Please enter a valid pincode.", "danger");
+                  return;
+                }
+                setPincode(e.target.value)
+              }}
+              value={pincode || ""}
+            />
+            {
+              deliveryShowed ?
+                <button
+                  aria-label="Check Delivery"
+                  onClick={() => {
+                    setDeliveryShowed(false);
+                    setPincode("");
+                    setDeliveryDetail({});
+                  }}
+                  type="button"
+                  className={`${styles.deliveryBtn} d-inline-flex align-items-center justify-content-center border-success text-success`}
+                >
+                  Change
+                </button>
+                :
+                <button
+                  aria-label="Check Delivery"
+                  onClick={() => getDeliveyPincode(pincode)}
+                  type="button"
+                  className={`${styles.deliveryBtn} d-inline-flex align-items-center justify-content-center`}
+                >
+                  Check
+                </button>
+            }
+          </div>
+          <span
+            className={`${styles.checkZiperror} col-12 d-inline-block`}
+          ></span>
+          {Object.keys(deliveryDetail)?.length > 0 && (
+            <div
+              className={`${styles.checkDeliveryResponse} d-inline-flex flex-column col-12 gap-2 mt-3 p-3`}
+            >
+              {deliveryDetail.max_days !== "" ||
+                deliveryDetail.min_days !== "" ? (
+                <p
+                  className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}
+                >
+                  <span
+                    className={`${styles.checkDeliveryLabel} d-inline-flex`}
+                  >
+                    Expected Delivery Date:
+                  </span>
+                  <span>
+                    {deliveryDetail.min_days !== "" ? (
+                      <span>
+                        <strong
+                          className={`${styles.checkDeliveryDate} d-inline-flex`}
+                        >
+                          {
+                            formatDeliveryDate(new Date().setDate(new Date().getDate() + deliveryDetail.min_days))
+                          }
+                        </strong>
+                      </span>
+                    ) : null}
+                    {deliveryDetail.max_days !== "" &&
+                      deliveryDetail.min_days !== "" && (
+                        <span>&nbsp;-&nbsp;</span>
+                      )}
+                    {deliveryDetail.max_days !== "" ? (
+                      <span>
+                        <strong
+                          className={`${styles.checkDeliveryDate} d-inline-flex`}
+                        >
+                          {
+                            formatDeliveryDate(new Date().setDate(new Date().getDate() + deliveryDetail.max_days))
+                          }
+                        </strong>
+                      </span>
+                    ) : null}
+                  </span>
+                </p>
+              ) : (
+                ""
+              )}
+
+              <p
+                className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <span>Available for Pickup at: </span>
+                <strong
+                  id="deliveryLoc"
+                  className={`${styles.checkDeliveryLabel} d-inline-flex`}
+                >
+                  Shop No - 01, Old Delhi Road Opposite Hudda Office Gurugram Haryana - 122015
+                </strong>
+              </p>
+              <p
+                className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <span>Store Contact: </span>
+                <span
+                  className={`${styles.checkDeliveryLabel} d-inline-flex`}
+                >
+                  <Link
+                    className={`${styles.checkDeliveryDateOuter} d-inline-flex fw-bold text-black`}
+                    to={`tel:${enviroment.PHONE_NUMBER}`}
+                    id="storeTel"
+                  >
+                    {enviroment.PHONE_NUMBER}
+                  </Link>
+                </span>
+              </p>
+              <p
+                className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <span>Locate Store: </span>
+                <span
+                  className={`${styles.checkDeliveryLabel} d-inline-flex`}
+                >
+                  <a
+                    href="https://g.co/kgs/o2Frgzd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.checkDeliveryDateOuter} d-inline-flex fw-bold text-black`}
+                  >
+                    Google Map
+                  </a>
+                </span>
+              </p>
+            </div>
+          )}
+        </div>
+      </Row>
+    </Card>
+  );
+};
+
+

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ChevronRight } from "react-bootstrap-icons";
+import { ChevronRight, Youtube } from "react-bootstrap-icons";
 import { Link, useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
@@ -272,6 +272,10 @@ export const Aside = ({ asideOpen, setAsideOpen }) => {
                     ></path>
                   </svg>
                 </Link>
+                {
+                enviroment.YOUTUBE_LINK &&
+                <a href={enviroment.YOUTUBE_LINK} className={`${styles.socialLink}`} style={{marginLeft: '10px'}}><Youtube /></a>
+              }
               </li>
             </ul>
           </div>

@@ -20,7 +20,7 @@
 }
 .productDetailName{
     font-size: 16px;
-    font-weight: 400 !important;
+    font-weight: 400;
     line-height: 18px;
     color: #000;
 }
@@ -30,7 +30,6 @@
     color: #16253B;
 }
 .offerPercentage{
-    color: rgba(253, 42, 42, 0.613);
 	font-weight: 600;
 	border-radius: 4px;
 	font-size: 24px;
@@ -96,10 +95,10 @@
 }
 .productGalleryRow .galleryBox{
     border: 1px solid #EEE;
-    height: 80px;
-    max-height: 83px;
-    width: 83px;
-    max-width: 83px;
+    height: 70px;
+    max-height: 63px;
+    width: 63px;
+    max-width: 63px;
 }
 .productGalleryRow .galleryBox.activeGallery{
     border: 2px solid red;
@@ -114,7 +113,7 @@
     color: #FFF;
     border: 2px solid var(--ADD_BUTTON_COLOR);
     height: 50px;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 16px;
     font-weight: 500;
 }
@@ -209,7 +208,7 @@
     font-size: 12px;
 }
 .checkDeliveryResponse{
-    background: var(--MENU_HOVER_COLOR);
+    background: var(--SECONDARY_COLOR);
     border-radius: 4px;
     padding: 30px;
 }
@@ -370,9 +369,9 @@
     .productDetailName{
         margin: 0px;
         text-align: left;
-        font-size: 28px;
-        line-height: 34px;
-        font-weight: 600;
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 800;
     }
     .continueShop{
         width: 100%;

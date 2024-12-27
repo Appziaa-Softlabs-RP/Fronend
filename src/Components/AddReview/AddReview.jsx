@@ -57,9 +57,9 @@ export default function AddReview({ product_id, total_rating = null }) {
     return (
         <div className="container">
             {/* Add Review Section */}
-            <div className="text-center mb-4 mt-3">
-                <h2 style={{ color: "black" }}>Rate Your Experience</h2>
-                <div className="d-flex justify-content-center mb-2">
+            <div className="text-start mb-4 mt-3">
+                <h2 style={{ color: "black" }} className='fs-4'>Rate Your Experience</h2>
+                <div className="d-flex justify-content-center mb-2" style={{width: 'fit-content'}}>
                     {[1, 2, 3, 4, 5].map((star) => (
                         <svg
                             key={star}
