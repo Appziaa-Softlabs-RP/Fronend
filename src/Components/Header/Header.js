@@ -2,7 +2,7 @@ import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import siteLogo from "../../assets/images/site_logo.png";
+import siteLogo from "../../assets/images/site_logo.svg";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
@@ -20,6 +20,8 @@ import {
   UserIcon
 } from "../siteIcons";
 import styles from "./Header.module.css";
+import { Form, InputGroup, ListGroup } from 'react-bootstrap';
+import { Search, X } from 'react-bootstrap-icons';
 
 import { useAppStore } from "../../store";
 import { HeaderNavLoader } from "../Loader/Loader";
@@ -399,15 +401,15 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                 />
               </h1>
               <div className="d-inline-flex align-items-stretch w-100 justify-content-end gap-4">
-                <button
-                  className={`${styles.supportDrop} btn d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
-                  type="button"
-                  onClick={
-                    () => setIsSearchOpen(!isSearchOpen)
-                  }
-                >
-                  <SearchIcon color={'black'} />
-                </button>
+                <SearchElement
+                  searchProd={searchProd}
+                  searchShopProd={searchShopProd}
+                  handleKeyDown={handleKeyDown}
+                  setIsSearchOpen={setIsSearchOpen}
+                  searchProdList={searchProdList}
+                  openProductId={openProductId}
+                />
+
                 <div
                   className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
                   role="button"
@@ -776,3 +778,58 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
     </>
   );
 };
+const SearchElement = ({
+  searchProd,
+  searchShopProd,
+  handleKeyDown,
+  setIsSearchOpen,
+  searchProdList,
+  openProductId
+}) => {
+  return (
+    <div className="position-relative d-flex align-items-center" style={{ width: '250px' }}>
+      <InputGroup size="sm">
+        <InputGroup.Text className="bg-white border-end-0">
+          <Search size={14} />
+        </InputGroup.Text>
+        <Form.Control
+          type="text"
+          className="border-start-0"
+          value={searchProd}
+          onChange={(e) => searchShopProd(e, e.target.value)}
+          placeholder={enviroment.SEARCH_PLACEHOLDER}
+          onKeyDown={handleKeyDown}
+        />
+        {searchProd && (
+          <InputGroup.Text
+            className="bg-white border-start-0 cursor-pointer"
+            onClick={() => {
+              searchShopProd('', '')
+              setIsSearchOpen(false)
+            }}
+          >
+            <X size={14} />
+          </InputGroup.Text>
+        )}
+      </InputGroup>
+      {searchProdList?.length > 0 && (
+        <ListGroup
+          className="position-absolute w-100 mt-1 shadow-sm"
+          style={{ maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}
+        >
+          {searchProdList.map((item, idx) => (
+            <ListGroup.Item
+              key={idx}
+              action
+              className="py-2 text-truncate"
+              onClick={() => openProductId(item.name_url, item.name, item.product_id)}
+            >
+              {item.name}
+            </ListGroup.Item>
+          ))}
+        </ListGroup>
+      )}
+    </div>
+  );
+};
+
