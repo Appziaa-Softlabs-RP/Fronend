@@ -11,27 +11,25 @@ export const MyOrders = () => {
   let windowWidth = appData.appData.windowWidth;
   return (
     <React.Fragment>
-      {windowWidth === "mobile" ? (
-        <React.Fragment>
-          <PageHeader title="My Orders" />
-          <MyOrdersBox />
-        </React.Fragment> 
-      ) : ( 
-        <React.Fragment>
-          <Header />
-          <div className="col-12 d-inline-flex mt-4">
-            <div className="container">
-              <div className="d-flex gap-3 col-12 align-items-start">
-                <MyAccountMenu />
-                <div className="d-flex flex-grow-1">
-                  <MyOrdersBox />
-                </div>
+      <div className="hideInDesktop">
+        <PageHeader title="My Orders" />
+        <MyOrdersBox />
+      </div>
+
+      <div className="hideInMobile">
+        <Header />
+        <div className="col-12 d-inline-flex mt-4">
+          <div className="container">
+            <div className="d-flex gap-3 col-12 align-items-start">
+              <MyAccountMenu />
+              <div className="d-flex flex-grow-1">
+                <MyOrdersBox />
               </div>
             </div>
           </div>
-          <Footer />
-        </React.Fragment>
-      )}
+        </div>
+        <Footer />
+      </div>
     </React.Fragment>
   )
 }
