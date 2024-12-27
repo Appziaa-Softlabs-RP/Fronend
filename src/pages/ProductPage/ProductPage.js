@@ -1736,10 +1736,10 @@ const BankOffers = ({ offers, setNoImage }) => {
 
 const ProdFeatures = () => {
   const features = [
-    { img: "/icons/quality.svg", text: '100% Original' },
-    { img: "/icons/certified.svg", text: 'QC Passed' },
-    { img: "/icons/warranty.svg", text: '1 Year Warranty' },
-    { img: "/icons/delivery.svg", text: 'Home Delivery' },
+    { img: "/images/quality.svg", text: '100% Original' },
+    { img: "/images/certified.svg", text: 'QC Passed' },
+    { img: "/images/warranty.svg", text: '1 Year Warranty' },
+    { img: "/images/delivery.svg", text: 'Home Delivery' },
   ];
   return (
     <Card className="mt-3 w-100">

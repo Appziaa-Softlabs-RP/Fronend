@@ -1,6 +1,8 @@
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect, useState } from "react";
+import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Search } from 'react-bootstrap-icons';
 import { Link, useNavigate } from "react-router-dom";
 import siteLogo from "../../assets/images/site_logo.svg";
 import { useApp } from "../../context/AppContextProvider";
@@ -10,18 +12,20 @@ import { AppNotification } from "../../utils/helper";
 import { CartAside } from "../CartAside/CartAside";
 import { LoginPopup } from "../LoginPopup/LoginPopup";
 import {
+  AccountIcon,
   BackArrowIcon,
   CartIcon,
   CrossIcon,
+  LocationIcon,
+  LogoutIcon2,
   MailIcon,
   MenuIcons,
+  OrderIcon,
   SearchIcon,
   SupportIcon,
   UserIcon
 } from "../siteIcons";
 import styles from "./Header.module.css";
-import { Form, InputGroup, ListGroup } from 'react-bootstrap';
-import { Search, X } from 'react-bootstrap-icons';
 
 import { useAppStore } from "../../store";
 import { HeaderNavLoader } from "../Loader/Loader";
@@ -114,7 +118,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
   const openProductId = (prodId, name, id) => {
     setSearchProdList([]);
     setSearchProd(name);
-    navigate(`/product/${prodId}/id=${id}`);
+    navigate(`/product/${prodId}`);
   };
 
   const handleKeyDown = (event) => {
@@ -238,7 +242,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
       >
         <div className={`${styles.siteHeader} col-12 d-inline-flex`}>
           <div
-            className={`${styles.menuIconBox} d-inline-flex align-items-center justify-content-center`}
+            className={`${styles.menuIconBox} d-inline-flex align-items-center ms-5 justify-content-center`}
             onClick={openAsideMenu}
           >
             <MenuIcons color={'black'} />
@@ -259,10 +263,10 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                 maxWidth: '200px',
                 maxHeight: '30px',
               }}
-              className="mt-3"
+              className="mt-2"
             />
           </h1>
-          <div className="d-inline-flex align-items-stretch justify-content-end gap-2 me-3">
+          <div className="d-inline-flex align-items-stretch justify-content-end gap-2 me-5">
             <div
               className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
               type="button"
@@ -389,7 +393,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   right: '0',
                   padding: '0 2rem',
                 }}
-                className={`${styles.siteLogoBox} m-0 d-inline-flex justify-content-start col-2 w-100`}
+                className={`${styles.siteLogoBox} m-0 d-inline-flex justify-content-start col-2 ms-5 ps-5 w-100`}
               >
                 <span class="visually-hidden">
                   {enviroment.REACT_APP_BUSINESS_NAME}
@@ -414,10 +418,12 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
                   role="button"
                 >
-                  <SupportIcon color="#000" />
-                  <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
-                    Support
-                  </span>
+                  <div className={`p-2 btn ${styles.navItem}`}>
+                    <SupportIcon color="#000" />
+                    <span className={`${styles.supportHideOnMobile}`}>
+                      Support
+                    </span>
+                  </div>
                   <div
                     className={`${styles.supportDropDown} position-absolute d-inline-block`}
                   >
@@ -484,16 +490,24 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   <div
                     className={`${styles.supportDrop} d-inline-flex flex-column align-items-center gap-1 position-relative justify-content-center`}
                     role="button"
-                    onClick={() => openAccountDetail()}
+                    // onClick={() => openAccountDetail()}
+                    onMouseEnter={() => openAccountDetail()}
+                    onMouseLeave={() => openAccountDetail()}
                   >
-                    <div className="d-inline-flex align-items-center gap-2">
-                      <UserIcon color="#000" />
+                    <div className={`p-2 btn ${styles.navItem}`}>
+                      <div className="d-inline-flex align-items-center gap-2">
+                        <UserIcon color="#000" />
+                      </div>
+                      {userInfo?.name && userInfo?.name !== "" ? (
+                        <span className={`d-inline-flex`}>
+                          {userInfo.name}
+                        </span>
+                      ) : (
+                        <span className={`d-inline-flex`}>
+                          My Account
+                        </span>
+                      )}
                     </div>
-                    {userInfo?.name !== "" && (
-                      <span className={`${styles.userName} d-inline-flex`}>
-                        {userInfo.name}
-                      </span>
-                    )}
                     {accountOptn === true && (
                       <div
                         className={`${styles.userAccountDrop} position-absolute col-12`}
@@ -501,30 +515,34 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                       >
                         <span
                           role="button"
-                          className={`${styles.accountOption} col-12 d-inline-flex align-items-center`}
+                          className={`${styles.accountOption} ${styles.navItem} col-12 d-inline-flex align-items-center`}
                           onClick={() => navigate("/my-account")}
                         >
+                          <AccountIcon />
                           My Account
                         </span>
                         <span
                           role="button"
-                          className={`${styles.accountOption} col-12 d-inline-flex align-items-center`}
+                          className={`${styles.accountOption} ${styles.navItem} col-12 d-inline-flex align-items-center`}
                           onClick={() => navigate("/my-orders")}
                         >
+                          <OrderIcon color={'black'} />
                           My Orders
                         </span>
                         <span
                           role="button"
-                          className={`${styles.accountOption} col-12 d-inline-flex align-items-center`}
+                          className={`${styles.accountOption} ${styles.navItem} col-12 d-inline-flex align-items-center`}
                           onClick={() => navigate("/my-address")}
                         >
+                          <LocationIcon />
                           My Address
                         </span>
                         <span
                           role="button"
                           onClick={() => userLoggedOut()}
-                          className={`${styles.accountOption} col-12 d-inline-flex align-items-center`}
+                          className={`${styles.accountOption} ${styles.navItem} col-12 d-inline-flex align-items-center`}
                         >
+                          <LogoutIcon2 />
                           Log Out
                         </span>
                       </div>
@@ -536,10 +554,12 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     onClick={() => setLoginPop(true)}
                     role="button"
                   >
-                    <UserIcon color="#000" />
-                    <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
-                      Account
-                    </span>
+                    <div className={`p-2 btn ${styles.navItem}`}>
+                      <UserIcon color="#000" />
+                      <span className={`${styles.supportHideOnMobile}`}>
+                        Account
+                      </span>
+                    </div>
                   </div>
                 )}
                 <div
@@ -547,19 +567,21 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   role="button"
                   onClick={() => setCartPop(true)}
                 >
-                  <span className="position-relative d-inline-flex gap-2">
-                    <CartIcon color="#000" />
-                    <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
-                      Cart
-                    </span>
-                    {appData?.appData?.cartCount > 0 && (
-                      <span
-                        className={`${styles.cartCount} position-absolute d-inline-flex align-items-center`}
-                      >
-                        {appData?.appData?.cartCount}
+                  <div className={`p-2 btn ${styles.navItem}`}>
+                    <span className="position-relative d-inline-flex gap-2">
+                      <CartIcon color="#000" />
+                      <span className={`${styles.supportHideOnMobile}`}>
+                        Cart
                       </span>
-                    )}
-                  </span>
+                      {appData?.appData?.cartCount > 0 && (
+                        <span
+                          className={`${styles.cartCount} position-absolute d-inline-flex align-items-center`}
+                        >
+                          {appData?.appData?.cartCount}
+                        </span>
+                      )}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -620,17 +642,6 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                           >
                             {item.name}
                           </span>
-                          {/* {
-                            item?.catList?.length > 0 && (
-                              <BackArrowIcon
-                                color="#000"
-                                role="button"
-                                style={{
-                                  display: 'inline-block',
-                                  verticalAlign: 'middle',
-                                }}
-                              />
-                            )} */}
                         </div>
                       </div>
                     ))}
@@ -793,47 +804,43 @@ const SearchElement = ({
   openProductId
 }) => {
   return (
-    <div className="position-relative d-flex align-items-center" style={{ width: '250px' }}>
-      <InputGroup size="sm">
-        <InputGroup.Text className="bg-white border-end-0">
-          <Search size={14} />
-        </InputGroup.Text>
+    <div
+      className={`d-inline-flex col-5 position-relative align-items-center`}
+    >
+      <InputGroup>
         <Form.Control
-          type="text"
-          className="border-start-0"
+          type="search"
           value={searchProd}
           onChange={(e) => searchShopProd(e, e.target.value)}
-          placeholder={enviroment.SEARCH_PLACEHOLDER}
+          placeholder="Search products..."
           onKeyDown={handleKeyDown}
+          onFocus={() => setIsSearchOpen(false)}
+          onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
+          className={styles.searchInput}
         />
-        {searchProd && (
-          <InputGroup.Text
-            className="bg-white border-start-0 cursor-pointer"
-            onClick={() => {
-              searchShopProd('', '')
-              setIsSearchOpen(false)
-            }}
-          >
-            <X size={14} />
-          </InputGroup.Text>
-        )}
+        <Button variant="outline-secondary" className={`${styles.searchButton} bg-danger text-white`}>
+          <Search />
+        </Button>
       </InputGroup>
       {searchProdList?.length > 0 && (
-        <ListGroup
-          className="position-absolute w-100 mt-1 shadow-sm"
-          style={{ maxHeight: '200px', overflowY: 'auto', zIndex: 1000 }}
+        <div
+          className={`${styles.showSearchList} position-absolute d-inline-flex flex-column start-0 col-12 overflow-y-auto`}
         >
-          {searchProdList.map((item, idx) => (
-            <ListGroup.Item
-              key={idx}
-              action
-              className="py-2 text-truncate"
-              onClick={() => openProductId(item.name_url, item.name, item.product_id)}
-            >
-              {item.name}
-            </ListGroup.Item>
-          ))}
-        </ListGroup>
+          {searchProdList.map((item, idx) => {
+            return (
+              <span
+                className={`${styles.searchRow} p-3 text-truncate col-12`}
+                role="button"
+                key={idx}
+                onClick={() =>
+                  openProductId(item.name_url, item.name)
+                }
+              >
+                {item.name}
+              </span>
+            );
+          })}
+        </div>
       )}
     </div>
   );

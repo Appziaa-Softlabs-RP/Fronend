@@ -3,6 +3,7 @@
   --SECONDARY_COLOR : #fff8ee;
   --MENU_HOVER_COLOR : #7493d5;
   --ADD_BUTTON_COLOR : #f4431c;
+  --BUTTON_HOVER_COLOR : #f4441c48;
   --breakpoint-mobile: 560px;
 }
 body {

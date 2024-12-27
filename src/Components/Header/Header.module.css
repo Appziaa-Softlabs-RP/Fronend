@@ -10,6 +10,19 @@
   margin: 0px 10px;
 }
 
+.navItem {
+  color: black;
+  font-weight: 500;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.navItem:hover {
+  background: var(--SECONDARY_COLOR);
+  color: black;
+}
+
 .menuIconBox svg,
 .cartIconBox svg {
   height: 25px;
@@ -34,11 +47,11 @@
 }
 
 .cartCount {
-  font-size: 10px;
+  font-size: 12px;
   line-height: 11px;
-  background: var(--SECONDARY_COLOR);
-  color: var(--PRIMARY_COLOR);
-  height: 15px;
+  background: var(--ADD_BUTTON_COLOR);
+  color: var(--SECONDARY_COLOR);
+  height: 17px;
   padding: 0px 5px;
   top: -12px;
   right: -5px;
@@ -68,7 +81,7 @@
   background: var(--SECONDARY_COLOR)
 }
 
-.dealsLinkWrapper{
+.dealsLinkWrapper {
   min-height: 42px;
 }
 
@@ -212,7 +225,7 @@
   background: var(--ADD_BUTTON_COLOR);
 }
 
-.headerMenuItems{
+.headerMenuItems {
   display: flex;
   padding: 10px;
   flex-wrap: wrap;
@@ -262,7 +275,7 @@
 .SubMenuList {
   background: white;
   z-index: 5;
-  box-shadow: 0px 4px 16px 0px rgba(255, 255, 255, 0.2);
+  box-shadow: 0px 4px 16px 0px rgba(98, 98, 98, 0.2);
   top: 100%;
   padding: 12px;
   min-width: 240px;
@@ -293,6 +306,7 @@
   scale: 1.1;
   animation: scale 0.2s ease;
 }
+
 .userAccountDrop {
   background: #FFF;
   z-index: 5;
@@ -321,7 +335,7 @@
 }
 
 .accountOption:hover {
-  background: var(--MENU_HOVER_COLOR);
+  background: var(--BUTTON_HOVER_COLOR);
 }
 
 .userName {
@@ -331,11 +345,43 @@
 }
 
 .showSearchList {
-  top: 55px;
-  max-height: 230px;
+  top: 60px;
+  max-height: 260px;
   background: #FFF;
   z-index: 5;
   box-shadow: 0px 16px 16px 0px rgba(0, 0, 0, 0.30);
+}
+
+.searchInput:focus {
+  box-shadow: none;
+  border-color: #ced4da;
+}
+
+.searchButton:focus {
+  box-shadow: none;
+}
+
+.searchResults {
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.searchResults::-webkit-scrollbar {
+  width: 8px;
+}
+
+.searchResults::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.searchResults::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.searchResults::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 
 .searchRow {
@@ -346,7 +392,7 @@
 }
 
 .searchRow:hover {
-  background: var(--MENU_HOVER_COLOR);
+  background: var(--BUTTON_HOVER_COLOR);
 }
 
 .showSearchListMobile.showSearchList {
@@ -357,20 +403,20 @@
 
 @media screen and (max-width: 560px) {
   .hideInMobile {
-      display: none !important;
+    display: none !important;
   }
 }
 
 
 @media screen and (max-width:1070px) {
   .supportHideOnMobile {
-      display: none;
+    display: none;
   }
 }
 
 
 @media screen and (max-width:900px) {
   .headerNavBox {
-      margin: 0px 5px;
+    margin: 0px 5px;
   }
 }
