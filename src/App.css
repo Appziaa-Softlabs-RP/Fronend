@@ -73,6 +73,14 @@ img {
   text-transform: uppercase;
 }
 
+.btn-special{
+  background-color: var(--PRIMARY_COLOR);
+  color: white;
+}
+.btn-special:hover{
+  background-color: var(--PRIMARY_COLOR);
+}
+
 .subTitleLarge{
   font-size: 20px;
   font-weight: 500;

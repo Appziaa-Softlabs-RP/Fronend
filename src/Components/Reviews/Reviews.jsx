@@ -124,7 +124,7 @@ export default function Reviews() {
                 <ReactOwlCarousel className={`${styles.brandSilder} brandSilder s-theme`}  {...settings}>
                     {reviews.map((review) => (
                         <div key={review.id} className={`${styles.sliderItem} p-3 rounded-md`} style={{
-                            background: "#e5e4f185",
+                            background: "#f4431b1b",
                             color: "#291845",
                             borderRadius: "5px"
                         }}>

@@ -8,6 +8,7 @@ import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { PromoBanner } from '../PromoBanner/PromoBanner';
+import { Button } from 'react-bootstrap';
 
 export const HomeCategories = () => {
     const appData = useApp();
@@ -31,9 +32,9 @@ export const HomeCategories = () => {
         categoriesData.map((category, index) => (
             <>
                 {index === 1 &&
-                <>
-                <PromoBanner type="Promo Banner" />
-                </>}
+                    <>
+                        <PromoBanner type="Promo Banner" />
+                    </>}
 
                 <div className='border-section'>
                     <div className={`col-12 d-inline-flex`}>
@@ -82,9 +83,9 @@ export const HomeCategories = () => {
                                     ))}
                                 </ReactOwlCarousel>
                                 <Link to={`/store-product/${category?.cname_url}`} className='w-fit mx-auto'>
-                                <button className='titleMainSmall btn btn-dark rounded-0 p-3'>
-                                    View All products
-                                </button>
+                                    <Button className='titleMainSmall btn-special p-3'>
+                                        View All products
+                                    </Button>
                                 </Link>
                             </div>
                         </div>

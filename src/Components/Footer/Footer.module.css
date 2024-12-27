@@ -109,15 +109,16 @@
 
 .subscribeButton {
   width: 100%;
-  background-color: var(--MENU_HOVER_COLOR);
+  background-color: var(--ADD_BUTTON_COLOR);
   border: none;
   padding: 0.75rem;
   font-weight: 500;
   transition: background-color 0.3s ease;
+  cursor: pointer;
 }
 
 .subscribeButton:hover {
-  background-color: var(--SECONDARY_COLOR);
+  background-color: var(--MENU_HOVER_COLOR);
 }
 
 .contactInfo {
