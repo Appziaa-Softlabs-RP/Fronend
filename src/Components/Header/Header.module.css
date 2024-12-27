@@ -82,8 +82,9 @@
 }
 
 .headerRow {
-  background: var(--PRIMARY_COLOR);
+  background: white;
   height: 80px;
+  color: #000;
   /* padding: 20px; */
 }
 
@@ -100,7 +101,7 @@
 }
 
 .supportDrop {
-  color: #ffffff;
+  color: #000;
 }
 
 .supportDrop:hover {
@@ -208,7 +209,7 @@
 }
 
 .headerNavList {
-  background: #FFF;
+  background: var(--ADD_BUTTON_COLOR);
 }
 
 .headerMenuItems{
@@ -259,8 +260,7 @@
 }
 
 .SubMenuList {
-  background: var(--PRIMARY_COLOR);
-  color: white;
+  background: white;
   z-index: 5;
   box-shadow: 0px 4px 16px 0px rgba(255, 255, 255, 0.2);
   top: 100%;
@@ -275,7 +275,7 @@
 
 .subMenuName {
   min-height: 40px;
-  color: white;
+  color: black;
   border-radius: 4px;
 }
 

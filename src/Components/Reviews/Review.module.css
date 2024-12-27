@@ -1,21 +1,13 @@
-/* Updated Review.module.css */
-
-.mainContainerSlider{
-    background-color: rgb(242, 242, 242);
-    padding: 40px 0;
-    margin: 0px !important;
-}
-
 .sliderContainer {
     position: relative;
     display: flex;
-    overflow: hidden;
     flex-direction: column;
     padding: 10px;
     border-radius: 10px;
+    background: white;
     width: 1300px;
     max-width: 90%;
-    margin: 10px auto; /* Center the container */
+    margin: 10px 50px;
 }
 
 .reviewBtn {
@@ -26,36 +18,21 @@
 
 .brandSilder {
     display: grid;
-    grid-gap: 15px; /* Adjust the gap between items */
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive grid */
-    margin: 10px 0;
+    margin: 10px 0px;
 }
 
 .sliderItem {
-    min-width: 250px;
+    min-width: 280px;
     max-width: 280px;
-    height: 300px; /* Adjusted for better sizing */
-    background: #f5f5f5;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: transform 0.3s ease;
+    height: 330px;
 }
 
-.sliderItem:hover {
-    transform: translateY(-5px); /* Hover effect */
-}
-
-/* Responsive breakpoints for larger screens */
 @media screen and (min-width: 700px) {
-    .carousalBody {
-        padding: 25px;
+    .sliderContainer {
+        flex-direction: row;
     }
 
-    .sliderItem {
-        height: 330px; /* Adjust the height for larger screens */
+    .carousalBody {
+        padding: 25px;
     }
 }

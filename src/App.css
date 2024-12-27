@@ -1,8 +1,8 @@
 :root{
   --PRIMARY_COLOR : #1F3461;
-  --SECONDARY_COLOR : #f0b562;
+  --SECONDARY_COLOR : #fff8ee;
   --MENU_HOVER_COLOR : #7493d5;
-  --ADD_BUTTON_COLOR : #1C1B1B;
+  --ADD_BUTTON_COLOR : #f4431c;
   --breakpoint-mobile: 560px;
 }
 body {

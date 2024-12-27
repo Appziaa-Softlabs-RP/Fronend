@@ -4,6 +4,7 @@ import styles from './whoarewe.module.css'
 export default function WhoAreWe() {
     return <section className={`${styles.mainContainer}`}>
         <div className={`${styles.wrapper}`}>
+            {/* <img src="/img" alt="" /> */}
             <div className={`${styles.left}`}>
                 <WeGrow />
             </div>
@@ -26,15 +27,6 @@ export default function WhoAreWe() {
                     <br />
                     Through our brand AshiElectronics, we are solving core value-for-money problems faced by individual and institutional consumers while buying overhyped and overpriced new large appliances. Our unique low-cost business model leverages technology and brings the benefits of re-Commerce to consumers.
                 </p>
-                <img
-                    src="/images/certified.png"
-                    alt="certified"
-                    className="img-fluid"
-                    style={{
-                        maxHeight: '100px',
-                        maxWidth: '100px',
-                    }}
-                />
             </div>
         </div>
     </section>

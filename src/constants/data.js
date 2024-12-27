@@ -2,74 +2,74 @@
 export const reviews = [
     {
         id: 1,
-        name: "Mehul Adlakha",
-        date: "1 Month",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_8cd72bbb-c3b4-45fe-aefd-75d19f64e3a0.png?v=1710153374",
+        name: "manan dewan",
+        date: "2 Weeks",
+        image: "https://lh3.googleusercontent.com/a/ACg8ocLK3zft7sCuUgBfkbwr53OHIFy32o3o6ETZP3dj-H3OdGsXqYpU=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `bought washing machine from AshiElectronics for the first time. It was good purchase. I will recommend to my relatives as well. Will buy more house hold products  😊`
+        review: `Great service by the people there. They allowed me to test every product to help decide which one would be the best for me. 10/10 would recommend coming here!!!`
     },
     {
         id: 2,
-        name: "Mee Walee",
-        date: "2 Weeks",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_1cdc4a16-7556-45a2-9af7-6fb12506a80e.png?v=1710153525",
+        name: "Pandit Ratan",
+        date: "9 Month",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjXorTaclOIUgKmEhiOtVjTUciJjl9tqYhGtOY3Q7jiUKGnH6uzB=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `Recently went to the shop to buy an AC had an amazing overall experience the staff were very professional and the quality of the product was great!`
+        review: `I took the goods from him and got the best goods or got the goods at the best price or got the best product, please log in.`
     },
     {
         id: 3,
-        name: "Deepak Gautam",
-        date: "1 Month",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_419e9061-fc5b-4290-a961-f34ecdee639a.png?v=1710153760",
+        name: "sachin singhania",
+        date: "5 Month",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjXqujH57DKU5v62T67_dPub3yeJl_RtayGHQbbfV2XMhwRlHZHm=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `I purchased a washing machine a best deal I got best price from every where thank you sales team`
+        review: `Best service on visit, all the dealers are attentive and explain in detail, very much satisfied with the service.`
     },
     {
         id: 5,
-        name: "Krishan Kumar",
-        date: "4 Month",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_f8f6a541-76a3-47e9-8b82-c734d031e047.png?v=1710153185",
+        name: "Vikas Sharma",
+        date: "5 Month",
+        image: "https://lh3.googleusercontent.com/a/ACg8ocIR3FBfAFF4gp5z2kvbaZw3UbDsTIhNfpNQ-6XTUp_C8HQd8A=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `Very  Good and nice service i'm very happy thank u never owner`
+        review: `Nice product and good picture quality on better discount..`
     },
     {
         id: 6,
-        name: "Tarun Jain",
-        date: "4 Month",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_abca662b-93bd-4667-af9b-50c554af6347.png?v=1710153425",
+        name: "Deepak Wadhwa",
+        date: "8 Month",
+        image: "https://lh3.googleusercontent.com/a/ACg8ocIfsJ-2jOMbBcCcEMfQAWZ6FnyTiklTEyCejVGK_hos7-JqOxc=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `I purchased a tv in lowest price smart tv wich is in heavy discount I got I meet here vaibhav nice person`
+        review: `Thanks Ashok ji for helping me decide an AC and having a wonderful experience of buying it. Keep up the good work and God bless!`
     },
     {
         id: 7,
-        name: "Harsh Choudary",
-        date: "3 Month",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_1bf26adf-6957-486d-98c3-47054743724e.png?v=1710153978",
+        name: "Anuj Verma",
+        date: "5 Month",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjUpMDZnaxmZui0CZlkASWPBRcNStAkgN-eC2Uc6tQ-cCP9XvuyO=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `I have purchased voltas washing machine at best prize in India. Really recommend everyone to visit the store.`
+        review: `Good staff and well behaviour`
     },
     {
         id: 8,
-        name: "Jaspreet Singh",
-        date: "3 Month",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_e5a1ca6e-46dc-47d8-9f72-08d14aedbbf4.png?v=1710154247",
+        name: "Avnish Chaubey",
+        date: "a year ago",
+        image: "https://lh3.googleusercontent.com/a/ACg8ocJBZ9DJi3AlkaLWeAGcNeSP22zb8uDDny91NXBVQW5a-LOiQQ=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `I purchased a washing machine top load in lowest price  wich is in heavy discount I got I meet here Dheeraj nice person.`
+        review: `That's provides good service and good products`
     },
     {
         id: 9,
-        name: "Mukesh Bhatiya",
-        date: "2 Month",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_10be8287-8523-4554-8c7a-98fd1593bd0c.png?v=1710154336",
+        name: "Karn Parashar",
+        date: "a year ago",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjXPMva4OjN_Y-ja1MfDOM6PePP5r__UO38RzpodTGwHLlUojupQ=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `Unbeatable Price range Discount on every Product at AshiElectronics thanks to Sale Team mr Dheeraj.`
+        review: `This place is awesome..... Must visit Ashok bhai is so helpful and will guide you the product in your budget.. Must visit place... Pricing is so genuine 👍👍 …`
     },
     {
         id: 10,
-        name: "Rakesh Kaushik",
-        date: "2 Month",
-        image: "https://AshiElectronics.in/cdn/shop/files/unnamed_b6e29021-0f03-472d-8af4-ee1b8e7d7414.png?v=1710154459",
+        name: "Vivek Raj",
+        date: "9 Month",
+        image: "https://lh3.googleusercontent.com/a-/ALV-UjXePSKoQ-uHEb7IQ6IAoMsMqOPM5rWNmnG9bHb_eufSlGv88SY=w45-h45-p-rp-mo-br100",
         rating: 5,
-        review: `I am very happy my product and price this store is great I meet Sumit very nice person`
+        review: `Very good service and and really very appreciative great opportunity to get electronics from here 🤗 …`
     },
 ];

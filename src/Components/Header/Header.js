@@ -239,7 +239,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
             className={`${styles.menuIconBox} d-inline-flex align-items-center justify-content-center`}
             onClick={openAsideMenu}
           >
-            <MenuIcons color={'white'} />
+            <MenuIcons color={'black'} />
           </div>
           <h1
             onClick={() => routeHome()}
@@ -268,7 +268,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                 () => setIsSearchOpen(!isSearchOpen)
               }
             >
-              <SearchIcon color={'white'} />
+              <SearchIcon color={'black'} />
             </div>
             <div
               className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
@@ -276,7 +276,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
               onClick={() => setCartPop(true)}
             >
               <div className="position-relative d-inline-flex">
-                <CartIcon color="#FFF" />
+                <CartIcon color="#000" />
                 {appData?.appData?.cartCount > 0 && (
                   <span
                     className={`${styles.cartCount} position-absolute d-inline-flex align-items-center`}
@@ -406,13 +406,13 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     () => setIsSearchOpen(!isSearchOpen)
                   }
                 >
-                  <SearchIcon color={'white'} />
+                  <SearchIcon color={'black'} />
                 </button>
                 <div
                   className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
                   role="button"
                 >
-                  <SupportIcon color="#FFF" />
+                  <SupportIcon color="#000" />
                   <div
                     className={`${styles.supportDropDown} position-absolute d-inline-block`}
                   >
@@ -482,7 +482,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     onClick={() => openAccountDetail()}
                   >
                     <div className="d-inline-flex align-items-center gap-2">
-                      <UserIcon color="#FFF" />
+                      <UserIcon color="#000" />
                     </div>
                     {userInfo?.name !== "" && (
                       <span className={`${styles.userName} d-inline-flex`}>
@@ -531,7 +531,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     onClick={() => setLoginPop(true)}
                     role="button"
                   >
-                    <UserIcon color="#FFF" />
+                    <UserIcon color="#000" />
                     <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
                       Account
                     </span>
@@ -543,7 +543,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   onClick={() => setCartPop(true)}
                 >
                   <span className="position-relative d-inline-flex">
-                    <CartIcon color="#FFF" />
+                    <CartIcon color="#000" />
                     {appData?.appData?.cartCount > 0 && (
                       <span
                         className={`${styles.cartCount} position-absolute d-inline-flex align-items-center`}
@@ -562,7 +562,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
         >
           <div style={{
             width: 'fit-content',
-            margin: '0 auto'
+            margin: '0 auto',
           }}>
             {loading ? (
               <HeaderNavLoader />
@@ -607,6 +607,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                               whiteSpace: 'nowrap',
                               display: 'inline-block',
                               verticalAlign: 'middle',
+                              color: 'white',
                             }}
                           >
                             {item.name}
@@ -771,7 +772,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
         </div>
         {loginPop === true && <LoginPopup setLoginPop={setLoginPop} />}
         {cartPop === true && <CartAside setCartPop={setCartPop} />}
-      </div>
+      </div >
     </>
   );
 };
