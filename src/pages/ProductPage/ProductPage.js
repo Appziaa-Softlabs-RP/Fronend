@@ -1794,6 +1794,9 @@ const DeliveryService = ({
             <input
               type="number"
               className={`${styles.deliveryInput} w-100 d-inline-block position-relative`}
+              style={{
+                fontSize: '13px',
+              }}
               maxLength="6"
               minLength="6"
               placeholder="Enter Delivery Pincode"
