@@ -52,10 +52,10 @@
     font-size: 16px;
     border-radius: 4px;
     font-weight: 700;
-    border: 1px solid var(--PRIMARY_COLOR);
+    border: 1px solid var(--ADD_BUTTON_COLOR);
 }
 .loginFilledBtn{
-    background: var(--PRIMARY_COLOR);
+    background: var(--ADD_BUTTON_COLOR);
     color: var(--SECONDARY_COLOR);
 }
 .loginUnfilledBtn{
