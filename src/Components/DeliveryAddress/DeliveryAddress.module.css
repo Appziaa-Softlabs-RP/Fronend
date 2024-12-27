@@ -15,7 +15,9 @@
     border-top: 1px solid #EEE;
 }
 
-.placeOrderBtn, .payOrderBtn, .addAddressBtn {
+.placeOrderBtn,
+.payOrderBtn,
+.addAddressBtn {
     height: 45px;
     border: 1px solid var(--ADD_BUTTON_COLOR);
     background: var(--ADD_BUTTON_COLOR);
@@ -23,6 +25,7 @@
     font-size: 16px;
     font-weight: 500;
     border-radius: 2px;
+    border-radius: 5px;
 }
 
 .addAddressBtn {
@@ -30,14 +33,17 @@
     color: var(--ADD_BUTTON_COLOR);
 }
 
-.addedAdres, .deliveryBox {
+.addedAdres,
+.deliveryBox {
     background: #FFF;
 }
-.addedAdres{
+
+.addedAdres {
     border: 1px solid #CCC;
     border-radius: 4px;
 }
-.addedAdres:hover{
+
+.addedAdres:hover {
     border: 1px solid var(--ADD_BUTTON_COLOR);
 }
 
@@ -59,7 +65,8 @@
     font-size: 14px;
 }
 
-.deleteBtn, .editBtn {
+.deleteBtn,
+.editBtn {
     height: 30px;
     color: #DD5E5E;
     border-radius: 4px;
@@ -67,7 +74,9 @@
     font-weight: 700;
     background: #FEFEFE;
 }
-.deleteBtn svg, .editBtn svg{
+
+.deleteBtn svg,
+.editBtn svg {
     height: 14px;
 }
 
@@ -75,19 +84,21 @@
     border: 1px solid var(--PRIMARY_COLOR);
     color: var(--PRIMARY_COLOR);
 }
-.deliveryRadio{
+
+.deliveryRadio {
     left: 15px;
     top: 15px;
     width: 20px;
     height: 20px;
     border-radius: 20px;
-    box-shadow: 0 0 0 2px hsl(223,10%,80%) inset;
+    box-shadow: 0 0 0 2px hsl(223, 10%, 80%) inset;
     -webkit-tap-highlight-color: transparent;
     -webkit-appearance: none;
     appearance: none;
 }
+
 .deliveryRadio:before {
-    background-color: hsl(0,0%,100%);
+    background-color: hsl(0, 0%, 100%);
     border-radius: inherit;
     box-shadow: 0 0 0 0.3em var(--PRIMARY_COLOR);
     content: "";
@@ -97,22 +108,26 @@
     left: 6px;
     width: 8px;
     height: 8px;
-    transition: transform 0.3s cubic-bezier(0.37,0,0.63,1);
+    transition: transform 0.3s cubic-bezier(0.37, 0, 0.63, 1);
     transform: scale(0);
     border-radius: 20px;
 }
+
 .deliveryRadio:checked:before {
     transform: scale(1);
-    transition-timing-function: cubic-bezier(0.34,1.56,0.64,1);
+    transition-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
-.paymentRadio .deliveryRadio{
+
+.paymentRadio .deliveryRadio {
     left: -15px;
     top: 4px;
 }
+
 .cartSummryBox {
     background: #FFF;
     padding: 10px 20px;
 }
+
 .myCartTitle {
     font-size: 20px;
     color: #000;

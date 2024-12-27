@@ -1215,7 +1215,7 @@ export const ProductPage = () => {
       }}>
         <Header />
         <div className="col-12 d-inline-flex" style={{
-          maxWidth: "1200px",
+          maxWidth: "1300px",
           margin: "auto",
         }}>
           <div className="container-fluid">

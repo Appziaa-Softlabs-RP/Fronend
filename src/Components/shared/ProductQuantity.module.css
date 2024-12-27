@@ -7,6 +7,15 @@
     border: 1px solid hsla(240, 6%, 90%, 1);
 }
 
+.goCartBtn{
+    background: var(--ADD_BUTTON_COLOR);
+    color: white;
+}
+.goCartBtn:hover{
+    background: var(--BUTTON_HOVER_COLOR);
+    color: black;
+}
+
 .gapLg{
     gap: 20px;
 }

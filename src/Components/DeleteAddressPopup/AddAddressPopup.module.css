@@ -1,0 +1,28 @@
+
+.addresssLayerBox {
+    background: rgba(0, 0, 0, 0.50);
+    z-index: 1000;
+}
+.addressContainer {
+    width: 100%;
+    max-width: 600px;
+}
+.closeLogin{
+    font-size: 20px;
+    height: 40px;
+    width: 40px;
+    color: #000;
+    right: 10px;
+    top: 10px;
+    font-weight: 800;
+}
+
+.deleteButton {
+    height: 45px;
+    border: 1px solid var(--ADD_BUTTON_COLOR);
+    background: var(--ADD_BUTTON_COLOR);
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 2px;
+}

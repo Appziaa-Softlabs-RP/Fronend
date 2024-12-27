@@ -13,7 +13,7 @@
     color: #FFF;
 }
 .checkoutBtn {
-    background: var(--PRIMARY_COLOR);
+    background: var(--ADD_BUTTON_COLOR);
     color: var(--SECONDARY_COLOR);
     box-shadow: none;
     border: none;

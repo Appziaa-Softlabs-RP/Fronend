@@ -165,9 +165,9 @@ export default function ProductGalleryDesktop({
                             onError={(e) => setNoImage(e)}
                             className="bg-white rounded"
                             style={{
-                                height: "80px",
-                                maxHeight: "80px",
-                                maxWidth: "100%",
+                                height: "95%",
+                                maxHeight: "95%",
+                                maxWidth: "95%",
                                 objectFit: "contain",
                             }}
                         />
@@ -191,9 +191,9 @@ export default function ProductGalleryDesktop({
                                     onError={(e) => setNoImage(e)}
                                     className="bg-white m-0 rounded"
                                     style={{
-                                        height: "80px",
-                                        maxHeight: "80px",
-                                        maxWidth: "100%",
+                                        height: "95%",
+                                        maxHeight: "95%",
+                                        maxWidth: "95%",
                                         objectFit: "contain",
                                     }}
                                 />
