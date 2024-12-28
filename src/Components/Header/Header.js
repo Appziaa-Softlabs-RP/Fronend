@@ -242,7 +242,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
       >
         <div className={`${styles.siteHeader} col-12 d-inline-flex`}>
           <div
-            className={`${styles.menuIconBox} d-inline-flex align-items-center ms-5 justify-content-center`}
+            className={`${styles.menuIconBox} d-inline-flex align-items-center ms-3 justify-content-center`}
             onClick={openAsideMenu}
           >
             <MenuIcons color={'black'} />
@@ -266,7 +266,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
               className="mt-2"
             />
           </h1>
-          <div className="d-inline-flex align-items-stretch justify-content-end gap-2 me-5">
+          <div className="d-inline-flex align-items-stretch justify-content-end gap-2 me-3">
             <div
               className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
               type="button"

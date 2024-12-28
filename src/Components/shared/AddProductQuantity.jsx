@@ -13,7 +13,7 @@ export default function AddProductQuantity({
         gridTemplateColumns: '1fr 1fr',
     }}>
         <div
-            className={`${styles.itemQuantityBtnBox} ${sm ? styles.gapSm : styles.gapLg} m-0 d-inline-flex align-items-center justify-content-center position-relative`}
+            className={`${styles.itemQuantityBtnBox} ${sm ? styles.gapSm : styles.gapLg} mx-2 mx-md-0 d-inline-flex align-items-center justify-content-center position-relative`}
         >
             <span
                 role="button"

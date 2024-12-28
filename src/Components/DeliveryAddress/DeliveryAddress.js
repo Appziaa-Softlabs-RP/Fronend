@@ -100,7 +100,10 @@ const AddressDelivery = ({
                     </div>
                     {allAddress?.length > 0 && (
                         <React.Fragment>
-                            <div className="col-12 d-inline-flex flex-wrap p-3">
+                            <div className="col-12 d-inline-flex flex-wrap p-3" style={{
+                                maxHeight: '400px',
+                                overflowY: 'auto'
+                            }}>
                                 {allAddress?.map((item, idx) => {
                                     return (
                                         <div

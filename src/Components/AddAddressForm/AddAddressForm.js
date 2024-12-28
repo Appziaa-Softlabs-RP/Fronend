@@ -453,7 +453,7 @@ export const AddAddressForm = ({
                     </label>
                 </div>
                 <h6 className="addres-type col-md-12 p-0 mb-2">Address Type</h6>
-                <div className="col-12 pb-3 pr-0 d-inline-flex align-items-center justify-content-between">
+                <div className="col-12 pb-3 pr-0 d-inline-flex align-items-center justify-content-start gap-5">
                     <div className={`${styles.addressOptionBox} d-inline-flex`}>
                         <label
                             className="d-inline-flex align-items-center"
@@ -516,7 +516,7 @@ export const AddAddressForm = ({
                     </div>
                 </div>
             </div>
-            <div className="col-12 d-inline-flex">
+            <div className="col-12 mb-4 d-inline-flex">
                 <span
                     role="button"
                     disabled={pending}
