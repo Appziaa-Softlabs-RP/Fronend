@@ -92,7 +92,7 @@ export default function ProdGalleryMobile({
     }
 
     return (
-        <div className={`col-12 bg-white d-inline-block position-relative ${styles.productGallery}`}>
+        <div className={`col-12 bg-white pt-4 d-inline-block position-relative ${styles.productGallery}`}>
             {ProductData?.stock <= 0 && (
                 <div className={styles.soldOutBox}>
                     <span className={styles.soldOutText}>Sold Out</span>

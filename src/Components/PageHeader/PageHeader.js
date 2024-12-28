@@ -1,11 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useApp } from "../../context/AppContextProvider";
+import { enviroment } from "../../enviroment";
+import ApiService from "../../services/ApiService";
 import { BackArrowIcon, CartIcon, CrossIcon, SearchIcon } from "../siteIcons";
 import styles from './PageHeader.module.css';
-import { useNavigate } from "react-router-dom";
-import { enviroment } from "../../enviroment";
-import { AppNotification } from "../../utils/helper";
-import ApiService from "../../services/ApiService";
-import { useApp } from "../../context/AppContextProvider";
 
 export const PageHeader = ({ title, hide }) => {
     const navigate = useNavigate();
@@ -41,20 +40,7 @@ export const PageHeader = ({ title, hide }) => {
     const openProductId = (prodId, name) => {
         setSearchProdList([]);
         setSearchProd(name);
-        const payload = {
-            product_id: prodId,
-            company_id: parseInt(enviroment.COMPANY_ID),
-            store_id: parseInt(enviroment.STORE_ID)
-        }
-        ApiService.productDetails(payload).then((res) => {
-            if (res.message === "Product Detail") {
-                navigate(`/product?id=${prodId}`, { state: { product: res.payload } })
-            } else {
-                AppNotification('Error', 'Sorry, Product detail not found.', 'danger');
-            }
-        }).catch((err) => {
-            AppNotification('Error', 'Sorry, Product detail not found.', 'danger');
-        });
+        navigate(`/product/${prodId}`)
     }
 
     const handleKeyDown = (event) => {
@@ -101,7 +87,7 @@ export const PageHeader = ({ title, hide }) => {
                         <div className={`${styles.showSearchList} ${styles.showSearchListMobile} position-absolute d-inline-flex flex-column start-0 col-11 end-0 m-auto overflow-y-auto`}>
                             {searchProdList.map((item, idx) => {
                                 return (
-                                    <span className={`${styles.searchRow} p-3 d-inline-block text-truncate col-12`} role="button" key={idx} onClick={() => openProductId(item.id, item.name)}>{item.name}</span>
+                                    <span className={`${styles.searchRow} p-3 d-inline-block text-truncate col-12`} role="button" key={idx} onClick={() => openProductId(item.name_url, item.name)}>{item.name}</span>
                                 )
                             })}
                         </div>
