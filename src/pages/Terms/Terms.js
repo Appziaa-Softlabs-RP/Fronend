@@ -273,7 +273,7 @@ export const Terms = () => {
               <span className="c2">Address:</span>
               <span className="c8">&nbsp;</span>
               <span className="c14">
-                42, Cycle Market, Jhandewalan Extension, New Delhi 110055.,
+                NEOTOY INNOVATIONS PRIVATE LIMITED Sri Sai Tower, No. 994, 1st Floor, 1st main, Koramangala 1st Block Bengaluru -560034 Karnataka,
                 India,{" "}
               </span>
             </li>

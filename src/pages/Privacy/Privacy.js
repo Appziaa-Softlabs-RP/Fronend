@@ -35,8 +35,7 @@ export const Privacy = () => {
               &quot;us,&quot; or &quot;our&quot;) collects, uses, and discloses
               your personal information when you visit our website at
               {process.env.REACT_APP_URL} (the &quot;Site&quot;) or make purchases at our
-              physical store located at 42, Cycle Market, Jhandewalan Extension,
-              New Delhi 110055. (the &quot;Store&quot;).
+              physical store located at NEOTOY INNOVATIONS PRIVATE LIMITED Sri Sai Tower, No. 994, 1st Floor, 1st main, Koramangala 1st Block Bengaluru -560034 Karnataka (the &quot;Store&quot;).
             </span>
           </p>
           <p className="c0">

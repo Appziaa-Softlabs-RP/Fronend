@@ -198,7 +198,7 @@ const ContactUsUserTemplate = `<table
           >
             <div style="width: 100%">
               <img
-                src="https://knickknack.online/static/media/site_logo.6b7c4f872947716c5fbb.png"
+                src="https://toymie.com/static/media/site_logo.6b7c4f872947716c5fbb.png"
                 style="max-height: 40px"
               /><br />
             </div>
@@ -233,7 +233,7 @@ const ContactUsUserTemplate = `<table
             <div>
               <span class="size" style="font-size: 16px"
                 >In the meantime, feel free to explore
-                <a href="https://knickknack.online/" target="_blank">our website</a>
+                <a href="https://toymie.com/" target="_blank">our website</a>
                 for the latest products and updates.<br
               /></span>
             </div>

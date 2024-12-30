@@ -64,7 +64,7 @@
 }
 
 .topHeaderSale {
-    background: #93071c;
+    background: var(--DARK_COLOR);
     height: 30px;
 }
 
@@ -92,7 +92,7 @@
 }
 
 .supportDrop {
-    color: #FFF;
+    color: white;
 }
 
 .supportDrop:hover {

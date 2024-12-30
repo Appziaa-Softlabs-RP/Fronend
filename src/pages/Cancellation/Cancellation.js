@@ -98,7 +98,7 @@ export const Cancellation = () => {
                 location at{" "}
               </span>
               <span className="c14 c18">
-                42, Cycle Market, Jhandewalan Extension, New Delhi 110055.
+                NEOTOY INNOVATIONS PRIVATE LIMITED Sri Sai Tower, No. 994, 1st Floor, 1st main, Koramangala 1st Block Bengaluru -560034 Karnataka
                 India,{" "}
               </span>
               <span className="c4">

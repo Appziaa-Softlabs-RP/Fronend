@@ -136,7 +136,7 @@ ${[
   .map(
     (url) => `
 <url>
-<loc>https://knickknack.in${url}</loc>
+<loc>https://toymie.com${url}</loc>
 <changefreq>weekly</changefreq>
 <priority>0.8</priority>
 <lastmod>${new Date().toISOString()}</lastmod>

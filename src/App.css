@@ -1,6 +1,7 @@
 :root {
-  --PRIMARY_COLOR: #cf102e;
-  --SECONDARY_COLOR: #fff;
+  --PRIMARY_COLOR: #DF2027;
+  --SECONDARY_COLOR: #FBDE59;
+  --DARK_COLOR: #000;
   --MENU_HOVER_COLOR: rgba(207, 16, 45, 0.101);
   --ADD_BUTTON_COLOR: #cf102e;
   --breakpoint-mobile: 560px;
