@@ -72,6 +72,7 @@ export const StoreProductCategory = () => {
         ApiService.CategoryByProd(data)
             .then((res) => {
                 if (res.message === "Fetch successfully.") {
+                    console.log(res.payload_CategoryByProduct);
                     setProductData(res.payload_CategoryByProduct?.products);
                     setProductActualData(res.payload_CategoryByProduct?.products)
                     setBrands(res.payload_CategoryByProduct?.brands);
@@ -159,7 +160,7 @@ export const StoreProductCategory = () => {
                                 {filterVert !== null &&
                                     filterVert !== undefined && (
                                         <div
-                                            className={`${styles.filterSticky} hideInMobile col-3 position-sticky flex-shrink-1 d-inline-flex overflow-y-auto`}
+                                            className={`${styles.filterSticky} hideInMobile col-3 position-sticky flex-shrink-1 d-inline-flex`}
                                         >
                                             <SearchCategoryFilter
                                                 categorySlug={category}

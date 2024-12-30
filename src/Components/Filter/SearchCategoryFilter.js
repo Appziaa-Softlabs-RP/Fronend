@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import styles from "./Filter.module.css";
+import { Search } from "react-bootstrap-icons";
 
 export const SearchCategoryFilter = ({
     filterVert,
@@ -157,8 +158,48 @@ export const SearchCategoryFilter = ({
     }, [allfilterVal, selectedBrandId]);
 
     return (
-        <React.Fragment>
-            <div className="col-12 d-inline-flex flex-column gap-3">
+        <div className="h-100">
+            <div className={`${styles.filterContainer} col-12 d-inline-flex flex-column gap-1`}>
+                <div className="ps-3 pt-3" style={{
+                    borderBottom: "1px solid #e5e5e5",
+                }}>
+                    <h2 className={styles.filterTitle} >Filters</h2>
+                    <div className={styles.filterTagContainer}>
+                        {
+                            selectedBrandId?.length > 0 &&
+                            // show selected brands as tags
+                            selectedBrandId?.map((brandId, index) => {
+                                const brandData = allBrands?.find((brand) => brand.id == brandId)
+                                return (
+                                    <p className={styles.filterTag}>
+                                        {brandData?.name}
+                                        <span
+                                            role="button"
+                                            key={index}
+                                            onClick={() => filterBrand(brandData?.id)}
+                                        >
+                                            X
+                                        </span>
+                                    </p>
+                                );
+                            })
+                        }
+                    </div>
+                    {
+                        allfilterVal.priceMin && allfilterVal.priceMax &&
+                        <div className={styles.filterTagContainer}>
+                            <p className={styles.filterTag}>
+                                Price: ₹{allfilterVal.priceMin} - ₹{allfilterVal.priceMax}
+                                <span
+                                    role="button"
+                                    onClick={resetFilterPrice}
+                                >
+                                    X
+                                </span>
+                            </p>
+                        </div>
+                    }
+                </div>
                 {brands?.length > 0 && (
                     <div
                         className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
@@ -172,12 +213,13 @@ export const SearchCategoryFilter = ({
                             <li
                                 className={`${styles.filterSearch} col-12 position-sticky top-0 start-0 d-inline-flex align-items-center`}
                             >
+                                <p className={styles.filterSearchIcon}>
+                                    <Search />
+                                </p>
                                 <input
                                     type="search"
                                     placeholder="Search Brand"
-                                    value={searchBrand}
                                     className={`${styles.filterSearchInput} col-12 d-inline-flex p-3`}
-                                    onChange={(e) => searchBrandName(e.target.value)}
                                 />
                             </li>
                             {allBrands?.length > 0 &&
@@ -453,6 +495,6 @@ export const SearchCategoryFilter = ({
                     </ul>
                 </div>
             </div>
-        </React.Fragment>
+        </div>
     );
 };

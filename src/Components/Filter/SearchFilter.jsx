@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Search } from "react-bootstrap-icons";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import styles from "./Filter.module.css";
@@ -20,7 +21,6 @@ export const SearchFilter = ({
     age: [],
   });
 
-  const [searchBrand, setSearchBrand] = useState("");
   const [allfilterVal, setFilterVal] = useState({
     priceMin: "",
     priceMax: "",
@@ -125,7 +125,6 @@ export const SearchFilter = ({
   }, [filterCatg]);
 
   const fetchFilterProd = () => {
-    console.log('workign')
     const payload = {
       store_id: enviroment.STORE_ID,
       vertical_id: filterVert,
@@ -157,8 +156,46 @@ export const SearchFilter = ({
   }, [allfilterVal]);
 
   return (
-    <React.Fragment>
-      <div className="col-12 d-inline-flex flex-column gap-3">
+    <div className="h-100">
+      <div className={`${styles.filterContainer} col-12 d-inline-flex flex-column gap-1`} style={{
+        top: "140px"
+      }}>
+        <div className="ps-3 pt-3" style={{
+          borderBottom: "1px solid #e5e5e5",
+        }}>
+          <h2 className={styles.filterTitle} >Filters</h2>
+          <div className={styles.filterTagContainer}>
+            {
+              allfilterVal?.brandsName?.length > 0 &&
+              // show selected brands as tags
+              allfilterVal?.brandsName?.map((brandName, index) => {
+                // const brand = allBrands.find((brand) => brand.brand_id === item);
+                return (
+                  <p className={styles.filterTag}>
+                    {brandName}
+                    <span
+                      role="button"
+                      key={index}
+                      onClick={() => filterBrand(brandName)}
+                    >
+                      X
+                    </span>
+                  </p>
+                );
+              })
+            }
+          </div>
+          <div className={styles.filterTagContainer}>
+            {allfilterVal?.priceMin && allfilterVal?.priceMax && (
+              <p className={styles.filterTag}>
+                Price: ₹{allfilterVal?.priceMin} - ₹{allfilterVal?.priceMax}
+                <span role="button" onClick={resetFilterPrice}>
+                  X
+                </span>
+              </p>
+            )}
+          </div>
+        </div>
         <div
           className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
         >
@@ -171,12 +208,13 @@ export const SearchFilter = ({
             <li
               className={`${styles.filterSearch} col-12 position-sticky top-0 start-0 d-inline-flex align-items-center`}
             >
+              <p className={styles.filterSearchIcon}>
+                <Search />
+              </p>
               <input
                 type="search"
                 placeholder="Search Brand"
-                // value={searchBrand}
                 className={`${styles.filterSearchInput} col-12 d-inline-flex p-3`}
-              // onChange={(e) => searchBrandName(e.target.value)}
               />
             </li>
             {allBrands.length > 0 &&
@@ -194,6 +232,7 @@ export const SearchFilter = ({
                         id={`brand-checkbox-${index}`}
                         onClick={(e) => filterBrand(item?.brand_name)}
                         type="checkbox"
+                        checked={allfilterVal?.brandsName?.includes(item?.brand_name)}
                         className={`${styles.address_option}`}
                         value={item.brand_id}
                         name="brand"
@@ -202,122 +241,6 @@ export const SearchFilter = ({
                         className={`${styles.customRadio} d-inline-flex flex-shrink-0 me-1 position-relative`}
                       ></div>
                       {item.brand_name}
-                    </label>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-
-        <div
-          className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
-        >
-          <div className="mb-4 d-flex align-items-center justify-content-between">
-            <h5 className={`${styles.filterTitle}`}>Age</h5>
-            <div
-              style={{
-                display: "flex",
-                padding: "10px",
-                justifyContent: "end",
-              }}
-            >
-              <button
-                onClick={resetFilterAge}
-                style={{
-                  border: "none",
-                  padding: "5px 10px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  width: "fit-content",
-                }}
-              >
-                Clear
-              </button>
-            </div>
-          </div>
-          <ul
-            className={`${styles.brandScroll} col-12 d-inline-flex list-unstyled flex-column gap-3 overflow-y-auto`}
-          >
-            {allBrandLen.age.length > 0 &&
-              allBrandLen.age?.map((item, index) => {
-                return (
-                  <li
-                    className={`${styles.filterRow} col-12 d-inline-flex align-items-center`}
-                    key={index}
-                  >
-                    <label
-                      className="d-inline-flex align-items-center gap-2 text-capitalize"
-                      onClick={() => filterAge(item.name)}
-                    >
-                      <input
-                        type="radio"
-                        className={`${styles.address_option}`}
-                        value={item.name}
-                        checked={allfilterVal.ageGroup === item.name}
-                        name="age"
-                      />
-                      <div
-                        className={`${styles.customRadio} d-inline-flex flex-shrink-0 me-1 position-relative`}
-                      ></div>
-                      {item.name}
-                    </label>
-                  </li>
-                );
-              })}
-          </ul>
-        </div>
-
-        <div
-          className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
-        >
-          <div className="mb-4 d-flex align-items-center justify-content-between">
-            <h5 className={`${styles.filterTitle}`}>Gender</h5>
-            <div
-              style={{
-                display: "flex",
-                padding: "10px",
-                justifyContent: "end",
-              }}
-            >
-              <button
-                onClick={resetFilterGender}
-                style={{
-                  border: "none",
-                  padding: "5px 10px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  width: "fit-content",
-                }}
-              >
-                Clear
-              </button>
-            </div>
-          </div>
-          <ul
-            className={`${styles.brandScroll} col-12 d-inline-flex list-unstyled flex-column gap-3 overflow-y-auto`}
-          >
-            {allBrandLen.gender.length > 0 &&
-              allBrandLen.gender?.map((item, index) => {
-                return (
-                  <li
-                    className={`${styles.filterRow} col-12 d-inline-flex align-items-center`}
-                    key={index}
-                  >
-                    <label
-                      className="d-inline-flex align-items-center gap-2 text-capitalize"
-                      onClick={() => filterGender(item.gender_name)}
-                    >
-                      <input
-                        type="radio"
-                        className={`${styles.address_option}`}
-                        checked={allfilterVal.genderName === item.gender_name}
-                        value={item.gender_id}
-                        name="gender"
-                      />
-                      <div
-                        className={`${styles.customRadio} d-inline-flex flex-shrink-0 me-1 position-relative`}
-                      ></div>
-                      {item.gender_name}
                     </label>
                   </li>
                 );
@@ -446,6 +369,6 @@ export const SearchFilter = ({
           </ul>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };

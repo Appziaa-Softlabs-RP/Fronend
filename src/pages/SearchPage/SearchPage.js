@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
+import AdaptiveLoader from "../../Components/AdaptiveLoader/AdaptiveLoader";
 import { SearchFilter } from "../../Components/Filter/SearchFilter";
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
-import { ProductListLoader } from "../../Components/Loader/Loader";
 import { PageHeader } from "../../Components/PageHeader/PageHeader";
 import { ProductCard } from "../../Components/ProductCard/ProductCard";
-import { useApp } from "../../context/AppContextProvider";
-import { enviroment } from "../../enviroment";
-import ApiService from "../../services/ApiService";
-import styles from "./SearchPage.module.css";
 import {
   BackArrowIcon,
   FilterIcon,
   SortByIcon,
 } from "../../Components/siteIcons";
+import { useApp } from "../../context/AppContextProvider";
+import { enviroment } from "../../enviroment";
+import ApiService from "../../services/ApiService";
+import styles from "./SearchPage.module.css";
 
 export const SearchPage = () => {
   const locationState = useLocation();
@@ -41,6 +41,7 @@ export const SearchPage = () => {
       };
       setFilterVert(locationState?.state?.verticalId);
       setFilterCatg(locationState?.state?.categoryId);
+      setLoading(true);
       ApiService.storeSearch(payload)
         .then((res) => {
           if (res.message === "Fetch successfully.") {
@@ -49,8 +50,8 @@ export const SearchPage = () => {
             setProductDataLen(res.payload_searchAI.length);
           }
         })
-        .catch((err) => {});
-      setLoading(false);
+        .catch((err) => { })
+        .finally(() => setLoading(false));
     }
   }, [keyword]);
 
@@ -68,8 +69,8 @@ export const SearchPage = () => {
       parseInt(p1.mrp) < parseInt(p2.mrp)
         ? 1
         : parseInt(p1.mrp) > parseInt(p2.mrp)
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
     setProductData(originalProduct);
     setIsAscendingOrder(true);
@@ -82,8 +83,8 @@ export const SearchPage = () => {
       parseInt(p1.mrp) > parseInt(p2.mrp)
         ? 1
         : parseInt(p1.mrp) < parseInt(p2.mrp)
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
     setProductData(originalProduct);
     setIsDscendingOrder(true);
@@ -99,20 +100,13 @@ export const SearchPage = () => {
       ) : (
         ""
       )}
-
       <div
-        className={`col-12 d-inline-flex ${
-          windowWidth === "mobile" ? "mt-3" : "mt-5"
-        }`}
+        className={`col-12 d-inline-flex ${windowWidth === "mobile" ? "mt-3" : "mt-5"
+          }`}
       >
         <div className="container">
           <div className={`d-inline-flex flex-wrap col-12`}>
-            {ProductDataLen > 0 && (
-              <h4 className={`${styles.searchProdTitle} col-12 d-inline-flex`}>
-                Showing {ProductDataLen} Results for {keyword}
-              </h4>
-            )}
-            {loading && <ProductListLoader />}
+            {loading && <AdaptiveLoader />}
             {loading === false && (
               <div
                 className={`d-inline-flex flex-column col-12 mb-3`}
@@ -121,7 +115,7 @@ export const SearchPage = () => {
                 <div className={`d-inline-flex align-items-start col-12 gap-2`}>
                   {windowWidth === "desktop" && (
                     <div
-                      className={`${styles.filterSticky} col-3 position-sticky flex-shrink-1 d-inline-flex overflow-y-auto`}
+                      className={`${styles.filterSticky} col-3 position-sticky flex-shrink-1 d-inline-flex`}
                     >
                       <SearchFilter
                         filterVert={filterVert}
@@ -134,16 +128,19 @@ export const SearchPage = () => {
                     </div>
                   )}
                   <div
-                    className={`${
-                      windowWidth === "mobile"
-                        ? "col-12 pt-2"
-                        : filterVert !== null && filterVert !== undefined
+                    className={`${windowWidth === "mobile"
+                      ? "col-12 pt-2"
+                      : filterVert !== null && filterVert !== undefined
                         ? "col-9"
                         : "col-12"
-                    } ${
-                      styles.productContainer
-                    } flex-shrink-1 d-inline-flex flex-wrap`}
+                      } ${styles.productContainer
+                      } flex-shrink-1 d-inline-flex flex-wrap`}
                   >
+                    {ProductDataLen > 0 && (
+                      <h4 className={`${styles.searchProdTitle} col-12 fs-5`}>
+                        <span>Showing {ProductDataLen} Results for "{keyword}"</span>
+                      </h4>
+                    )}
                     <div
                       className={`${styles.sortContainer} col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}
                     >
@@ -161,18 +158,16 @@ export const SearchPage = () => {
                         <span
                           onClick={() => priceDescending()}
                           role="button"
-                          className={`${styles.priceLow} ${
-                            isDescendingOrder ? "fw-bold" : ""
-                          } d-inline-flex px-1`}
+                          className={`${styles.priceLow} ${isDescendingOrder ? "fw-bold" : ""
+                            } d-inline-flex px-1`}
                         >
                           Price: Low to High
                         </span>
                         <span
                           onClick={() => priceAscending()}
                           role="button"
-                          className={`${styles.priceLow} d-inline-flex px-1 ${
-                            isAscendingOrder ? "fw-bold" : ""
-                          }`}
+                          className={`${styles.priceLow} d-inline-flex px-1 ${isAscendingOrder ? "fw-bold" : ""
+                            }`}
                         >
                           Price: High to Low
                         </span>
@@ -207,9 +202,8 @@ export const SearchPage = () => {
                             <React.Fragment key={index}>
                               {item.name !== "" && (
                                 <div
-                                  className={`${
-                                    windowWidth === "mobile" ? "col-6" : "col-3"
-                                  } px-2 flex-shrink-0 mb-3`}
+                                  className={`${windowWidth === "mobile" ? "col-6" : "col-3"
+                                    } px-2 flex-shrink-0 mb-3`}
                                   key={index}
                                   role="button"
                                 >
@@ -278,11 +272,9 @@ export const SearchPage = () => {
 
         {windowWidth === "mobile" && (
           <div
-            className={`${
-              styles.filterPopup
-            } top-0 start-0 h-100 col-12 position-fixed ${
-              filterPopup === true ? "d-inline-flex" : "d-none"
-            } flex-column overflow-y-auto`}
+            className={`${styles.filterPopup
+              } top-0 start-0 h-100 col-12 position-fixed ${filterPopup === true ? "d-inline-flex" : "d-none"
+              } flex-column overflow-y-auto`}
           >
             <div
               className={`${styles.PageHeader} position-sticky top-0 start-0 col-12 d-inline-flex gap-2`}

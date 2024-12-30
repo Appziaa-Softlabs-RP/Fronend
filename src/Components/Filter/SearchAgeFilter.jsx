@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import styles from "./Filter.module.css";
+import { Search } from "react-bootstrap-icons";
 
 export const SearchAgeFilter = ({
     filterVert,
@@ -147,8 +148,13 @@ export const SearchAgeFilter = ({
     }, [allfilterVal]);
 
     return (
-        <React.Fragment>
-            <div className="col-12 d-inline-flex flex-column gap-3">
+        <div className="h-100">
+            <div className={`${styles.filterContainer} col-12 d-inline-flex flex-column gap-1`}>
+                <div className="ps-3 pt-3" style={{
+                    borderBottom: "1px solid #e5e5e5",
+                }}>
+                    <h2 className={styles.filterTitle} >Filters</h2>
+                </div>
                 <div
                     className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
                 >
@@ -161,12 +167,13 @@ export const SearchAgeFilter = ({
                         <li
                             className={`${styles.filterSearch} col-12 position-sticky top-0 start-0 d-inline-flex align-items-center`}
                         >
+                            <p className={styles.filterSearchIcon}>
+                                <Search />
+                            </p>
                             <input
                                 type="search"
                                 placeholder="Search Brand"
-                                // value={searchBrand}
                                 className={`${styles.filterSearchInput} col-12 d-inline-flex p-3`}
-                            // onChange={(e) => searchBrandName(e.target.value)}
                             />
                         </li>
                         {allBrands.length > 0 &&
@@ -377,6 +384,6 @@ export const SearchAgeFilter = ({
                     </ul>
                 </div>
             </div>
-        </React.Fragment>
+        </div>
     );
 };

@@ -187,6 +187,7 @@ export const CategoryPage = () => {
       ) : (
         ""
       )}
+   
 
       <div
         className={`col-12 d-inline-flex flex-column ${

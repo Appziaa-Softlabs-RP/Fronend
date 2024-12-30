@@ -44,7 +44,7 @@ export const PageHeader = ({ title, hide }) => {
     }
 
     const handleKeyDown = (event) => {
-        if (searchProd.length > 2 && event.code === "Enter") {
+        if (searchProd.length > 1 && event.code === "Enter") {
             let category = searchProd?.replaceAll("[^A-Za-z0-9]", "-");
             setSearchProdList([]);
             navigate(`/search-product/${category}`, { state: { keyword: searchProd } });

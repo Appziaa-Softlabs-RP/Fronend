@@ -550,7 +550,6 @@ export const ProductPage = () => {
 
       <div className="hideInDesktop" style={{
         maxWidth: "100vw",
-        // overflowX: "hidden",
       }}>
         <PageHeader title={ProductData?.name} />
         <ProdGalleryMobile
@@ -1040,7 +1039,7 @@ const ProdPrice = ({
               <Skeleton width={'300px'} height={24} />
               :
               <div
-                className={`${styles.offerPrice} fs-1 d-flex fw-bold align-items-cente my-1 flex-column`}
+                className={`${styles.offerPrice} fs-2 d-flex fw-bold align-items-cente my-1 flex-column`}
               >
                 <span style={{
                   margin: '0',
