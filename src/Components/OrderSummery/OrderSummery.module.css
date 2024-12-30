@@ -1,3 +1,10 @@
+.deliveryCharges{
+    background-color: var(--MENU_HOVER_COLOR);
+    padding: 10px;
+    border-radius: 5px;
+    color: rgb(89, 85, 85)
+}
+
 .orderSummryBox {
     background: #FFF;
 }
@@ -26,7 +33,7 @@
 
 .finalSavingLabel, .subTotalSaving {
     font-size: 15px;
-    color: #75BF3A;
+    color: #408558;
 }
 
 .couponInputBox {
