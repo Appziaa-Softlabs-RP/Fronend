@@ -25,11 +25,6 @@ export const HeaderNavLoader = () => {
         margin: '0px 80px',
         width: '200px'
       }} />
-      <Skeleton height={40} width={"80%"} containerClassName='h-100' style={{
-        minWidth: '180px',
-        margin: '0px 80px',
-        width: '200px'
-      }} />
     </div>
   )
 }
@@ -177,17 +172,10 @@ export const LookingForBannerLoader = () => {
   return (
     <div className={styles.bannerLoader}>
       <div className='container'>
-        <div className={styles.bannerTitle}>
-          <Skeleton
-            containerClassName='h-100 w-100'
-            height={25}
-            width={"40%"}
-          />
-        </div>
         <div className={styles.bannerBody}>
           {Array.apply(null, { length: 6 }).map((e, i) => (
             <div className={styles.smallBox} key={i}>
-              <Skeleton className='h-100 w-100' />
+              <Skeleton className='h-100 w-100' borderRadius={100} />
             </div>
           ))}
         </div>

@@ -39,19 +39,19 @@ export const LookingFor = () => {
 
   return (
     <React.Fragment>
-      {loading ? (
-        <LookingForBannerLoader />
-      ) : (
-        <div className={`${styles.shopAgeBox} px-3 col-12 d-inline-flex mb-3`}>
-          <div
-            className={`${windowWidth === "mobile" && "p-0"
-              } container d-flex flex-column m-auto`}
+      <div className={`${styles.shopAgeBox} px-3 col-12 d-inline-flex mb-3`}>
+        <div
+          className={`${windowWidth === "mobile" && "p-0"
+            } container d-flex flex-column m-auto`}
+        >
+          <h2
+            className={`${styles.categoryHeaderTitle} col-12 d-inline-flex justify-content-center mt-4 mb-3 fs-2`}
           >
-            <h2
-              className={`${styles.categoryHeaderTitle} col-12 d-inline-flex justify-content-center mt-4 mb-3 fs-2`}
-            >
-              ✨ Shop by Category ✨
-            </h2>
+            ✨ Shop by Category ✨
+          </h2>
+          {loading ? (
+            <LookingForBannerLoader />
+          ) : (
             <div className="col-12 d-inline-flex">
               <ReactOwlCarousel
                 className={`carousel-looking-for col-12 brandSilder owl-theme`}
@@ -90,9 +90,9 @@ export const LookingFor = () => {
                 })}
               </ReactOwlCarousel>
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </React.Fragment>
   );
 };

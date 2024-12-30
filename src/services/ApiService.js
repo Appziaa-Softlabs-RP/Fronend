@@ -2,7 +2,7 @@ import fetch from "./ApiInterceptor";
 
 const ApiService = {};
 
-const storageKey = 'stepsForeverApiCache';
+const storageKey = 'toymieApiCache';
 
 // Helper function to get cache from localStorage
 const getCache = () => {
@@ -114,6 +114,21 @@ ApiService.sendContactUsEmail = function (data) {
     data: data,
   });
 };
+
+
+ApiService.productVariantInfo = function (data) {
+  const cacheKey = "/store/product-variants-info" + JSON.stringify(data);
+  return cacheFetch(
+    "/store/product-variants-info",
+    {
+      method: "post",
+      body: data,
+      headers: { "Content-Type": "application/json" },
+    },
+    cacheKey
+  );
+};
+
 
 ApiService.getRazorpayPublicKey = function (data) {
   return fetch({

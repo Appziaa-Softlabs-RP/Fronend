@@ -2,30 +2,36 @@
   --PRIMARY_COLOR: #DF2027;
   --SECONDARY_COLOR: #FBDE59;
   --DARK_COLOR: #000;
-  --MENU_HOVER_COLOR: rgba(207, 16, 45, 0.101);
+  --MENU_HOVER_COLOR: rgba(207, 16, 45, 0.062);
   --ADD_BUTTON_COLOR: #cf102e;
   --breakpoint-mobile: 560px;
 }
 
 body {
-  background: #e7ecf2;
+  background: white;
 }
 
-.hero{
+h1,
+h2,
+h3 {
+  font-family: 'Comic Sans MS', cursive, sans-serif !important;
+}
+
+.hero {
   max-width: 1500px;
   margin: auto;
   padding: 0 20px;
 }
 
 @media screen and (min-width: 560px) {
-  .hideInDesktop{
-      display: none !important;
+  .hideInDesktop {
+    display: none !important;
   }
 }
 
 @media screen and (max-width: 560px) {
-  .hideInMobile{
-      display: none !important;
+  .hideInMobile {
+    display: none !important;
   }
 }
 
@@ -37,22 +43,23 @@ img {
   padding: 0 !important;
 }
 
-.swiper-button-next:hover{
+.swiper-button-next:hover {
   background: var(--PRIMARY_COLOR) !important;
 }
 
-.swiper-button-prev:hover{
+.swiper-button-prev:hover {
   background: var(--PRIMARY_COLOR) !important;
 }
 
 .swiper-button-next:hover::after,
 .swiper-button-prev:hover::after {
-  color: white !important; /* Change this to your desired color */
+  color: white !important;
+  /* Change this to your desired color */
 }
 
 .swiper-button-next,
 .swiper-button-prev {
-  background: white  !important;
+  background: white !important;
   height: 40px !important;
   width: 40px !important;
   border-radius: 200px !important;
@@ -61,13 +68,14 @@ img {
 
 /* 560 below buttons are hidden */
 @media screen and (max-width: 560px) {
+
   .swiper-button-next,
   .swiper-button-prev {
     display: none !important;
   }
 }
 
-.swiper-button-disabled{
+.swiper-button-disabled {
   display: none !important;
 }
 
@@ -90,7 +98,7 @@ img {
 
 .swiper-pagination-bullets {
   width: fit-content !important;
-  transform: translateX(-50%) !important;
+  transform: translateX(-50%) translateY(-10px) !important;
   left: 50% !important;
   margin: auto;
   padding: 0px !important;
@@ -141,9 +149,11 @@ img {
   display: flex;
   align-items: stretch;
 }
+
 .mouse-cursor {
   cursor: pointer;
 }
+
 /* owl  carousel left & right arrow */
 .owl-nav {
   position: absolute;
@@ -153,12 +163,15 @@ img {
   display: flex;
   justify-content: space-between;
 }
+
 .owl-nav button {
   min-width: 40px;
 }
+
 .owl-nav span {
   font-size: 30px;
 }
+
 .carousel-looking-for .owl-nav button,
 .heroBanner .owl-nav button,
 .brandSilder .owl-nav button,
@@ -173,66 +186,82 @@ img {
   justify-content: center;
   transition: 0.2s;
 }
+
 .carousel-looking-for .owl-nav button.owl-prev,
 .brandSilder .owl-nav button.owl-prev {
   left: -25px;
 }
+
 .carousel-looking-for .owl-nav button.owl-next,
 .brandSilder .owl-nav button.owl-next {
   right: -25px;
 }
+
 .carousel-looking-for .owl-nav button span,
 .brandSilder .owl-nav button span {
   color: var(--PRIMARY_COLOR);
   position: relative;
   top: -2px;
 }
+
 .carousel-looking-for .owl-nav button:hover,
 .brandSilder .owl-nav button:hover {
   background: var(--PRIMARY_COLOR) !important;
 }
+
 .carousel-looking-for .owl-nav button:hover span,
 .brandSilder .owl-nav button:hover span {
   color: var(--SECONDARY_COLOR);
 }
+
 .heroBannerMobile .owl-dots {
   background-color: rgb(255, 255, 255) !important;
   transform: translateY(-18px);
 }
-.primaryColor{
+
+.primaryColor {
   background-color: var(--PRIMARY_COLOR);
   color: var(--SECONDARY_COLOR);
 }
+
 .heroBanner .owl-nav button,
 .limitedOfferSlider .owl-nav button {
   background: transparent !important;
 }
+
 .heroBanner .owl-nav button.owl-prev {
   left: 15px;
 }
+
 .heroBanner .owl-nav button.owl-next {
   right: 15px;
 }
+
 .heroBanner .owl-nav button span {
   font-size: 80px;
   color: var(--SECONDARY_COLOR);
 }
+
 .brandSilder .owl-nav button.disabled,
 .limitedOfferSlider .owl-nav button.disabled {
   display: none !important;
 }
+
 input::-webkit-inner-spin-button,
 input::-webkit-outter-spin-button {
   -webkit-appearance: none;
   display: none;
 }
+
 .dealsShop.owl-carousel .owl-stage {
   display: flex;
   align-items: stretch;
 }
+
 .limitedOfferSlider .owl-stage-outer {
   padding-top: 30px;
 }
+
 .limitedOfferSlider.owl-theme .owl-nav {
   width: 100px;
   top: 0px;
@@ -240,31 +269,39 @@ input::-webkit-outter-spin-button {
   height: 30px;
   margin-top: -5px;
 }
+
 .limitedOfferSlider .owl-nav button.owl-next {
   right: 0px;
 }
+
 .limitedOfferSlider .owl-nav button.owl-prev {
   right: 30px;
 }
+
 .limitedOfferSlider .owl-nav button span {
   font-size: 20px;
   color: var(--SECONDARY_COLOR);
 }
+
 .limitedOfferSlider.owl-theme .owl-nav button {
   height: 30px;
   width: 30px;
   margin: 0px;
 }
+
 .infinite-scroll-component__outerdiv {
   width: 100%;
   display: inline-flex;
 }
+
 @media screen and (max-width: 568px) {
+
   .carousel-looking-for .owl-nav button.owl-prev,
   .brandSilder .owl-nav button.owl-prev {
     left: -10px;
     display: none !important;
   }
+
   .carousel-looking-for .owl-nav button.owl-next,
   .brandSilder .owl-nav button.owl-next {
     right: 20px;

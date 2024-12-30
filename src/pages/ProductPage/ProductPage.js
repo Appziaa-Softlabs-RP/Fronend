@@ -1,12 +1,9 @@
-import axios from "axios";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect, useState } from "react";
+import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
-import { ThreeDots } from "react-loader-spinner";
-import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import noImage from "../../assets/images/image-not-available.jpg";
-import ReactOwlCarousel from "react-owl-carousel";
+import Skeleton from "react-loading-skeleton";
 import {
   Link,
   useLocation,
@@ -14,14 +11,14 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
-import replacement from "../../assets/images/7-days-money-back-guarantee-icon.png";
-import delivery from "../../assets/images/free-delivery.png";
-import orignal from "../../assets/images/original.png";
+import noImage from "../../assets/images/image-not-available.jpg";
+import AddReview from "../../Components/AddReview/AddReview";
 import ShowReviews from "../../Components/AddReview/ShowReviews";
 import { FeaturedProducts } from "../../Components/FeaturedProducts/FeaturedProducts";
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
 import { PageHeader } from "../../Components/PageHeader/PageHeader";
+import AddProductQuantity from "../../Components/shared/AddProductQuantity";
 import { SimilarProduct } from "../../Components/SimilarProduct/SimilarProduct";
 import {
   CopyIcon,
@@ -29,23 +26,22 @@ import {
   FacebookIcon,
   LocationIcon,
   PinterestIcon,
-  ShareIcon,
   TwitterIcon,
-  WhatsAppIcon,
+  WhatsAppIcon
 } from "../../Components/siteIcons";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { AppNotification } from "../../utils/helper";
+import ProductGalleryDesktop from "./ProdGalleryDesktop";
+import ProdGalleryMobile from "./ProdGalleryMobile";
 import styles from "./ProductPage.module.css";
-import AddReview from "../../Components/AddReview/AddReview";
-import ProductGallery from "../../Components/ShowProduct/Gallery";
 
 export const ProductPage = () => {
   const appData = useApp();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { slug } = useParams();
+  const { slug, prodId } = useParams();
   const locationState = useLocation();
   const [ProductData, setProductData] = useState(locationState?.state?.product);
   const [prodMainImg, setProdMainImg] = useState("");
@@ -70,7 +66,11 @@ export const ProductPage = () => {
   const [isSpecilization, setIsSpecilization] = useState(false);
   const userInfo = appData?.appData?.user;
   const pageCurrentURL = encodeURIComponent(window.location.href);
+  const [productVariants, setProductVariants] = useState([]);
+  const [productVariantsLoading, setProductVariantsLoading] = useState(true);
   const [productLoading, setProductLoading] = useState(true);
+
+  const [deliveryShowed, setDeliveryShowed] = useState(false);
 
   const setMainImage = (image, count) => {
     setActiveImg(count);
@@ -272,88 +272,56 @@ export const ProductPage = () => {
     }
   };
 
-  const getDeliveyPincode = (val) => {
-    setPincode(val);
-    if (val.length < 6) {
-      setDeliveryDetail({});
-    }
+  const getProductImageOfColorId = (colorId) => {
+    return productVariants.filter((item) => ((item.color_id === colorId) && item?.image !== ''))[0]?.image
+  }
+
+  const formatDeliveryDate = (date) => {
+    const options = {
+      weekday: 'long', // Full day name (e.g., "Tuesday")
+      day: 'numeric',  // Numeric day (e.g., "3")
+      month: 'short',  // Short month (e.g., "Oct")
+    };
+
+    const formattedDate = new Date(date).toLocaleDateString('en-GB', options);
+
+    // Insert a comma after the day
+    const [weekday, day, month] = formattedDate.split(' ');
+    return `${weekday}, ${day} ${month}`;
   };
 
-  const getDeliveyInfo = (val) => {
-    const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
-    ];
-    const weekNames = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    var day = new Date();
 
-    if (val.length > 5) {
-      axios
-        .post(`${enviroment.DELIVERY_URL}/pincode-status`, {
-          store_email: process.env.REACT_APP_EMAIL_ADDRESS,
-          pincode: val,
-        })
-        .then(function (res) {
-          if (res.data.message === "Delivery found") {
-            AppNotification("Success", "Product Delivery Found", "success");
-            if (res?.data?.data?.max_days && res?.data?.data?.min_days) {
-              var fromDay = new Date(day);
-              fromDay.setDate(day.getDate() + res.data.data.min_days);
-              let fromMonth = weekNames[fromDay.getDay()];
-              let fromWeek = monthNames[fromDay.getMonth()];
-              let fromDate = fromDay.getDate();
-              fromDay = fromMonth + ", " + fromDate + " " + fromWeek;
-              var nextDay = new Date(day);
-              nextDay.setDate(day.getDate() + res.data.data.max_days);
-              let nextMonth = weekNames[nextDay.getDay()];
-              let nextWeek = monthNames[nextDay.getMonth()];
-              let nextDate = nextDay.getDate();
-              nextDay = nextMonth + ", " + nextDate + " " + nextWeek;
-              setDeliveryDetail({ minDays: fromDay, maxDays: nextDay });
-            } else if (res?.data?.data?.max_days) {
-              var nextDay = new Date(day);
-              nextDay.setDate(day.getDate() + res.data.data.max_days);
-              let nextMonth = weekNames[nextDay.getDay()];
-              let nextWeek = monthNames[nextDay.getMonth()];
-              let nextDate = nextDay.getDate();
-              nextDay = nextMonth + ", " + nextDate + " " + nextWeek;
-              setDeliveryDetail({ maxDays: nextDay });
-            } else if (res?.data?.data?.min_days) {
-              var fromDay = new Date(day);
-              fromDay.setDate(day.getDate() + res.data.data.min_days);
-              let fromMonth = weekNames[fromDay.getDay()];
-              let fromWeek = monthNames[fromDay.getMonth()];
-              let fromDate = fromDay.getDate();
-              fromDay = fromMonth + ", " + fromDate + " " + fromWeek;
-              setDeliveryDetail({ minDays: fromDay });
-            } else {
-              setDeliveryDetail({});
+  const getDeliveyPincode = async (val) => {
+    setPincode(val);
+    if (val.length === 6) {
+      const payload = {
+        pincode: val,
+        store_email: "ashiretailggn@gmail.com"
+      };
+      try {
+        const response = await fetch(`https://company.aspl.tech/api/pincode-status`,
+          {
+            method: "POST",
+            body: JSON.stringify(payload),
+            headers: {
+              "Content-Type": "application/json",
+              'Accept': 'application/json',
+              'Access-Control-Allow-Origin': '*',
             }
-          }
-        })
-        .catch(function (error) {
-          setDeliveryDetail({});
-        });
+          });
+
+        const data = await response.json();
+        if (data?.data === null) {
+          AppNotification("Error", "Please enter valid pincode.", "danger");
+          return;
+        }
+        setDeliveryDetail(data?.data);
+        setDeliveryShowed(true);
+      } catch (error) {
+        AppNotification("Error", "Please enter valid pincode.", "danger");
+      }
     } else {
-      setDeliveryDetail({});
+      AppNotification("Error", "Please enter valid pincode.", "danger");
     }
   };
 
@@ -374,9 +342,9 @@ export const ProductPage = () => {
   }, [appData.appData]);
 
   useEffect(() => {
-    let prodId = searchParams.get("id");
     const payload = {
       product_slug: slug,
+      product_id: prodId,
       company_id: parseInt(enviroment.COMPANY_ID),
       store_id: parseInt(enviroment.STORE_ID),
     };
@@ -426,6 +394,27 @@ export const ProductPage = () => {
               }
             });
           }
+
+          // Fetching Similar Products
+          const similarProdPayload = {
+            product_id: res.payload.product_id,
+            store_id: parseInt(enviroment.STORE_ID),
+          };
+
+          setProductVariantsLoading(true);
+          ApiService.productVariantInfo(similarProdPayload)
+            .then((res) => {
+              if (res.message === "Product Variant") {
+                setProductVariants(res?.payload);
+              }
+            })
+            .catch((err) => {
+              console.log(err);
+            })
+            .finally(() => {
+              setProductVariantsLoading(false);
+            });
+
         } else {
           AppNotification(
             "Error",
@@ -435,6 +424,7 @@ export const ProductPage = () => {
         }
       })
       .catch((err) => {
+        console.log(err)
         AppNotification("Error", "Sorry, Product detail not found.", "danger");
       })
       .finally(() => {
@@ -561,28 +551,36 @@ export const ProductPage = () => {
 
       <div className="hideInDesktop" style={{
         maxWidth: "100vw",
-        overflowX: "hidden",
       }}>
         <PageHeader title={ProductData?.name} />
-        <ProductGallery
+        <ProdGalleryMobile
           ProductData={ProductData}
           styles={styles}
           productLoading={productLoading}
           setNoImage={setNoImage}
           prodMainImg={prodMainImg}
-          setProdMainImg={setProdMainImg}
-          setProdSharePop={setProdSharePop}
+          getProductImageOfColorId={getProductImageOfColorId}
+          prodDiscount={prodDiscount}
         />
-
         <div
-          className={`${styles.productAllDetail} col-12 d-inline-block p-4`}
+          className={`${styles.productAllDetail} ${styles.productSection} col-12 d-flex flex-column gap-3 p-2`}
         >
-          <h2 className={`${styles.productDetailName} col-12 mb-1`}>
-            {ProductData?.name}
+          <h2 className={`${styles.productDetailName} col-12 mb-1 text-start m-0`}
+            style={{
+              fontSize: "1.5rem",
+              lineHeight: "1.2",
+            }}
+          >
+            {
+              productLoading ?
+                <Skeleton width={200} height={20} />
+                :
+                ProductData?.name
+            }
           </h2>
 
           <div
-            className={`ms-1`}
+            className={``}
           >
             {
               productLoading ?
@@ -594,647 +592,180 @@ export const ProductPage = () => {
                 />
             }
           </div>
-
-          <div className="ms-2">
-            <span className="mb-2">Item Code: {ProductData?.barcode} </span>
-            <div
-              className={`d-inline-flex align-items-center col-12 mb-0 position-relative`}
-            >
-              {ProductData?.selling_price === ProductData?.mrp ? (
-                <span className={`${styles.offerPrice}`}>
-                  <b>₹{ProductData?.mrp}</b>
+          <div
+            className={` d-inline-flex align-items-start flex-column gap-2 col-12 position-relative`}
+          >
+            {
+              productLoading ?
+                <Skeleton width={100} height={20} />
+                :
+                <span>
+                  {
+                    ProductData?.stock > 0 ? (
+                      <span
+                        className="rounded"
+                        style={{
+                          padding: "5px 10px",
+                          background: "hsla(0, 0%, 87%, 1)",
+                          color: "#4CAF50",
+                          fontWeight: "bold",
+                        }}
+                      >
+                        In stock
+                      </span>
+                    ) : (
+                      <span
+                        className="rounded"
+                        style={{
+                          padding: "5px 10px",
+                          background: "hsla(0, 0%, 87%, 1)",
+                          color: "red",
+                          fontWeight: "bold",
+                        }}>
+                        Out of stock
+                      </span>
+                    )
+                  }
                 </span>
-              ) : (
-                <React.Fragment>
-                  <span className={`${styles.offerPrice}`}>
-                    <b>₹{ProductData?.selling_price}</b>{" "}
-                    <del>₹{ProductData?.mrp}</del>
-                  </span>
-                  {prodDiscount !== "" && (
-                    <span
-                      className={`${styles.offerPercentage} d-inline-flex`}
-                    >
-                      {prodDiscount}% &nbsp;OFF
-                    </span>
-                  )}
-                </React.Fragment>
-              )}
-            </div>
-            <span className={`${styles.inclusivTax} col-12 d-inline-block`}>
-              (Inclusive of all taxes)
-            </span>
+            }
           </div>
+
+          <ProdPrice
+            productLoading={productLoading}
+            ProductData={ProductData}
+            prodDiscount={prodDiscount}
+          />
+        </div>
+        <div className={`col-12 d-inline-block  ${styles.productSection}  flex-column p-2 bg-white w-100 d-flex justify-content-center`}>
+          <BankOffers
+            offers={ProductData?.bank_offer}
+            setNoImage={setNoImage}
+          />
+
+          <ProdFeatures />
+
+          <DeliveryService
+            deliveryDetail={deliveryDetail}
+            deliveryShowed={deliveryShowed}
+            setPincode={setPincode}
+            pincode={pincode}
+            setDeliveryShowed={setDeliveryShowed}
+            getDeliveyPincode={getDeliveyPincode}
+            setDeliveryDetail={setDeliveryDetail}
+            formatDeliveryDate={formatDeliveryDate}
+          />
         </div>
 
-        {ProductData?.bank_offer !== null &&
-          ProductData?.bank_offer?.length > 0 &&
-          ProductData?.bank_offer !== undefined && (
-            <div
-              className={`${styles.productDesciptionBox} mt-2 col-12 d-inline-flex flex-column gap-2 p-4`}
-            >
-              <h2
-                className={`${styles.availSizeTitle} d-inline-flex mt-0 mb-1`}
-              >
-                Offers
-              </h2>
-              {ProductData?.bank_offer.length > 0 &&
-                ProductData?.bank_offer?.map((item, index) => {
-                  return (
-                    <span
-                      key={index}
-                      className={`${styles.bankOfferText} col-12 d-inline-flex align-items-center gap-3`}
-                    >
-                      <img src={item.logo}
-                        onError={(e) => setNoImage(e)}
-                        alt={item.description} />
-                      {item.description}
-                    </span>
-                  );
-                })}
-            </div>
-          )}
-
-        {isSpecializationDetail &&
-          isOtherDetail &&
-          ProductData?.description !== "Not available" && (
-            <div
-              className={`${styles.productDesciptionBox} col-12 d-inline-block mb-3 p-4`}
-            >
-              <h2
-                className={`${styles.availSizeTitle} mb-3 col-12 d-inline-block p-0`}
-              >
-                Product Details
-              </h2>
-              {ProductData?.description !== "Not available" && (
-                <div
-                  className={`${styles.productCollapseBox} active col-12 d-inline-block p-0`}
-                  onClick={openProductColpse(this)}
-                >
-                  <div
-                    className={`${styles.productTabBox} col-12 d-inline-flex align-items-center justify-content-between`}
-                    style={{
-                      height: "fit-content",
-                      background: "rgba(207, 16, 46, 0.12)",
-                    }}
-                  >
-                    <button
-                      aria-label="About product"
-                      style={{
-                        borderRadius: "4px",
-                        border: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        background: "none",
-                      }}
-                    >
-                      <span>About product</span>&nbsp;
-                    </button>
-                    <button
-                      aria-label="About product"
-                      style={{
-                        borderRadius: "4px",
-                        border: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        background: "none",
-                      }}
-                      onClick={() =>
-                        setIsAboutProductDesc(!isAboutProductDesc)
-                      }
-                    >
-                      {isAboutProductDesc ? "-" : "+"}
-                    </button>
-                  </div>
-                  <div
-                    className={`${styles.productDetailText} col-12 p-0 ${!isAboutProductDesc && "visually-hidden"
-                      }`}
-                  >
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: ProductData?.description,
-                      }}
-                    ></div>
-                  </div>
-                </div>
-              )}
-              {otherInfo === true && isOtherDetail && (
-                <div
-                  className={`${styles.productCollapseBox} col-12 d-inline-block p-0`}
-                  onClick={openProductColpse(this)}
-                >
-                  <div
-                    className={`${styles.productTabBox} col-12 d-inline-flex align-items-center justify-content-between`}
-                    style={{
-                      height: "fit-content",
-                      background: "rgba(207, 16, 46, 0.12)",
-                    }}
-                  >
-                    <button
-                      aria-label="specifications"
-                      style={{
-                        borderRadius: "4px",
-                        border: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        background: "none",
-                      }}
-                    >
-                      <span>Specifications</span>&nbsp;
-                    </button>
-                    <button
-                      aria-label="specifications"
-                      style={{
-                        borderRadius: "4px",
-                        border: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        background: "none",
-                      }}
-                      onClick={() => setIsSpecilization(!isSpecilization)}
-                    >
-                      {isSpecilization ? "-" : "+"}
-                    </button>
-                  </div>
-                  {isSpecilization && (
-                    <div
-                      className={`${styles.productDetailText} d-inline-flex flex-column gap-3 col-12`}
-                    >
-                      {ProductData?.specifications?.type && (
-                        <p className="col-12 d-inline-flex gap-2  m-0">
-                          <strong>Type:</strong>{" "}
-                          {ProductData?.specifications?.type}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.model_name && (
-                        <p className="col-12 d-inline-flex gap-2 m-0">
-                          <strong>Model Name: </strong>
-                          {ProductData?.specifications?.model_name}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.shelf_life && (
-                        <p className="col-12 d-none gap-2 m-0">
-                          <strong>Shelf Life: </strong>
-                          {ProductData?.specifications?.shelf_life}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications
-                        ?.shelf_life_month_years && (
-                          <p className="col-12 d-none gap-2 m-0">
-                            <strong>Shelf Life Month Years: </strong>
-                            {
-                              ProductData?.specifications
-                                ?.shelf_life_month_years
-                            }{" "}
-                          </p>
-                        )}
-
-                      {ProductData?.specifications?.container_type && (
-                        <p className="col-12 d-inline-flex gap-2 m-0">
-                          <strong>Container Type: </strong>
-                          {ProductData?.specifications?.container_type}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.organic && (
-                        <p className="col-12 d-none gap-2 m-0">
-                          <strong>Organic: </strong>
-                          {ProductData?.specifications?.organic}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.polished && (
-                        <p className="col-12 d-none gap-2 m-0">
-                          <strong>Polished: </strong>
-                          {ProductData?.specifications?.polished}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications
-                        ?.package_dimension_length && (
-                          <p className="col-12 d-inline-flex gap-2 m-0">
-                            <strong>Dimension: </strong>
-                            {"L " +
-                              ProductData?.specifications
-                                ?.package_dimension_length +
-                              " x B " +
-                              ProductData?.specifications
-                                ?.package_dimension_width +
-                              " x H " +
-                              ProductData?.specifications
-                                ?.package_dimension_height}{" "}
-                            cm{" "}
-                          </p>
-                        )}
-
-                      {ProductData?.specifications?.manufactured_by && (
-                        <p className="col-12 d-inline-flex gap-2 m-0">
-                          <strong>Manufactured By: </strong>
-                          {ProductData?.specifications?.manufactured_by}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.packed_by && (
-                        <p className="col-12 d-inline-flex gap-2 m-0">
-                          <strong>Packed By: </strong>
-                          {ProductData?.specifications?.packed_by}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.exp_date && (
-                        <p className="col-12 d-inline-flex gap-2 m-0">
-                          <strong>Exp Date: </strong>
-                          {ProductData?.specifications?.exp_date}{" "}
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              )}
-              {isOtherDetail && (
-                <div
-                  className={`${styles.productCollapseBox} mb-4 mt-3 active col-12 d-inline-block p-0`}
-                  onClick={openProductColpse(this)}
-                >
-                  <div
-                    className={`${styles.productTabBox} col-12 d-inline-flex align-items-center justify-content-between`}
-                    style={{
-                      height: "fit-content",
-                      background: "rgba(207, 16, 46, 0.12)",
-                    }}
-                  >
-                    <button
-                      aria-label="About product"
-                      style={{
-                        borderRadius: "4px",
-                        border: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        background: "none",
-                      }}
-                    >
-                      <span>Other Info</span>&nbsp;
-                    </button>
-                    <button
-                      aria-label="About product"
-                      style={{
-                        borderRadius: "4px",
-                        border: "none",
-                        outline: "none",
-                        boxShadow: "none",
-                        background: "none",
-                      }}
-                      onClick={() =>
-                        setIsOtherProductDesc(!isOtherProductDesc)
-                      }
-                    >
-                      {isOtherProductDesc ? "-" : "+"}
-                    </button>
-                  </div>
-                  <div
-                    className={`${styles.productDetailText} col-12 p-0 ${!isOtherProductDesc && "visually-hidden"
-                      }`}
-                  >
-                    <div
-                      className={`${styles.productDetailText} d-inline-flex flex-column gap-3 col-12`}
-                    >
-                      {ProductData?.other_information?.country_origin && (
-                        <p className="col-12 d-inline-flex gap-2 m-0">
-                          <strong>Country Of Origin: </strong>
-                          {ProductData?.other_information?.country_origin}
-                          <br />
-                        </p>
-                      )}
-
-                      {ProductData?.other_information?.manufactured_by && (
-                        <p className="col-12 d-inline-flex gap-2 m-0">
-                          <strong>Manufactured By: </strong>
-                          {
-                            ProductData?.other_information?.manufactured_by
-                          }{" "}
-                          <br />
-                        </p>
-                      )}
-
-                      {ProductData?.other_information?.marketed_by && (
-                        <p className="col-12 d-inline-flex gap-2 m-0">
-                          <strong>Marketed By: </strong>
-                          {ProductData?.other_information?.marketed_by} <br />
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          )}
-
-        <AddReview
-          product_id={ProductData?.product_id}
-          total_rating={ProductData?.total_rating}
-        />
-
-        <div className={`col-12 d-inline-block mb-5`}>
+        <div className={` ${styles.productSection} col-12 d-inline-block p-2 bg-white w-100 d-flex flex-column gap-2 justify-content-center`}>
+          <ProdDetails
+            ProductData={ProductData}
+            descActive={descActive}
+            setDescActive={setDescActive}
+            prodDesc={prodDesc}
+            featuresInfo={featuresInfo}
+          />
+        </div>
+        <div className={`col-12 d-inline-block pb-5`}>
           <FeaturedProducts product={ProductData?.featured} />
           <SimilarProduct product={ProductData?.similar} />
         </div>
         <div
-          className={`${styles.productBtnBox} d-inline-flex align-items-stretch col-12 position-fixed bottom-0 start-0`}
+          className={`${styles.productBtnBox} w-100 p-2 bg-white d-inline-flex align-items-stretch col-12 position-fixed bottom-0 start-0`}
         >
-          <span
-            className={`${styles.goCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center`}
-            onClick={() => showCheckoutPage()}
-          >
-            Go to Cart
-          </span>
-
           {!prodAdded ? (
             ProductData?.stock <= 0 ? (
               <button
                 style={{
                   border: "none",
-                  background: "#ed1f29",
+                  background: "black",
                   cursor: "not-allowed",
                   // opacity: "0.5",
                 }}
                 disabled={true}
-                className={`${styles.AddCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center`}
+                className={`${styles.AddCartBtn} position-relative w-100 d-inline-flex align-items-center justify-content-center`}
               >
                 Out of Stock
               </button>
             ) : (
-              <span
-                className={`${styles.AddCartBtn} ${ProductData?.stock === 0 || ProductData?.stock < 0
+              <button
+                disabled={productLoading || ProductData?.stock === 0 || ProductData?.stock < 0}
+                className={`${styles.continueShop} ${ProductData?.stock === 0 || ProductData?.stock < 0
                   ? styles.disableCartBtn
                   : ""
-                  } position-relative col-6 d-inline-flex align-items-center justify-content-center`}
+                  } position-relative w-100 d-inline-flex align-items-center justify-content-center`}
                 onClick={(e) => addToCart(e, ProductData)}
               >
                 Add to Cart
-              </span>
+              </button>
             )
           ) : (
-            <div
-              className={`${styles.addedQuantityBtnBox} d-inline-flex align-items-center position-relative col-6 justify-content-evenly`}
-            >
-              <span
-                role="button"
-                onClick={(e) =>
-                  updateProdQty(
-                    e,
-                    ProductData?.product_id
-                      ? ProductData.product_id
-                      : ProductData.id,
-                    ProductData?.no_of_quantity_allowed,
-                    prodAddedQty,
-                    "minus",
-                    ProductData?.stock
-                  )
-                }
-                className={`${styles.decrease_btn} ${styles.minusIcon} d-inline-flex align-items-center justify-content-center`}
-              >
-                -
-              </span>
-              <span className="d-inline-flex flex-shrink-0">
-                <input
-                  type="text"
-                  readOnly
-                  value={prodAddedQty}
-                  className={`${styles.countValue} d-inline-block text-center`}
-                />
-              </span>
-              <span
-                role="button"
-                onClick={(e) =>
-                  updateProdQty(
-                    e,
-                    ProductData?.product_id
-                      ? ProductData.product_id
-                      : ProductData.id,
-                    ProductData?.no_of_quantity_allowed,
-                    prodAddedQty,
-                    "plus",
-                    ProductData?.stock
-                  )
-                }
-                className={`${styles.increase_btn} ${styles.plusIcon} d-inline-flex align-items-center justify-content-center`}
-              >
-                +
-              </span>
-            </div>
+            <AddProductQuantity
+              prodAddedQty={prodAddedQty}
+              ProductData={ProductData}
+              updateProdQty={updateProdQty}
+            />
           )}
         </div>
       </div>
 
       <div className="hideInMobile" style={{
         maxWidth: "100vw",
-        overflowX: "hidden",
+        background: "white",
+        display: "flex",
+        justifyContent: "center",
+        flexDirection: "column",
       }}>
         <Header />
         <div className="col-12 d-inline-flex" style={{
-          background: "#EEEEEE"
+          maxWidth: "1300px",
+          margin: "auto",
         }}>
           <div className="container-fluid">
-            <div
-              className={`col-12 d-inline-flex align-items-start position-relative gap-4 mb-4`}
-            >
+            <div className="col-12 d-flex position-relative gap-2 h-100 mb-4">
               <div
-                className={`d-inline-flex flex-column gap-3 col-6 flex-shrink-1 position-sticky top-0 mt-5`}
+                className={`shadow-sm col-4 position-relative mt-5`}
               >
-                <ProductGallery
-                  sm={false}
-                  ProductData={ProductData}
+                <ProductGalleryDesktop
                   styles={styles}
-                  productLoading={productLoading}
-                  setNoImage={setNoImage}
-                  prodMainImg={prodMainImg}
-                  setProdMainImg={setProdMainImg}
+                  ProductData={ProductData}
                   setProdSharePop={setProdSharePop}
+                  prodMainImg={prodMainImg}
+                  productLoading={productLoading}
+                  getProductImageOfColorId={getProductImageOfColorId}
+                  setNoImage={setNoImage}
+                  activeImg={activeImg}
+                  setMainImage={setMainImage}
                 />
-                <div className={`col-12 d-inline-flex flex-column my-3`}>
-                  <div
-                    className={`${styles.productDescHeader} col-12 d-inline-flex align-items-center justify-content-between`}
-                  >
-                    {ProductData?.description !== "" &&
-                      ProductData?.description !== null &&
-                      ProductData?.description !== "Not available" && (
-                        <h3
-                          className={`${descActive === "Description" && styles.tabActive
-                            } ${styles.productDescTitle
-                            } col-4 d-inline-flex justify-content-center m-0`}
-                          onClick={() => setDescActive("Description")}
-                          role="button"
-                        >
-                          Product Description
-                        </h3>
-                      )}
-                    {otherInfo === true && (
-                      <h3
-                        className={`${descActive === "Specifications" && styles.tabActive
-                          } ${styles.productDescTitle
-                          } col-4 justify-content-center d-inline-flex m-0`}
-                        onClick={() => setDescActive("Specifications")}
-                        role="button"
-                      >
-                        Specifications
-                      </h3>
-                    )}
-                    {featuresInfo === true && (
-                      <h3
-                        className={`${descActive === "Features" && styles.tabActive
-                          } ${styles.productDescTitle
-                          } col-4 d-inline-flex justify-content-center m-0`}
-                        onClick={() => setDescActive("Features")}
-                        role="button"
-                      >
-                        Other Information
-                      </h3>
-                    )}
-                  </div>
-                  {descActive === "Description" && (
-                    <div
-                      className={`${styles.prodDescAnswer} d-inline-flex flex-column col-12`}
-                      dangerouslySetInnerHTML={prodDesc}
-                    ></div>
-                  )}
-                  {descActive === "Specifications" && (
-                    <div
-                      className={`${styles.productDetailText} d-inline-flex flex-column gap-3 col-12 p-3`}
-                    >
-                      {ProductData?.specifications?.type && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Type:</strong>{" "}
-                          {ProductData?.specifications?.type}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.model_name && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Model Name: </strong>
-                          {ProductData?.specifications?.model_name}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.container_type && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Container Type: </strong>
-                          {ProductData?.specifications?.container_type}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications
-                        ?.package_dimension_length && (
-                          <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                            <strong>Dimension: </strong>
-                            <span>{"L " +
-                              ProductData?.specifications
-                                ?.package_dimension_length +
-                              " x B " +
-                              ProductData?.specifications
-                                ?.package_dimension_width +
-                              " x H " +
-                              ProductData?.specifications
-                                ?.package_dimension_height}{" "}
-                              {
-                                ProductData?.specifications
-                                  ?.package_dimension_unit === 2
-                                  ? <span>inch</span> :
-                                  ProductData?.specifications
-                                    ?.package_dimension_unit === 3
-                                    ? <span>cm</span> :
-                                    ProductData?.specifications
-                                      ?.package_dimension_unit === 4
-                                      ? <span>mm</span> : ''
-                              }{" "}
-                            </span>
-                          </p>
-                        )}
-
-                      {ProductData?.specifications?.manufactured_by && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Manufactured By: </strong>
-                          {ProductData?.specifications?.manufactured_by}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.packed_by && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Packed By: </strong>
-                          {ProductData?.specifications?.packed_by}{" "}
-                        </p>
-                      )}
-
-                      {ProductData?.specifications?.exp_date && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Exp Date: </strong>
-                          {ProductData?.specifications?.exp_date}{" "}
-                        </p>
-                      )}
-                    </div>
-                  )}
-
-                  {descActive === "Features" && (
-                    <div
-                      className={`${styles.productDetailText} gap-3 col-12 p-3`}
-                    >
-                      {ProductData?.barcode && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Bar Code: </strong>
-                          {ProductData?.barcode} <br />
-                        </p>
-                      )}
-                      {ProductData?.other_information?.country_origin && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Country Of Origin: </strong>
-                          {ProductData?.other_information?.country_origin}
-                          <br />
-                        </p>
-                      )}
-
-                      {ProductData?.other_information?.manufactured_by && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Manufactured By: </strong>
-                          {
-                            ProductData?.other_information?.manufactured_by
-                          }{" "}
-                          <br />
-                        </p>
-                      )}
-                      {ProductData?.other_information?.marketed_by && (
-                        <p className={`col-12 ${styles.gridtwo} gap-2 m-0`}>
-                          <strong>Marketed By: </strong>
-                          {ProductData?.other_information?.marketed_by} <br />
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
               </div>
               <div
-                className={`${styles.productDetailBox} d-inline-flex flex-column gap-3 col-6 flex-shrink-1 align-items-start justify-content-start px-4 pt-5`}
+                className={`shadow-sm d-inline-flex flex-column gap-2 col-5 flex-shrink-1 align-items-start justify-content-start px-2 pt-5`}
               >
-                {
-                  productLoading ?
-                    <Skeleton height={18} width={100} />
-                    :
-                    ProductData?.brand_name !== null && (
-                      <h6 className={`${styles.brandName} d-inline-flex m-0`}>
-                        {ProductData?.brand_name}
-                      </h6>
-                    )
-                }
-                {
-                  productLoading ?
-                    <Skeleton height={35} width={300} />
-                    :
-                    <h2
-                      className={`${styles.productDetailName} col-12 m-0 mb-1`}
-                    >
-                      {ProductData?.name}
-                    </h2>
-                }
+                <div
+                  className={`${styles.productSubLine} d-inline-flex align-items-center gap-2 col-12 mb-0 position-relative`}
+                >
+                  {
+                    productLoading ?
+                      <Skeleton width={100} height={20} />
+                      :
+                      <div className="d-inline-flex align-items-center gap-2 fs-6 fw-light mb-3">
+                        {ProductData?.category_name ? (
+                          <span className={`${styles.categoryName} titleMainSmall d-inline-flex m-0`}>
+                            {ProductData?.category_name}
+                          </span>
+                        ) : null}
+                      </div>
+                  }
+                </div>
+                <h2
+                  className={`${styles.productDetailName} col-12 mb-1`}
+                >
+                  {
+                    productLoading ?
+                      <Skeleton width={200} height={30} />
+                      :
+                      ProductData?.name
+                  }
+                </h2>
                 <div
                   className={``}
                 >
@@ -1250,368 +781,137 @@ export const ProductPage = () => {
                 </div>
                 {
                   productLoading ?
-                    <Skeleton height={25} width={300} />
+                    <Skeleton width={100} height={20} />
                     :
-                    <div
-                      className={`${styles.productSubLine} d-inline-flex align-items-center gap-2 col-12 mb-0`}
-                    >
-                      {ProductData?.age_type ? ProductData?.age_type : ""}
-                      {ProductData?.age_type !== null &&
-                        ProductData?.gender_name !== null && (
-                          <span className={`${styles.spaceLine} d-inline-flex`}>
-                            |
-                          </span>
-                        )}
-                      {ProductData?.gender_name ? ProductData?.gender_name : ""}
-                      {ProductData?.category_name !== null &&
-                        ProductData?.gender_name !== null && (
-                          <span className={`${styles.spaceLine} d-inline-flex`}>
-                            |
-                          </span>
-                        )}
-                      {ProductData?.category_name
-                        ? ProductData?.category_name
-                        : ""}
-                    </div>
-                }
-                {
-                  ProductData?.article_name &&
-                  <span className="ml-3 mb-0">
-                    Item Code: {ProductData?.article_name ?? ''}{" "}
-                  </span>
-                }
-                <div
-                  className={`d-inline-flex align-items-start flex-column gap-2 col-12 mb-4`}
-                >
-                  <h2 className={`${styles.specialTitle} d-inline-flex m-0`}>
-                    Special Price
-                  </h2>
-                  {
-                    productLoading ?
-                      <Skeleton height={25} width={300} />
-                      :
-                      ProductData?.selling_price === ProductData?.mrp ? (
-                        <span className={`${styles.offerPrice}`}>
-                          <b>₹{ProductData?.mrp}</b>
-                        </span>
-                      ) : (
-                        <div className="col-12 d-inline-flex align-items-center gap-3">
+                    <span>
+                      {
+                        ProductData?.stock > 0 ? (
                           <span
-                            className={`${styles.offerPrice} d-inline-flex align-items-center gap-2`}
+                            className="rounded"
+                            style={{
+                              padding: "5px 10px",
+                              background: "hsla(0, 0%, 87%, 1)",
+                              color: "#4CAF50",
+                              fontWeight: "bold",
+                            }}
                           >
-                            <b>₹{ProductData?.selling_price}</b>
-                            <del>₹{ProductData?.mrp}</del>
+                            In stock
                           </span>
-                          {prodDiscount !== "" && (
-                            <span
-                              className={`${styles.offerPercentage} d-inline-flex`}
-                            >
-                              {prodDiscount}% &nbsp;OFF
-                            </span>
-                          )}
-                        </div>
-                      )}
-                </div>
-                {!prodAdded ? (
-                  ProductData?.stock <= 0 ? (
-                    <button
-                      style={{
-                        border: "none",
-                        background: "#cd1c25",
-                        cursor: "not-allowed",
-                        opacity: "0.5",
-                      }}
-                      disabled={true}
-                      type="button"
-                      className={`${styles.continueShop} col-5 d-inline-flex align-items-center justify-content-center text-uppercase`}
-                    >
-                      Out of stock
-                    </button>
-                  ) : (
-                    <span
-                      role="button"
-                      className={`${styles.continueShop} ${ProductData?.stock === 0 || ProductData?.stock < 0
-                        ? styles.disableCartBtn
-                        : ""
-                        } col-5 d-inline-flex align-items-center justify-content-center text-uppercase`}
-                      onClick={(e) => addToCart(e, ProductData)}
-                    >
-                      Add to cart
-                    </span>
-                  )
-                ) : (
-                  <div
-                    className={`${styles.itemQuantityBtnBox} d-inline-flex align-items-center position-relative`}
-                  >
-                    <span
-                      role="button"
-                      onClick={(e) =>
-                        updateProdQty(
-                          e,
-                          ProductData?.product_id
-                            ? ProductData.product_id
-                            : ProductData.id,
-                          ProductData?.no_of_quantity_allowed,
-                          prodAddedQty,
-                          "minus",
-                          ProductData?.stock
-                        )
-                      }
-                      className={`${styles.decrease_btn} ${styles.minusIcon} d-inline-flex align-items-center justify-content-center`}
-                    >
-                      -
-                    </span>
-                    <span className="d-inline-flex flex-shrink-0">
-                      <input
-                        type="text"
-                        readOnly
-                        value={prodAddedQty}
-                        className={`${styles.countValue} d-inline-block text-center`}
-                      />
-                    </span>
-                    <span
-                      role="button"
-                      onClick={(e) =>
-                        updateProdQty(
-                          e,
-                          ProductData?.product_id
-                            ? ProductData.product_id
-                            : ProductData.id,
-                          ProductData?.no_of_quantity_allowed,
-                          prodAddedQty,
-                          "plus",
-                          ProductData?.stock
-                        )
-                      }
-                      className={`${styles.increase_btn} ${styles.plusIcon} d-inline-flex align-items-center justify-content-center`}
-                    >
-                      +
-                    </span>
-                  </div>
-                )}
-
-                {ProductData?.bank_offer !== null &&
-                  ProductData?.bank_offer?.length > 0 &&
-                  ProductData?.bank_offer !== undefined && (
-                    <div
-                      className={`${styles.bankOffer} mt-2 col-12 d-inline-flex flex-column gap-2`}
-                    >
-                      <h2
-                        className={`${styles.bankOfferTitle} d-inline-flex mt-0 mb-1`}
-                      >
-                        Offers
-                      </h2>
-                      {ProductData?.bank_offer.length > 0 &&
-                        ProductData?.bank_offer?.map((item, index) => {
-                          return (
-                            <span
-                              key={index}
-                              className={`${styles.bankOfferText} col-12 d-inline-flex align-items-center gap-3`}
-                            >
-                              <img src={item.logo}
-                                onError={(e) => setNoImage(e)}
-                                alt={item.description} />
-                              {item.description}
-                            </span>
-                          );
-                        })}
-                    </div>
-                  )}
-
-                <div
-                  className={`${styles.qualityAssured} col-12 d-inline-flex aliign-items-stretch gap-4 mt-4 p-4`}
-                >
-                  <div
-                    className={`${styles.assuredBox} col-4 flex-shrink-1 d-inline-flex flex-column align-items-center gap-2`}
-                  >
-                    <img
-                      src={delivery}
-                      alt="delivery"
-                      onError={(e) => setNoImage(e)}
-                      className="object-fit-contain"
-                    />
-                    <h6
-                      className={`${styles.assuredTitle} col-12 d-inline-flex justify-content-center mb-0`}
-                    >
-                      Free Home Delivery
-                    </h6>
-                    <p
-                      className={`${styles.assuredDesc} m-0 col-12 d-inline-flex justify-content-center text-center`}
-                    >
-                      More than 19,000 pincodes, seamlessly connected.
-                    </p>
-                  </div>
-                  <div
-                    className={`${styles.assuredBox} col-4 flex-shrink-1 d-inline-flex flex-column align-items-center gap-2`}
-                  >
-                    <img
-                      src={orignal}
-                      alt="orignal"
-                      onError={(e) => setNoImage(e)}
-                      className="object-fit-contain"
-                    />
-                    <h6
-                      className={`${styles.assuredTitle} col-12 d-inline-flex justify-content-center mb-0`}
-                    >
-                      100% Original
-                    </h6>
-                    <p
-                      className={`${styles.assuredDesc} m-0 col-12 d-inline-flex justify-content-center text-center`}
-                    >
-                      Backed by manufacturer warranty.
-                    </p>
-                  </div>
-                  <div
-                    className={`${styles.assuredBox} col-4 flex-shrink-1 d-inline-flex flex-column align-items-center gap-2`}
-                  >
-                    <img
-                      src={replacement}
-                      alt="replacement"
-                      onError={(e) => setNoImage(e)}
-                      className="object-fit-contain"
-                    />
-                    <h6
-                      className={`${styles.assuredTitle} col-12 d-inline-flex justify-content-center mb-0`}
-                    >
-                      7 Days Replacement
-                    </h6>
-                    <p
-                      className={`${styles.assuredDesc} m-0 col-12 d-inline-flex justify-content-center text-center`}
-                    >
-                      Shop risk-free with our 7-day return policy.
-                    </p>
-                  </div>
-                </div>
-                <div className="col-12 d-inline-block mt-3 mb-3">
-                  <h3
-                    className={`${styles.deliveryHeading} col-12 d-inline-block mt-0 mb-4`}
-                  >
-                    Delivery &amp; Services
-                  </h3>
-                  <div className={`col-12 d-inline-block`}>
-                    <div
-                      className={`${styles.deliveryInputBox} d-inline-flex align-items-center col-12 position-relative mb-1`}
-                    >
-                      <LocationIcon color={enviroment.PRIMARY_COLOR} />
-                      <input
-                        type="number"
-                        className={`${styles.deliveryInput} col-12 d-inline-block position-relative`}
-                        maxLength="6"
-                        minLength="6"
-                        placeholder="Enter Delivery Pincode"
-                        onChange={(e) => getDeliveyPincode(e.target.value)}
-                        value={pincode || ""}
-                      />
-                      <button
-                        aria-label="Check Delivery"
-                        onClick={() => getDeliveyInfo(pincode)}
-                        type="button"
-                        className={`${styles.deliveryBtn} position-absolute d-inline-flex h-100 align-items-center justify-content-center`}
-                      >
-                        Check
-                      </button>
-                    </div>
-                    <span
-                      className={`${styles.checkZiperror} col-12 d-inline-block`}
-                    ></span>
-                    {Object.keys(deliveryDetail)?.length > 0 && (
-                      <div
-                        className={`${styles.checkDeliveryResponse} d-inline-flex flex-column col-12 mt-3 p-3`}
-                      >
-                        {deliveryDetail.maxDays !== "" ||
-                          deliveryDetail.minDays !== "" ? (
-                          <p
-                            className={`${styles.checkDeliveryDateOuter} col-12 mb-1 d-inline-block`}
-                          >
-                            <span
-                              className={`${styles.checkDeliveryLabel} d-inline-flex`}
-                            >
-                              Expected Delivery Date - &nbsp;
-                            </span>
-                            {deliveryDetail.minDays !== "" ? (
-                              <span>
-                                <strong
-                                  className={`${styles.checkDeliveryDate} d-inline-flex`}
-                                >
-                                  {deliveryDetail.minDays}
-                                </strong>
-                              </span>
-                            ) : null}
-                            {deliveryDetail.maxDays !== "" &&
-                              deliveryDetail.min_days !== "" && (
-                                <span>&nbsp;-&nbsp;</span>
-                              )}
-                            {deliveryDetail.maxDays !== "" ? (
-                              <span>
-                                <strong
-                                  className={`${styles.checkDeliveryDate} d-inline-flex`}
-                                >
-                                  {deliveryDetail.maxDays}
-                                </strong>
-                              </span>
-                            ) : null}
-                          </p>
                         ) : (
-                          ""
-                        )}
+                          <span
+                            className="rounded"
+                            style={{
+                              padding: "5px 10px",
+                              background: "hsla(0, 0%, 87%, 1)",
+                              color: "red",
+                              fontWeight: "bold",
+                            }}>
+                            Out of stock
+                          </span>
+                        )
+                      }
+                    </span>
+                }
+                <ProdPrice
+                  productLoading={productLoading}
+                  ProductData={ProductData}
+                  prodDiscount={prodDiscount}
+                />
 
-                        <p
-                          className={`${styles.checkDeliveryDateOuter} col-12 mb-1 d-inline-block`}
-                        >
-                          <span>Available for Pickup at: </span>
-                          <strong
-                            id="deliveryLoc"
-                            className={`${styles.checkDeliveryLabel} d-inline-flex`}
-                          >
-                            {enviroment.STORE_ADDRESS}
-                          </strong>
-                        </p>
-                        <p
-                          className={`${styles.checkDeliveryDateOuter} col-12 mb-1 d-inline-block`}
-                        >
-                          <span>Store Contact: </span>
-                          <span
-                            className={`${styles.checkDeliveryLabel} d-inline-flex`}
-                          >
-                            <Link
-                              className={`${styles.checkDeliveryDateOuter} text-decoration-none d-inline-flex`}
-                              to={`tel:${enviroment.PHONE_NUMBER}`}
-                              id="storeTel"
-                            >
-                              {enviroment.PHONE_NUMBER}
-                            </Link>
-                          </span>
-                        </p>
-                        <p
-                          className={`${styles.checkDeliveryDateOuter} col-12 mb-1 d-inline-block`}
-                        >
-                          <span>Locate Store: </span>
-                          <span
-                            className={`${styles.checkDeliveryLabel} d-inline-flex`}
-                          >
-                            <a
-                              href="https://maps.app.goo.gl/gyhzfKFKBJZJkPfa6"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className={`${styles.checkDeliveryDateOuter} text-decoration-none d-inline-flex`}
-                            >
-                              Google Map
-                            </a>
-                          </span>
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                </div>
+                <ProdDetails
+                  ProductData={ProductData}
+                  descActive={descActive}
+                  setDescActive={setDescActive}
+                  prodDesc={prodDesc}
+                  featuresInfo={featuresInfo}
+                />
+
                 <AddReview
                   product_id={ProductData?.product_id}
                   total_rating={ProductData?.total_rating}
                 />
               </div>
+              <div
+                className={`col-3 px-1 pt-2 shadow-sm`}
+              >
+                <div
+                  className={`d-inline-flex flex-column gap-2 flex-shrink-1 align-items-start justify-content-start pt-5`}
+                  style={{
+                    position: "sticky",
+                    top: "140px",
+                    height: 'fit-content'
+                  }}
+                >
+                  <ProdPrice
+                    productLoading={productLoading}
+                    ProductData={ProductData}
+                    prodDiscount={prodDiscount}
+                  />
+                  <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: '1fr',
+                    width: '100%',
+                    margin: '0 0 10px 0',
+                    gap: '10px',
+                  }}>
+                    {!prodAdded ? (
+                      ProductData?.stock <= 0 ? (
+                        <button
+                          style={{
+                            border: "none",
+                            background: "black",
+                            cursor: "not-allowed",
+                            opacity: "0.5",
+                          }}
+                          disabled={true}
+                          type="button"
+                          className={`${styles.continueShop} col-12 d-inline-flex align-items-center justify-content-center text-uppercase`}
+                        >
+                          Out of stock
+                        </button>
+                      ) : (
+                        <button
+                          disabled={productLoading || ProductData?.stock === 0 || ProductData?.stock < 0}
+                          className={`${styles.continueShop} ${ProductData?.stock === 0 || ProductData?.stock < 0
+                            ? styles.disableCartBtn
+                            : ""
+                            } col-12 d-inline-flex align-items-center justify-content-center`}
+                          onClick={(e) => addToCart(e, ProductData)}
+                        >
+                          Add to Cart
+                        </button>
+                      )
+                    ) : (
+                      <AddProductQuantity
+                        prodAddedQty={prodAddedQty}
+                        ProductData={ProductData}
+                        updateProdQty={updateProdQty}
+                      />
+                    )}
+                  </div>
+                  <BankOffers
+                    offers={ProductData?.bank_offer}
+                    setNoImage={setNoImage}
+                  />
+
+                  <ProdFeatures />
+
+                  <DeliveryService
+                    deliveryDetail={deliveryDetail}
+                    deliveryShowed={deliveryShowed}
+                    setPincode={setPincode}
+                    pincode={pincode}
+                    setDeliveryShowed={setDeliveryShowed}
+                    getDeliveyPincode={getDeliveyPincode}
+                    setDeliveryDetail={setDeliveryDetail}
+                    formatDeliveryDate={formatDeliveryDate}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div className={`col-12 d-inline-block mb-5`}>
+        <div className={`col-12 d-inline-block pb-5`}>
           <FeaturedProducts product={ProductData?.featured} />
           <SimilarProduct product={ProductData?.similar} />
         </div>
@@ -1709,3 +1009,483 @@ export const ProductPage = () => {
     </React.Fragment>
   );
 };
+
+const ProdPrice = ({
+  productLoading,
+  ProductData,
+  prodDiscount
+}) => {
+
+  const sellingPrice = parseFloat(ProductData?.selling_price);
+  const mrp = parseFloat(ProductData?.mrp);
+
+  return <>
+    <div
+      className={`d-inline-flex align-items-start gap-2 mt-2 col-12 position-relative`}
+    >
+      {sellingPrice === mrp ? (
+        <span className={`${styles.offerPrice}`}>
+          {
+            productLoading ?
+              <Skeleton width={100} height={20} />
+              : <span
+                className="fw-bold"
+              >₹{ProductData?.mrp}</span>
+          }
+        </span>
+      ) : (
+        <div className="col-12 d-inline-flex align-items-center gap-4">
+          {
+            productLoading ?
+              <Skeleton width={'300px'} height={24} />
+              :
+              <div
+                className={`${styles.offerPrice} fs-2 d-flex fw-bold align-items-cente my-1 flex-column`}
+              >
+                <span style={{
+                  margin: '0',
+                }}>₹{sellingPrice}</span>
+                <p
+                  className={`${styles.offerPrice} d-flex align-items-center gap-2`}
+                >
+                  <p className="text-secondary"
+                    style={{
+                      fontSize: '16px',
+                      display: 'flex',
+                      gap: '5px',
+                      margin: '0',
+                      marginTop: '5px',
+                    }}><span style={{
+                      fontWeight: 'bold'
+                    }}>MRP</span><del>₹{mrp}</del>
+                  </p>
+                  {prodDiscount !== "" && (
+                    <span
+                      className={`${styles.offerPercentage} fw-bold text-success d-inline-flex`}
+                      style={{
+                        fontSize: '16px',
+                      }}
+                    >
+                      ({prodDiscount}% &nbsp;OFF)
+                    </span>
+                  )}
+                </p>
+              </div>
+          }
+        </div>
+      )}
+    </div>
+  </>
+}
+
+const BankOffers = ({ offers, setNoImage }) => {
+  if (!offers || offers.length === 0) {
+    return null;
+  }
+
+  return (
+    <Card className="mt-3 w-100">
+      <Card.Header as="h5" className="text-success fw-bold" style={{
+        fontSize: '16px',
+        backgroundColor: '#e8f5e9'
+      }}>Offers and Coupons</Card.Header>
+      <ListGroup variant="flush">
+        {offers.map((offer, index) => (
+          <ListGroup.Item key={index} className="d-flex align-items-center border-0 bg-transparent">
+            <img
+              src={offer.logo}
+              alt=""
+              onError={setNoImage}
+              className="me-3"
+              style={{ width: '40px', height: '40px', objectFit: 'contain' }}
+            />
+            <span style={{
+              fontSize: '14px'
+            }}>{offer.description}</span>
+          </ListGroup.Item>
+        ))}
+      </ListGroup>
+    </Card>
+  );
+};
+
+const ProdFeatures = () => {
+  const features = [
+    { img: "/images/quality.svg", text: '100% Original' },
+    { img: "/images/certified.svg", text: 'QC Passed' },
+    { img: "/images/warranty.svg", text: '1 Year Warranty' },
+    { img: "/images/delivery.svg", text: 'Home Delivery' },
+  ];
+  return (
+    <Card className="mt-3 w-100">
+      <Card.Header as="h5" className="text-success fw-bold" style={{
+        fontSize: '16px',
+        backgroundColor: '#e8f5e9'
+      }}>Toymie Promise</Card.Header>
+      <Row className="g-1">
+        {features.map((feature, index) => (
+          <Col key={index} xs={3} md={3}>
+            <Card className="h-100 border-0">
+              <Card.Body className="d-flex flex-column align-items-center justify-content-center p-2">
+                <img src={feature.img} alt="" style={{ width: '30px', height: '30px' }} />
+                <Card.Text className="text-center mb-0 small text-success" style={{ fontSize: '12px' }}>{feature.text}</Card.Text>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Card>
+  );
+};
+
+const DeliveryService = ({
+  deliveryDetail,
+  deliveryShowed,
+  setPincode,
+  pincode,
+  setDeliveryShowed,
+  getDeliveyPincode,
+  setDeliveryDetail,
+  formatDeliveryDate
+}) => {
+
+  return (
+    <Card className="mt-3 w-100">
+      <Card.Header as="h5" className="text-success fw-bold" style={{
+        fontSize: '16px',
+        backgroundColor: '#e8f5e9'
+      }}>Delivery &amp; Services</Card.Header>
+      <Row className="g-2 p-2">
+        <div className={`col-12 d-inline-block`}>
+          <div
+            className={`${styles.deliveryInputBox} d-inline-flex align-items-center col-12 position-relative mb-1`}
+          >
+            <p style={{
+              width: '30px',
+              height: '30px',
+            }}>
+              <LocationIcon color={'gray'} />
+            </p>
+            <input
+              type="number"
+              className={`${styles.deliveryInput} w-100 d-inline-block position-relative`}
+              style={{
+                fontSize: '13px',
+              }}
+              maxLength="6"
+              minLength="6"
+              placeholder="Enter Delivery Pincode"
+              disabled={deliveryShowed}
+              onChange={(e) => {
+                if (e.target.value.length > 6) {
+                  AppNotification("Error", "Please enter a valid pincode.", "danger");
+                  return;
+                }
+                setPincode(e.target.value)
+              }}
+              value={pincode || ""}
+            />
+            {
+              deliveryShowed ?
+                <button
+                  aria-label="Check Delivery"
+                  onClick={() => {
+                    setDeliveryShowed(false);
+                    setPincode("");
+                    setDeliveryDetail({});
+                  }}
+                  type="button"
+                  className={`${styles.deliveryBtn} d-inline-flex align-items-center justify-content-center border-success text-success`}
+                >
+                  Change
+                </button>
+                :
+                <button
+                  aria-label="Check Delivery"
+                  onClick={() => getDeliveyPincode(pincode)}
+                  type="button"
+                  className={`${styles.deliveryBtn} d-inline-flex align-items-center justify-content-center`}
+                >
+                  Check
+                </button>
+            }
+          </div>
+          <span
+            className={`${styles.checkZiperror} col-12 d-inline-block`}
+          ></span>
+          {Object.keys(deliveryDetail)?.length > 0 && (
+            <div
+              className={`${styles.checkDeliveryResponse} d-inline-flex flex-column col-12 gap-2 mt-3 p-3`}
+            >
+              {deliveryDetail.max_days !== "" ||
+                deliveryDetail.min_days !== "" ? (
+                <p
+                  className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'column'
+                  }}
+                >
+                  <span
+                    className={`${styles.checkDeliveryLabel} d-inline-flex`}
+                  >
+                    Expected Delivery Date:
+                  </span>
+                  <span>
+                    {deliveryDetail.min_days !== "" ? (
+                      <span>
+                        <strong
+                          className={`${styles.checkDeliveryDate} d-inline-flex`}
+                        >
+                          {
+                            formatDeliveryDate(new Date().setDate(new Date().getDate() + deliveryDetail.min_days))
+                          }
+                        </strong>
+                      </span>
+                    ) : null}
+                    {deliveryDetail.max_days !== "" &&
+                      deliveryDetail.min_days !== "" && (
+                        <span>&nbsp;-&nbsp;</span>
+                      )}
+                    {deliveryDetail.max_days !== "" ? (
+                      <span>
+                        <strong
+                          className={`${styles.checkDeliveryDate} d-inline-flex`}
+                        >
+                          {
+                            formatDeliveryDate(new Date().setDate(new Date().getDate() + deliveryDetail.max_days))
+                          }
+                        </strong>
+                      </span>
+                    ) : null}
+                  </span>
+                </p>
+              ) : (
+                ""
+              )}
+
+              <p
+                className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <span>Available for Pickup at: </span>
+                <strong
+                  id="deliveryLoc"
+                  className={`${styles.checkDeliveryLabel} d-inline-flex`}
+                >
+                  Shop No - 01, Old Delhi Road Opposite Hudda Office Gurugram Haryana - 122015
+                </strong>
+              </p>
+              <p
+                className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <span>Store Contact: </span>
+                <span
+                  className={`${styles.checkDeliveryLabel} d-inline-flex`}
+                >
+                  <Link
+                    className={`${styles.checkDeliveryDateOuter} d-inline-flex fw-bold text-black`}
+                    to={`tel:${enviroment.PHONE_NUMBER}`}
+                    id="storeTel"
+                  >
+                    {enviroment.PHONE_NUMBER}
+                  </Link>
+                </span>
+              </p>
+              <p
+                className={`${styles.checkDeliveryDateOuter} col-12 mb-1`}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column'
+                }}
+              >
+                <span>Locate Store: </span>
+                <span
+                  className={`${styles.checkDeliveryLabel} d-inline-flex`}
+                >
+                  <a
+                    href="https://g.co/kgs/o2Frgzd"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${styles.checkDeliveryDateOuter} d-inline-flex fw-bold text-black`}
+                  >
+                    Google Map
+                  </a>
+                </span>
+              </p>
+            </div>
+          )}
+        </div>
+      </Row>
+    </Card>
+  );
+};
+
+const ProdDetails = ({
+  ProductData,
+  descActive,
+  setDescActive,
+  prodDesc,
+  featuresInfo
+}) => {
+
+  const isAllSpecializationDetail = !(
+    ProductData?.specifications?.type == "" &&
+    ProductData?.specifications?.model_name == "" &&
+    ProductData?.specifications?.shelf_life == null &&
+    ProductData?.specifications?.container_type == "" &&
+    ProductData?.specifications?.shelf_life_month_years == null &&
+    ProductData?.specifications?.organic == null &&
+    ProductData?.specifications?.polished == null &&
+    ProductData?.specifications?.package_dimension_length == null &&
+    ProductData?.specifications?.manufactured_by == undefined &&
+    ProductData?.specifications?.packed_by == undefined &&
+    ProductData?.specifications?.exp_date == null
+  );
+
+  return <>
+    {ProductData?.description &&
+      ProductData?.description !== "Not available" &&
+      (
+        <div
+          className={`col-4 p-3 m-0 text-center ${descActive === "Description" ? styles.tabActive : ""
+            } ${styles.productDescTitle}`}
+          onClick={() => {
+            if (descActive === "Description") {
+              setDescActive("")
+              return;
+            }
+            setDescActive("Description")
+          }}
+          role="button"
+        >
+          <h4>Product Description</h4>
+          <span>
+            {descActive === "Description" ? "-" : "+"}
+          </span>
+        </div>
+      )}
+    {descActive === "Description" &&
+      ProductData?.description !== "Not available" && (
+        <div
+          className={`d-flex flex-column col-12 p-1`}
+          dangerouslySetInnerHTML={prodDesc}
+        ></div>
+      )}
+    <div className="col-12 d-flex flex-column">
+      <div className="d-flex align-items-center justify-content-between flex-column gap-2">
+        {(isAllSpecializationDetail && ProductData?.specifications && ProductData?.specifications != '') && (
+          <div
+            className={`col-4 p-3 m-0 text-center ${descActive === "Specifications" ? styles.tabActive : ""
+              } ${styles.productDescTitle}`}
+            onClick={() => {
+              if (descActive === "Specifications") {
+                setDescActive("")
+                return;
+              }
+              setDescActive("Specifications")
+            }}
+            role="button"
+          >
+            <h4>Specifications</h4>
+            <span>+</span>
+          </div>
+        )}
+        {descActive === "Specifications" && (
+          <div className="d-flex flex-column gap-3 col-12 p-3">
+            {ProductData?.specifications?.type && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Type:</strong> {ProductData?.specifications?.type}
+              </p>
+            )}
+            {ProductData?.specifications?.model_name && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Model Name:</strong> {ProductData?.specifications?.model_name}
+              </p>
+            )}
+            {ProductData?.specifications?.container_type && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Container Type:</strong> {ProductData?.specifications?.container_type}
+              </p>
+            )}
+            {ProductData?.specifications?.package_dimension_length && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Dimension:</strong>{" "}
+                {"L " +
+                  ProductData?.specifications?.package_dimension_length +
+                  " x B " +
+                  ProductData?.specifications?.package_dimension_width +
+                  " x H " +
+                  ProductData?.specifications?.package_dimension_height}{" "}
+                cm
+              </p>
+            )}
+            {ProductData?.specifications?.manufactured_by && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Manufactured By:</strong> {ProductData?.specifications?.manufactured_by}
+              </p>
+            )}
+            {ProductData?.specifications?.packed_by && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Packed By:</strong> {ProductData?.specifications?.packed_by}
+              </p>
+            )}
+            {ProductData?.specifications?.exp_date && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Exp Date:</strong> {ProductData?.specifications?.exp_date}
+              </p>
+            )}
+          </div>
+        )}
+        {featuresInfo && (
+          <div
+            className={`col-4 p-3 m-0 text-center  text-center ${descActive === "Features" ? styles.tabActive : ""
+              } ${styles.productDescTitle}`}
+            onClick={() => {
+              if (descActive === "Features") {
+                setDescActive("")
+                return;
+              }
+              setDescActive("Features")
+            }}
+            role="button"
+          >
+            <h4>Other Information</h4>
+            <span>+</span>
+          </div>
+        )}
+        {descActive === "Features" && (
+          <div className="d-flex flex-column gap-3 col-12 p-3">
+            {ProductData?.barcode && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Barcode:</strong> {ProductData?.barcode}
+              </p>
+            )}
+            {ProductData?.other_information?.country_origin && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Country Of Origin:</strong> {ProductData?.other_information?.country_origin}
+              </p>
+            )}
+            {ProductData?.other_information?.manufactured_by && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Manufactured By:</strong> {ProductData?.other_information?.manufactured_by}
+              </p>
+            )}
+            {ProductData?.other_information?.marketed_by && (
+              <p className="col-12 d-flex gap-2 m-0">
+                <strong>Marketed By:</strong> {ProductData?.other_information?.marketed_by}
+              </p>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  </>
+}

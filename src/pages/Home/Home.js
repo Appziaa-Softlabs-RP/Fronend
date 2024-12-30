@@ -12,7 +12,6 @@ import { NewArrival } from "../../Components/NewArrival/NewArrival";
 import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
 import Reviews from "../../Components/Reviews/Reviews";
 import { ShopAge } from "../../Components/ShopAge/ShopAge";
-import AllStores from "../../Components/AllStores/AllStores";
 import UnderContruction from "../../Components/UnderConstruction/UnderConstruction";
 
 export const Home = () => {
@@ -53,8 +52,6 @@ export const Home = () => {
         <PromoBanner type="Offers" />
 
         <Reviews />
-
-        <AllStores />
 
         <Footer />
       </div>

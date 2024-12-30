@@ -1,0 +1,61 @@
+.itemQuantityBtnBox{
+    z-index: 9;
+    display: flex;
+    width: fit-content;
+    margin: auto;
+    padding: 10px;
+    border: 1px solid hsla(240, 6%, 90%, 1);
+}
+
+.goCartBtn{
+    background: var(--ADD_BUTTON_COLOR);
+    color: white;
+}
+.goCartBtn:hover{
+    background: var(--BUTTON_HOVER_COLOR);
+    color: black;
+}
+
+.gapLg{
+    gap: 20px;
+}
+
+.gapSm{
+    gap: 8px;
+}
+
+.itemQuantityBtnBox button{
+	background: transparent;
+	box-shadow: none;
+	border: none;
+}
+.itemQuantityBtn .decreaseBtn{
+	width: 20px;
+}
+.itemQuantityBtn{
+	padding-right: 0;
+    padding-left: 0;
+    margin-top: auto;
+    margin-bottom: 0px;
+	position: relative;
+	z-index: 9;
+}
+.countValue{
+	width: 20px;
+	text-align: center;
+	-webkit-appearance: none;
+	border: none;
+	outline: none;
+	background: transparent;
+	cursor: default;
+	font-weight: 500;
+}
+.decrease_btn, .increase_btn{
+    height: 20px;
+    width: 20px;
+    color: rgb(55, 55, 55);
+    background: #FFF;
+    border-radius: 20px;
+    font-size: 30px;
+    padding-bottom: 5px;
+}

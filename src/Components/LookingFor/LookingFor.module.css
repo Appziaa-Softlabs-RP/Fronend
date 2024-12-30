@@ -1,4 +1,5 @@
 .categoryHeaderTitle{
+    color: var(--PRIMARY_COLOR);
     font-size: 25px;
     font-weight: 700;
 }

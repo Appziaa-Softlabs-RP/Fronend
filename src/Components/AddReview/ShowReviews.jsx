@@ -26,7 +26,7 @@ export default function ShowReviews({ product_id, total_rating = null }) {
     const handleShow = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
 
-    if(!total_rating) {
+    if (!total_rating) {
         return null;
     }
 

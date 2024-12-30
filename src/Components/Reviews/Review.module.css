@@ -1,38 +1,225 @@
-.sliderContainer {
+.container {
+  background-color: var(--MENU_HOVER_COLOR);
+  padding: 4rem 0;
   position: relative;
+  overflow: hidden;
+}
+
+.wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 2.5rem;
+  color: var(--PRIMARY_COLOR);
+  margin-bottom: 2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.navigationButtons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.navButton {
+  background-color: var(--PRIMARY_COLOR);
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--SECONDARY_COLOR);
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+  font-size: 1.5rem;
+  z-index: 10;
+}
+
+.navButton:hover {
+  transform: scale(1.1);
+  background-color: var(--ADD_BUTTON_COLOR);
+}
+
+.swiperContainer {
+  position: relative;
+}
+
+.slideCard {
+  background-color: white;
+  border: 3px solid var(--PRIMARY_COLOR);
+  border-radius: 20px;
+  padding: 2rem;
+  margin: 1.2rem 0.6rem;
+  height: 380px;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   display: flex;
   flex-direction: column;
-  padding: 10px;
-  border-radius: 10px;
-  background: white;
-  width: 1300px;
-  max-width: 90%;
-  margin: 10px 50px;
 }
 
-.reviewBtn{
+.slideCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.userName {
+  color: var(--PRIMARY_COLOR);
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.ratingContainer {
+  display: flex;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.starFilled,
+.starEmpty {
+  color: var(--PRIMARY_COLOR);
+  font-size: 1.2rem;
+}
+
+.starEmpty {
+  opacity: 0.5;
+}
+
+.review {
+  color: var(--DARK_COLOR);
+  font-size: 1rem;
+  line-height: 1.6;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  flex-grow: 1;
+  padding-right: 10px;
+}
+
+.review::-webkit-scrollbar {
+  width: 6px;
+}
+
+.review::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.review::-webkit-scrollbar-thumb {
   background: var(--PRIMARY_COLOR);
-  border: none;
-  border-radius: 5px;
+  border-radius: 3px;
 }
 
-.brandSilder {
-  display: grid;
-  margin: 10px 0px;
+.source {
+  color: var(--PRIMARY_COLOR);
+  font-weight: bold;
+  font-size: 0.9rem;
+  text-align: right;
 }
 
-.sliderItem {
-  min-width: 280px;
-  max-width: 280px;
-  height: 330px;
+.quoteLeft,
+.quoteRight {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  background-color: var(--PRIMARY_COLOR);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--SECONDARY_COLOR);
+  z-index: 2;
 }
 
-@media screen and (min-width: 700px) {
-  .sliderContainer {
-    flex-direction: row;
+.quoteLeft {
+  top: -18px;
+  left: 18px;
+}
+
+.quoteRight {
+  bottom: -18px;
+  right: 18px;
+}
+
+.writeReviewContainer {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.writeReviewButton {
+  background-color: var(--PRIMARY_COLOR);
+  color: var(--SECONDARY_COLOR);
+  padding: 0.75rem 1.5rem;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.writeReviewButton:hover {
+  background-color: var(--ADD_BUTTON_COLOR);
+  transform: scale(1.05);
+}
+
+/* Custom Swiper Styles */
+:global(.swiper-pagination) {
+  bottom: -5px !important;
+}
+
+:global(.swiper-pagination-bullet) {
+  background-color: var(--PRIMARY_COLOR) !important;
+  opacity: 0.5;
+}
+
+:global(.swiper-pagination-bullet-active) {
+  opacity: 1;
+}
+
+:global(.swiper-slide) {
+  opacity: 0.5;
+  transition: opacity 0.3s ease;
+}
+
+:global(.swiper-slide-active) {
+  opacity: 1;
+}
+
+@media (max-width: 1200px) {
+  .wrapper {
+    max-width: 1000px;
   }
 
-  .carousalBody{
-    padding: 25px;
+  .slideCard {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .slideCard {
+    height: 420px;
+    margin: 1.2rem 0.3rem;
+  }
+
+  .userName {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .slideCard {
+    height: 450px;
   }
 }

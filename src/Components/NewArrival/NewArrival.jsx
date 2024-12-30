@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
-import styles from './NewArrival.module.css';
-import ReactOwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import React, { useEffect, useState } from "react";
+import ReactOwlCarousel from 'react-owl-carousel';
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
-import { useNavigate } from "react-router-dom";
 import ApiService from "../../services/ApiService";
 import { ProductCard } from "../ProductCard/ProductCard";
+import styles from './NewArrival.module.css';
 
 export const NewArrival = () => {
     const appData = useApp();

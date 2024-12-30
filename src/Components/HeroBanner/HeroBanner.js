@@ -79,6 +79,8 @@ export const HeroBanner = ({ allBanner }) => {
       store_id: parseInt(enviroment.STORE_ID),
     };
 
+    setLoading(true);
+
     ApiService.banner(payload)
       .then((res) => {
         if (res.message === "Fetch successfully.") {
@@ -88,11 +90,12 @@ export const HeroBanner = ({ allBanner }) => {
           setPromoBanners(res?.payload_banner?.promobanner);
           // offers
           setOfferBanners(res?.payload_banner?.sectionbanner);
-
-          setLoading(false);
         }
       })
-      .catch((err) => { });
+      .catch((err) => { })
+      .finally(() => {
+        setLoading(false);
+      });
   }, []);
 
   return (
@@ -101,7 +104,7 @@ export const HeroBanner = ({ allBanner }) => {
       <div
         className={`${styles.heroBannerContainer} hideInDesktop heroBannerMobile col-12 d-inline-flex px-3`}
       >
-        {loading ? (
+        {loading || heroBanners.length === 0 ? (
           <HeroBannerLoader />
         ) : (
           <ReactOwlCarousel
@@ -145,7 +148,7 @@ export const HeroBanner = ({ allBanner }) => {
 
       {/* Desktop Structure */}
       <div className={`hideInMobile`}>
-        {loading ? (
+        {loading || heroBanners.length === 0 ? (
           <HeroBannerLoader />
         ) : (
           <div className={`col-12 d-inline-flex`}>
