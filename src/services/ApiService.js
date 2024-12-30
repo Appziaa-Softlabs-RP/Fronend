@@ -2,13 +2,25 @@ import fetch from "./ApiInterceptor";
 
 const ApiService = {};
 
-const cache = {};
+const storageKey = 'stepsForeverApiCache';
 
-// Only works until the page is refreshed
+// Helper function to get cache from localStorage
+const getCache = () => {
+  const cachedData = localStorage.getItem(storageKey);
+  return cachedData ? JSON.parse(cachedData) : {};
+};
+
+// Helper function to set cache in localStorage
+const setCache = (cache) => {
+  localStorage.setItem(storageKey, JSON.stringify(cache));
+};
+
+// Enhanced cacheFetch function that uses localStorage
 const cacheFetch = async (url, options, cacheKey, ttl = 500000) => {
   const currentTime = new Date().getTime();
+  const cache = getCache();
 
-    if (cache[cacheKey] && cache[cacheKey].expiry > currentTime) {
+  if (cache[cacheKey] && cache[cacheKey].expiry > currentTime) {
     return JSON.parse(cache[cacheKey].response);
   }
 
@@ -26,12 +38,16 @@ const cacheFetch = async (url, options, cacheKey, ttl = 500000) => {
       expiry: currentTime + ttl,
     };
 
+    // Update localStorage with the new cache
+    setCache(cache);
+
     return data;
   } catch (error) {
     console.error(`Fetch error for ${url}:`, error);
     throw error;
   }
 };
+
 
 ApiService.banner = function (data) {
   const cacheKey = "/store/banner" + JSON.stringify(data);

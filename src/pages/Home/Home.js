@@ -13,6 +13,7 @@ import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
 import Reviews from "../../Components/Reviews/Reviews";
 import { ShopAge } from "../../Components/ShopAge/ShopAge";
 import AllStores from "../../Components/AllStores/AllStores";
+import UnderContruction from "../../Components/UnderConstruction/UnderConstruction";
 
 export const Home = () => {
   const [asideOpen, setAsideOpen] = useState(false);
@@ -23,6 +24,8 @@ export const Home = () => {
       <div className="col-12 d-inline-flex flex-column">
         <Header asideOpen={asideOpen} setAsideOpen={setAsideOpen} setFetchedNavItems={setNavItems} />
         <Aside asideOpen={asideOpen} setAsideOpen={setAsideOpen} navItems={navItems} setNavItems={setNavItems} />
+        <UnderContruction />
+
         {/* hero banner */}
         <HeroBanner />
 
