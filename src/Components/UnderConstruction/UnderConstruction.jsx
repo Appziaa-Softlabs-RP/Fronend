@@ -1,34 +1,12 @@
 'use client'
 
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Envelope, Facebook, Instagram, Linkedin, Telephone, Twitter, X, Youtube } from 'react-bootstrap-icons';
 import { enviroment } from "../../enviroment";
 import styles from './UnderConstruction.module.css';
 
 export default function UnderConstruction() {
-    const [isVisible, setIsVisible] = useState(false)
-
-    useEffect(() => {
-        const checkVisibility = () => {
-            const closedTimestamp = localStorage.getItem('underConstructionClosed')
-            if (!closedTimestamp) {
-                setIsVisible(true)
-                return
-            }
-
-            const closedTime = parseInt(closedTimestamp, 10)
-            const currentTime = new Date().getTime()
-            const timeDifference = currentTime - closedTime
-            const daysDifference = timeDifference / (1000 * 3600 * 24)
-
-            if (daysDifference > 2) {
-                setIsVisible(true)
-                localStorage.removeItem('underConstructionClosed')
-            }
-        }
-
-        checkVisibility()
-    }, [])
+    const [isVisible, setIsVisible] = useState(true)
 
     const handleClose = () => {
         setIsVisible(false)
