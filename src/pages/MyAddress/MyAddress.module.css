@@ -3,7 +3,8 @@
     border-left: 6px solid var(--PRIMARY_COLOR);
     padding: 0 10px;
     height: 60px;
-    background: #FFF;
+    cursor: pointer;
+    background: var(--SECONDARY_COLOR);
 }
 .addAressTxt{
     font-size: 15px;

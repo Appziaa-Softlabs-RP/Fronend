@@ -268,10 +268,9 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
               />
             </h1>
             <div className="d-inline-flex align-items-stretch justify-content-end gap-2 me-4">
-              <div
+              <Link
+                to="checkout"
                 className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
-                role="button"
-                onClick={() => setCartPop(true)}
               >
                 <div className="position-relative d-inline-flex">
                   <CartIcon color="#000" />
@@ -283,7 +282,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     </span>
                   )}
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
           <div

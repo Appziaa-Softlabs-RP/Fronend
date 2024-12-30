@@ -43,7 +43,7 @@
     color: var(--PRIMARY_COLOR);
 }
 .activeMenu{
-    background-color: var(--MENU_HOVER_COLOR);
+    background-color: var(--SECONDARY_COLOR);
     font-weight: bold;
     border-left: 4px solid var(--PRIMARY_COLOR);
 }

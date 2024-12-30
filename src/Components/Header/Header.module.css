@@ -115,6 +115,7 @@
 
 .supportDrop {
   color: #000;
+  z-index: 100;
 }
 
 .supportDrop:hover {

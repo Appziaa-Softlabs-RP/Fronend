@@ -45,6 +45,8 @@
 }
 .addressFrom{
     background: #FFF;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 .savedAddress{
     font-size: 17px;
