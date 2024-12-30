@@ -235,124 +235,111 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
     <>
       {/* Mobile Structure */}
       <div
-        className={`hideInDesktop`}
+        className={`hideInDesktop bg-success`}
         style={{
           position: 'relative',
+          minHeight: 'fit-content',
         }}
       >
-        <div className={`${styles.siteHeader} col-12 d-inline-flex`}>
-          <div
-            className={`${styles.menuIconBox} d-inline-flex align-items-center ms-3 justify-content-center`}
-            onClick={openAsideMenu}
-          >
-            <MenuIcons color={'black'} />
-          </div>
-          <h1
-            onClick={() => routeHome()}
-            style={{ cursor: "pointer" }}
-            itemtype="http://schema.org/Organization"
-            className={`${styles.siteLogoBox} w-100 d-flex justify-content-center position-relative`}
-          >
-            <span class="visually-hidden">
-              {enviroment.REACT_APP_BUSINESS_NAME}
-            </span>
-            <img
-              src={siteLogo}
-              alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
-              style={{
-                maxWidth: '200px',
-                maxHeight: '30px',
-              }}
-              className="mt-2"
-            />
-          </h1>
-          <div className="d-inline-flex align-items-stretch justify-content-end gap-2 me-3">
+        <div className={`${styles.siteHeader} col-12`}>
+          <div className="d-inline-flex col-12">
             <div
-              className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
-              type="button"
-              onClick={
-                () => setIsSearchOpen(!isSearchOpen)
-              }
+              className={`${styles.menuIconBox} d-inline-flex align-items-center ms-3 justify-content-center`}
+              onClick={openAsideMenu}
             >
-              <SearchIcon color={'black'} />
+              <MenuIcons color={'black'} />
             </div>
-            <div
-              className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
-              role="button"
-              onClick={() => setCartPop(true)}
+            <h1
+              onClick={() => routeHome()}
+              style={{ cursor: "pointer" }}
+              itemtype="http://schema.org/Organization"
+              className={`${styles.siteLogoBox} w-100 d-flex justify-content-center position-relative`}
             >
-              <div className="position-relative d-inline-flex">
-                <CartIcon color="#000" />
-                {appData?.appData?.cartCount > 0 && (
-                  <span
-                    className={`${styles.cartCount} position-absolute d-inline-flex align-items-center`}
-                  >
-                    {appData?.appData?.cartCount}
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-          {
-            isSearchOpen && (
-              <div
-                className={`d-inline-flex align-items-center`}
+              <span class="visually-hidden">
+                {enviroment.REACT_APP_BUSINESS_NAME}
+              </span>
+              <img
+                src={siteLogo}
+                alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
                 style={{
-                  position: 'absolute',
-                  left: '0px',
-                  zIndex: 90,
-                  top: '80px',
+                  maxWidth: '220px',
+                  maxHeight: '35px',
                 }}
-
+              />
+            </h1>
+            <div className="d-inline-flex align-items-stretch justify-content-end gap-2 me-4">
+              <div
+                className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
+                role="button"
+                onClick={() => setCartPop(true)}
               >
-                <span
-                  className={`${styles.searchIcon} position-absolute p-1 top-0 bottom-0 m-auto start-0 ms-3 d-inline-flex align-items-center`}
-                >
-                  <SearchIcon color="#000" />
-                </span>
-                <input
-                  type="text"
-                  className={`${styles.inputSearch} d-inline-flex ps-5 col-12 p-3 pe-3`}
-                  style={{
-                    fontSize: '1rem',
-                  }}
-                  value={searchProd}
-                  onChange={(e) => searchShopProd(e, e.target.value)}
-                  placeholder={enviroment.SEARCH_PLACEHOLDER}
-                  onKeyDown={handleKeyDown}
-                />
-                <span
-                  onClick={() => {
-                    searchShopProd('', '')
-                    setIsSearchOpen(false)
-                  }}
-                  style={{ cursor: "pointer" }}
-                  className={`${styles.searchIcon} position-absolute top-0 bottom-0 m-auto end-0 me-4 p-1 d-inline-flex align-items-center`}
-                >
-                  <CrossIcon color="#000" />
-                </span>
-                {searchProdList?.length > 0 && (
-                  <div
-                    className={`${styles.showSearchList} position-absolute d-inline-flex flex-column start-0 col-12 overflow-y-auto`}
-                  >
-                    {searchProdList.map((item, idx) => {
-                      return (
-                        <span
-                          className={`${styles.searchRow} p-3 text-truncate col-12`}
-                          role="button"
-                          key={idx}
-                          onClick={() =>
-                            openProductId(item.name_url, item.name, item.product_id)
-                          }
-                        >
-                          {item.name}
-                        </span>
-                      );
-                    })}
-                  </div>
-                )}
+                <div className="position-relative d-inline-flex">
+                  <CartIcon color="#000" />
+                  {appData?.appData?.cartCount > 0 && (
+                    <span
+                      className={`${styles.cartCount} position-absolute d-inline-flex align-items-center`}
+                    >
+                      {appData?.appData?.cartCount}
+                    </span>
+                  )}
+                </div>
               </div>
-            )}
+            </div>
+          </div>
+          <div
+            className={`d-inline-flex align-items-center pt-3 w-100`}>
+            <div className="position-relative" style={{
+              width: "92%",
+              margin: "auto",
+            }}>
+              <span
+                className={`${styles.searchIcon} position-absolute p-1 top-0 bottom-0 m-auto start-0 ms-3 d-inline-flex align-items-center`}
+              >
+                <SearchIcon color="#000" />
+              </span>
+              <input
+                type="text"
+                className={`${styles.inputSearch} d-inline-flex ps-5 col-12 p-3 pe-3`}
+                style={{
+                  fontSize: '1rem',
+                }}
+                value={searchProd}
+                onChange={(e) => searchShopProd(e, e.target.value)}
+                placeholder={enviroment.SEARCH_PLACEHOLDER}
+                onKeyDown={handleKeyDown}
+              />
+              {/* <span
+                onClick={() => {
+                  searchShopProd('', '')
+                  setIsSearchOpen(false)
+                }}
+                style={{ cursor: "pointer" }}
+                className={`${styles.searchIcon} position-absolute top-0 bottom-0 m-auto end-0 me-4 p-1 d-inline-flex align-items-center`}
+              >
+                <CrossIcon color="#000" />
+              </span> */}
+              {searchProdList?.length > 0 && (
+                <div
+                  className={`${styles.showSearchList} position-absolute d-inline-flex flex-column start-0 col-12 overflow-y-auto`}
+                >
+                  {searchProdList.map((item, idx) => {
+                    return (
+                      <span
+                        className={`${styles.searchRow} p-3 text-truncate col-12`}
+                        role="button"
+                        key={idx}
+                        onClick={() =>
+                          openProductId(item.name_url, item.name, item.product_id)
+                        }
+                      >
+                        {item.name}
+                      </span>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </div>
       {/* Delivering India Section */}
