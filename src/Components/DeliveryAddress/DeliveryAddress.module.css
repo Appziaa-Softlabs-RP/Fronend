@@ -63,6 +63,8 @@
 .addressdetail {
     color: #000;
     font-size: 14px;
+    display: grid !important;
+    grid-template-columns: 63px 1fr !important;
 }
 
 .deleteBtn,

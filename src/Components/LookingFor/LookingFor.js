@@ -55,7 +55,7 @@ export const LookingFor = () => {
               <p
                 className={`subTitleLarge col-12`}
               >
-                AshiElectronics STORE
+                Ashi Electronics STORE
               </p>
             </div>
             <div className="col-12 d-inline-flex">

@@ -16,24 +16,24 @@ export const Faq = () => {
 
   const faqs = [
     {
-      heading: "What is AshiElectronics?",
+      heading: "What is Ashi Electronics?",
       answer:
         "Ashi Electronics offers top-quality open-box electrical appliances at unbeatable prices. Discover a wide range of trusted brands with warranty and savings that fit your budget!",
     },
     {
-      heading: "Are the items on AshiElectronics brand new?",
+      heading: "Are the items on Ashi Electronics brand new?",
       answer:
         "Our products either have been directly procured from the OEM under excess inventory, transit damage, service return & end of life categories or simply unboxed items returned by the customers on leading eCommerce portals.<br /> <br />These items have never been owned by anyone, and are unused but may have their packaging boxes open with minor scratches or small dents. We have an extremely efficient procurement channel to source such items at large scale from OEMs and e-com portals. Each sourced item undergoes comprehensive quality checks to ensure that only perfectly functional and defect free products reach our end customers.",
     },
     {
-      heading: "How much can I save by buying from AshiElectronics?",
+      heading: "How much can I save by buying from Ashi Electronics?",
       answer:
-        "AshiElectronics offers unbeatable pricing with up to 80%* discounts on MRP depending on the product type.  We are more or less certain that our pricing remains the best across online or offline platforms pan India. To buy the products of your choice and check our amazing offers and discounts, click here: <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a>.",
+        "Ashi Electronics offers unbeatable pricing with up to 80%* discounts on MRP depending on the product type.  We are more or less certain that our pricing remains the best across online or offline platforms pan India. To buy the products of your choice and check our amazing offers and discounts, click here: <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a>.",
     },
     {
-      heading: "Is AshiElectronics a recognized company?",
+      heading: "Is Ashi Electronics a recognized company?",
       answer:
-        "Yes, AshiElectronics is a registered business entity having its head office in Delhi with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a>. We use secure online e-commerce platform India's leading payment gateway Razorpay and deploy robust SSL security measures strictly following government regulations/compliances to keep our customers data privacy as the top most priority",
+        "Yes, Ashi Electronics is a registered business entity having its head office in Delhi with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a>. We use secure online e-commerce platform India's leading payment gateway Razorpay and deploy robust SSL security measures strictly following government regulations/compliances to keep our customers data privacy as the top most priority",
     },
     {
       heading: "How do I place an order?",
@@ -99,7 +99,7 @@ export const Faq = () => {
     {
       heading: "Do you offer warranty on your products?",
       answer:
-        "All large appliances available on our website get 100% coverage for one year warranty without an exception. A significant percentage of large appliances from leading Brands are covered under their respective brand warranty. Those not covered under the brand warranty or other large appliances from smaller/purely online brands are covered under AshiElectronics one-year comprehensive onsite service warranty.<br /><br />Small home appliances and other lifestyle products may be covered under their respective brand warranties which are generally off site in nature. We do not take any responsibility for these categories of products and nor we cover them under our own warranty.",
+        "All large appliances available on our website get 100% coverage for one year warranty without an exception. A significant percentage of large appliances from leading Brands are covered under their respective brand warranty. Those not covered under the brand warranty or other large appliances from smaller/purely online brands are covered under Ashi Electronics one-year comprehensive onsite service warranty.<br /><br />Small home appliances and other lifestyle products may be covered under their respective brand warranties which are generally off site in nature. We do not take any responsibility for these categories of products and nor we cover them under our own warranty.",
     },
     {
       heading: "How are you able to offer such heavy discounts?",

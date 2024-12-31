@@ -405,7 +405,7 @@ const PaymentMode = ({
             transection_id: transID,
             cart_id: shopcartID,
         };
-        console.log(payload)
+
         ApiService.onlinePaymentSuccess(payload)
             .then((res) => {
                 if (res.message == "Online payment successfully.") {
@@ -637,7 +637,7 @@ const PaymentMode = ({
                                 className={`${styles.payOrderBtn} d-inline-flex align-items-center px-3`}
                             >
                                 {" "}
-                                PLACE ORDER (₹{cartPriceTotal.subTotal + cartPriceTotal.delivery + (cartPriceTotal.handling_fee ?? 0) - (cartPriceTotal.digital_discount ?? 0)})
+                                PLACE ORDER (₹{(cartPriceTotal.subTotal + cartPriceTotal.delivery + (cartPriceTotal.handling_fee ?? 0) - (cartPriceTotal.digital_discount ?? 0)).toLocaleString("en-IN")})
                             </span>
                         </div>
                     </div>
