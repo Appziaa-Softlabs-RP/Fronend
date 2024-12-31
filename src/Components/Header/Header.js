@@ -357,40 +357,50 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
       </div>
 
       {/* Desktop Structure */}
-      <div className={`hideInMobile col-12 d-inline-flex flex-column overflow-hidden`} style={{
+      <div className={`hideInMobile col-12 d-inline-flex flex-column`} style={{
         position: 'sticky',
         top: '0',
         zIndex: '999',
       }}>
         <div
-          className={`${styles.headerRow} col-12 d-inline-flex align-items-center`}>
-          <div className="container h-100 d-flex align-items-stretch p-0">
+          className={`${styles.headerRow} col-12 d-inline-flex w-100`}>
+          <div className="h-100 container-fluid d-flex p-0" style={{
+            position: 'relative',
+            width: '100vw',
+
+          }}>
             <div
-              className={`p-0 m-0 positoin-relative h-100 col-12 d-inline-flex flex-wrap align-items-stretch gap-3`}
+              className={`p-0 m-0 h-100 col-12 d-flex gap-3`}
             >
-              <h1
-                onClick={() => routeHome()}
-                itemtype="http://schema.org/Organization"
-                style={{
-                  cursor: "pointer",
-                  position: 'absolute',
-                  left: '0',
-                  top: '0',
-                  right: '0',
-                  padding: '0 2rem',
-                }}
-                className={`${styles.siteLogoBox} m-0 d-inline-flex justify-content-start col-2 ms-5 ps-5 w-100`}
-              >
-                <span class="visually-hidden">
-                  {enviroment.REACT_APP_BUSINESS_NAME}
-                </span>
-                <img
-                  src={siteLogo}
-                  alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
-                  className="object-fit-contain mt-3"
-                />
-              </h1>
-              <div className="d-inline-flex align-items-stretch w-100 justify-content-end gap-4">
+              <div className="col-4">
+                <h1
+                  onClick={() => routeHome()}
+                  itemtype="http://schema.org/Organization"
+                  style={{
+                    cursor: "pointer",
+                    position: 'absolute',
+                    left: '0',
+                    top: '0',
+                    right: '0',
+                    padding: '0 2rem',
+                    // overflow: 'hidden', // Prevent overflow
+                    whiteSpace: 'nowrap', // Prevent text wrapping
+                    textOverflow: 'ellipsis',
+                    maxWidth: 'calc(100% - 4rem)',
+                  }}
+                  className={`${styles.siteLogoBox} m-0 d-inline-flex justify-content-start col-2 ms-5 ps-5  w-100`}
+                >
+                  <span className="visually-hidden">
+                    {enviroment.REACT_APP_BUSINESS_NAME}
+                  </span>
+                  <img
+                    src={siteLogo}
+                    alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
+                    className="object-fit-contain mt-3"
+                  />
+                </h1>
+              </div>
+              <div className="w-full d-flex align-items-stretch w-100 justify-content-end gap-4 pe-5 me-5">
                 <SearchElement
                   searchProd={searchProd}
                   searchShopProd={searchShopProd}
@@ -584,7 +594,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
               <HeaderNavLoader />
             ) : (
               <div
-                className={`${styles.headerMenuRow}  col-12`}
+                className={`${styles.headerMenuRow} col-12`}
               >
                 {navItems.length > 0 &&
                   <div className={`${styles.headerMenuItems}`}>
