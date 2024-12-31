@@ -357,7 +357,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
       </div>
 
       {/* Desktop Structure */}
-      <div className={`hideInMobile col-12 d-inline-flex flex-column`} style={{
+      <div className={`hideInMobile col-12 d-inline-flex flex-column overflow-hidden`} style={{
         position: 'sticky',
         top: '0',
         zIndex: '999',

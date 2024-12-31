@@ -23,7 +23,7 @@ export const Home = () => {
 
   return (
     <React.Fragment>
-      <div className="position-relative col-12 d-inline-flex flex-column">
+      <div className="position-relative col-12 d-inline-flex flex-column overflow-hidden">
         <Header
           asideOpen={asideOpen}
           setAsideOpen={setAsideOpen}
