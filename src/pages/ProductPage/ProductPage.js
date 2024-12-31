@@ -1,7 +1,7 @@
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect, useState } from "react";
-import { Card, Col, ListGroup, Row } from "react-bootstrap";
+import { Badge, Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import Skeleton from "react-loading-skeleton";
 import {
@@ -562,78 +562,10 @@ export const ProductPage = () => {
           getProductImageOfColorId={getProductImageOfColorId}
           prodDiscount={prodDiscount}
         />
-        <div
-          className={`${styles.productAllDetail} ${styles.productSection} col-12 d-flex flex-column gap-3 p-2`}
-        >
-          <h2 className={`${styles.productDetailName} col-12 mb-1 text-start m-0`}
-            style={{
-              fontSize: "1.5rem",
-              lineHeight: "1.2",
-            }}
-          >
-            {
-              productLoading ?
-                <Skeleton width={200} height={20} />
-                :
-                ProductData?.name
-            }
-          </h2>
 
-          <div
-            className={``}
-          >
-            {
-              productLoading ?
-                <Skeleton width={100} height={25} />
-                :
-                <ShowReviews
-                  product_id={ProductData?.product_id}
-                  total_rating={ProductData?.total_rating}
-                />
-            }
-          </div>
-          <div
-            className={` d-inline-flex align-items-start flex-column gap-2 col-12 position-relative`}
-          >
-            {
-              productLoading ?
-                <Skeleton width={100} height={20} />
-                :
-                <span>
-                  {
-                    ProductData?.stock > 0 ? (
-                      <span
-                        className="rounded"
-                        style={{
-                          padding: "5px 10px",
-                          background: "hsla(0, 0%, 87%, 1)",
-                          color: "#4CAF50",
-                          fontWeight: "bold",
-                        }}
-                      >
-                        In stock
-                      </span>
-                    ) : (
-                      <span
-                        className="rounded"
-                        style={{
-                          padding: "5px 10px",
-                          background: "hsla(0, 0%, 87%, 1)",
-                          color: "red",
-                          fontWeight: "bold",
-                        }}>
-                        Out of stock
-                      </span>
-                    )
-                  }
-                </span>
-            }
-          </div>
-
-          <ProdPrice
-            productLoading={productLoading}
+        <div className="container-fluid py-2">
+          <ProdMainInfo
             ProductData={ProductData}
-            prodDiscount={prodDiscount}
           />
         </div>
         <div className={`col-12 d-inline-block  ${styles.productSection}  flex-column p-2 bg-white w-100 d-flex justify-content-center`}>
@@ -740,78 +672,11 @@ export const ProductPage = () => {
               <div
                 className={`shadow-sm d-inline-flex flex-column gap-2 col-5 flex-shrink-1 align-items-start justify-content-start px-2 pt-5`}
               >
-                <div
-                  className={`${styles.productSubLine} d-inline-flex align-items-center gap-2 col-12 mb-0 position-relative`}
-                >
-                  {
-                    productLoading ?
-                      <Skeleton width={100} height={20} />
-                      :
-                      <div className="d-inline-flex align-items-center gap-2 fs-6 fw-light mb-3">
-                        {ProductData?.category_name ? (
-                          <span className={`${styles.categoryName} titleMainSmall d-inline-flex m-0`}>
-                            {ProductData?.category_name}
-                          </span>
-                        ) : null}
-                      </div>
-                  }
-                </div>
-                <h2
-                  className={`${styles.productDetailName} col-12 mb-1`}
-                >
-                  {
-                    productLoading ?
-                      <Skeleton width={200} height={30} />
-                      :
-                      ProductData?.name
-                  }
-                </h2>
-                <div
-                  className={``}
-                >
-                  {
-                    productLoading ?
-                      <Skeleton width={100} height={25} />
-                      :
-                      <ShowReviews
-                        product_id={ProductData?.product_id}
-                        total_rating={ProductData?.total_rating}
-                      />
-                  }
-                </div>
-                {
-                  productLoading ?
-                    <Skeleton width={100} height={20} />
-                    :
-                    <span>
-                      {
-                        ProductData?.stock > 0 ? (
-                          <span
-                            className="rounded"
-                            style={{
-                              padding: "5px 10px",
-                              background: "hsla(0, 0%, 87%, 1)",
-                              color: "#4CAF50",
-                              fontWeight: "bold",
-                            }}
-                          >
-                            In stock
-                          </span>
-                        ) : (
-                          <span
-                            className="rounded"
-                            style={{
-                              padding: "5px 10px",
-                              background: "hsla(0, 0%, 87%, 1)",
-                              color: "red",
-                              fontWeight: "bold",
-                            }}>
-                            Out of stock
-                          </span>
-                        )
-                      }
-                    </span>
-                }
+                <ProdMainInfo
+                  ProductData={ProductData}
+                  productLoading={productLoading}
+                />
+
                 <ProdPrice
                   productLoading={productLoading}
                   ProductData={ProductData}
@@ -875,7 +740,7 @@ export const ProductPage = () => {
                           className={`${styles.continueShop} ${ProductData?.stock === 0 || ProductData?.stock < 0
                             ? styles.disableCartBtn
                             : ""
-                            } col-12 d-inline-flex align-items-center justify-content-center`}
+                            } col-12 d-inline-flex btnCustom align-items-center justify-content-center`}
                           onClick={(e) => addToCart(e, ProductData)}
                         >
                           Add to Cart
@@ -1109,26 +974,67 @@ const BankOffers = ({ offers, setNoImage }) => {
   );
 };
 
+const ProdMainInfo = ({ ProductData, productLoading }) => {
+  return <>
+    <Card className="border-0">
+      <Card.Body className="p-0">
+        {ProductData?.category_name && (
+          <Card.Subtitle className="mb-2 text-muted">
+            {ProductData.category_name}
+          </Card.Subtitle>
+        )}
+        <Card.Title className={`${styles.productDetailName} mb-3`}>
+          <h1 className="fs-4">
+            {ProductData?.name}
+          </h1>
+        </Card.Title>
+        <div className="d-flex align-items-center mb-3">
+          <ShowReviews
+            product_id={ProductData?.product_id}
+            total_rating={ProductData?.total_rating}
+          />
+        </div>
+        <div className="d-flex gap-2 align-items-center">
+          <StockBadge stock={ProductData?.stock} />
+          {ProductData?.gender_name && (
+            <Badge bg="secondary">{ProductData.gender_name}</Badge>
+          )}
+        </div>
+      </Card.Body>
+    </Card>
+  </>
+}
+
+const StockBadge = ({ stock }) => {
+  if (stock === undefined) return null;
+  return stock > 0 ? (
+    <Badge bg="success">In stock</Badge>
+  ) : (
+    <Badge bg="danger">Out of stock</Badge>
+  );
+};
+
+
 const ProdFeatures = () => {
   const features = [
-    { img: "/images/quality.svg", text: '100% Original' },
-    { img: "/images/certified.svg", text: 'QC Passed' },
-    { img: "/images/warranty.svg", text: '1 Year Warranty' },
-    { img: "/images/delivery.svg", text: 'Home Delivery' },
+    { img: "/images/freeDelivery.png", text: 'Free Home Delivery' },
+    { img: "/images/original.png", text: '100% Original' },
+    { img: "/images/replacement.png", text: '7 Days Replacement' }
   ];
   return (
     <Card className="mt-3 w-100">
-      <Card.Header as="h5" className="text-success fw-bold" style={{
+      <Card.Header as="h5" className="fw-bold" style={{
         fontSize: '16px',
-        backgroundColor: '#e8f5e9'
+        color: 'var(--PRIMARY_COLOR)',
+        backgroundColor: 'var(--MENU_HOVER_COLOR)'
       }}>Toymie Promise</Card.Header>
       <Row className="g-1">
         {features.map((feature, index) => (
-          <Col key={index} xs={3} md={3}>
+          <Col key={index} xs={4} md={4}>
             <Card className="h-100 border-0">
               <Card.Body className="d-flex flex-column align-items-center justify-content-center p-2">
                 <img src={feature.img} alt="" style={{ width: '30px', height: '30px' }} />
-                <Card.Text className="text-center mb-0 small text-success" style={{ fontSize: '12px' }}>{feature.text}</Card.Text>
+                <Card.Text className="text-center mb-0 small text-danger" style={{ fontSize: '12px' }}>{feature.text}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
@@ -1151,9 +1057,10 @@ const DeliveryService = ({
 
   return (
     <Card className="mt-3 w-100">
-      <Card.Header as="h5" className="text-success fw-bold" style={{
+      <Card.Header as="h5" className="fw-bold" style={{
         fontSize: '16px',
-        backgroundColor: '#e8f5e9'
+        color: 'var(--PRIMARY_COLOR)',
+        backgroundColor: 'var(--MENU_HOVER_COLOR)'
       }}>Delivery &amp; Services</Card.Header>
       <Row className="g-2 p-2">
         <div className={`col-12 d-inline-block`}>
@@ -1276,7 +1183,9 @@ const DeliveryService = ({
                   id="deliveryLoc"
                   className={`${styles.checkDeliveryLabel} d-inline-flex`}
                 >
-                  Shop No - 01, Old Delhi Road Opposite Hudda Office Gurugram Haryana - 122015
+                  {
+                    enviroment.STORE_ADDRESS
+                  }
                 </strong>
               </p>
               <p
@@ -1306,7 +1215,7 @@ const DeliveryService = ({
                   flexDirection: 'column'
                 }}
               >
-                <span>Locate Store: </span>
+                {/* <span>Locate Store: </span>
                 <span
                   className={`${styles.checkDeliveryLabel} d-inline-flex`}
                 >
@@ -1318,7 +1227,7 @@ const DeliveryService = ({
                   >
                     Google Map
                   </a>
-                </span>
+                </span> */}
               </p>
             </div>
           )}

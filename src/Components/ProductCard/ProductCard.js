@@ -387,11 +387,11 @@ export const ProductCard = ({ item, index }) => {
             </div>
           )}
           {item.stock > 0 && (
-            <React.Fragment>
+            <div>
               {!prodAdded ? (
                 <span
                   role="button"
-                  className={`${styles.addCartBtn} d-inline-flex align-items-center justify-content-center position-absolute text-uppercase`}
+                  className={`${styles.addCartBtn} btnCustom d-inline-flex align-items-center justify-content-center position-absolute text-uppercase`}
                   onClick={(e) => addToCart(e, item)}
                 >
                   Add to cart
@@ -442,7 +442,7 @@ export const ProductCard = ({ item, index }) => {
                   </span>
                 </div>
               )}
-            </React.Fragment>
+            </div>
           )}
           {item.stock <= 0 && (
             <button

@@ -61,7 +61,7 @@ export default function AddProductQuantity({
             </span>
         </div>
         <Link to="/checkout" className="w-100 h-100">
-            <button className={`btn w-100 h-100 ${styles.goCartBtn}`}>
+            <button className={`btn w-100 h-100 ${styles.goCartBtn} btnCustom`}>
                 Go to cart
             </button>
         </Link>

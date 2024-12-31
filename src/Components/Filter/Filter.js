@@ -43,7 +43,7 @@ export const Filter = ({
           length: brands?.length,
         }));
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
   useEffect(() => {
     const payload = {
@@ -67,8 +67,8 @@ export const Filter = ({
           getAgeBrandOption(allBrand);
         }
       })
-     
-      getAgeBrandOption();
+
+    getAgeBrandOption();
 
   }, [filterCatg]);
 
@@ -156,7 +156,7 @@ export const Filter = ({
           setProductActualData(res.payload_FilterByProductNew);
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   useEffect(() => {
@@ -164,8 +164,13 @@ export const Filter = ({
   }, [allfilterVal]);
 
   return (
-    <React.Fragment>
-      <div className="col-12 d-inline-flex flex-column gap-3">
+    <div className="h-100 w-100">
+      <div className={`${styles.filterContainer} col-12 d-inline-flex flex-column gap-1`}>
+        <div className="ps-3 pt-3" style={{
+          borderBottom: "1px solid #e5e5e5",
+        }}>
+          <h2 className={styles.filterTitle} >Filters</h2>
+        </div>
         {allBrandLen?.length > 0 && (
           <div
             className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
@@ -459,6 +464,6 @@ export const Filter = ({
           </ul>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };

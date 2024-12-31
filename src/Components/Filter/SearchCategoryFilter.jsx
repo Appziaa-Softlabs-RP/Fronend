@@ -47,7 +47,7 @@ export const SearchCategoryFilter = ({
           length: brands?.length,
         }));
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   useEffect(() => {
@@ -149,7 +149,7 @@ export const SearchCategoryFilter = ({
           setProductActualData(res.payload_FilterByProductCategory);
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   useEffect(() => {
@@ -157,8 +157,63 @@ export const SearchCategoryFilter = ({
   }, [allfilterVal, selectedBrandId]);
 
   return (
-    <React.Fragment>
-      <div className="col-12 d-inline-flex flex-column gap-3">
+    <div className="h-100 w-100">
+      <div className={`${styles.filterContainer} col-12 d-inline-flex flex-column gap-1`}>
+        <div className="ps-3 pt-3" style={{
+          borderBottom: "1px solid #e5e5e5",
+        }}>
+          <h2 className={styles.filterTitle} >Filters</h2>
+          <div className={styles.filterTagContainer}>
+            {
+              selectedBrandId?.length > 0 &&
+              // show selected brands as tags
+              selectedBrandId?.map((brandId, index) => {
+                const brandData = allBrands?.find((brand) => brand.id == brandId)
+                return (
+                  <p className={styles.filterTag}>
+                    {brandData?.name}
+                    <span
+                      role="button"
+                      key={index}
+                      onClick={() => filterBrand(brandData?.id)}
+                    >
+                      X
+                    </span>
+                  </p>
+                );
+              })
+            }
+          </div>
+          {
+            // gender
+            allfilterVal?.genderId &&
+            <div className={styles.filterTagContainer}>
+              <p className={styles.filterTag}>
+                Gender: {allBrandLen?.gender.find((gender)=>gender.gender_id == allfilterVal.genderId)?.gender_name}
+                <span
+                  role="button"
+                  onClick={resetFilterGender}
+                >
+                  X
+                </span>
+              </p>
+            </div>
+          }
+          {
+            allfilterVal.priceMin && allfilterVal.priceMax &&
+            <div className={styles.filterTagContainer}>
+              <p className={styles.filterTag}>
+                Price: ₹{allfilterVal.priceMin} - ₹{allfilterVal.priceMax}
+                <span
+                  role="button"
+                  onClick={resetFilterPrice}
+                >
+                  X
+                </span>
+              </p>
+            </div>
+          }
+        </div>
         {brands?.length > 0 && (
           <div
             className={`${styles.filterBox} d-inline-flex flex-column col-12 p-3`}
@@ -453,6 +508,6 @@ export const SearchCategoryFilter = ({
           </ul>
         </div>
       </div>
-    </React.Fragment>
+    </div>
   );
 };

@@ -37,14 +37,8 @@
   justify-content: center;
   color: var(--SECONDARY_COLOR);
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
   font-size: 1.5rem;
   z-index: 10;
-}
-
-.navButton:hover {
-  transform: scale(1.1);
-  background-color: var(--ADD_BUTTON_COLOR);
 }
 
 .swiperContainer {
@@ -154,20 +148,12 @@
   margin-top: 2rem;
 }
 
-.writeReviewButton {
-  background-color: var(--PRIMARY_COLOR);
-  color: var(--SECONDARY_COLOR);
-  padding: 0.75rem 1.5rem;
-  border-radius: 25px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  text-decoration: none;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.writeReviewButton:hover {
-  background-color: var(--ADD_BUTTON_COLOR);
-  transform: scale(1.05);
+@media (max-width: 768px) {
+  .writeReviewButton {
+    --button-depth: 4px;
+    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+  }
 }
 
 /* Custom Swiper Styles */

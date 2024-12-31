@@ -49,7 +49,7 @@
   margin-top: 1rem;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 1250px) {
   .productsContainer {
     width: 50%;
   }
@@ -69,7 +69,7 @@
   }
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 1250px) {
   .productCardsContainer {
     width: 100%;
   }
@@ -98,7 +98,7 @@
   margin: 20px 0px;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 1250px) {
   .heroBannerLoader {
     min-height: calc((100vw / 4.77)*1.6);
   }
@@ -159,7 +159,7 @@
   width: 100%;
 }
 
-@media screen and (max-width: 560px) {
+@media screen and (max-width: 1250px) {
   .smallBox {
     height: 110px;
     /* width: 110px; */

@@ -1,61 +1,116 @@
+.filterContainer {
+    background: #FFF;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px 0px #0000000D;
+    border: 2px solid rgba(234, 234, 234, 0.581);
+    height: fit-content;
+    margin-top: 10px;
+    position: sticky;
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+}
+
+.filterTagContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin: 10px 0;
+}
+
+.filterTag{
+    background-color: rgb(237, 234, 234);
+    font-size: 10px;
+    display: flex;
+    gap: 5px;
+    width: fit-content;
+    padding: 5px 10px;
+    margin: 0px;
+    border-radius: 5px;
+}
+
+.filterTag span{
+    cursor: pointer;
+}
+
 .filterBox {
     border-radius: 8px;
     background: #FFF;
 }
+
 .filterTitle {
     font-size: 20px;
     color: #000;
     font-weight: 600;
 }
-.customRadio{
-    border: 1px solid var(--ADD_BUTTON_COLOR);
+
+.customRadio {
+    border: 1px solid gray;
     height: 20px;
     width: 20px;
-    border-radius: 50%;
 }
-.address_option:checked+.customRadio:after{
+
+.address_option:checked+.customRadio:after {
     margin: auto;
     content: '';
-    height: 14px;
-    width: 14px;
+    height: 100%;
+    width: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>');
     display: block;
-    border-radius: 50%;
-    background-color: var(--ADD_BUTTON_COLOR);
+    background-color: gray;
     position: absolute;
     inset: 0;
 }
-.filterRow{
+
+.filterRow {
     font-size: 15px;
     color: #111;
 }
-.filterRow .address_option{
+
+.filterRow .address_option {
     display: none;
 }
-.brandScroll{
+
+.brandScroll {
     max-height: 200px;
 }
-.brandScroll::-webkit-scrollbar{
+
+.brandScroll::-webkit-scrollbar {
     width: 5px;
 }
+
 .brandScroll::-webkit-scrollbar-thumb {
     background: #DDD;
     border-radius: 5px;
     width: 5px;
 }
+
 .filterSearchInput {
-    border: 1px solid #EDEDED;
-    border-radius: 4px;
+    border: none;
+    border-bottom: 1px solid #e1dddd;
     height: 45px;
     background: #FFF;
+    padding: 0 0 0 35px !important;
 }
+
+.filterSearchIcon {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    color: #000;
+}
+
 .filterSearchInput:focus {
     outline: none;
+    border-bottom: 1px solid var(--PRIMARY_COLOR);
 }
-.filterSearch{
+
+.filterSearch {
     z-index: 5;
 }
-@media only screen and (max-width:568px) {    
-    .brandScroll{
+
+@media only screen and (max-width:568px) {
+    .brandScroll {
         max-height: auto;
     }
 }

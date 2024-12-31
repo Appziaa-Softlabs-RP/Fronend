@@ -263,7 +263,7 @@
 }
 
 .checkDeliveryResponse {
-    background: var(--SECONDARY_COLOR);
+    background: var(--MENU_HOVER_COLOR);
     border-radius: 4px;
     padding: 30px;
 }

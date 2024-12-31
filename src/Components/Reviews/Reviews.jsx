@@ -121,21 +121,26 @@ export default function SuccessStories() {
                 <div className={styles.navigationButtons}>
                     <button
                         ref={prevButtonRef}
-                        className={`${styles.navButton} ${styles.navButtonPrev}`}
+                        className={`${styles.navButton} btnCustom ${styles.navButtonPrev}`}
                         aria-label="Previous slide"
                     >
                         ←
                     </button>
                     <button
                         ref={nextButtonRef}
-                        className={`${styles.navButton} ${styles.navButtonNext}`}
+                        className={`${styles.navButton} btnCustom ${styles.navButtonNext}`}
                         aria-label="Next slide"
                     >
                         →
                     </button>
                 </div>
                 <div className={styles.writeReviewContainer}>
-                    <a href="https://g.page/r/CXxxxxxxxxxxxxxxx/review" target="_blank" rel="noopener noreferrer" className={styles.writeReviewButton}>
+                    <a
+                        href="https://g.page/r/CXxxxxxxxxxxxxxxx/review"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={"btnCustom"}
+                    >
                         Share Your Experience
                     </a>
                 </div>

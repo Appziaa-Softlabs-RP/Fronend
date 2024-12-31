@@ -1,4 +1,4 @@
-.itemQuantityBtnBox{
+.itemQuantityBtnBox {
     z-index: 9;
     display: flex;
     width: fit-content;
@@ -7,50 +7,59 @@
     border: 1px solid hsla(240, 6%, 90%, 1);
 }
 
-.goCartBtn{
-    background: var(--ADD_BUTTON_COLOR);
-    color: white;
-}
-.goCartBtn:hover{
-    background: var(--BUTTON_HOVER_COLOR);
-    color: black;
+.goCartBtn {
+    background: var(--ADD_BUTTON_COLOR) !important;
+    color: white !important;
 }
 
-.gapLg{
+.goCartBtn:hover {
+    background: var(--BUTTON_HOVER_COLOR) !important;
+}
+
+.goCartBtn:active {
+    background: var(--BUTTON_HOVER_COLOR) !important;
+}
+
+.gapLg {
     gap: 20px;
 }
 
-.gapSm{
+.gapSm {
     gap: 8px;
 }
 
-.itemQuantityBtnBox button{
-	background: transparent;
-	box-shadow: none;
-	border: none;
+.itemQuantityBtnBox button {
+    background: transparent;
+    box-shadow: none;
+    border: none;
 }
-.itemQuantityBtn .decreaseBtn{
-	width: 20px;
+
+.itemQuantityBtn .decreaseBtn {
+    width: 20px;
 }
-.itemQuantityBtn{
-	padding-right: 0;
+
+.itemQuantityBtn {
+    padding-right: 0;
     padding-left: 0;
     margin-top: auto;
     margin-bottom: 0px;
-	position: relative;
-	z-index: 9;
+    position: relative;
+    z-index: 9;
 }
-.countValue{
-	width: 20px;
-	text-align: center;
-	-webkit-appearance: none;
-	border: none;
-	outline: none;
-	background: transparent;
-	cursor: default;
-	font-weight: 500;
+
+.countValue {
+    width: 20px;
+    text-align: center;
+    -webkit-appearance: none;
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: default;
+    font-weight: 500;
 }
-.decrease_btn, .increase_btn{
+
+.decrease_btn,
+.increase_btn {
     height: 20px;
     width: 20px;
     color: rgb(55, 55, 55);
