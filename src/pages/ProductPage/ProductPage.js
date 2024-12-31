@@ -1,6 +1,7 @@
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
 import React, { useEffect, useState } from "react";
+import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import { Helmet } from "react-helmet";
 import Skeleton from "react-loading-skeleton";
 import {
@@ -17,6 +18,7 @@ import { FeaturedProducts } from "../../Components/FeaturedProducts/FeaturedProd
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
 import { PageHeader } from "../../Components/PageHeader/PageHeader";
+import RazorpayAffordabilityWidget from "../../Components/RazorpayAffordabilityWidget/RazorpayAffordabilityWidget";
 import AddProductQuantity from "../../Components/shared/AddProductQuantity";
 import { SimilarProduct } from "../../Components/SimilarProduct/SimilarProduct";
 import {
@@ -35,7 +37,6 @@ import { AppNotification } from "../../utils/helper";
 import ProductGalleryDesktop from "./ProdGalleryDesktop";
 import ProdGalleryMobile from "./ProdGalleryMobile";
 import styles from "./ProductPage.module.css";
-import { Card, Col, ListGroup, Row } from "react-bootstrap";
 
 export const ProductPage = () => {
   const appData = useApp();
@@ -888,6 +889,9 @@ export const ProductPage = () => {
                       />
                     )}
                   </div>
+                  <RazorpayAffordabilityWidget
+                    amount={parseInt(ProductData?.selling_price)}
+                  />
                   <BankOffers
                     offers={ProductData?.bank_offer}
                     setNoImage={setNoImage}
