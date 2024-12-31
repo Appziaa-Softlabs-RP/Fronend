@@ -156,7 +156,7 @@ export const SearchFilter = ({
   }, [allfilterVal]);
 
   return (
-    <div className="h-100">
+    <div className="h-100 w-100" >
       <div className={`${styles.filterContainer} col-12 d-inline-flex flex-column gap-1`} style={{
         top: "140px"
       }}>

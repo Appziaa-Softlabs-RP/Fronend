@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useParams } from "react-router-dom";
-import { Filter } from "../../Components/Filter/Filter";
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
 import { ProductListLoader } from "../../Components/Loader/Loader";
@@ -16,6 +15,7 @@ import {
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import styles from "./CategoryPage.module.css";
+import { SearchCategoryFilter } from "../../Components/Filter/SearchCategoryFilter";
 
 export const ShopCategoryPage = () => {
   const { verticalSlug } = useParams();
@@ -157,7 +157,7 @@ export const ShopCategoryPage = () => {
                     <div
                       className={`${styles.filterSticky} hideInMobile col-3 position-sticky flex-shrink-1 d-inline-flex overflow-y-auto`}
                     >
-                      <Filter
+                      <SearchCategoryFilter
                         filterVert={filterVert}
                         filterCatg={filterCatg}
                         setProductData={setProductData}
@@ -168,38 +168,38 @@ export const ShopCategoryPage = () => {
                 <div
                   className={`${styles.productContainer
                     } flex-shrink-1 d-inline-flex flex-wrap`}>
-                    <div
-                      className={`${styles.sortContainer} hideInMobile col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}
+                  <div
+                    className={`${styles.sortContainer} hideInMobile col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}
+                  >
+                    <span
+                      onClick={() => resetSortFilter()}
+                      role="button"
+                      className={`${styles.clearAllBtn} d-inline-flex`}
                     >
-                      <span
-                        onClick={() => resetSortFilter()}
-                        role="button"
-                        className={`${styles.clearAllBtn} d-inline-flex`}
-                      >
-                        Clear All
+                      Clear All
+                    </span>
+                    <div className="col-12 d-inline-flex justify-content-end align-items-center">
+                      <span className={`${styles.sortBy} d-inline-flex me-2`}>
+                        Sort By
                       </span>
-                      <div className="col-12 d-inline-flex justify-content-end align-items-center">
-                        <span className={`${styles.sortBy} d-inline-flex me-2`}>
-                          Sort By
-                        </span>
-                        <span
-                          onClick={() => priceDescending()}
-                          role="button"
-                          className={`${styles.priceLow} ${isDescendingOrder ? "fw-bold" : ""
-                            } d-inline-flex px-1`}
-                        >
-                          Price: Low to High
-                        </span>
-                        <span
-                          onClick={() => priceAscending()}
-                          role="button"
-                          className={`${styles.priceLow} d-inline-flex px-1 ${isAscendingOrder ? "fw-bold" : ""
-                            }`}
-                        >
-                          Price: High to Low
-                        </span>
-                      </div>
+                      <span
+                        onClick={() => priceDescending()}
+                        role="button"
+                        className={`${styles.priceLow} ${isDescendingOrder ? "fw-bold" : ""
+                          } d-inline-flex px-1`}
+                      >
+                        Price: Low to High
+                      </span>
+                      <span
+                        onClick={() => priceAscending()}
+                        role="button"
+                        className={`${styles.priceLow} d-inline-flex px-1 ${isAscendingOrder ? "fw-bold" : ""
+                          }`}
+                      >
+                        Price: High to Low
+                      </span>
                     </div>
+                  </div>
 
                   {ProductData?.length > 0 ? (
                     <InfiniteScroll
@@ -321,7 +321,7 @@ export const ShopCategoryPage = () => {
                   </label>
                 </div>
               </div>
-              <Filter
+              <SearchCategoryFilter
                 filterVert={filterVert}
                 filterCatg={filterCatg}
                 setProductData={setProductData}
@@ -340,24 +340,24 @@ export const ShopCategoryPage = () => {
             </div>
           )}
 
-          <div
-            className={`${styles.productBtnBox} hideInDesktop d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}
+        <div
+          className={`${styles.productBtnBox} hideInDesktop d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}
+        >
+          <span
+            className={`${styles.goCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
+            onClick={() => setSortPopup(true)}
           >
-            <span
-              className={`${styles.goCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
-              onClick={() => setSortPopup(true)}
-            >
-              {" "}
-              <SortByIcon />
-              Sort By
-            </span>
-            <span
-              className={`${styles.AddCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
-              onClick={() => setFilterPopup(true)}
-            >
-              <FilterIcon /> Filters
-            </span>
-          </div>
+            {" "}
+            <SortByIcon />
+            Sort By
+          </span>
+          <span
+            className={`${styles.AddCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
+            onClick={() => setFilterPopup(true)}
+          >
+            <FilterIcon /> Filters
+          </span>
+        </div>
 
       </div>
       <Footer />

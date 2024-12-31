@@ -597,7 +597,8 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                         onMouseEnter={() => handleMouseEnter(item, index)}
                         onClick={() => handleMouseEnter(item, index)}
                       >
-                        <div
+                        <a
+                          href={`/store/${item.name_url}`}
                           className={`${styles.menuName}`}
                           style={{
                             display: 'flex',
@@ -609,6 +610,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
                             fontSize: '1rem',
+                            textDecoration: 'none',
                           }}
                         >
                           <img src={getCatIcon(item.name)} alt={item.name} style={{
@@ -628,7 +630,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                           >
                             {item.name}
                           </span>
-                        </div>
+                        </a>
                       </div>
                     ))}
                     {hoveredItem?.catList?.length > 0 && (

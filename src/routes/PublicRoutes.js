@@ -40,7 +40,7 @@ export const PublicRoutes = () => {
       <Route path="/product/:slug" element={<ProductPage />} />
       <Route path="/product/:slug/:prodId" element={<ProductPage />} />
       <Route path="/shop-offers" element={<ShopOffers />} />
-      <Route path="/store/:categoryId" element={<ShopCategoryPage />} />
+      <Route path="/store/:verticalSlug" element={<ShopCategoryPage />} />
       <Route
         path="/store-product/:category"
         element={<StoreProductCategory />}
