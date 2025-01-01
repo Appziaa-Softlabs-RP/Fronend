@@ -643,84 +643,14 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                         </a>
                       </div>
                     ))}
-                    {hoveredItem?.catList?.length > 0 && (
-                      <div
-                        className={`${styles.SubMenuList} d-inline-flex flex-column gap-1`}
-                        style={{
-                          position: 'absolute',
-                          left: hoveredPosition.left,
-                          zIndex: 100,
-                          maxWidth: '300px'
-                        }}
-                        onMouseEnter={() => {
-                          setHoveredItem(hoveredItem)
-                        }}
-                        onClick={() => setHoveredItem(hoveredItem)}
-                        onMouseLeave={handleMouseLeave}
-                      >
-                        <div className="position-relative">
-
-                          {/* Category List */}
-                          {hoveredItem?.catList?.map((subNme, subIdx) => (
-                            <Link
-                              to={`/store-product/${subNme?.name_url}`}
-                              style={{ textDecoration: 'none' }}
-                              key={subIdx}
-                              onMouseEnter={() => {
-                                setCatHoveredItem(subNme)
-                              }}
-                              className={`${styles.subMenuName}  col-12 justify-content-between align-items-center px-3 d-inline-flex py-2`}
-                            >
-                              {subNme.name}
-
-                              <span style={{
-                                height: '1rem',
-                                width: '1rem',
-                                transform: 'rotate(180deg)',
-                                display: 'flex',
-                                alignItems: 'center',
-                              }}>
-                                {
-                                  subNme?.subcatList?.length > 0 && (
-                                    <BackArrowIcon
-                                      color="white"
-                                      role="button"
-                                      style={{
-                                        display: 'inline-block',
-                                        verticalAlign: 'middle',
-                                      }}
-                                    />
-                                  )}
-                              </span>
-                            </Link>
-                          ))}
-
-                          {/* Category Child List */}
-                          {
-                            catHoveredItem?.subcatList?.length > 0 && (
-                              <div
-                                className={`${styles.SubMenuList} d-inline-flex flex-column gap-1`}
-                                style={{
-                                  position: 'absolute',
-                                  top: '-12px',
-                                  left: '103%',
-                                }}
-                              >
-                                {catHoveredItem?.subcatList?.map((subCatNme, subIdx) => (
-                                  <Link
-                                    to={`/category/${catHoveredItem?.name_url}/sub-category/${subCatNme?.name_url}`}
-                                    style={{ textDecoration: 'none' }}
-                                    key={subIdx}
-                                    className={`${styles.subMenuName} col-12 justify-content-between align-items-center px-3 d-inline-flex py-2`}
-                                  >
-                                    {subCatNme.name}
-                                  </Link>
-                                ))}
-                              </div>
-                            )}
-                        </div>
-                      </div>
-                    )}
+                    <HoveredItemsList
+                      hoveredItem={hoveredItem}
+                      hoveredPosition={hoveredPosition}
+                      setHoveredItem={setHoveredItem}
+                      handleMouseLeave={handleMouseLeave}
+                      catHoveredItem={catHoveredItem}
+                      setCatHoveredItem={setCatHoveredItem}
+                    />
                   </div>
                 }
               </div>
@@ -844,3 +774,94 @@ const SearchElement = ({
   );
 };
 
+
+const HoveredItemsList = ({
+  hoveredItem,
+  hoveredPosition,
+  setHoveredItem,
+  handleMouseLeave,
+  catHoveredItem,
+  setCatHoveredItem
+}) => {
+  return <>
+    {hoveredItem?.catList?.length > 0 && (
+      <div
+        className={`${styles.SubMenuList} d-inline-flex flex-column gap-1`}
+        style={{
+          position: 'absolute',
+          left: hoveredPosition.left,
+          zIndex: 100,
+          maxWidth: '300px'
+        }}
+        onMouseEnter={() => {
+          setHoveredItem(hoveredItem)
+        }}
+        onClick={() => setHoveredItem(hoveredItem)}
+        onMouseLeave={handleMouseLeave}
+      >
+        <div className="position-relative">
+
+          {/* Category List */}
+          {hoveredItem?.catList?.map((subNme, subIdx) => (
+            <div className="position-relative" key={subIdx}>
+              <Link
+                to={`/store-product/${subNme?.name_url}`}
+                style={{ textDecoration: 'none' }}
+                onMouseEnter={() => {
+                  setCatHoveredItem(subNme)
+                }}
+                className={`${styles.subMenuName}  col-12 justify-content-between align-items-center px-3 d-inline-flex py-2`}
+              >
+                {subNme.name}
+
+                <span style={{
+                  height: '1rem',
+                  width: '1rem',
+                  transform: 'rotate(180deg)',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}>
+                  {
+                    subNme?.subcatList?.length > 0 && (
+                      <BackArrowIcon
+                        color="white"
+                        role="button"
+                        style={{
+                          display: 'inline-block',
+                          verticalAlign: 'middle',
+                        }}
+                      />
+                    )}
+                </span>
+              </Link>
+              {/* Category Child List */}
+              {
+                catHoveredItem?.category_id === subNme?.category_id &&
+                subNme?.subcatList?.length > 0 && (
+                  <div
+                    className={`${styles.SubMenuList} d-inline-flex flex-column gap-1`}
+                    style={{
+                      position: 'absolute',
+                      top: '-12px',
+                      left: '103%',
+                    }}
+                  >
+                    {subNme?.subcatList?.map((subCatNme, subIdx) => (
+                      <Link
+                        to={`/category/${catHoveredItem?.name_url}/sub-category/${subCatNme?.name_url}`}
+                        style={{ textDecoration: 'none' }}
+                        key={subIdx}
+                        className={`${styles.subMenuName} col-12 justify-content-between align-items-center px-3 d-inline-flex py-2`}
+                      >
+                        {subCatNme.name}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+            </div>
+          ))}
+        </div>
+      </div>
+    )}
+  </>
+}
