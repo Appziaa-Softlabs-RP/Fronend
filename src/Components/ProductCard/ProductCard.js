@@ -121,7 +121,8 @@ export const ProductCard = ({ item, index }) => {
       </div>
       {parseFloat(mrp) > parseFloat(item.selling_price) && (
         <div className={`${styles.featureOffBox} position-absolute`}>
-          {Math.ceil(((item?.mrp - selling_price) * 100) / item?.mrp)}% OFF
+          <span>{Math.ceil(((item?.mrp - selling_price) * 100) / item?.mrp)}%</span>
+          <span>OFF</span>
         </div>
       )}
     </>

@@ -61,7 +61,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
   };
 
   const routeHome = () => {
-    navigate("/");
+    window.location.href = "/";
   };
 
   const openAccountDetail = () => {
