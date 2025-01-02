@@ -746,7 +746,7 @@ const SearchElement = ({
           onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
           className={styles.searchInput}
         />
-        <Button variant="outline-secondary" className={`${styles.searchButton} bg-danger text-white`}>
+        <Button variant="outline-secondary" className={`${styles.searchButton} text-white`}>
           <Search />
         </Button>
       </InputGroup>

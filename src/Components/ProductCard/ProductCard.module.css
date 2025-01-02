@@ -88,14 +88,18 @@
 
 .featureOffBox {
   background: var(--ADD_BUTTON_COLOR);
+  height: 42px;
+  width: 42px;
   color: #fff;
   font-weight: 600;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 3px;
   font-size: 12px;
   line-height: 10px;
-  padding: 11px 9px;
+  /* padding: 11px 9px; */
   font-weight: bold;
   border-radius: 150px;
   right: 10px;
