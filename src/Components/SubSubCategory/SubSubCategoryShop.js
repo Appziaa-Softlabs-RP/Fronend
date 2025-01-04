@@ -9,6 +9,7 @@ import { Header } from "../Header/Header";
 import { PageHeader } from "../PageHeader/PageHeader";
 import { Footer } from "../Footer/Footer";
 import InfiniteScroll from "react-infinite-scroll-component";
+import AdaptiveLoader from "../AdaptiveLoader/AdaptiveLoader";
 
 export const SubSubCategoryShop = () => {
   const { subCategorySlug } = useParams();
@@ -50,7 +51,7 @@ export const SubSubCategoryShop = () => {
             prevProdArr.push(newProd[i]);
           }
           let newProduct = [...prevProdArr];
-          setData((prev)=>{
+          setData((prev) => {
             return {
               ...prev,
               products: newProduct
@@ -90,9 +91,7 @@ export const SubSubCategoryShop = () => {
           >
             {
               loading ?
-                <div className="col-12 d-inline-flex flex-column align-items-center justify-content-center">
-                  <h5 className="col-12 fs-3 text-center text-secondary py-5 my-5">Loading...</h5>
-                </div>
+                <AdaptiveLoader />
                 :
                 data?.products?.length > 0 ? (
                   <InfiniteScroll

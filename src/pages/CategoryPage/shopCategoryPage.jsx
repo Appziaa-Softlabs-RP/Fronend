@@ -16,6 +16,7 @@ import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import styles from "./CategoryPage.module.css";
 import { SearchCategoryFilter } from "../../Components/Filter/SearchCategoryFilter";
+import AdaptiveLoader from "../../Components/AdaptiveLoader/AdaptiveLoader";
 
 export const ShopCategoryPage = () => {
   const { verticalSlug } = useParams();
@@ -55,7 +56,7 @@ export const ShopCategoryPage = () => {
   const priceDescending = () => {
     let originalProduct = [...ProductData];
     originalProduct.sort((p1, p2) =>
-      parseInt(p1.mrp) > parseInt(p2.mrp)
+      parseInt(p1.mrp) > parseInt(p2.mrp) 
         ? 1
         : parseInt(p1.mrp) < parseInt(p2.mrp)
           ? -1
@@ -145,7 +146,7 @@ export const ShopCategoryPage = () => {
                 />
               </div>
             )} */}
-          {loading && <ProductListLoader />}
+            {loading && <AdaptiveLoader />}
           {loading === false && (
             <div
               className={`d-inline-flex flex-column col-12 mb-3 `}

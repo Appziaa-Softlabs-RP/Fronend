@@ -16,6 +16,7 @@ import {
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import styles from "./CategoryPage.module.css";
+import AdaptiveLoader from "../../Components/AdaptiveLoader/AdaptiveLoader";
 
 export const StoreProductCategory = () => {
     const locationState = useLocation();
@@ -150,7 +151,7 @@ export const StoreProductCategory = () => {
                                 />
                             </div>
                         )}
-                    {loading && <ProductListLoader />}
+                    {loading && <AdaptiveLoader />}
                     {loading === false && (
                         <div
                             className={`d-inline-flex  flex-column col-12 mb-3`}

@@ -18,6 +18,7 @@ import {
 import InfiniteScroll from "react-infinite-scroll-component";
 import { enviroment } from "../../enviroment";
 import { Helmet } from "react-helmet";
+import AdaptiveLoader from "../../Components/AdaptiveLoader/AdaptiveLoader";
 
 export const BrandCategoryPage = () => {
   const { brandId } = useParams();
@@ -164,7 +165,7 @@ export const BrandCategoryPage = () => {
                 />
               </div>
             )}
-          {loading && <ProductListLoader />}
+            {loading && <AdaptiveLoader />}
           {loading === false && (
             <div
               className={`d-inline-flex flex-column col-12 mb-3`}
