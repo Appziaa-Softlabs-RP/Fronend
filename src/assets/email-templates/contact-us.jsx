@@ -198,7 +198,7 @@ const ContactUsUserTemplate = `<table
           >
             <div style="width: 100%">
               <img
-                src="https://ashielectronics.com/static/media/site_logo.8370918601d7a5ea5637.png"
+                src="https://byebyemrps.com/static/media/site_logo.8370918601d7a5ea5637.png"
                 style="max-height: 40px"
               /><br />
             </div>
@@ -233,7 +233,7 @@ const ContactUsUserTemplate = `<table
             <div>
               <span class="size" style="font-size: 16px"
                 >In the meantime, feel free to explore
-                <a href="https://ashielectronics.com/" target="_blank">our website</a>
+                <a href="https://byebyemrps.com/" target="_blank">our website</a>
                 for the latest products and updates.<br
               /></span>
             </div>

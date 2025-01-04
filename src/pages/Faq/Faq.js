@@ -16,29 +16,29 @@ export const Faq = () => {
 
   const faqs = [
     {
-      heading: "What is Ashi Electronics?",
+      heading: "What is ByeByeMRPS?",
       answer:
-        "Ashi Electronics offers top-quality open-box electrical appliances at unbeatable prices. Discover a wide range of trusted brands with warranty and savings that fit your budget!",
+        "ByeByeMRPS offers top-quality open-box electrical appliances at unbeatable prices. Discover a wide range of trusted brands with warranty and savings that fit your budget!",
     },
     {
-      heading: "Are the items on Ashi Electronics brand new?",
+      heading: "Are the items on ByeByeMRPS brand new?",
       answer:
         "Our products either have been directly procured from the OEM under excess inventory, transit damage, service return & end of life categories or simply unboxed items returned by the customers on leading eCommerce portals.<br /> <br />These items have never been owned by anyone, and are unused but may have their packaging boxes open with minor scratches or small dents. We have an extremely efficient procurement channel to source such items at large scale from OEMs and e-com portals. Each sourced item undergoes comprehensive quality checks to ensure that only perfectly functional and defect free products reach our end customers.",
     },
     {
-      heading: "How much can I save by buying from Ashi Electronics?",
+      heading: "How much can I save by buying from ByeByeMRPS?",
       answer:
-        "Ashi Electronics offers unbeatable pricing with up to 80%* discounts on MRP depending on the product type.  We are more or less certain that our pricing remains the best across online or offline platforms pan India. To buy the products of your choice and check our amazing offers and discounts, click here: <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a>.",
+        "ByeByeMRPS offers unbeatable pricing with up to 80%* discounts on MRP depending on the product type.  We are more or less certain that our pricing remains the best across online or offline platforms pan India. To buy the products of your choice and check our amazing offers and discounts, click here: <a href='https://byebyemrps.com/' target='_blank'>https://byebyemrps.com/</a>.",
     },
     {
-      heading: "Is Ashi Electronics a recognized company?",
+      heading: "Is ByeByeMRPS a recognized company?",
       answer:
-        "Yes, Ashi Electronics is a registered business entity having its head office in Delhi with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a>. We use secure online e-commerce platform India's leading payment gateway Razorpay and deploy robust SSL security measures strictly following government regulations/compliances to keep our customers data privacy as the top most priority",
+        "Yes, ByeByeMRPS is a registered business entity having its head office in Delhi with nationwide distribution through company-owned outlets, franchises, business associates, and our online portal <a href='https://byebyemrps.com/' target='_blank'>https://byebyemrps.com/</a>. We use secure online e-commerce platform India's leading payment gateway Razorpay and deploy robust SSL security measures strictly following government regulations/compliances to keep our customers data privacy as the top most priority",
     },
     {
       heading: "How do I place an order?",
       answer:
-        "<ul><li>Go to our website: <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a></li><li>Use the search bar or browse through product categories to find the product of your choice</li><li>Click on the product you would like to purchase</li><li>If you like the product, click the '<strong>Add to Cart</strong>' button.</li><li>Once you are ready, click the '<strong>Proceed to Checkout</strong>' button.</li><li>You will be prompted to enter your email address and delivery address. Make sure all your information is accurate to avoid delays.</li><li>Provide additional phone number in the billing address if you have one</li><li>Select your preferred payment method from the available options</li><li>We offer secure payment gateways for credit cards, debit cards, net banking, and UPI</li><li>Review and Place Order: Review your order summary carefully, including product details, pricing, and delivery address</li><li>Once everything looks good, click the '<strong>Place Order</strong>' button.</li></ul>",
+        "<ul><li>Go to our website: <a href='https://byebyemrps.com/' target='_blank'>https://byebyemrps.com/</a></li><li>Use the search bar or browse through product categories to find the product of your choice</li><li>Click on the product you would like to purchase</li><li>If you like the product, click the '<strong>Add to Cart</strong>' button.</li><li>Once you are ready, click the '<strong>Proceed to Checkout</strong>' button.</li><li>You will be prompted to enter your email address and delivery address. Make sure all your information is accurate to avoid delays.</li><li>Provide additional phone number in the billing address if you have one</li><li>Select your preferred payment method from the available options</li><li>We offer secure payment gateways for credit cards, debit cards, net banking, and UPI</li><li>Review and Place Order: Review your order summary carefully, including product details, pricing, and delivery address</li><li>Once everything looks good, click the '<strong>Place Order</strong>' button.</li></ul>",
     },
     {
       heading: "Which payment methods do you accept?",
@@ -48,7 +48,7 @@ export const Faq = () => {
     {
       heading: "Is my payment information secure?",
       answer:
-        "We use Razorpay <a href='https://ashielectronics.com/' target='_blank'>https://ashielectronics.com/</a> payment gateway for processing all the transactions. Razorpay is India's first full-stack financial solutions company compliant with leading industry standards such as ISO 27001, PCI DSS and SOC2.<br /><br />They are RBI Authorised Payment Aggregator, and fully ensures that your transactions are secure.",
+        "We use Razorpay <a href='https://byebyemrps.com/' target='_blank'>https://byebyemrps.com/</a> payment gateway for processing all the transactions. Razorpay is India's first full-stack financial solutions company compliant with leading industry standards such as ISO 27001, PCI DSS and SOC2.<br /><br />They are RBI Authorised Payment Aggregator, and fully ensures that your transactions are secure.",
     },
     {
       heading: "How long does it take to receive my order?",
@@ -73,7 +73,7 @@ export const Faq = () => {
     {
       heading: "What all I need to do while accepting the delivery?",
       answer:
-        "We take utmost care to ensure that your orders are processed and delivered safely and within the committed delivery timelines.<br /><br /><ul><li>We kindly request that you inspect the product and its accessories carefully upon delivery.</li><li>Pls make a complete unboxing video without any breaks in between.</li><li>If you discover any discrepancies, defects, or damages in the product or its accessories, please bring it to our attention immediately on the very same day within 24 hours after accepting the delivery.</li><li>You can contact us at +91 9654502991 or email us at info@ashielectronics.com to report any issues with your order within 24 hours after you accept the delivery.</li></ul>",
+        "We take utmost care to ensure that your orders are processed and delivered safely and within the committed delivery timelines.<br /><br /><ul><li>We kindly request that you inspect the product and its accessories carefully upon delivery.</li><li>Pls make a complete unboxing video without any breaks in between.</li><li>If you discover any discrepancies, defects, or damages in the product or its accessories, please bring it to our attention immediately on the very same day within 24 hours after accepting the delivery.</li><li>You can contact us at +91 9654675803 or email us at byebyemrps@gmail.com to report any issues with your order within 24 hours after you accept the delivery.</li></ul>",
     },
     {
       heading:
@@ -99,7 +99,7 @@ export const Faq = () => {
     {
       heading: "Do you offer warranty on your products?",
       answer:
-        "All large appliances available on our website get 100% coverage for one year warranty without an exception. A significant percentage of large appliances from leading Brands are covered under their respective brand warranty. Those not covered under the brand warranty or other large appliances from smaller/purely online brands are covered under Ashi Electronics one-year comprehensive onsite service warranty.<br /><br />Small home appliances and other lifestyle products may be covered under their respective brand warranties which are generally off site in nature. We do not take any responsibility for these categories of products and nor we cover them under our own warranty.",
+        "All large appliances available on our website get 100% coverage for one year warranty without an exception. A significant percentage of large appliances from leading Brands are covered under their respective brand warranty. Those not covered under the brand warranty or other large appliances from smaller/purely online brands are covered under ByeByeMRPS one-year comprehensive onsite service warranty.<br /><br />Small home appliances and other lifestyle products may be covered under their respective brand warranties which are generally off site in nature. We do not take any responsibility for these categories of products and nor we cover them under our own warranty.",
     },
     {
       heading: "How are you able to offer such heavy discounts?",
@@ -109,7 +109,7 @@ export const Faq = () => {
     {
       heading: "How can I contact customer service?",
       answer:
-        "You can reach us by phone - 9654502991 or email us at info@ashielectronics.com",
+        "You can reach us by phone - 9654675803 or email us at byebyemrps@gmail.com",
     },
     {
       heading: "What are your customer service hours?",

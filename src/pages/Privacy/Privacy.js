@@ -116,7 +116,7 @@ export const Privacy = () => {
         <div className="container">
           <div className="col-md-12 d-flex flex-row flex-wrap d-inline-block align-items-start  mt-4">
             <div className="col-md-8 d-inline-block pull-left">
-              <h1>Ashi Electronics Privacy Policy</h1>
+              <h1>ByeByeMRPS Privacy Policy</h1>
               <p className="c13">
                 <span className="c6">Effective Date:</span>
                 <span className="c2">&nbsp;2024-02-29</span>
@@ -126,10 +126,10 @@ export const Privacy = () => {
               </h3>
               <p className="c0">
                 <span className="c2">
-                  This Privacy Policy describes how Ashi Electronics owned and operated by ASHI RETAIL ENTERPRISES (&quot;we,&quot;
+                  This Privacy Policy describes how ByeByeMRPS owned and operated by Kamal Enterprises (&quot;we,&quot;
                   &quot;us,&quot; or &quot;our&quot;) collects, uses, and
                   discloses your personal information when you visit our website
-                  at ashielectronics.com owned and operated by ASHI RETAIL ENTERPRISES (the &quot;Site&quot;) or make purchases
+                  at byebyemrps.com owned and operated by Kamal Enterprises (the &quot;Site&quot;) or make purchases
                   at our physical store located at SHOP NO. -4, KAUSHIK COMPLEX, SECTOR-17,NEAR PNB BANK
                   SUKHRALI, SUKHRALI, Gurgaon, Haryana, 122001. (the &quot;Store&quot;).
                 </span>

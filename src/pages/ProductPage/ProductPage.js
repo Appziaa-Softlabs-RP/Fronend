@@ -1124,7 +1124,7 @@ const ProdFeatures = () => {
       <Card.Header as="h5" className="text-success fw-bold" style={{
         fontSize: '16px',
         backgroundColor: '#e8f5e9'
-      }}>Ashi Promise</Card.Header>
+      }}>We Promise</Card.Header>
       <Row className="g-1">
         {features.map((feature, index) => (
           <Col key={index} xs={3} md={3}>

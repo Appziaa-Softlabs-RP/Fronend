@@ -17,7 +17,7 @@ export const Footer = () => {
           <Col lg={3} md={6} className={styles.footerColumn}>
             <h3 className={styles.columnTitle}>About the Shop</h3>
             <p className={styles.aboutText}>
-              Ashi Electronics specializes in selling open-box home and electronic appliances, offering high-quality products at deeply discounted prices. The brand ensures that all items are thoroughly tested and certified for functionality and reliability, providing customers with excellent value for money. With a focus on affordability and sustainability, Ashi Electronics caters to smart shoppers looking for premium appliances at unbeatable deals.
+              ByeByeMRPS specializes in selling open-box home and electronic appliances, offering high-quality products at deeply discounted prices. The brand ensures that all items are thoroughly tested and certified for functionality and reliability, providing customers with excellent value for money. With a focus on affordability and sustainability, ByeByeMRPS caters to smart shoppers looking for premium appliances at unbeatable deals.
             </p>
             <div className={styles.socialIcons}>
               {
@@ -89,28 +89,15 @@ export const Footer = () => {
 
             <div className={styles.contactInfo}>
               <h3 className={styles.columnTitle}>Contact Us</h3>
-              <p>+91 9654502991</p>
-              <p>+91 9811931938</p>
-              <p>Monday to Saturday: 11:00 AM - 7:00 PM</p>
-              <p>Sunday: Closed</p>
+              <p>+91 {enviroment.PHONE_NUMBER}</p>
+              <p>Monday to Sunday: 11:00 AM - 7:00 PM</p>
             </div>
           </Col>
         </Row>
 
-        {/* <div className={styles.businessSection}>
-          <h3 className={styles.columnTitle} style={{
-            width: 'fit-content',
-            margin: 'auto'
-          }}>Let's Do Business Together!</h3>
-          <p>
-            Be a part of Ashi Electronics - Recommence Retail revolution and own a profitable online + offline business.
-            Contact us at info@ashielectronics.com or WhatsApp 9654502991
-          </p>
-        </div> */}
-
         <div className={styles.copyrightSection}>
-          <p>© {(new Date()).getFullYear()} Ashi Electronics India</p>
-          <p>ashielectronics.com is a property of Ashi Electronics. Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
+          <p>© {(new Date()).getFullYear()} ByeByeMRPS India</p>
+          <p>byebyemrps.com is a property of ByeByeMRPS. Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
         </div>
       </Container>
     </footer>

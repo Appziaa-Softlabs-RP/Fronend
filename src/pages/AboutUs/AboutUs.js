@@ -27,14 +27,14 @@ export const AboutUs = () => {
 
           <p className="c6">
             <span className="c1">
-              About Ashi Electronics &ndash; Your Ultimate Destination for Quality
+              About ByeByeMRPS &ndash; Your Ultimate Destination for Quality
               Re-Commerce!
             </span>
           </p>
           <p className="c6">
-            Welcome to Ashi Electronics!
+            Welcome to ByeByeMRPS!
             <br />
-            At Ashi Electronics, we pride ourselves on being a premium brand
+            At ByeByeMRPS, we pride ourselves on being a premium brand
             dedicated to re-commerce. We specialize in the resale of branded
             electronics and household items, offering our customers quality
             products at exceptional value.
@@ -61,12 +61,12 @@ export const AboutUs = () => {
             <br />
             <br />
             Whether you're looking for the latest gadgets or essential household
-            items, Ashi Electronics is your trusted destination for premium
+            items, ByeByeMRPS is your trusted destination for premium
             re-commerce products. Join us in embracing sustainable consumption
             while enjoying top-notch products at unbeatable prices.
             <br />
             <br />
-            Discover the difference with Ashi Electronics today!
+            Discover the difference with ByeByeMRPS today!
           </p>
         </div>
       </div>

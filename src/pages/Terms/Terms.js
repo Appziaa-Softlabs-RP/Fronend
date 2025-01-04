@@ -28,12 +28,12 @@ export const Terms = () => {
           <p className="c6">
             <span className="c4">
               Explore our comprehensive Terms & Conditions document tailored for
-              Ashi Electronics owned and operated by ASHI RETAIL ENTERPRISES, covering essential aspects for our online re-commerce
+              ByeByeMRPS owned and operated by Kamal Enterprises, covering essential aspects for our online re-commerce
               platform operating in India.
             </span>
           </p>
           <p className="c6">
-            <span className="c1">ashielectronics.com owned and operated by ASHI RETAIL ENTERPRISES Terms &amp; Conditions</span>
+            <span className="c1">byebyemrps.com owned and operated by Kamal Enterprises Terms &amp; Conditions</span>
           </p>
           <p className="c6">
             <span className="c2">Effective Date:</span>
@@ -41,9 +41,9 @@ export const Terms = () => {
           </p>
           <p className="c6">
             <span className="c2">
-              Welcome to ashielectronics.com owned and operated by ASHI RETAIL ENTERPRISES (&quot;the Site&quot;). These Terms
+              Welcome to byebyemrps.com owned and operated by Kamal Enterprises (&quot;the Site&quot;). These Terms
               &amp; Conditions (&quot;Terms&quot;) govern your use of the Site
-              and the purchase of products from Ashi Electronics owned and operated by ASHI RETAIL ENTERPRISES.
+              and the purchase of products from ByeByeMRPS owned and operated by Kamal Enterprises.
             </span>
             <span className="c8">&nbsp;</span>
             <span className="c1">
@@ -154,7 +154,7 @@ export const Terms = () => {
             <li className="c0 li-bullet-0">
               <span className="c4">
                 All content on the Site, including text, graphics, logos,
-                images, and software is the property of Ashi Electronics owned and operated by ASHI RETAIL ENTERPRISES or its
+                images, and software is the property of ByeByeMRPS owned and operated by Kamal Enterprises or its
                 licensors and is protected by copyright and trademark laws.
               </span>
             </li>
@@ -218,7 +218,7 @@ export const Terms = () => {
           <ul className="c10 lst-kix_28a2ovzdh5yk-0 start">
             <li className="c0 li-bullet-0">
               <span className="c4">
-                You agree to indemnify and hold Ashi Electronics owned and operated by ASHI RETAIL ENTERPRISES harmless from any
+                You agree to indemnify and hold ByeByeMRPS owned and operated by Kamal Enterprises harmless from any
                 claims or damages that arise from your use of the Site or your
                 violation of these Terms.
               </span>
@@ -283,7 +283,7 @@ export const Terms = () => {
           </ul>
           <p className="c6">
             <span className="c1">
-              By using the ashielectronics.com owned and operated by ASHI RETAIL ENTERPRISES website, you acknowledge and agree
+              By using the byebyemrps.com owned and operated by Kamal Enterprises website, you acknowledge and agree
               to these Terms &amp; Conditions.
             </span>
           </p>

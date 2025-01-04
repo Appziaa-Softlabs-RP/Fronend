@@ -41,7 +41,7 @@ export const ShippingPolicy = () => {
                     The information about any pin code being serviced within India can be checked on the product page once the Pincode is entered. Your shipping address Pin code will be verified with our database before you add the product to the cart. In case it is not serviceable by our delivery partners, we would request you to provide us with an alternate shipping Pincode and check the availability.
                     <br />
                     <br />
-                    For non serviceable areas, you may enquire separately with our customer service number 9654502991 through phone call or whatsapp message. If delivery is possible through an alternate courier service, we will respond with the extra shipping charges applicable for such locations
+                    For non serviceable areas, you may enquire separately with our customer service number 9654675803 through phone call or whatsapp message. If delivery is possible through an alternate courier service, we will respond with the extra shipping charges applicable for such locations
                     <br />
                     <br />
                     Product delivery will be done through reputed courier service providers.
