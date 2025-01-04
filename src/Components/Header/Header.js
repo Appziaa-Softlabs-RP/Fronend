@@ -540,10 +540,12 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                       onMouseEnter={() => handleMouseEnter(item, index)}
                       onClick={() => handleMouseEnter(item, index)}
                     >
-                      <div
+                      <Link
+                        to={`/store/${item.name_url}`}
                         className={`${styles.menuName}`}
                         style={{
                           display: 'flex',
+                          textDecoration: 'none',
                           alignItems: 'center',
                           justifyContent: 'center',
                           gap: '0.5rem',
@@ -575,7 +577,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                             verticalAlign: 'middle',
                           }}
                         />
-                      </div>
+                      </Link>
                     </div>
                   ))}
               </div>
