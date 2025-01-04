@@ -14,8 +14,8 @@ export const BrandFocus = () => {
   let windowWidth = appData.appData.windowWidth;
   const [brandData, setBrandData] = useState([]);
 
-  const showBrandProd = (id, name) => {
-    navigate(`/store-product/brand/${id}`);
+  const showBrandProd = (name_url) => {
+    navigate(`/store-product/brand/${name_url}`);
   };
 
   useEffect(() => {
@@ -26,31 +26,28 @@ export const BrandFocus = () => {
       .then((res) => {
         setBrandData(res.payload_brandOffer.brand_offer);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, []);
   return (
     <React.Fragment>
       {brandData?.length > 0 && (
         <div
-          className={`col-12 ${
-            windowWidth === "desktop" && "p-3 mt-2"
-          } d-inline-flex`}
+          className={`col-12 ${windowWidth === "desktop" && "p-3 mt-2"
+            } d-inline-flex`}
         >
           <div className={`${windowWidth === "mobile" && "p-0"} container`}>
             <div
-              className={`col-12 ${
-                windowWidth === "mobile" ? "p-3" : "mt-3"
-              } d-inline-flex flex-column`}
+              className={`col-12 ${windowWidth === "mobile" ? "p-3" : "mt-3"
+                } d-inline-flex flex-column`}
             >
-              <h6
-                className={`${styles.brandInTitle} col-12 ${
-                  windowWidth === "desktop" ? "mb-4" : "mb-3"
-                } mt-0 fs-2`}
+              <h2
+                className={`${styles.brandInTitle} col-12 ${windowWidth === "desktop" ? "mb-4 fs-2" : "mb-3 fs-3"
+                  } mt-0`}
               >
                 {windowWidth === "mobile"
                   ? "Brands in Focus"
                   : "✨ Brands in Focus ✨"}
-              </h6>
+              </h2>
               <ReactOwlCarousel
                 className={`${styles.brandSilder} brandSilder col-12 owl-theme`}
                 margin={10}
@@ -66,7 +63,7 @@ export const BrandFocus = () => {
                       key={index}
                       className={`${styles.brandItemCard} item flex-shrink-1 d-inline-block position-relative text-decoration-none col-12 overflow-hidden mouse-cursor`}
                       onClick={() =>
-                        showBrandProd(item.brand_id, item.brand_offer)
+                        showBrandProd(item.name_url)
                       }
                     >
                       <span
@@ -74,7 +71,7 @@ export const BrandFocus = () => {
                       >
                         <img
                           src={item.offer_image}
-                          alt=""
+                          alt="offer"
                           className="object-contain p-0 col-12 d-inline-block position-absolute h-100 start-0 top-0"
                         />
                       </span>
@@ -83,8 +80,12 @@ export const BrandFocus = () => {
                       >
                         <img
                           src={item.brand_icon}
-                          alt=""
-                          className="object-contain p-0 col-12 d-inline-block"
+                          alt="offer"
+                          className={`${styles.brand_icon}`}
+                          style={{
+                            width: 'fit-content',
+                            borderRadius: "10px",
+                          }}
                         />
                         <label
                           className={`${styles.productPromoteText} col-12 p-0 text-center mb-2`}
@@ -92,11 +93,11 @@ export const BrandFocus = () => {
                           {item.brand_offer}
                         </label>
                         <div className="col-12 p-0 d-inline-flex justify-content-center mb-4">
-                          <span
+                          <button
                             className={`${styles.productShopText} text-uppercase d-inline-block text-center`}
                           >
                             Shop Now
-                          </span>
+                          </button>
                         </div>
                       </div>
                     </div>

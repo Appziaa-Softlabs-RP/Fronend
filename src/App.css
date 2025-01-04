@@ -4,36 +4,138 @@
   --MENU_HOVER_COLOR : rgba(22, 91, 219, 0.12);
   --ADD_BUTTON_COLOR : #165bdb;
 }
-@media (min-width: 1600px){
-  .container-xxl {
-      max-width: 1520px;
+
+body {
+  background: #e7ecf2;
+}
+
+.hero{
+  max-width: 1500px;
+  margin: auto;
+  padding: 0 20px;
+}
+
+@media screen and (min-width: 560px) {
+  .hideInDesktop{
+      display: none !important;
   }
 }
-@media (min-width: 1800px){
-  .container-xxl {
-      max-width: 1720px;
+
+@media screen and (max-width: 560px) {
+  .hideInMobile{
+      display: none !important;
   }
 }
-@media (min-width: 2000px){
-  .container-xxl {
-      max-width: 1920px;
-  }
-}
-@media (min-width: 2200px){
-  .container-xxl {
-      max-width: 2120px;
-  }
-}
-body{
-  background: #E7ECF2;
-}
-img{
+
+img {
   max-width: 100%;
 }
-.owl-carousel .owl-stage-outer .owl-stage{
+
+.owl-carousel .owl-stage-outer .owl-stage {
   padding: 0 !important;
 }
-.galleryBox .owl-stage{
+
+.swiper-button-next:hover{
+  background: var(--PRIMARY_COLOR) !important;
+}
+
+.swiper-button-prev:hover{
+  background: var(--PRIMARY_COLOR) !important;
+}
+
+.swiper-button-next:hover::after,
+.swiper-button-prev:hover::after {
+  color: white !important; /* Change this to your desired color */
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  background: white  !important;
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 200px !important;
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1) !important;
+}
+
+/* 560 below buttons are hidden */
+@media screen and (max-width: 560px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none !important;
+  }
+}
+
+.swiper-button-disabled{
+  display: none !important;
+}
+
+/* chaning icon size */
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  font-size: 15px !important;
+  font-weight: bold !important;
+  color: red !important;
+}
+
+.owl-next,
+.owl-prev {
+  box-shadow: 0 !important;
+}
+
+.swiper-wrapper {
+  padding-bottom: 20px !important;
+}
+
+.swiper-pagination-bullets {
+  width: fit-content !important;
+  transform: translateX(-50%) !important;
+  left: 50% !important;
+  margin: auto;
+  padding: 0px !important;
+  background-color: rgba(255, 255, 255, 0.767) !important;
+  border-radius: 40px !important;
+  height: 12px;
+}
+
+.owl-dots {
+  width: fit-content;
+  margin: auto;
+  padding: 0px !important;
+  background-color: rgba(255, 255, 255, 0.767) !important;
+  border-radius: 40px !important;
+  transform: translateY(-5px);
+  height: 15px;
+}
+
+.swiper-pagination-bullet {
+  transform: translateY(-3px);
+  margin: 6px !important;
+  padding: 0px !important;
+  height: 6px !important;
+  width: 6px !important;
+}
+
+.owl-dot {
+  margin: 0px !important;
+  padding: 0px !important;
+}
+
+.owl-dot span {
+  height: 6px !important;
+  width: 6px !important;
+  margin: 0px 6px !important;
+  transform: translateY(-7px);
+}
+
+.swiper-pagination-bullet-active {
+  background: var(--PRIMARY_COLOR) !important;
+}
+
+.owl-dot.active span {
+  background: var(--PRIMARY_COLOR) !important;
+}
+
+.galleryBox .owl-stage {
   display: flex;
   align-items: stretch;
 }
@@ -55,7 +157,10 @@ img{
 .owl-nav span {
   font-size: 30px;
 }
-.carousel-looking-for .owl-nav button, .heroBanner .owl-nav button, .brandSilder .owl-nav button, .limitedOfferSlider .owl-nav button{
+.carousel-looking-for .owl-nav button,
+.heroBanner .owl-nav button,
+.brandSilder .owl-nav button,
+.limitedOfferSlider .owl-nav button {
   position: absolute;
   background: var(--SECONDARY_COLOR) !important;
   border-radius: 50% !important;
@@ -64,26 +169,40 @@ img{
   display: flex !important;
   align-items: center;
   justify-content: center;
-  transition: .2s;
+  transition: 0.2s;
 }
-.carousel-looking-for .owl-nav button.owl-prev, .brandSilder .owl-nav button.owl-prev {
-left: -25px;
+.carousel-looking-for .owl-nav button.owl-prev,
+.brandSilder .owl-nav button.owl-prev {
+  left: -25px;
 }
-.carousel-looking-for .owl-nav button.owl-next, .brandSilder .owl-nav button.owl-next {
+.carousel-looking-for .owl-nav button.owl-next,
+.brandSilder .owl-nav button.owl-next {
   right: -25px;
 }
-.carousel-looking-for .owl-nav button span, .brandSilder .owl-nav button span{
+.carousel-looking-for .owl-nav button span,
+.brandSilder .owl-nav button span {
   color: var(--PRIMARY_COLOR);
   position: relative;
   top: -2px;
 }
-.carousel-looking-for .owl-nav button:hover, .brandSilder .owl-nav button:hover{
+.carousel-looking-for .owl-nav button:hover,
+.brandSilder .owl-nav button:hover {
   background: var(--PRIMARY_COLOR) !important;
 }
-.carousel-looking-for .owl-nav button:hover span, .brandSilder .owl-nav button:hover span{
+.carousel-looking-for .owl-nav button:hover span,
+.brandSilder .owl-nav button:hover span {
   color: var(--SECONDARY_COLOR);
 }
-.heroBanner .owl-nav button, .limitedOfferSlider .owl-nav button{
+.heroBannerMobile .owl-dots {
+  background-color: rgb(255, 255, 255) !important;
+  transform: translateY(-18px);
+}
+.primaryColor{
+  background-color: var(--PRIMARY_COLOR);
+  color: var(--SECONDARY_COLOR);
+}
+.heroBanner .owl-nav button,
+.limitedOfferSlider .owl-nav button {
   background: transparent !important;
 }
 .heroBanner .owl-nav button.owl-prev {
@@ -92,51 +211,61 @@ left: -25px;
 .heroBanner .owl-nav button.owl-next {
   right: 15px;
 }
-.heroBanner .owl-nav button span{
+.heroBanner .owl-nav button span {
   font-size: 80px;
   color: var(--SECONDARY_COLOR);
 }
-.brandSilder .owl-nav button.disabled, .limitedOfferSlider .owl-nav button.disabled{
+.brandSilder .owl-nav button.disabled,
+.limitedOfferSlider .owl-nav button.disabled {
   display: none !important;
 }
-input::-webkit-inner-spin-button, input::-webkit-outter-spin-button{
+input::-webkit-inner-spin-button,
+input::-webkit-outter-spin-button {
   -webkit-appearance: none;
   display: none;
 }
-.dealsShop.owl-carousel .owl-stage{
+.dealsShop.owl-carousel .owl-stage {
   display: flex;
   align-items: stretch;
 }
-.limitedOfferSlider .owl-stage-outer{
+.limitedOfferSlider .owl-stage-outer {
   padding-top: 30px;
 }
-.limitedOfferSlider.owl-theme .owl-nav{
+.limitedOfferSlider.owl-theme .owl-nav {
   width: 100px;
   top: 0px;
   right: 0px;
   height: 30px;
   margin-top: -5px;
 }
-.limitedOfferSlider .owl-nav button.owl-next{
+.limitedOfferSlider .owl-nav button.owl-next {
   right: 0px;
 }
-.limitedOfferSlider .owl-nav button.owl-prev{
+.limitedOfferSlider .owl-nav button.owl-prev {
   right: 30px;
 }
-.limitedOfferSlider .owl-nav button span{
+.limitedOfferSlider .owl-nav button span {
   font-size: 20px;
   color: var(--SECONDARY_COLOR);
 }
-.limitedOfferSlider.owl-theme .owl-nav button{
+.limitedOfferSlider.owl-theme .owl-nav button {
   height: 30px;
   width: 30px;
   margin: 0px;
 }
+.infinite-scroll-component__outerdiv {
+  width: 100%;
+  display: inline-flex;
+}
 @media screen and (max-width: 568px) {
-  .carousel-looking-for .owl-nav button.owl-prev, .brandSilder .owl-nav button.owl-prev {
+  .carousel-looking-for .owl-nav button.owl-prev,
+  .brandSilder .owl-nav button.owl-prev {
     left: -10px;
+    display: none !important;
   }
-  .carousel-looking-for .owl-nav button.owl-next, .brandSilder .owl-nav button.owl-next {
+  .carousel-looking-for .owl-nav button.owl-next,
+  .brandSilder .owl-nav button.owl-next {
     right: 20px;
+    display: none !important;
   }
 }

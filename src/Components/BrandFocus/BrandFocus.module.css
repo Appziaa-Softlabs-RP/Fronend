@@ -1,28 +1,46 @@
-.brandInTitle{
-    color: #1D2A39;
-    font-size: 16px;
-    font-weight: 700;
-    line-height: 16px;
+.brandInTitle {
+	color: #1D2A39;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 16px;
 }
+
+.brandItemCard:hover .productShopText {
+	background: #cc0d57;
+}
+
+.brandItemCard .brandItemPhotoBox img {
+	transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.brandItemCard:hover .brandItemPhotoBox img {
+	transform: scale(1.1);
+	cursor: pointer;
+}
+
 .exploreByCategoryHeader {
-    font-weight: bold;
-    color: #1D2A39;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 20px;
+	font-weight: bold;
+	color: #1D2A39;
+	font-size: 16px;
+	font-weight: 700;
+	margin-bottom: 20px;
 }
-.brandItemCard{
-	background: -webkit-linear-gradient(-45deg, #9d1285 0%,#4900ab 100%);
-	background: linear-gradient(135deg, #9d1285 0%,#4900ab 100%);
-	border-radius: 10px;	
+
+.brandItemCard {
+	background: -webkit-linear-gradient(-45deg, #9d1285 0%, #4900ab 100%);
+	background: linear-gradient(135deg, #9d1285 0%, #4900ab 100%);
+	border-radius: 10px;
 }
-.brandItemPhotoBox{
+
+.brandItemPhotoBox {
 	padding-top: 100%;
 }
-.brandItemPhotoBox img{
+
+.brandItemPhotoBox img {
 	inset: 0;
 }
-.brandTextBlock img{
+
+.brandTextBlock img {
 	position: absolute;
 	height: 60px;
 	top: -40px;
@@ -31,23 +49,28 @@
 	transform: translateX(-50%);
 	-webkit-transform: translateX(-50%);
 }
-.productPromoteText{
+
+.productPromoteText {
 	margin-top: 30px;
 	font-size: 20px;
 	font-weight: 700;
 	letter-spacing: 0.04em;
 	color: #FFF;
 }
-.productShopText{
+
+.productShopText {
+	border: none;
 	color: #FFF;
+	transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
 	background: #f01569;
 	border-radius: 10px;
 	font-size: 16px;
 	font-weight: 600;
 	padding: 5px 25px;
 }
+
 @media screen and (min-width:568px) {
-	.brandInTitle{
+	.brandInTitle {
 		font-size: 25px;
 		font-weight: 700;
 		text-align: center;

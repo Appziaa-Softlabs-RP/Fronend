@@ -1,7 +1,8 @@
-.categoryBox{
+.categoryBox {
     background: #FFF;
     border-radius: 10px;
 }
+
 .exploreByCategoryHeader {
     font-weight: bold;
     color: #1D2A39;
@@ -9,16 +10,19 @@
     font-weight: 700;
     margin-bottom: 20px;
 }
-.categoryblock{
+
+.categoryblock {
     float: left;
     width: 50%;
     padding: 0px 10px;
 }
-.imgBox{
-    border-radius: 5px;
-    border: 2px solid #F9F01F;
+
+.imgBox {
+    border-radius: 100%;
+    border: 1px solid var(--PRIMARY_COLOR);
 }
-.categoryProdName{
+
+.categoryProdName {
     color: #000;
     font-weight: 500;
     font-size: 13px;

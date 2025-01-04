@@ -1,33 +1,37 @@
 import React, { useState } from "react";
-import { Header } from "../../Components/Header/Header";
 import { Aside } from "../../Components/Aside/Aside";
-import { ShopAge } from "../../Components/ShopAge/ShopAge";
-import { CategoryShop } from "../../Components/CategoryShop/CategoryShop";
-import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
-import { HeroBanner } from "../../Components/HeroBanner/HeroBanner";
 import { BrandFocus } from "../../Components/BrandFocus/BrandFocus";
-import { Footer } from "../../Components/Footer/Footer";
-import { useApp } from "../../context/AppContextProvider";
-import { LookingFor } from "../../Components/LookingFor/LookingFor";
+import { CategoryShop } from "../../Components/CategoryShop/CategoryShop";
 import { DealShop } from "../../Components/DealShop/DealShop";
+import { Footer } from "../../Components/Footer/Footer";
+import { Header } from "../../Components/Header/Header";
+import { HeroBanner } from "../../Components/HeroBanner/HeroBanner";
 import { LimitedOffers } from "../../Components/LimitedOffers/LimitedOffers";
+import { LookingFor } from "../../Components/LookingFor/LookingFor";
+import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
+import { ShopAge } from "../../Components/ShopAge/ShopAge";
 
 export const Home = () => {
   const [asideOpen, setAsideOpen] = useState(false);
-  const appData = useApp();
-  const isMobile = appData.appData.windowWidth === 'mobile';
+  const [navItems, setNavItems] = useState([]);
 
   return (
     <React.Fragment>
       <div className="col-12 d-inline-flex flex-column">
-        <Header asideOpen={asideOpen} setAsideOpen={setAsideOpen} />
-        <Aside asideOpen={asideOpen} setAsideOpen={setAsideOpen} />
+        <Header asideOpen={asideOpen} setAsideOpen={setAsideOpen} setFetchedNavItems={setNavItems} />
+        <Aside asideOpen={asideOpen} setAsideOpen={setAsideOpen} navItems={navItems} setNavItems={setNavItems} />
         {/* hero banner */}
         <HeroBanner />
-        {/* what are you looking for ? */}
-        {!isMobile && <LookingFor />}
-        
-        {isMobile && <CategoryShop />}
+
+        {/* Mobile Structure */}
+        <div className={`hideInDesktop`}>
+          <CategoryShop />
+        </div>
+        {/* Desktop Structure */}
+        <div className={`hideInMobile`}>
+          <LookingFor />
+        </div>
+
 
         <DealShop />
 
@@ -37,7 +41,7 @@ export const Home = () => {
 
         <PromoBanner type="Offers" />
 
-        <LimitedOffers/>
+        <LimitedOffers />
 
         <BrandFocus />
 

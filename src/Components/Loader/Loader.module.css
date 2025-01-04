@@ -5,6 +5,7 @@
   min-height: 200px;
   column-count: 4;
 }
+
 .loaderItem {
   display: flex;
   border-radius: 10px;
@@ -13,24 +14,106 @@
   margin: 10px;
 }
 
-.productCardLoaderWrapper{
-  border: 1px solid #DDD;
+.productCardsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 8px;
+  width: 70%;
+  background: #fff;
+}
+
+.productCardLoaderWrapper {
   padding: 10px;
   background: #FFF;
+}
+
+.productListBanner {
+  width: 90vw;
+  height: 200px;
+}
+
+.productCardLoaderWrapperBody {
+  border: 1px solid #DDD;
   border-radius: 10px;
-  width: calc(25% - 20px);
-  margin: 10px;
+  padding: 10px;
+}
+
+.productCardLoaderWrapper {
+  position: relative;
+  border-radius: 8px;
+  width: 33%;
+  background: #fff;
+}
+
+.superContainerCards {
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 560px) {
+  .productsContainer {
+    width: 50%;
+  }
+
+
+  .productListBanner {
+    height: 100px !important;
+  }
+
+
+  .productCardLoaderWrapper {
+    width: 50%;
+  }
+
+  .superCardsContainer {
+    margin-top: 1rem;
+  }
+}
+
+@media screen and (max-width: 560px) {
+  .productCardsContainer {
+    width: 100%;
+  }
+
+  .superCardsContainer {
+    margin-top: 2rem;
+  }
+}
+
+@media screen and (max-width: 770px) {
+  .productCardLoaderWrapper {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .loaderContainer {
+    min-width: calc(50% - 10px);
+  }
 }
 
 .heroBannerLoader {
   display: flex;
-  padding: 10px;
-  background-color: #FFF;
+  height: calc(100vw / 4.77);
+  width: 100%;
+  margin: 20px 0px;
+}
+
+@media screen and (max-width: 560px) {
+  .heroBannerLoader {
+    min-height: calc((100vw / 4.77)*1.6);
+  }
 }
 
 .bannerLoader {
   display: flex;
   flex-direction: column;
+}
+
+.agelLoader {
+  display: flex;
+  flex-direction: column;
+  background: var(--MENU_HOVER_COLOR);
+
 }
 
 .bannerTitle {
@@ -44,11 +127,56 @@
   display: flex;
 }
 
+.ageBody {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  justify-content: space-between;
+  background-color: var(--MENU_HOVER_COLOR);
+  margin-top: 10px;
+  padding: 40px 10px;
+}
+
 .smallBox {
   height: 200px;
   width: 200px;
   border-radius: 10px;
   margin: 10px;
+}
+
+.ageCircleLoader{
+  border-radius: 200px;
+  height: 180px;
+  width: 180px;
+  margin: 0 auto;
+}
+
+.ageTextLoader{
+  border-radius: 5px;
+  height: 30px;
+  position: relative;
+  min-width: 150px;
+  width: 100%;
+}
+
+@media screen and (max-width: 560px) {
+  .smallBox {
+    height: 110px;
+    /* width: 110px; */
+  }
+  .ageCircleLoader{
+    border-radius: 200px;
+    height: 100px;
+    width: 100px;
+    margin: 0 auto;
+  }
+  .ageTextLoader{
+    border-radius: 5px;
+    height: 30px;
+    position: relative;
+    min-width: 100px;
+    width: 100%;
+  }
 }
 
 .promoBox {

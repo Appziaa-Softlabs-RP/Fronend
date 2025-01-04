@@ -6,13 +6,30 @@ import styles from './Loader.module.css';
 
 export const HeaderNavLoader = () => {
   return (
-    <div className={styles.headerNavWrapper}>
-      <div className='container d-flex justify-content-around'>
-        <Skeleton height={40} width={"80%"} containerClassName='w-100 h-100' />
-        <Skeleton height={40} width={"80%"} containerClassName='w-100 h-100' />
-        <Skeleton height={40} width={"80%"} containerClassName='w-100 h-100' />
-        <Skeleton height={40} width={"80%"} containerClassName='w-100 h-100' />
-      </div>
+    <div className='p-1 pb-2 d-flex justify-content-around' style={{
+      maxWidth: "100dvw",
+      overflowX: "hidden",
+    }}>
+      <Skeleton height={40} width={"80%"} containerClassName='h-100' style={{
+        minWidth: '180px',
+        margin: '0px 80px',
+        width: '200px'
+      }} />
+      <Skeleton height={40} width={"80%"} containerClassName='h-100' style={{
+        minWidth: '180px',
+        margin: '0px 80px',
+        width: '200px'
+      }} />
+      <Skeleton height={40} width={"80%"} containerClassName='h-100' style={{
+        minWidth: '180px',
+        margin: '0px 80px',
+        width: '200px'
+      }} />
+      <Skeleton height={40} width={"80%"} containerClassName='h-100' style={{
+        minWidth: '180px',
+        margin: '0px 80px',
+        width: '200px'
+      }} />
     </div>
   )
 }
@@ -20,23 +37,25 @@ export const HeaderNavLoader = () => {
 export const ProductCardLoader = () => {
   return (
     <div className={styles.productCardLoaderWrapper}>
-      <div className='container'>
-        {/* images */}
-        <Skeleton
-          height={275}
-          width={"100%"}
-        />
+      <div className={styles.productCardLoaderWrapperBody}>
+        <div className='container'>
+          {/* images */}
+          <Skeleton
+            height={275}
+            width={"100%"}
+          />
 
-        <Skeleton
-          height={16}
-          count={2}
-        />
-        <Skeleton
-          height={16}
-          width={"40%"}
-        />
-        <div className='mt-10' />
-        <Skeleton height={50} />
+          <Skeleton
+            height={16}
+            count={2}
+          />
+          <Skeleton
+            height={16}
+            width={"40%"}
+          />
+          <div className='mt-10' />
+          <Skeleton height={50} />
+        </div>
       </div>
     </div>
   );
@@ -44,11 +63,57 @@ export const ProductCardLoader = () => {
 
 export const ProductListLoader = () => {
   return (
-    <div className='d-flex flex-wrap'>
-      <div className='container'>
-        <div className='d-flex flex-wrap'>
+    <div className='d-flex flex-column w-full'>
+      <div className={`${styles.ageBannerRow} col-12 d-inline-flex mb-4`}>
+        <Skeleton
+          height={200}
+          className={styles.productListBanner}
+        />
+      </div>
+      <div className='d-flex w-full'
+        style={{
+          position: "relative",
+          maxWidth: "100vw",
+          overflowX: "hidden",
+        }}
+      >
+        <div className='hideInMobile' style={{
+          position: 'sticky',
+          borderRadius: '10px',
+          top: "10",
+          background: 'white',
+          height: "100vh",
+          display: 'grid',
+          gridTemplateColumns: '1fr',
+          // minWidth: 'calc(100vw - 77%)',
+          width: '25%',
+          margin: '0px 10px',
+        }}>
+          <Skeleton
+            style={{
+              borderRadius: '10px',
+              width: '90%',
+              margin: "5%",
+              height: '200px',
+            }} />
+          <Skeleton
+            style={{
+              borderRadius: '10px',
+              width: '90%',
+              margin: "5%",
+              height: '200px',
+            }} />
+          <Skeleton
+            style={{
+              borderRadius: '10px',
+              width: '90%',
+              margin: "5%",
+              height: '200px',
+            }} />
+        </div>
+        <div className={styles.productCardsContainer}>
           {Array.apply(null, { length: 10 }).map((e, i) => (
-            <ProductCardLoader key={i}/>
+            <ProductCardLoader key={i} />
           ))}
         </div>
       </div>
@@ -59,8 +124,50 @@ export const ProductListLoader = () => {
 export const HeroBannerLoader = () => {
   return (
     <div className={styles.heroBannerLoader}>
+      <Skeleton containerClassName='h-100 w-100'
+        style={{
+          minHeight: '100%',
+          borderRadius: '10px',
+        }}
+        height={100}
+        width={"100%"} />
+    </div>
+  );
+}
+
+const responsiveItems =
+  window.innerWidth >= 1450
+    ? 6
+    : window.innerWidth >= 1400
+      ? 5
+      : window.innerWidth >= 992
+        ? 4
+        : 3
+
+export const ShopAgeLoader = () => {
+  return (
+    <div className={styles.ageLoader}>
       <div className='container'>
-        <Skeleton containerClassName='h-100 w-100' height={250} width={"100%"} />
+        <div className={styles.bannerTitle}>
+          <Skeleton
+            containerClassName='h-100 w-100 mt-4'
+            height={40}
+            width={"40%"}
+          />
+        </div>
+        <div className={styles.ageBody}>
+          {Array.apply(null, { length: responsiveItems }).map((e, i) => (
+            <div className={styles.smallBox} key={i} style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}>
+              <Skeleton className={styles.ageCircleLoader} />
+              <Skeleton className={styles.ageTextLoader} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
