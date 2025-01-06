@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import noImage from "../../assets/images/image-not-available.jpg";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { AppNotification } from "../../utils/helper";
 import styles from "./ProductCard.module.css";
-import noImage from "../../assets/images/image-not-available.jpg";
-import { ProductPage } from "../../pages/ProductPage/ProductPage";
 
 export const ProductCard = ({ item, index }) => {
   const [prodAdded, setProdAdded] = useState(false);
@@ -277,7 +276,7 @@ export const ProductCard = ({ item, index }) => {
             )}
 
         <Link
-          to={`/product/${item?.name_url}`}
+          to={`/product/${item?.name_url}#top`}
           style={{
             textDecoration: "none",
           }}
@@ -332,7 +331,7 @@ export const ProductCard = ({ item, index }) => {
         </Link>
         <div>
           <Link
-            to={`/product/${item?.name_url}`}
+            to={`/product/${item?.name_url}#top`}
             style={{
               margin: "15px 0px",
               textDecoration: "none",

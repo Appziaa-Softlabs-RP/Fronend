@@ -18,6 +18,28 @@ h3 {
   font-family: 'Comic Sans MS', cursive, sans-serif !important;
 }
 
+.zoomSlide {
+  overflow: hidden !important;
+}
+
+.zoomContent {
+  transition: transform 2.5s ease, opacity 2.5s ease !important;
+  transform: scale(10) !important;
+  /* opacity: 0 !important; */
+}
+
+.zoomSlide.swiper-slide-active .zoomContent {
+  transform: scale(1) !important;
+  opacity: 1 !important;
+}
+
+.zoomSlide.swiper-slide-prev .zoomContent,
+.zoomSlide.swiper-slide-next .zoomContent {
+  transform: scale(0.3) !important;
+  /* opacity: 0 !important; */
+}
+
+
 .btnCustom {
   --button-color: var(--PRIMARY_COLOR, #4a90e2);
   --button-text-color: var(--SECONDARY_COLOR, #ffffff);

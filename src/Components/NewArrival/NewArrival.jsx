@@ -12,6 +12,7 @@ export const NewArrival = () => {
     const appData = useApp();
     let windowWidth = appData.appData.windowWidth;
     const [productData, setProductData] = useState([]);
+    const isMobile = windowWidth === "mobile";
 
     useEffect(() => {
         const payload = {
@@ -39,31 +40,56 @@ export const NewArrival = () => {
     return (
         <React.Fragment>
             {productData?.length > 0 &&
-                <div className={`col-12 ${windowWidth === "desktop" && 'p-3 mt-2'} d-inline-flex`}>
-                    <div className={`${windowWidth === "mobile" && 'p-0'} container`}>
-                        <div className={`col-12 ${windowWidth === 'mobile' ? 'p-3' : 'mt-3'} d-inline-flex flex-column`}>
-                            <h2 className={`${styles.brandInTitle} col-12 ${windowWidth === "desktop" ? 'mb-4 fs-2' : 'mb-3 fs-3'} mt-0 fs-2`}>{windowWidth === 'mobile' ? 'New Arrivals!' : '✨ New Arrivals! ✨'}</h2>
-                            <ReactOwlCarousel className={`${styles.brandSilder} brandSilder col-12 owl-theme`}
-                                margin={10}
+                <div className={`col-12 py-5 ${styles.container} ${windowWidth === "desktop" && 'p-3 mt-2'} d-inline-flex`}>
+                    <div className={`container-fluid`}>
+                        {/* <div className={`col-12 ${windowWidth === 'mobile' ? 'p-3' : 'mt-3'} position-relative d-inline-flex flex-column`}> */}
+                        <div className={`col-12 d-inline-flex flex-column`} style={{
+                            maxWidth: "100%",
+                        }}>
+                            <h2 className={`${styles.brandInTitle} text-white pb-4 col-12 ${windowWidth === "desktop" ? 'mb-4 fs-2' : 'mb-3 fs-3'} mt-0 fs-2`}>{windowWidth === 'mobile' ? 'New Arrivals!' : '✨ New Arrivals! ✨'}</h2>
+                            <ReactOwlCarousel
+                                className={`${styles.brandSilder} brandSilder col-12 owl-theme`}
+                                margin={20}
                                 dots={false}
-                                items={responsiveItems}
+                                items={isMobile ? 1 : 3}
                                 loop={false}
                                 nav={true}
-                                stagePadding={`${windowWidth === 'mobile' ? 50 : 0}`}>
-                                {/* {productData?.map((item, index) => { */}
-                                {/* show in descending order according sort by stock */}
-                                {productData?.sort((a, b) => b.stock - a.stock).map((item, index) => {
-                                    return (
-                                        <div key={index} className={`${styles.brandItemCard} item flex-shrink-1 d-inline-block position-relative text-decoration-none col-12 overflow-hidden mouse-cursor`}>
-                                            <ProductCard item={item} index={index} />
-                                        </div>
-                                    );
-                                })}
+                                stagePadding={isMobile ? 50 : 0}
+                                responsive={{
+                                    0: { items: 1.5 },
+                                    768: { items: 2 },
+                                    992: { items: 3 },
+                                    1210: { items: 4 },
+                                }}
+                            >
+                                {
+                                    productData?.sort((a, b) => b.stock - a.stock).map((item, index) => {
+                                        return (
+                                            <div
+                                                key={index}
+                                                className="item"
+                                                style={{
+                                                    padding: "15px",
+                                                    transition: "transform 0.3s",
+                                                    cursor: "pointer",
+                                                }}
+                                                onMouseEnter={(e) => {
+                                                    e.currentTarget.style.transform = "scale(1.05)";
+                                                }}
+                                                onMouseLeave={(e) => {
+                                                    e.currentTarget.style.transform = "scale(1)";
+                                                }}
+                                            >
+                                                <ProductCard item={item} index={index} />
+                                            </div>
+                                        );
+                                    })
+                                }
                             </ReactOwlCarousel>
                         </div>
                     </div>
                 </div>
             }
-        </React.Fragment>
+        </React.Fragment >
     )
 }

@@ -1,3 +1,7 @@
+.container{
+  background-color: var(--PRIMARY_COLOR);
+}
+
 .brandInTitle {
   color: #1d2a39;
   font-size: 16px;

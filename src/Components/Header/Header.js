@@ -1,29 +1,31 @@
-import React, { useEffect, useState } from "react";
-import styles from "./Header.module.css";
-import {
-  MenuIcons,
-  CartIcon,
-  SupportIcon,
-  MailIcon,
-  UserIcon,
-  SearchIcon,
-  BackArrowIcon,
-} from "../siteIcons";
-import siteLogo from "../../assets/images/site_logo.png";
-import { enviroment } from "../../enviroment";
-import { useNavigate } from "react-router-dom";
-import { useApp } from "../../context/AppContextProvider";
-import { Link } from "react-router-dom";
-import { LoginPopup } from "../LoginPopup/LoginPopup";
-import ReactOwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import siteLogo from "../../assets/images/site_logo.png";
+import { useApp } from "../../context/AppContextProvider";
+import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
-import { CartAside } from "../CartAside/CartAside";
 import { AppNotification } from "../../utils/helper";
+import { CartAside } from "../CartAside/CartAside";
+import { LoginPopup } from "../LoginPopup/LoginPopup";
+import {
+  BackArrowIcon,
+  CartIcon,
+  MailIcon,
+  MenuIcons,
+  SearchIcon,
+  SupportIcon,
+  UserIcon,
+} from "../siteIcons";
+import styles from "./Header.module.css";
 
+import { Autoplay, EffectFade, Navigation } from "swiper/modules";
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { useAppStore } from "../../store";
 import { HeaderNavLoader } from "../Loader/Loader";
+
+import 'swiper/css';
 
 export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
   const appData = useApp();
@@ -265,37 +267,31 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
       <div className={`hideInMobile col-12 d-inline-flex flex-column`} style={{
         position: 'relative'
       }}>
-        <ReactOwlCarousel
-          className={`${styles.topHeaderSale} col-12 owl-theme`}
+        <Swiper
+          className={`${styles.topHeaderSale} col-12`}
           margin={0}
-          items={1}
+          modules={[Navigation, Autoplay, EffectFade]}
+          effect="fade"
+          spaceBetween={0}
+          autoplay={{
+            delay: 5000,
+          }}
+          slidesPerView={1}
           loop={true}
-          dots={false}
-          animateOut="slideOutUp"
-          animateIn="slideInUp"
-          autoPlay={true}
         >
-          <div
-            className={`col-12 d-inline-flex align-items-center justify-content-center`}
-          >
-            <span
-              className={`d-inline-block text-decoration-none ${styles.dealsLink}`}
-              title="Superdeals"
-            >
-              Shipping Across India.
-            </span>
-          </div>
-          <div
-            className={`col-12 d-inline-flex align-items-center justify-content-center`}
-          >
-            <span
-              className={`d-inline-block text-decoration-none ${styles.dealsLink}`}
-              title="Superdeals"
-            >
-              Shipping Across India.
-            </span>
-          </div>
-        </ReactOwlCarousel>
+          {
+            Array.from({ length: 4 }).map((_, idx) => (
+              <SwiperSlide key={idx} className={`zoomSlide ${styles.dealsLink}`}>
+                <div className={`zoomContent w-full flex items-center justify-center text-center py-2`}>
+                  <span
+                    className={`text-sm md:text-base font-medium`}
+                  >
+                    Shipping Across India || Same Day Delivery in Bengaluru
+                  </span>
+                </div>
+              </SwiperSlide>
+            ))}
+        </Swiper>
         <div
           className={`${styles.headerRow} col-12 d-inline-flex align-items-center`}
         >

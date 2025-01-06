@@ -99,6 +99,19 @@ ApiService.sendOTP = function (data) {
   });
 };
 
+ApiService.homeCategories = function (data) {
+  const cacheKey = "/store/get-home-category-featured" + JSON.stringify(data);
+  return cacheFetch(
+    "/store/get-home-category-featured",
+    {
+      method: "post",
+      body: data,
+      headers: { "Content-Type": "application/json" },
+    },
+    cacheKey
+  );
+};
+
 ApiService.getPaymentFees = function (data) {
   return fetch({
     url: "payments/get-company-payment-fees",

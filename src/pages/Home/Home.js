@@ -13,6 +13,7 @@ import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
 import Reviews from "../../Components/Reviews/Reviews";
 import { ShopAge } from "../../Components/ShopAge/ShopAge";
 import UnderContruction from "../../Components/UnderConstruction/UnderConstruction";
+import { HomeCategories } from "../../Components/home-category-products/HomeCategoryProducts";
 
 export const Home = () => {
   const [asideOpen, setAsideOpen] = useState(false);
@@ -42,6 +43,8 @@ export const Home = () => {
         <NewArrival />
 
         <DealShop />
+
+        <HomeCategories />
 
         <PromoBanner type="Promo Banner" />
 

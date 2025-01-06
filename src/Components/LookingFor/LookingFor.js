@@ -5,8 +5,8 @@ import { useApp } from "../../context/AppContextProvider";
 import styles from "./LookingFor.module.css";
 
 import { useAppStore } from "../../store";
-import { enviroment } from "../../enviroment";
 import { LookingForBannerLoader } from "../Loader/Loader";
+import { ArrowRight } from "react-bootstrap-icons";
 
 export const LookingFor = () => {
   const categories = useAppStore((state) => state.categories);
@@ -25,17 +25,32 @@ export const LookingFor = () => {
     }
   }, [categories]);
 
-  const responsiveItems =
-    window.innerWidth >= 1300
-      ? 6
-      : window.innerWidth >= 1200
-        ? 5
-        : window.innerWidth >= 992
-          ? 4
-          : window.innerWidth >= 768
-            ? 3
-            : 2.5;
+  // Adjusting responsive settings for the carousel
+  const responsiveSettings = {
+    0: {
+      items: 1.5, // Mobile devices
+    },
+    500: {
+      items: 2, // Mobile devices
+    },
+    768: {
+      items: 3, // Tablets
+    },
+    992: {
+      items: 4, // Small laptops
+    }
+  };
 
+  const getColors = (item) => {
+    return item?.category?.color_code ?? "#e75050";
+  }
+
+  const hexToRgb = (hex) => {
+    let r = parseInt(hex.slice(1, 3), 16);
+    let g = parseInt(hex.slice(3, 5), 16);
+    let b = parseInt(hex.slice(5, 7), 16);
+    return `${r}, ${g}, ${b}`;
+  };
 
   return (
     <React.Fragment>
@@ -52,39 +67,68 @@ export const LookingFor = () => {
           {loading ? (
             <LookingForBannerLoader />
           ) : (
-            <div className="col-12 d-inline-flex">
+            <div className="col-12 row d-inline-flex" style={{
+              maxWidth: '1200px',
+              margin: 'auto',
+            }}>
               <ReactOwlCarousel
                 className={`carousel-looking-for col-12 brandSilder owl-theme`}
                 margin={10}
                 loop={false}
                 dots={false}
-                items={responsiveItems}
+                responsive={responsiveSettings}
+                style={{
+                  display: 'flex',
+                  justifyContent: 'center'
+                }}
                 nav={true}
               >
                 {categories?.map((item, idx) => {
                   return (
-                    <div
-                      className={`${styles.thumbItem} col-12 d-inline-flex flex-column gap-2 mouse-cursor`}
-                      key={idx}
-                      onClick={() =>
-                        subCatProduts(
-                          item?.category?.name_url,
-                          item?.verticalSlug
-                        )
-                      }
-                    >
-                      <div className={`${styles.lookingForContainer}`}>
-                        <img
-                          src={item?.category?.image}
+                    <div key={idx} className="my-4">
+                      <div className={styles.cardContainer}
+                        style={{
+                          color: "black"
+                        }}
+                        onClick={() =>
+                          subCatProduts(
+                            item?.category?.name_url,
+                            item?.verticalSlug
+                          )
+                        }
+                      >
+                        <div className={`${styles.backgroundGradientColor}`} style={{
+                          background: `linear-gradient(to bottom, rgba(${hexToRgb(getColors(item))}, 0.1) 0%, rgba(${hexToRgb(getColors(item))}, 1) 100%)`
+                        }} />
+                        <img src={item?.category?.image}
                           alt={item?.category?.name}
                           className="object-fit-fill col-12 d-inline-block"
+                          style={{
+                            objectFit: "cover",
+                            width: "100%",
+                            margin: "0px",
+                            transform: "translateY(-6%) scale(1.5)",
+                          }}
                         />
+                        <span className="fs-5 mt-2">
+                          {item?.category?.name}
+                        </span>
+                        <span className={styles.arrow} style={{
+                          background: getColors(item),
+                          color: "black",
+                          boxShadow: "0px 0px 2px 0px rgba(255, 255, 255, 0.25)",
+                          padding: "2px 10px",
+                          borderRadius: "100px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          marginTop: "10px",
+                        }}>
+                          <ArrowRight style={{
+                            margin: "0px"
+                          }} />
+                        </span>
                       </div>
-                      <p
-                        className={`${styles.thumbName} text-truncate col-12 text-center mb-0`}
-                      >
-                        {item?.category?.name}
-                      </p>
                     </div>
                   );
                 })}

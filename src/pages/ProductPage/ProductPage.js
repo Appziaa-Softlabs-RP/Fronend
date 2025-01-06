@@ -61,9 +61,6 @@ export const ProductPage = () => {
   const [shareProdName, setShareProdName] = useState(
     encodeURIComponent(ProductData?.name)
   );
-  const [isAboutProductDesc, setIsAboutProductDesc] = useState(true);
-  const [isOtherProductDesc, setIsOtherProductDesc] = useState(false);
-  const [isSpecilization, setIsSpecilization] = useState(false);
   const userInfo = appData?.appData?.user;
   const pageCurrentURL = encodeURIComponent(window.location.href);
   const [productVariants, setProductVariants] = useState([]);
@@ -324,11 +321,7 @@ export const ProductPage = () => {
       AppNotification("Error", "Please enter valid pincode.", "danger");
     }
   };
-
-  const showCheckoutPage = () => {
-    navigate("/checkout");
-  };
-
+  
   const copylinkUrl = () => {
     var copyText = document.getElementById("myUrlInput");
     copyText.select();
@@ -549,7 +542,7 @@ export const ProductPage = () => {
         </Helmet>
       )}
 
-      <div className="hideInDesktop" style={{
+      <div className="hideInDesktop" id="top" style={{
         maxWidth: "100vw",
       }}>
         <PageHeader title={ProductData?.name} />
@@ -640,7 +633,7 @@ export const ProductPage = () => {
         </div>
       </div>
 
-      <div className="hideInMobile" style={{
+      <div className="hideInMobile" id="top" style={{
         maxWidth: "100vw",
         background: "white",
         display: "flex",
