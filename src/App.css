@@ -24,7 +24,7 @@ h3 {
 
 .zoomContent {
   transition: transform 2.5s ease, opacity 2.5s ease !important;
-  transform: scale(10) !important;
+  transform: scale(0.3) !important;
   /* opacity: 0 !important; */
 }
 
