@@ -501,56 +501,76 @@ export const Footer = () => {
                 >
                   <h5>Get social with us</h5>
                   <ul className="list-unstyled d-inline-flex align-items-center mb-3 gap-3">
-                    <li className={`${styles.socialIcon} list-unstyled`}>
-                      <a
-                        href={enviroment.FACEBOOK_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-decoration-none"
-                      >
-                        <FacebookIcon />
-                      </a>
-                    </li>
-                    <li className={`${styles.socialIcon} list-unstyled`}>
-                      <a
-                        href={enviroment.TWITTER_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-decoration-none"
-                      >
-                        <TwitterIcon />
-                      </a>
-                    </li>
-                    <li className={`${styles.socialIcon} list-unstyled`}>
-                      <a
-                        href={enviroment.INSTAGRAM_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <InstagramIcon />
-                      </a>
-                    </li>
-                    <li className={`${styles.socialIcon} list-unstyled`}>
-                      <a
-                        href={enviroment.LINKEDIN_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-decoration-none"
-                        title={`${enviroment.BUSINESS_NAME} on LinkedIn`}
-                      >
-                        <LinkedInIcon />
-                      </a>
-                    </li>
-                    <li className={`${styles.socialIcon} list-unstyled`}>
-                      <a
-                        href={enviroment.YOUTUBE_LINK}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-decoration-none"
-                      >
-                        <YoutubeIcon />
-                      </a>
-                    </li>
+                    {
+                      enviroment.FACEBOOK_LINK && enviroment.FACEBOOK_LINK !== "" ? (
+                        <li className={`${styles.socialIcon} list-unstyled`}>
+                          <a
+                            href={enviroment.FACEBOOK_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-none"
+                          >
+                            <FacebookIcon />
+                          </a>
+                        </li>
+                      ) : ""
+                    }
+                    {
+                      enviroment.TWITTER_LINK && enviroment.TWITTER_LINK !== "" ? (
+                        <li className={`${styles.socialIcon} list-unstyled`}>
+                          <a
+                            href={enviroment.TWITTER_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-none"
+                          >
+                            <TwitterIcon />
+                          </a>
+                        </li>
+                      ) : ""
+                    }
+                    {
+                      enviroment.INSTAGRAM_LINK && enviroment.INSTAGRAM_LINK !== "" ? (
+                        <li className={`${styles.socialIcon} list-unstyled`}>
+                          <a
+                            href={enviroment.INSTAGRAM_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <InstagramIcon />
+                          </a>
+                        </li>
+                      ) : ""
+                    }
+                    {
+                      enviroment.LINKEDIN_LINK && enviroment.LINKEDIN_LINK !== "" ? (
+                        <li className={`${styles.socialIcon} list-unstyled`}>
+                          <a
+                            href={enviroment.LINKEDIN_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-none"
+                            title={`${enviroment.BUSINESS_NAME} on LinkedIn`}
+                          >
+                            <LinkedInIcon />
+                          </a>
+                        </li>
+                      ) : ""
+                    }
+                    {
+                      enviroment.YOUTUBE_LINK && enviroment.YOUTUBE_LINK !== "" ? (
+                        <li className={`${styles.socialIcon} list-unstyled`}>
+                          <a
+                            href={enviroment.YOUTUBE_LINK}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-decoration-none"
+                          >
+                            <YoutubeIcon />
+                          </a>
+                        </li>
+                      ) : ""
+                    }
                   </ul>
                   <h5 className="mb-2">Contact Us</h5>
                   <div className="d-inline-flex align-items-center mb-3">
