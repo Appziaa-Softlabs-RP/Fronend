@@ -47,10 +47,10 @@
 
 .slideCard {
   background-color: white;
-  border: 3px solid var(--PRIMARY_COLOR);
+  border: 2px solid #ffa2a5;
   border-radius: 20px;
   padding: 2rem;
-  margin: 1.2rem 0.6rem;
+  margin: 1.5rem 0.6rem;
   height: 380px;
   position: relative;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -67,8 +67,9 @@
 .userName {
   color: var(--PRIMARY_COLOR);
   font-size: 1.6rem;
+  margin: 0px !important;
+  margin-bottom: 0.5rem !important;
   font-weight: bold;
-  margin-bottom: 0.5rem;
 }
 
 .ratingContainer {
@@ -79,7 +80,7 @@
 
 .starFilled,
 .starEmpty {
-  color: var(--PRIMARY_COLOR);
+  color: #f1b70a;
   font-size: 1.2rem;
 }
 
@@ -112,7 +113,7 @@
 }
 
 .source {
-  color: var(--PRIMARY_COLOR);
+  color: #5678ab;
   font-weight: bold;
   font-size: 0.9rem;
   text-align: right;
@@ -139,6 +140,7 @@
 
 .quoteRight {
   bottom: -18px;
+  transform: rotate(180deg);
   right: 18px;
 }
 

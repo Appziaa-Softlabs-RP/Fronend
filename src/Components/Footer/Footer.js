@@ -378,7 +378,7 @@ export const Footer = () => {
                 <div
                   className={`${styles.footerTabCol} col-3 d-inline-flex flex-column px-3`}
                 >
-                  <h5>About Us</h5>
+                  <h5>About</h5>
                   <ul className="list-unstyled">
                     <li>
                       <a
@@ -391,6 +391,16 @@ export const Footer = () => {
                       </a>
                     </li>
                     <li>
+                      <a
+                        href="https://blog.toymie.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-decoration-none"
+                      >
+                        Blogs
+                      </a>
+                    </li>
+                    <li>
                       <Link className="text-decoration-none" to="">
                         Our Team
                       </Link>
@@ -398,11 +408,6 @@ export const Footer = () => {
                     <li>
                       <Link className="text-decoration-none" to="">
                         Press
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className="text-decoration-none" to="">
-                        Our Stores
                       </Link>
                     </li>
                   </ul>

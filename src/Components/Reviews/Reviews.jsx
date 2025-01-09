@@ -139,7 +139,7 @@ export default function SuccessStories() {
                         href="https://g.page/r/CXxxxxxxxxxxxxxxx/review"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className={"btnCustom"}
+                        className={"btnCustom2"}
                     >
                         Share Your Experience
                     </a>

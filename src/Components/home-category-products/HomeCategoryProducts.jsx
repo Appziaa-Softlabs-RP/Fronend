@@ -2,13 +2,11 @@ import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
 import React, { useEffect, useState } from "react";
 import ReactOwlCarousel from 'react-owl-carousel';
-import { Link } from 'react-router-dom';
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { ProductCard } from "../ProductCard/ProductCard";
 import { PromoBanner } from '../PromoBanner/PromoBanner';
-import { Button } from 'react-bootstrap';
 
 export const HomeCategories = () => {
     const appData = useApp();
@@ -41,7 +39,7 @@ export const HomeCategories = () => {
 
                 <div className='py-5'
                     style={{
-                        background: !isEven ? "var(--PRIMARY_COLOR)" : 'white'
+                        background: !isEven ? "#4b0608" : 'white'
                     }}
                 >
                     <div className={`container m-0 mx-auto`}>
@@ -88,13 +86,13 @@ export const HomeCategories = () => {
                                 ))}
                             </ReactOwlCarousel>
                             <a href={`/store-product/${category?.cname_url}`} className='w-fit mx-auto mt-4'>
-                                <button className='btnCustom'
+                                <button className='btnCustom2'
                                     style={{
-                                        background: !isEven ? "white" : 'var(--PRIMARY_COLOR)',
-                                        color: !isEven ? "var(--PRIMARY_COLOR)" : 'white'
+                                        border: !isEven ? "2px solid white" : '2px solid var(--PRIMARY_COLOR)',
+                                        color: !isEven ? "white" : 'var(--PRIMARY_COLOR)',
                                     }}
                                 >
-                                    View All products
+                                    View All Products
                                 </button>
                             </a>
                         </div>

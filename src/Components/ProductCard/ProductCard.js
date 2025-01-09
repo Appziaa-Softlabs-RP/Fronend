@@ -240,40 +240,40 @@ export const ProductCard = ({ item, index }) => {
       >
         {item?.is_deal
           ? parseFloat(item.mrp) > parseFloat(item.deals_price) && (
-              <span
-                className={`${styles.featureOffBox} position-absolute d-inline-flex align-items-center`}
-              >
-                {Math.ceil(((item?.mrp - item?.deals_price) * 100) / item?.mrp)}
-                % OFF
-              </span>
-            )
+            <span
+              className={`${styles.featureOffBox} position-absolute d-inline-flex align-items-center`}
+            >
+              {Math.ceil(((item?.mrp - item?.deals_price) * 100) / item?.mrp)}
+              % OFF
+            </span>
+          )
           : parseFloat(item.mrp) > parseFloat(item.selling_price) && (
-              <span
-                className={`${styles.featureOffBox} position-absolute d-inline-flex align-items-center`}
-                style={{
-                  borderRadius: '100px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  padding: "7px",
-                  width: "40px",
-                  height: "40px",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                <span style={{
-                  margin: "1px"
-                }}>
-                  {Math.ceil(
-                    ((item?.mrp - item?.selling_price) * 100) / item?.mrp
-                  )}
-                  %
-                </span>{" "}
-                <span style={{
-                  margin: "1px"
-                }}>OFF</span>
-              </span>
-            )}
+            <span
+              className={`${styles.featureOffBox} position-absolute d-inline-flex align-items-center`}
+              style={{
+                borderRadius: '100px',
+                display: 'flex',
+                flexDirection: 'column',
+                padding: "7px",
+                width: "40px",
+                height: "40px",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <span style={{
+                margin: "1px"
+              }}>
+                {Math.ceil(
+                  ((item?.mrp - item?.selling_price) * 100) / item?.mrp
+                )}
+                %
+              </span>{" "}
+              <span style={{
+                margin: "1px"
+              }}>OFF</span>
+            </span>
+          )}
 
         <Link
           to={`/product/${item?.name_url}#top`}
@@ -303,9 +303,9 @@ export const ProductCard = ({ item, index }) => {
               src={
                 item?.image
                   ? item.image?.replace(
-                      "https://rewardsplus.in/uploads/app/public/cogendermpany",
-                      "https://merchant.rewardsplus.in/uploads/app/public/company"
-                    )
+                    "https://rewardsplus.in/uploads/app/public/cogendermpany",
+                    "https://merchant.rewardsplus.in/uploads/app/public/company"
+                  )
                   : item?.image_url
               }
               alt="--"
@@ -411,7 +411,10 @@ export const ProductCard = ({ item, index }) => {
                         item?.stock
                       )
                     }
-                    className={`${styles.decrease_btn} ${styles.minusIcon} d-inline-flex align-items-center justify-content-center`}
+                    className={`${styles.decrease_btn} btnCustom2 ${styles.minusIcon} d-inline-flex align-items-center justify-content-center`}
+                    style={{
+                      padding: "0px",
+                    }}
                   >
                     -
                   </span>
@@ -435,7 +438,10 @@ export const ProductCard = ({ item, index }) => {
                         item?.stock
                       )
                     }
-                    className={`${styles.increase_btn} ${styles.plusIcon} d-inline-flex align-items-center justify-content-center`}
+                    className={`${styles.increase_btn} btnCustom2 ${styles.plusIcon} d-inline-flex align-items-center justify-content-center`}
+                    style={{
+                      padding: "0px",
+                    }}
                   >
                     +
                   </span>

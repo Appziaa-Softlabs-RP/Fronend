@@ -180,12 +180,7 @@ const LatestBlogs = () => {
                 <div className="text-center mt-4">
                     <a href="https://blog.toymie.com" target="_blank" rel="noreferrer" style={{ textDecoration: 'none' }}>
                         <button
-                            className="btn btnCustom"
-                            style={{
-                                color: "var(--SECONDARY_COLOR)"
-                            }}
-                            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#E60000'}
-                            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#FF0000'}
+                            className="btnCustom2"
                         >
                             View All Blog Posts
                         </button>

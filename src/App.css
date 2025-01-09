@@ -8,14 +8,28 @@
   --breakpoint-mobile: 1250px;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=ABeeZee:ital@0;1&display=swap');
+
 body {
   background: white;
+  font-family: "ABeeZee", serif !important
 }
 
-h1,
-h2,
-h3 {
-  font-family: 'Comic Sans MS', cursive, sans-serif !important;
+.btnCustom2 {
+  font-weight: 500;
+  font-size: 1rem;
+  border: 2px solid var(--PRIMARY_COLOR);
+  color: var(--PRIMARY_COLOR);
+  padding: 10px 20px;
+  background: none;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btnCustom2:hover {
+  scale: 1.05;
 }
 
 .zoomSlide {
@@ -56,8 +70,7 @@ h3 {
 
   /* Enhanced 3D effect */
   box-shadow:
-    0 var(--button-depth) 0 0 rgb(0, 0, 0),
-    0 var(--button-depth) 6px rgb(36, 36, 36);
+    0 var(--button-depth) 0 0 #a8191e;
   border: none;
   position: relative;
   /* top: 0; */
@@ -67,15 +80,15 @@ h3 {
 .btnCustom:hover {
   transform: translateY(calc(var(--button-depth) * -0.75));
   box-shadow:
-    0 calc(var(--button-depth) * 1.25) 0 0 rgb(50, 50, 50),
-    0 calc(var(--button-depth) * 1.25) 8px rgba(0, 0, 0, 0.2);
+    0 calc(var(--button-depth) * 1.25) 0 0 #a8191e,
+    0 calc(var(--button-depth) * 1.25) 8px #ffffff00;
 }
 
 .btnCustom:active {
   transform: translateY(0);
   box-shadow:
-    0 calc(var(--button-depth) * 0.5) 0 0 rgba(0, 0, 0, 0.3),
-    0 calc(var(--button-depth) * 0.5) 4px rgb(15, 15, 15);
+    0 calc(var(--button-depth) * 0.5) 0 0 #a8191e,
+    0 calc(var(--button-depth) * 0.5) 4px #ffffff00;
 }
 
 .hero {
