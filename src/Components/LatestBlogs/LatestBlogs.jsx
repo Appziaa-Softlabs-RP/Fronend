@@ -8,36 +8,6 @@ import { Navigation, Pagination } from 'swiper/modules'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 const LatestBlogs = () => {
-    // const blogs = [
-    //     {
-    //         title: "Top 10 Educational Toys for Toddlers",
-    //         description: "Discover the best toys that can help your toddler learn and grow while having fun!",
-    //         image: "https://source.unsplash.com/random/800x600?toy,educational",
-    //         dateAdded: "2023-07-01",
-    //         categories: ["Educational", "Toddlers"]
-    //     },
-    //     {
-    //         title: "The Rise of Eco-Friendly Toys",
-    //         description: "Explore the growing trend of sustainable and environmentally friendly toys for conscious parents.",
-    //         image: "https://source.unsplash.com/random/800x600?toy,eco-friendly",
-    //         dateAdded: "2023-06-28",
-    //         categories: ["Eco-Friendly", "Sustainability"]
-    //     },
-    //     {
-    //         title: "Retro Toys Making a Comeback",
-    //         description: "Nostalgia alert! These classic toys from your childhood are becoming popular again.",
-    //         image: "https://source.unsplash.com/random/800x600?toy,retro",
-    //         dateAdded: "2023-06-25",
-    //         categories: ["Retro", "Classics"]
-    //     },
-    //     {
-    //         title: "STEM Toys: Preparing Kids for the Future",
-    //         description: "How STEM toys are shaping the next generation of innovators and problem-solvers.",
-    //         image: "https://source.unsplash.com/random/800x600?toy,stem",
-    //         dateAdded: "2023-06-22",
-    //         categories: ["STEM", "Educational"]
-    //     }
-    // ]
 
     const [blogs, setBlogs] = useState(null);
 
@@ -67,7 +37,7 @@ const LatestBlogs = () => {
     return (
         <div className=""
             style={{
-                backgroundColor: '#f7ba0023',
+                backgroundColor: '#faf0d2',
             }}
         >
             <div className="container my-5">

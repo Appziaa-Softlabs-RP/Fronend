@@ -267,37 +267,22 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
       <div className={`hideInMobile col-12 d-inline-flex flex-column`} style={{
         position: 'relative'
       }}>
-        <Swiper
-          className={`${styles.topHeaderSale} col-12`}
-          margin={0}
-          modules={[Navigation, Autoplay, EffectFade]}
-          effect="fade"
-          spaceBetween={0}
-          autoplay={{
-            delay: 5000,
-          }}
-          slidesPerView={1}
-          loop={true}
-        >
-          {
-            Array.from({ length: 4 }).map((_, idx) => (
-              <SwiperSlide key={idx} className={`zoomSlide ${styles.dealsLink}`}>
-                <div className={`zoomContent w-full flex items-center justify-center text-center py-2`}>
-                  <span
-                    className={`text-sm md:text-base font-medium`}
-                  >
-                    Shipping Across India || Same Day Delivery in Bengaluru
-                  </span>
-                </div>
-              </SwiperSlide>
-            ))}
-        </Swiper>
+        <div className={`w-full flex items-center justify-center text-center py-2`} style={{
+          background: "#a8191e",
+          color: 'yellow',
+        }}>
+          <span
+            className={`text-sm md:text-base font-medium`}
+          >
+            Shipping Across India || Same Day Delivery in Bengaluru
+          </span>
+        </div>
         <div
           className={`${styles.headerRow} col-12 d-inline-flex align-items-center`}
         >
           <div className="container h-100 d-flex align-items-stretch">
             <div
-              className={`${styles.headerInnerRow} col-12 d-inline-flex align-items-stretch gap-3`}
+              className={`${styles.headerInnerRow} pt-2 col-12 d-inline-flex align-items-stretch gap-3`}
             >
               <h1
                 onClick={() => routeHome()}
