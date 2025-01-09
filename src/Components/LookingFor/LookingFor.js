@@ -98,7 +98,7 @@ export const LookingFor = () => {
                         }
                       >
                         <div className={`${styles.backgroundGradientColor}`} style={{
-                          background: `linear-gradient(to bottom, rgba(${hexToRgb(getColors(item))}, 0.1) 0%, rgba(${hexToRgb(getColors(item))}, 1) 100%)`
+                          background: `linear-gradient(145deg, rgba(${hexToRgb(getColors(item))}, 0.1) 0%, rgba(${hexToRgb(getColors(item))}, 1) 100%)`
                         }} />
                         <img src={item?.category?.image}
                           alt={item?.category?.name}
