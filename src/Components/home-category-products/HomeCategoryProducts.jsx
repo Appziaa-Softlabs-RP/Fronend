@@ -39,67 +39,64 @@ export const HomeCategories = () => {
                         <PromoBanner type="Promo Banner" />
                     </>}
 
-                <div className='border-section py-5'
+                <div className='py-5'
                     style={{
                         background: !isEven ? "var(--PRIMARY_COLOR)" : 'white'
                     }}
                 >
-                    <div className={`col-12 d-inline-flex`}>
-                        <div className={`container-fluid`}>
-                            <div className={`col-12 d-inline-flex flex-column`}>
-                                <h2 className={`text-center pb-4 col-12 ${windowWidth === "desktop" ? 'mb-4 fs-2' : 'mb-3 fs-3'} mt-0 fs-2`}
-                                    style={{
-                                        color: !isEven ? "white" : 'black'
-                                    }}>
-                                    ✨ {category?.cname} ✨
-                                </h2>
-                                <ReactOwlCarousel
-                                    // className="owl-theme"
-                                    className={`brandSilder col-12 owl-theme`}
-                                    margin={20}
-                                    dots={false}
-                                    items={isMobile ? 1 : 3}
-                                    loop={false}
-                                    nav={true}
-                                    stagePadding={isMobile ? 50 : 0}
-                                    responsive={{
-                                        0: { items: 1.5 },
-                                        768: { items: 2 },
-                                        992: { items: 3 },
-                                        1210: { items: 4 },
-                                    }}
-                                >
-                                    {category?.products.map((item, index) => (
-                                        <div
-                                            key={index}
-                                            className="item"
-                                            style={{
-                                                padding: "15px",
-                                                transition: "transform 0.3s",
-                                                cursor: "pointer",
-                                            }}
-                                            onMouseEnter={(e) => {
-                                                e.currentTarget.style.transform = "scale(1.05)";
-                                            }}
-                                            onMouseLeave={(e) => {
-                                                e.currentTarget.style.transform = "scale(1)";
-                                            }}
-                                        >
-                                            <ProductCard item={item} index={index} />
-                                        </div>
-                                    ))}
-                                </ReactOwlCarousel>
-                                <a href={`/store-product/${category?.cname_url}`} className='w-fit mx-auto mt-4'>
-                                    <button className='btnCustom'
+                    <div className={`container m-0 mx-auto`}>
+                        <div className={`col-12 d-inline-flex flex-column`}>
+                            <h2 className={`text-center pb-4 col-12 ${windowWidth === "desktop" ? 'mb-4 fs-2' : 'mb-3 fs-3'} mt-0 fs-2`}
+                                style={{
+                                    color: !isEven ? "white" : 'black'
+                                }}>
+                                ✨ {category?.cname} ✨
+                            </h2>
+                            <ReactOwlCarousel
+                                // className="owl-theme"
+                                className={`brandSilder col-12 owl-theme`}
+                                margin={20}
+                                dots={false}
+                                items={isMobile ? 1 : 3}
+                                loop={false}
+                                nav={true}
+                                stagePadding={isMobile ? 50 : 0}
+                                responsive={{
+                                    0: { items: 1.5 },
+                                    768: { items: 2 },
+                                    992: { items: 3 },
+                                    1210: { items: 4 },
+                                }}
+                            >
+                                {category?.products.map((item, index) => (
+                                    <div
+                                        key={index}
+                                        className="item p-md-2"
                                         style={{
-                                            background: !isEven ? "white" : 'var(--PRIMARY_COLOR)',
-                                            color: !isEven ? "var(--PRIMARY_COLOR)" : 'white'
+                                            transition: "transform 0.3s",
+                                            cursor: "pointer",
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.currentTarget.style.transform = "scale(1.05)";
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.currentTarget.style.transform = "scale(1)";
                                         }}
                                     >
-                                        View All products
-                                    </button>
-                                </a>
-                            </div>
+                                        <ProductCard item={item} index={index} />
+                                    </div>
+                                ))}
+                            </ReactOwlCarousel>
+                            <a href={`/store-product/${category?.cname_url}`} className='w-fit mx-auto mt-4'>
+                                <button className='btnCustom'
+                                    style={{
+                                        background: !isEven ? "white" : 'var(--PRIMARY_COLOR)',
+                                        color: !isEven ? "var(--PRIMARY_COLOR)" : 'white'
+                                    }}
+                                >
+                                    View All products
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>

@@ -46,7 +46,7 @@ export const NewArrival = () => {
                         <div className={`col-12 d-inline-flex flex-column`} style={{
                             maxWidth: "100%",
                         }}>
-                            <h2 className={`${styles.brandInTitle} text-white pb-4 col-12 ${windowWidth === "desktop" ? 'mb-4 fs-2' : 'mb-3 fs-3'} mt-0 fs-2`}>{windowWidth === 'mobile' ? 'New Arrivals!' : '✨ New Arrivals! ✨'}</h2>
+                            <h2 className={`${styles.brandInTitle} text-white text-center pb-4 col-12 ${windowWidth === "desktop" ? 'mb-4 fs-2' : 'mb-3 fs-3'} mt-0 fs-2`}>'✨ New Arrivals! ✨'</h2>
                             <ReactOwlCarousel
                                 className={`${styles.brandSilder} brandSilder col-12 owl-theme`}
                                 margin={20}
@@ -67,9 +67,8 @@ export const NewArrival = () => {
                                         return (
                                             <div
                                                 key={index}
-                                                className="item"
+                                                className="item p-md-2"
                                                 style={{
-                                                    padding: "15px",
                                                     transition: "transform 0.3s",
                                                     cursor: "pointer",
                                                 }}

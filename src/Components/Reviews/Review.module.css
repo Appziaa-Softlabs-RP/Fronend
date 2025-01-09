@@ -163,7 +163,7 @@
 
 :global(.swiper-pagination-bullet) {
   background-color: var(--PRIMARY_COLOR) !important;
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 :global(.swiper-pagination-bullet-active) {
@@ -171,7 +171,7 @@
 }
 
 :global(.swiper-slide) {
-  opacity: 0.5;
+  /* opacity: 0.5; */
   transition: opacity 0.3s ease;
 }
 

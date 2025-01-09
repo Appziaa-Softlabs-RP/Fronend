@@ -55,7 +55,7 @@ export const CategoryShop = () => {
             <h2
               className={`${styles.categoryHeaderTitle} text-center pb-4`}
             >
-              Shop By Category
+              ✨ Shop by Category ✨
             </h2>
             <ReactOwlCarousel
               className={`carousel-looking-for col-12 brandSilder owl-theme d-flex flex-column`}
