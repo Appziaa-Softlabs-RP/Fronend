@@ -4,6 +4,7 @@
   background: #fff;
   border-radius: 10px;
 }
+
 .featureOffBox {
   background: #389956;
   color: #fff;
@@ -16,15 +17,18 @@
   top: 10px;
   z-index: 1;
 }
+
 .featuredImageBox {
   /* padding-top: 100%; */
   border-radius: 5px;
 }
+
 .featuredImageBox img {
   top: 0;
   left: 0;
   object-fit: cover;
 }
+
 .soldOutText {
   background: #ed1f29;
   -webkit-transform: rotate(-5deg) translateY(-50%);
@@ -43,6 +47,7 @@
   padding: 4px 5px;
   z-index: 2;
 }
+
 .soldOutText::after {
   content: "";
   position: absolute;
@@ -54,6 +59,7 @@
   border: 1px solid #fff;
   display: inline-block;
 }
+
 .offerItemName {
   font-size: 15px;
   line-height: 17px;
@@ -67,17 +73,20 @@
   font-weight: 400;
   white-space: normal;
 }
+
 .offerPrice {
   font-size: 14px;
   line-height: 16px;
   color: #16253b;
 }
+
 .offerDiscountPrice {
   font-size: 13px;
   color: #16253b;
   opacity: 0.8;
   line-height: 14px;
 }
+
 .addCartBtn {
   background: var(--ADD_BUTTON_COLOR);
   padding: 0 15px;
@@ -91,19 +100,23 @@
   right: 10px;
   left: 10px;
 }
+
 .itemQuantityBtnBox {
   bottom: 10px;
   right: 15px;
   z-index: 9;
 }
+
 .itemQuantityBtnBox button {
   background: transparent;
   box-shadow: none;
   border: none;
 }
+
 .itemQuantityBtn .decreaseBtn {
   width: 20px;
 }
+
 .itemQuantityBtn {
   padding-right: 0;
   padding-left: 0;
@@ -112,6 +125,7 @@
   position: relative;
   z-index: 9;
 }
+
 .countValue {
   width: 20px;
   text-align: center;
@@ -122,21 +136,24 @@
   cursor: default;
   font-weight: 500;
 }
+
 .decrease_btn,
 .increase_btn {
-  height: 20px;
-  width: 20px;
   border: 1px solid var(--ADD_BUTTON_COLOR);
   color: var(--ADD_BUTTON_COLOR);
   background: #fff;
   border-radius: 20px;
   font-size: 20px;
   padding-bottom: 5px;
+  height: 30px;
+  width: 30px;
 }
+
 .galleryImage {
   opacity: 0;
   transition: all ease 200ms;
 }
+
 .featuredImageBox:hover .galleryImage {
   opacity: 1;
 }
@@ -167,20 +184,18 @@
   .offerItemName {
     min-height: 34px;
   }
+
   .addCartBtn {
     font-size: 15px;
     line-height: 15px;
     height: 45px;
   }
+
   .singleFeaturedProduct {
     padding-bottom: 60px;
   }
+
   .countValue {
     width: 40px;
-  }
-  .decrease_btn,
-  .increase_btn {
-    height: 30px;
-    width: 30px;
   }
 }

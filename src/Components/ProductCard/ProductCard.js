@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import noImage from "../../assets/images/image-not-available.jpg";
 import { useApp } from "../../context/AppContextProvider";
 import { enviroment } from "../../enviroment";
@@ -7,7 +9,18 @@ import ApiService from "../../services/ApiService";
 import { AppNotification } from "../../utils/helper";
 import styles from "./ProductCard.module.css";
 
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
 export const ProductCard = ({ item, index }) => {
+  const [isHovered, setIsHovered] = useState(false);
+  const swiperRef = useRef(null);
+
+  const mrp = parseFloat(item?.mrp);
+  const selling_price = parseFloat(item?.selling_price);
+
   const [prodAdded, setProdAdded] = useState(false);
   const [prodAddedQty, setProdAddedQty] = useState(0);
   const [userInfo, setUserInfo] = useState({});
@@ -231,238 +244,183 @@ export const ProductCard = ({ item, index }) => {
     setUserInfo(appData.appData.user);
   }, [appData.appData]);
 
-  return (
-    <React.Fragment>
-      <div
-        className={`${styles.singleFeaturedProduct} flex-shrink-0 d-inline-block position-relative overflow-hidden col-12 h-100`}
-        role="button"
-        key={index}
-      >
-        {item?.is_deal
-          ? parseFloat(item.mrp) > parseFloat(item.deals_price) && (
-            <span
-              className={`${styles.featureOffBox} position-absolute d-inline-flex align-items-center`}
-            >
-              {Math.ceil(((item?.mrp - item?.deals_price) * 100) / item?.mrp)}
-              % OFF
-            </span>
-          )
-          : parseFloat(item.mrp) > parseFloat(item.selling_price) && (
-            <span
-              className={`${styles.featureOffBox} position-absolute d-inline-flex align-items-center`}
-              style={{
-                borderRadius: '100px',
-                display: 'flex',
-                flexDirection: 'column',
-                padding: "7px",
-                width: "40px",
-                height: "40px",
-                alignItems: "center",
-                justifyContent: "center",
-              }}
-            >
-              <span style={{
-                margin: "1px"
-              }}>
-                {Math.ceil(
-                  ((item?.mrp - item?.selling_price) * 100) / item?.mrp
-                )}
-                %
-              </span>{" "}
-              <span style={{
-                margin: "1px"
-              }}>OFF</span>
-            </span>
-          )}
+  const getInitialSlide = () => {
+    if (!isHovered) return 0;
+    // If there's a second image (either gallery or main), show it on hover
+    return (item?.gallery_images?.length > 0 || item?.image) ? 1 : 0;
+  };
 
-        <Link
-          to={`/product/${item?.name_url}#top`}
-          style={{
-            textDecoration: "none",
+  const CardContent = () => (
+    <>
+      <div
+        className={`${styles.featuredImageBox}`}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        {item.stock === 0 || item.stock < 0 ? (
+          <span className={`${styles.soldOutText} position-absolute`}>
+            Sold Out
+          </span>
+        ) : null}
+        <Swiper
+          ref={swiperRef}
+          modules={[Pagination, Navigation, Autoplay]}
+          pagination={{
+            clickable: true,
+            el: '.swiper-pagination'
           }}
-          className={`${styles.featuredImageBox} position-relative col-12 mt-1 float-left mb-1 d-flex justify-content-center align-items-center w-full`}
+          navigation={false}
+          autoplay={isHovered ? { delay: 2000, disableOnInteraction: false } : false}
+          loop={true}
+          initialSlide={getInitialSlide()}
+          allowTouchMove={true}
+          className={styles.swiper}
         >
-          {item.stock === 0 || item.stock < 0 ? (
-            <span className={`${styles.soldOutText} position-absolute d-block`}>
-              Sold Out
-            </span>
-          ) : (
-            ""
+          {isHovered && (item?.gallery_images?.length > 1 || (item?.gallery_images?.length > 0 && item?.image)) && (
+            <>
+              <div className={`swiper-pagination ${styles.customPagination}`}></div>
+            </>
           )}
-          <div
-            className={`d-flex align-items-center  justify-content-center ${styles.productImgContainer}`}
-          >
+          <SwiperSlide>
             <img
-              onError={(e) => setNoImage(e)}
-              style={{
-                opacity: item.stock <= 0 ? "0.5" : "1",
-                height: "100%",
-                width: "100%",
-                objectFit: "contain",
-              }}
+              onError={setNoImage}
               src={
                 item?.image
                   ? item.image?.replace(
                     "https://rewardsplus.in/uploads/app/public/cogendermpany",
                     "https://merchant.rewardsplus.in/uploads/app/public/company"
                   )
-                  : item?.image_url
+                  : item?.image_url ?? noImage
               }
-              alt="--"
-              className={`${styles.productImg}`}
+              alt={item.name}
+              className={styles.productImg}
             />
-          </div>
-          {item?.gallery_images?.length ? (
-            <React.Fragment>
-              {item?.gallery_images?.map((imagesrc, index) => {
-                return (
-                  <img
-                    src={enviroment.API_IMAGE_GALLERY_URL + imagesrc}
-                    alt="offer"
-                    className={`${styles.galleryImage} position-absolute h-100 col-12 p-0`}
-                    key={index}
-                  />
-                );
-              })}
-            </React.Fragment>
+          </SwiperSlide>
+          {item?.gallery_images?.map((imageSrc, idx) => (
+            <SwiperSlide key={idx}>
+              <img
+                src={enviroment.API_IMAGE_GALLERY_URL + imageSrc}
+                alt={`gallery`}
+                className={styles.productImg}
+              />
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </div>
+      <div className={styles.productInfo}>
+        <h5 className={styles.offerItemName}>{item.name}</h5>
+        <div className={styles.priceContainer}>
+          {item?.is_deal === 1 && item.deals_price !== 0 ? (
+            <>
+              <span className={styles.offerPrice}>₹{Math.round(item.deals_price)}</span>
+              <del className={styles.offerDiscountPrice}>₹{Math.round(mrp)}</del>
+            </>
+          ) : mrp > item.selling_price ? (
+            <>
+              <span className={styles.offerPrice}>₹{Math.round(item.selling_price)}</span>
+              <del className={styles.offerDiscountPrice}>₹{Math.round(mrp)}</del>
+            </>
           ) : (
-            ""
-          )}
-        </Link>
-        <div>
-          <Link
-            to={`/product/${item?.name_url}#top`}
-            style={{
-              margin: "15px 0px",
-              textDecoration: "none",
-              minHeight: "30px",
-              display: "-webkit-box",
-              WebkitLineClamp: "2",
-              WebkitBoxOrient: "vertical",
-              overflow: "hidden",
-              textOverflow: "ellipsis",
-              whiteSpace: "normal",
-              lineHeight: "15px",
-            }}
-            className={`${styles.offerItemName} col-12 p-0 mb-1`}
-          >
-            {item.name}
-          </Link>
-          {item?.is_deal === 1 && item.deals_price != 0 ? (
-            <div className="col-12 p-0 d-inline-flex align-items-center gap-2 flex-wrap">
-              <span className={`${styles.offerPrice} d-inline-flex`}>
-                <b>₹{Math.round(item.deals_price)}</b>
-              </span>
-              <del className={`${styles.offerDiscountPrice} d-inline-flex`}>
-                ₹{Math.round(item.mrp)}
-              </del>
-            </div>
-          ) : item.mrp > item.selling_price ? (
-            <div
-              style={{
-                margin: "10px 0px",
-              }}
-              className="col-12 p-0 d-inline-flex align-items-center gap-2 flex-wrap"
-            >
-              <span className={`${styles.offerPrice} d-inline-flex`}>
-                <b>₹{Math.round(item.selling_price)}</b>
-              </span>
-              <del className={`${styles.offerDiscountPrice} d-inline-flex`}>
-                ₹{Math.round(item.mrp)}
-              </del>
-            </div>
-          ) : (
-            <div
-              style={{
-                margin: "5px 0px",
-              }}
-              className="col-12 float-left p-0 d-inline-block"
-            >
-              <span
-                className={`${styles.offerPrice} col-12 p-0 d-inline-block float-left`}
-              >
-                <b>₹{Math.round(item.mrp)}</b>
-              </span>
-            </div>
-          )}
-          {item.stock > 0 && (
-            <div>
-              {!prodAdded ? (
-                <span
-                  role="button"
-                  className={`${styles.addCartBtn} btnCustom d-inline-flex align-items-center justify-content-center position-absolute text-uppercase`}
-                  onClick={(e) => addToCart(e, item)}
-                >
-                  Add to cart
-                </span>
-              ) : (
-                <div
-                  className={`${styles.itemQuantityBtnBox} position-absolute`}
-                >
-                  <span
-                    role="button"
-                    onClick={(e) =>
-                      updateProdQty(
-                        e,
-                        item?.product_id ? item.product_id : item.id,
-                        item?.no_of_quantity_allowed,
-                        prodAddedQty,
-                        "minus",
-                        item?.stock
-                      )
-                    }
-                    className={`${styles.decrease_btn} btnCustom2 ${styles.minusIcon} d-inline-flex align-items-center justify-content-center`}
-                    style={{
-                      padding: "0px",
-                    }}
-                  >
-                    -
-                  </span>
-                  <span className="d-inline-flex flex-shrink-0">
-                    <input
-                      type="text"
-                      readOnly
-                      value={prodAddedQty}
-                      className={`${styles.countValue} d-inline-block text-center`}
-                    />
-                  </span>
-                  <span
-                    role="button"
-                    onClick={(e) =>
-                      updateProdQty(
-                        e,
-                        item?.product_id ? item.product_id : item.id,
-                        item?.no_of_quantity_allowed,
-                        prodAddedQty,
-                        "plus",
-                        item?.stock
-                      )
-                    }
-                    className={`${styles.increase_btn} btnCustom2 ${styles.plusIcon} d-inline-flex align-items-center justify-content-center`}
-                    style={{
-                      padding: "0px",
-                    }}
-                  >
-                    +
-                  </span>
-                </div>
-              )}
-            </div>
-          )}
-          {item.stock <= 0 && (
-            <button
-              type="button"
-              className={`${styles.addCartBtn} d-inline-flex align-items-center justify-content-center position-absolute text-uppercase`}
-              style={{
-                cursor: "not-allowed",
-                opacity: "0.5",
-              }}
-            >
-              Sold out!
-            </button>
+            <span className={styles.offerPrice}>₹{Math.round(mrp)}</span>
           )}
         </div>
       </div>
-    </React.Fragment>
+      {parseFloat(mrp) > parseFloat(item.selling_price) && (
+        <div className={`${styles.featureOffBox} position-absolute`}>
+          <span>{Math.ceil(((item?.mrp - selling_price) * 100) / item?.mrp)}%</span>
+          <span>OFF</span>
+        </div>
+      )}
+      {item.stock > 0 && (
+        <div className="m-2">
+          {!prodAdded ? (
+            <span
+              role="button"
+              className={`${styles.addCartBtn} text-white btnCustom w-100 d-inline-flex align-items-center justify-content-center text-uppercase`}
+              onClick={(e) => addToCart(e, item)}
+            >
+              Add to cart
+            </span>
+          ) : (
+            <div
+              className={`${styles.itemQuantityBtnBox}`}
+            >
+              <span
+                role="button"
+                onClick={(e) =>
+                  updateProdQty(
+                    e,
+                    item?.product_id ? item.product_id : item.id,
+                    item?.no_of_quantity_allowed,
+                    prodAddedQty,
+                    "minus",
+                    item?.stock
+                  )
+                }
+                className={`${styles.decrease_btn} btnCustom2 ${styles.minusIcon} d-inline-flex align-items-center justify-content-center`}
+                style={{
+                  padding: "0px",
+                }}
+              >
+                -
+              </span>
+              <span className="d-inline-flex flex-shrink-0">
+                <input
+                  type="text"
+                  readOnly
+                  value={prodAddedQty}
+                  className={`${styles.countValue} d-inline-block text-center`}
+                />
+              </span>
+              <span
+                role="button"
+                onClick={(e) =>
+                  updateProdQty(
+                    e,
+                    item?.product_id ? item.product_id : item.id,
+                    item?.no_of_quantity_allowed,
+                    prodAddedQty,
+                    "plus",
+                    item?.stock
+                  )
+                }
+                className={`${styles.increase_btn} btnCustom2 ${styles.plusIcon} d-inline-flex align-items-center justify-content-center`}
+                style={{
+                  padding: "0px",
+                }}
+              >
+                +
+              </span>
+            </div>
+          )}
+        </div>
+      )}
+      {item.stock <= 0 && (
+        <div className="m-2">
+          <button
+            disabled
+            type="button"
+            className={`${styles.addCartBtn} btnCustom w-100 d-inline-flex align-items-center justify-content-center text-uppercase`}
+            style={{
+              cursor: "not-allowed",
+              opacity: "0.5",
+            }}
+          >
+            Sold out!
+          </button>
+        </div>
+      )}
+    </>
+  );
+
+  return (
+    <div className={`${styles.singleFeaturedProduct} flex-shrink-0 d-inline-block position-relative overflow-hidden col-12 h-100`} key={index}>
+      <Link
+        to={`/product/${item?.name_url}`}
+        className={styles.productLink}
+      >
+        <CardContent />
+      </Link>
+    </div>
   );
 };

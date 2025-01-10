@@ -6,8 +6,10 @@ import { AddAddress } from "../pages/AddAddress/AddAddress";
 import { Cancellation } from "../pages/Cancellation/Cancellation";
 import { AgeCategoryPage } from "../pages/CategoryPage/ageCategoryPage";
 import { BrandCategoryPage } from "../pages/CategoryPage/brandCategoryPage";
+import { ShopCategoryPage } from "../pages/CategoryPage/shopCategoryPage";
 import { ShopVerticalPage } from "../pages/CategoryPage/shopVerticalPage";
 import { StoreProductCategory } from "../pages/CategoryPage/StoreProduct";
+import ContactUsPage from "../pages/ContactUs/ContactUs";
 import { Faq } from "../pages/Faq/Faq";
 import { Home } from "../pages/Home/Home";
 import { Login } from "../pages/Login/Login";
@@ -25,11 +27,9 @@ import { Return } from "../pages/Return/Return";
 import { SearchPage } from "../pages/SearchPage/SearchPage";
 import { ShopOffers } from "../pages/ShopOffers/ShopOffers";
 import { ShoppingCart } from "../pages/ShoppingCart/ShoppingCart";
-import { SubCategoryPage } from "../pages/SubCategoryPage/SubCategoryPage";
 import { Terms } from "../pages/Terms/Terms";
 import { VerifyOtp } from "../pages/VerifyOtp/VerifyOtp";
 import { ProtectedRoutes } from "./ProtectedRoutes";
-import ContactUsPage from "../pages/ContactUs/ContactUs";
 
 export const PublicRoutes = () => {
   return (
@@ -40,7 +40,7 @@ export const PublicRoutes = () => {
       <Route path="/verify" element={<VerifyOtp />} />
       <Route path="/product/:slug" element={<ProductPage />} />
       <Route path="/shop-offers" element={<ShopOffers />} />
-      <Route path="/store/:verticalSlug" element={<SubCategoryPage />} />
+      <Route path="/store/:verticalSlug" element={<ShopCategoryPage />} />
       <Route path="/store-product/:category" element={<StoreProductCategory />} />
       <Route
         path="/store-product/vertical/:verticalSlug/category/:categorySlug"

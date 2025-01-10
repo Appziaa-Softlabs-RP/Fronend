@@ -513,8 +513,9 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                 }}
               >
                 {navItems.length > 0 &&
-                  navItems.map((item, index) => (
-                    <div
+                  navItems.map((item, index) => {
+                    const isActive = hoveredItem?.name_url === item.name_url;
+                    return <div
                       id={`menu-${index}`}
                       className={`${styles.headerNavBox} position-relative d-inline-flex align-items-center px-4`}
                       key={index}
@@ -522,11 +523,13 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                       onMouseEnter={() => handleMouseEnter(item, index)}
                       onClick={() => handleMouseEnter(item, index)}
                     >
-                      <div
+                      <a
+                        href={`/store/${item.name_url}`}
                         className={`${styles.menuName}`}
                         style={{
                           display: 'flex',
                           alignItems: 'center',
+                          textDecoration: 'none',
                           justifyContent: 'center',
                           gap: '0.5rem',
                           minWidth: '220px',
@@ -534,6 +537,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
                           whiteSpace: 'nowrap',
+                          fontWeight: isActive && 'bold',
                         }}
                       >
                         <span
@@ -556,9 +560,9 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                             verticalAlign: 'middle',
                           }}
                         />
-                      </div>
+                      </a>
                     </div>
-                  ))}
+                  })}
               </div>
             )}
           </div>
