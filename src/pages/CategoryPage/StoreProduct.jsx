@@ -136,19 +136,6 @@ export const StoreProductCategory = () => {
             <div
                 className={`mt-4 col-12 d-inline-flex flex-column`}>
                 <div className="hero">
-                    {locationState?.state?.banner !== "" &&
-                        locationState?.state?.banner !== null &&
-                        locationState?.state?.banner !== undefined && (
-                            <div
-                                className={`${styles.ageBannerRow} col-12 d-inline-flex mb-4`}
-                            >
-                                <img
-                                    src={locationState.state.banner[0]?.image}
-                                    alt="Banner"
-                                    className="col-12 d-inline-block"
-                                />
-                            </div>
-                        )}
                     {loading && <ProductListLoader />}
                     {loading === false && (
                         <div
@@ -173,7 +160,7 @@ export const StoreProductCategory = () => {
                                     )}
                                 <div
                                     className={`${styles.productContainer
-                                        } flex-shrink-1 d-inline-flex flex-wrap`}>
+                                        } w-100 flex-shrink-1 d-inline-flex flex-wrap`}>
 
                                     <div
                                         className={`${styles.sortContainer} hideInMobile col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}

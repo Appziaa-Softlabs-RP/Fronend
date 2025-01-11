@@ -11,31 +11,31 @@ import styles from './Review.module.css';
 
 const reviews = [
     {
-        name: 'Sarah Johnson',
+        name: 'Ramesh Kumar',
         review: "The selection of toys is amazing! My kids absolutely love everything we've purchased. The quality is outstanding and the prices are very reasonable.",
         rating: 5,
         source: "Google Review"
     },
     {
-        name: 'Robert Smith',
+        name: 'Vickey Sharma',
         review: 'Finding educational toys for my grandchildren has never been easier. The staff is incredibly helpful and knowledgeable about their products.',
         rating: 4,
         source: "Google Review"
     },
     {
-        name: 'Emily Davis',
+        name: 'Nazakat Ali',
         review: "As a preschool teacher, I appreciate the range of developmental toys available. They're perfect for both learning and fun!",
         rating: 5,
         source: "Google Review"
     },
     {
-        name: 'Michael Brown',
+        name: 'Aditya Singh',
         review: 'The toy store has become our go-to place for birthday gifts. The unique selection and gift wrapping service make shopping here a joy.',
         rating: 5,
         source: "Google Review"
     },
     {
-        name: 'Lisa Wilson',
+        name: 'Ravi Yadav',
         review: 'The website is easy to navigate, and delivery is always prompt. Customer service is exceptional when you need help.',
         rating: 4,
         source: "Google Review"
@@ -136,7 +136,7 @@ export default function SuccessStories() {
                 </div>
                 <div className={styles.writeReviewContainer}>
                     <a
-                        href="https://g.page/r/CXxxxxxxxxxxxxxxx/review"
+                        href="https://rwps.in/SHS31o"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={"btnCustom2"}
