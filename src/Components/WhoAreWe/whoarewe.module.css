@@ -1,5 +1,5 @@
 .mainContainer{
-    background: var(--PRIMARY_COLOR);
+    background: var(--SECONDARY_COLOR);
 }
 .wrapper{
     display: grid;

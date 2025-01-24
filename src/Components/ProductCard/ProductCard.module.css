@@ -74,7 +74,7 @@
 .offerPrice {
   font-size: 16px;
   line-height: 16px;
-  color: #389956;
+  color: var(--PRIMARY_COLOR);
   font-weight: bold;
 }
 
@@ -149,7 +149,7 @@
 
 /* Swiper custom styles */
 :global(.swiper-pagination-bullet) {
-  background: #389956;
+  background: var(--PRIMARY_COLOR);
   opacity: 0.5;
   height: 5px !important;
   width: 5px !important;

@@ -1,6 +1,6 @@
 .siteHeader {
   padding: 15px 0px 150px;
-  background: var(--SECONDARY_COLOR);
+  background: var(--PRIMARY_COLOR);
 }
 
 .menuIconBox,
@@ -11,7 +11,7 @@
 }
 
 .navItem {
-  color: black;
+  color: white;
   font-weight: 500;
   display: flex;
   gap: 8px;
@@ -20,7 +20,7 @@
 
 .navItem:hover {
   background: var(--SECONDARY_COLOR);
-  color: black;
+  color: rgb(217, 217, 217);
 }
 
 .menuIconBox svg,
@@ -78,7 +78,7 @@
 }
 
 .topHeaderSale {
-  background: var(--SECONDARY_COLOR)
+  background: var(--MENU_HOVER_COLOR)
 }
 
 .dealsLinkWrapper {
@@ -89,13 +89,13 @@
   font-size: 11px;
   font-weight: 500;
   line-height: 16px;
-  color: var(--PRIMARY_COLOR);
+  color: white;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
 
 .headerRow {
-  background: white;
+  background: var(--PRIMARY_COLOR);
   height: 80px;
   color: #000;
   /* padding: 20px; */
@@ -350,6 +350,13 @@
   box-shadow: 0px 16px 16px 0px rgba(0, 0, 0, 0.30);
 }
 
+.searchInput{
+  border-radius: 100px;
+  height: 50px;
+  padding: 0 0 0 20px;
+  border-end-end-radius: 0;
+}
+
 .searchInput:focus {
   box-shadow: none;
   border-color: #ced4da;
@@ -360,6 +367,9 @@
   border: 0;
   display: flex;
   justify-content: center;
+  border-radius: 100px;
+  z-index: 1000;
+  padding: 0 15px;
   align-items: center;
 }
 

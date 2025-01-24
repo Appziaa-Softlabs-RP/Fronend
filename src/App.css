@@ -1,9 +1,9 @@
 :root {
-  --PRIMARY_COLOR: #663C00;
-  --SECONDARY_COLOR: #fff8ee;
-  --MENU_HOVER_COLOR: #7493d5;
-  --ADD_BUTTON_COLOR: #B87619;
-  --BUTTON_HOVER_COLOR: #f4441c48;
+  --PRIMARY_COLOR: #332F7B;
+  --SECONDARY_COLOR: #69930e;
+  --MENU_HOVER_COLOR: #524bd5;
+  --ADD_BUTTON_COLOR: #85BA10;
+  --BUTTON_HOVER_COLOR: #94d606;
   --breakpoint-mobile: 560px;
 }
 
@@ -200,7 +200,7 @@ img {
 
 .carousel-looking-for .owl-nav button span,
 .brandSilder .owl-nav button span {
-  color: var(--PRIMARY_COLOR);
+  color: white;
   position: relative;
   top: -2px;
 }
@@ -212,7 +212,7 @@ img {
 
 .carousel-looking-for .owl-nav button:hover span,
 .brandSilder .owl-nav button:hover span {
-  color: var(--PRIMARY_COLOR);
+  color: white;
 }
 
 .heroBannerMobile .owl-dots {

@@ -262,7 +262,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                 src={siteLogo}
                 alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
                 style={{
-                  maxWidth: '220px',
+                  maxWidth: '420px',
                   maxHeight: '35px',
                 }}
               />
@@ -273,7 +273,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                 className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
               >
                 <div className="position-relative d-inline-flex">
-                  <CartIcon color="#000" />
+                  <CartIcon color="white" />
                   {appData?.appData?.cartCount > 0 && (
                     <span
                       className={`${styles.cartCount} position-absolute d-inline-flex align-items-center`}
@@ -294,7 +294,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
               <span
                 className={`${styles.searchIcon} position-absolute p-1 top-0 bottom-0 m-auto start-0 ms-3 d-inline-flex align-items-center`}
               >
-                <SearchIcon color="#000" />
+                <SearchIcon color="white" />
               </span>
               <input
                 type="text"
@@ -315,7 +315,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                 style={{ cursor: "pointer" }}
                 className={`${styles.searchIcon} position-absolute top-0 bottom-0 m-auto end-0 me-4 p-1 d-inline-flex align-items-center`}
               >
-                <CrossIcon color="#000" />
+                <CrossIcon color="white" />
               </span> */}
               {searchProdList?.length > 0 && (
                 <div
@@ -372,7 +372,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
             <div
               className={`p-0 m-0 h-100 col-12 d-flex gap-3`}
             >
-              <div className="col-4">
+              <div className="col-2">
                 <h1
                   onClick={() => routeHome()}
                   itemtype="http://schema.org/Organization"
@@ -396,7 +396,10 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   <img
                     src={siteLogo}
                     alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
-                    className="object-fit-contain mt-3"
+                    className="object-fit-contain"
+                    style={{
+                      height: "70px"
+                    }}
                   />
                 </h1>
               </div>
@@ -415,7 +418,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   role="button"
                 >
                   <div className={`p-2 btn ${styles.navItem}`}>
-                    <SupportIcon color="#000" />
+                    <SupportIcon color="white" />
                     <span className={`${styles.supportHideOnMobile}`}>
                       Support
                     </span>
@@ -426,7 +429,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     <div
                       className={`${styles.timingPhoneBox} d-inline-flex col-12 align-items-center gap-3`}
                     >
-                      <SupportIcon color="#000" />
+                      <SupportIcon color="white" />
                       <div className="d-inline-flex flex-column">
                         <label
                           className={`${styles.supportTimings} d-inline-block col-12 p-0 text-center`}
@@ -447,7 +450,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     <div
                       className={`${styles.mailtoBox} text-decoration-none d-inline-flex align-items-center gap-3 col-12`}
                     >
-                      <MailIcon color="#000" />
+                      <MailIcon color="white" />
                       <Link
                         to={`mailto:${enviroment.EMAIL_ADDRESS}`}
                         className={`${styles.mailtoEmail} d-inline-block text-decoration-none`}
@@ -492,7 +495,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   >
                     <div className={`p-2 btn ${styles.navItem}`}>
                       <div className="d-inline-flex align-items-center gap-2">
-                        <UserIcon color="#000" />
+                        <UserIcon color="white" />
                       </div>
                       {userInfo?.name && userInfo?.name !== "" ? (
                         <span className={`d-inline-flex`}>
@@ -551,7 +554,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     role="button"
                   >
                     <div className={`p-2 btn ${styles.navItem}`}>
-                      <UserIcon color="#000" />
+                      <UserIcon color="white" />
                       <span className={`${styles.supportHideOnMobile}`}>
                         Account
                       </span>
@@ -565,7 +568,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                 >
                   <div className={`p-2 btn ${styles.navItem}`}>
                     <span className="position-relative d-inline-flex gap-2">
-                      <CartIcon color="#000" />
+                      <CartIcon color="white" />
                       <span className={`${styles.supportHideOnMobile}`}>
                         Cart
                       </span>
@@ -673,7 +676,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   <span
                     className={`${styles.searchIcon} position-absolute top-0 bottom-0 m-auto start-0 ms-3 d-inline-flex align-items-center`}
                   >
-                    <SearchIcon color="#000" />
+                    <SearchIcon color="white" />
                   </span>
                   <input
                     type="text"
@@ -691,7 +694,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     style={{ cursor: "pointer" }}
                     className={`${styles.searchIcon} position-absolute top-0 bottom-0 m-auto end-0 me-4 d-inline-flex align-items-center`}
                   >
-                    <CrossIcon color="#000" />
+                    <CrossIcon color="white" />
                   </span>
                   {searchProdList?.length > 0 && (
                     <div
@@ -744,10 +747,10 @@ const SearchElement = ({
           onKeyDown={handleKeyDown}
           onFocus={() => setIsSearchOpen(false)}
           onBlur={() => setTimeout(() => setIsSearchOpen(false), 200)}
-          className={styles.searchInput}
+          className={`${styles.searchInput}`}
         />
         <Button variant="outline-secondary" className={`${styles.searchButton} text-white`}>
-          <Search />
+          <Search size={'25px'} />
         </Button>
       </InputGroup>
       {searchProdList?.length > 0 && (

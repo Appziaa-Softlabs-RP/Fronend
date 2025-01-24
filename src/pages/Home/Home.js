@@ -14,6 +14,8 @@ import { ShopAge } from "../../Components/ShopAge/ShopAge";
 import WhoAreWe from "../../Components/WhoAreWe/WhoAreWe";
 import { HomeCategories } from "../../Components/home-category-products/HomeCategoryProducts";
 import { useApp } from "../../context/AppContextProvider";
+import ReasonsToBuy from "../../Components/ReasonsToBuy/ResonsToBuy";
+import CustomerStats from "../../Components/CustomerStats/CustomerStatus";
 // import WeGrow from "../../Components/WeGrow/WeGrow";
 
 export const Home = () => {
@@ -55,13 +57,18 @@ export const Home = () => {
 
         <Reviews />
 
-        <WhoAreWe />
+        <ReasonsToBuy />
+
+        {/* <WhoAreWe /> */}
 
         {/* <TopBrands /> */}
 
         {/* <OurProcess /> */}
 
+
         <AllStores />
+
+        <CustomerStats />
 
         {/* <WeGrow variant={'component'} /> */}
 
