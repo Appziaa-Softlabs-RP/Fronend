@@ -1,9 +1,9 @@
 :root {
   --PRIMARY_COLOR: #332F7B;
-  --SECONDARY_COLOR: #69930e;
+  --SECONDARY_COLOR: #5AAD92;
   --MENU_HOVER_COLOR: #524bd5;
-  --ADD_BUTTON_COLOR: #85BA10;
-  --BUTTON_HOVER_COLOR: #94d606;
+  --ADD_BUTTON_COLOR: #3A7160;
+  --BUTTON_HOVER_COLOR: #6cd1af;
   --breakpoint-mobile: 560px;
 }
 
@@ -43,6 +43,23 @@ body {
 
 img {
   max-width: 100%;
+}
+
+.btnCustom {
+  --button-color: var(--PRIMARY_COLOR, #4a90e2);
+  --button-text-color: var(--SECONDARY_COLOR, #ffffff);
+  --button-depth: 6px;
+
+  background-color: var(--button-color);
+  color: var(--button-text-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  position: relative;
 }
 
 .owl-carousel .owl-stage-outer .owl-stage {

@@ -1,11 +1,61 @@
+
 .singleFeaturedProduct {
   max-width: 400px;
   background-color: #fff;
-  transition: transform 0.3s ease;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  max-width: 400px;
+  background-color: #fff;
+  transition: all 0.3s ease;
 }
 
 .singleFeaturedProduct:hover {
-  transform: translateY(-5px);
+  scale: 0.97;
+}
+
+.itemQuantityBtnBox {
+  bottom: 10px;
+  right: 15px;
+  z-index: 9;
+  background-color: rgb(239, 239, 239);
+  padding: 5px;
+  display: flex;
+  gap: 10px;
+  border-radius: 1000px;
+  width: fit-content;
+  margin: auto;
+}
+
+.countValue {
+  width: 20px;
+  text-align: center;
+  -webkit-appearance: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  cursor: default;
+  font-weight: 500;
+}
+
+.decrease_btn,
+.increase_btn {
+  height: 20px;
+  width: 20px;
+  /* border: 1px solid var(--ADD_BUTTON_COLOR); */
+  /* color: var(--ADD_BUTTON_COLOR); */
+  border-radius: 20px;
+  font-size: 20px;
+  padding-bottom: 5px;
+  border: 0 !important;
+  color: white;
+}
+
+.increase_btn {
+  background-color: green;
+}
+
+.decrease_btn {
+  background-color: red;
 }
 
 .productLink {
@@ -30,6 +80,7 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
+  padding: 10px;
 }
 
 .soldOutText {
@@ -74,7 +125,7 @@
 .offerPrice {
   font-size: 16px;
   line-height: 16px;
-  color: var(--PRIMARY_COLOR);
+  color: #389956;
   font-weight: bold;
 }
 
@@ -137,20 +188,28 @@
   right: 10px;
 }
 
+.addCartBtn{
+  font-size: 12px;
+  white-space: nowrap;
+}
+
 /* Custom pagination */
 .customPagination {
   position: absolute;
-  top: 5px !important;
-  left: 5px !important;
+  top: -270px !important;
+  left: 40px !important;
   display: flex;
   justify-content: start;
+  background-color: white !important;
+  border: 1px solid rgb(213, 211, 211);
   z-index: 2;
 }
 
 /* Swiper custom styles */
 :global(.swiper-pagination-bullet) {
-  background: var(--PRIMARY_COLOR);
+  background: #389956;
   opacity: 0.5;
+  transform: translateY(1px);
   height: 5px !important;
   width: 5px !important;
   margin: 2px !important;
@@ -164,5 +223,15 @@
 @media screen and (min-width: 568px) {
   .offerItemName {
     min-height: 34px;
+  }
+
+  .addCartBtn{
+    font-size: 18px;
+  }
+
+  .decrease_btn,
+  .increase_btn {
+    height: 30px;
+    width: 30px;
   }
 }

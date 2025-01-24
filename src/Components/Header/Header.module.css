@@ -10,19 +10,6 @@
   margin: 0px 10px;
 }
 
-.navItem {
-  color: white;
-  font-weight: 500;
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.navItem:hover {
-  background: var(--SECONDARY_COLOR);
-  color: rgb(217, 217, 217);
-}
-
 .menuIconBox svg,
 .cartIconBox svg {
   height: 25px;
@@ -31,7 +18,7 @@
 
 .siteLogoBox img {
   position: absolute;
-  height: 40px;
+  height: 70px;
 }
 
 .cartCountMobile {
@@ -47,11 +34,11 @@
 }
 
 .cartCount {
-  font-size: 12px;
+  font-size: 10px;
   line-height: 11px;
-  background: var(--ADD_BUTTON_COLOR);
-  color: var(--SECONDARY_COLOR);
-  height: 17px;
+  background: var(--SECONDARY_COLOR);
+  color: white;
+  height: 15px;
   padding: 0px 5px;
   top: -12px;
   right: -5px;
@@ -78,10 +65,10 @@
 }
 
 .topHeaderSale {
-  background: var(--MENU_HOVER_COLOR)
+  background: var(--ADD_BUTTON_COLOR)
 }
 
-.dealsLinkWrapper {
+.dealsLinkWrapper{
   min-height: 42px;
 }
 
@@ -89,15 +76,14 @@
   font-size: 11px;
   font-weight: 500;
   line-height: 16px;
-  color: white;
+  color: #FFF;
   text-transform: uppercase;
   letter-spacing: 3px;
 }
 
 .headerRow {
-  background: var(--PRIMARY_COLOR);
+  background: var(--SECONDARY_COLOR);
   height: 80px;
-  color: #000;
   /* padding: 20px; */
 }
 
@@ -114,8 +100,7 @@
 }
 
 .supportDrop {
-  color: #000;
-  z-index: 100;
+  color: #ffffff;
 }
 
 .supportDrop:hover {
@@ -197,35 +182,38 @@
 
 .searchIcon,
 .searchIcon svg {
-  height: 25px;
-  width: 25px;
+  height: 20px;
+  width: 20px;
 }
 
 .inputSearch {
   padding: 25px;
+  width: 100vw;
   left: 0;
   right: 0;
   border-radius: 6px;
-  background: white;
+  background: #edecec;
   font-size: 25px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
   color: #000;
-  border: 2px solid #e3dbf6;
+  border: none;
   box-shadow: none;
 }
 
 .inputSearch:focus {
-  border-color: var(--PRIMARY_COLOR);
+  border: none;
   box-shadow: none;
   outline: none;
 }
 
 .headerNavList {
-  background: var(--ADD_BUTTON_COLOR);
+  background: #FFF;
 }
 
-.headerMenuItems {
+.headerMenuItems{
   display: flex;
-  padding: 3px;
+  padding: 10px;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -271,9 +259,10 @@
 }
 
 .SubMenuList {
-  background: white;
+  background: var(--PRIMARY_COLOR);
+  color: white;
   z-index: 5;
-  box-shadow: 0px 4px 16px 0px rgba(98, 98, 98, 0.2);
+  box-shadow: 0px 4px 16px 0px rgba(255, 255, 255, 0.2);
   top: 100%;
   padding: 12px;
   min-width: 240px;
@@ -286,7 +275,7 @@
 
 .subMenuName {
   min-height: 40px;
-  color: black;
+  color: white;
   border-radius: 4px;
 }
 
@@ -304,7 +293,6 @@
   scale: 1.1;
   animation: scale 0.2s ease;
 }
-
 .userAccountDrop {
   background: #FFF;
   z-index: 5;
@@ -333,7 +321,7 @@
 }
 
 .accountOption:hover {
-  background: var(--BUTTON_HOVER_COLOR);
+  background: var(--MENU_HOVER_COLOR);
 }
 
 .userName {
@@ -343,66 +331,11 @@
 }
 
 .showSearchList {
-  top: 60px;
-  max-height: 260px;
+  top: 55px;
+  max-height: 230px;
   background: #FFF;
   z-index: 5;
   box-shadow: 0px 16px 16px 0px rgba(0, 0, 0, 0.30);
-}
-
-.searchInput{
-  border-radius: 100px;
-  height: 50px;
-  padding: 0 0 0 20px;
-  border-end-end-radius: 0;
-}
-
-.searchInput:focus {
-  box-shadow: none;
-  border-color: #ced4da;
-}
-
-.searchButton {
-  background-color: var(--ADD_BUTTON_COLOR);
-  border: 0;
-  display: flex;
-  justify-content: center;
-  border-radius: 100px;
-  z-index: 1000;
-  padding: 0 15px;
-  align-items: center;
-}
-
-.searchButton:hover {
-  background-color: var(--ADD_BUTTON_COLOR);
-  border: 0;
-}
-
-.searchButton:focus {
-  box-shadow: none;
-}
-
-.searchResults {
-  max-height: 300px;
-  overflow-y: auto;
-  z-index: 1000;
-}
-
-.searchResults::-webkit-scrollbar {
-  width: 8px;
-}
-
-.searchResults::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-
-.searchResults::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
-}
-
-.searchResults::-webkit-scrollbar-thumb:hover {
-  background: #555;
 }
 
 .searchRow {
@@ -413,7 +346,7 @@
 }
 
 .searchRow:hover {
-  background: var(--BUTTON_HOVER_COLOR);
+  background: var(--MENU_HOVER_COLOR);
 }
 
 .showSearchListMobile.showSearchList {
@@ -424,20 +357,20 @@
 
 @media screen and (max-width: 560px) {
   .hideInMobile {
-    display: none !important;
+      display: none !important;
   }
 }
 
 
 @media screen and (max-width:1070px) {
   .supportHideOnMobile {
-    display: none;
+      display: none;
   }
 }
 
 
 @media screen and (max-width:900px) {
   .headerNavBox {
-    margin: 0px 5px;
+      margin: 0px 5px;
   }
 }
