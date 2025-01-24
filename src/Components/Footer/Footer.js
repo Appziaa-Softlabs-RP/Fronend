@@ -89,8 +89,13 @@ export const Footer = () => {
 
             <div className={styles.contactInfo}>
               <h3 className={styles.columnTitle}>Contact Us</h3>
+              <a href={`tel:${enviroment.PHONE_NUMBER}`} style={{textDecoration: 'none'}}>
               <p>+91 {enviroment.PHONE_NUMBER}</p>
-              <p>Monday to Sunday: 11:00 AM - 7:00 PM</p>
+              </a>
+              <a href={`tel:8950093336`} style={{textDecoration: 'none'}}>
+              <p>+91 8950093336</p>
+              </a>
+              <p>Monday to Sunday: 10:00 AM - 8:00 PM</p>
             </div>
           </Col>
         </Row>
