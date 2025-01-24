@@ -255,9 +255,10 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
               alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
               style={{
                 maxWidth: '200px',
-                maxHeight: '30px',
+                maxHeight: '60px',
+                height: '60px',
+                transform: "translateY(-5px)"
               }}
-              className="mt-3"
             />
           </h1>
           <div className="d-inline-flex align-items-stretch justify-content-end gap-2 me-3">
@@ -394,7 +395,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                 <img
                   src={siteLogo}
                   alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
-                  className="object-fit-contain"
+                  className="object-fit-contain mt-1"
                 />
               </h1>
               <div className="d-inline-flex align-items-stretch w-100 justify-content-end gap-4">
