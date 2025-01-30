@@ -389,6 +389,14 @@ ApiService.addMultipleCart = function (data) {
   });
 };
 
+ApiService.companyVideoBanner = function (data) {
+  return fetch({
+    url: "store/company-video-banner",
+    method: "post",
+    data: data,
+  });
+};
+
 ApiService.updateMultipleCart = function (data) {
   return fetch({
     url: "store/updateTocartMultiple",

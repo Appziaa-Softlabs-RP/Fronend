@@ -6,15 +6,15 @@ import { DealShop } from "../../Components/DealShop/DealShop";
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
 import { HeroBanner } from "../../Components/HeroBanner/HeroBanner";
+import { HomeCategories } from "../../Components/home-category-products/HomeCategoryProducts";
+import LatestBlogs from "../../Components/LatestBlogs/LatestBlogs";
 import { LimitedOffers } from "../../Components/LimitedOffers/LimitedOffers";
 import { LookingFor } from "../../Components/LookingFor/LookingFor";
 import { NewArrival } from "../../Components/NewArrival/NewArrival";
 import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
 import Reviews from "../../Components/Reviews/Reviews";
 import { ShopAge } from "../../Components/ShopAge/ShopAge";
-import UnderContruction from "../../Components/UnderConstruction/UnderConstruction";
-import { HomeCategories } from "../../Components/home-category-products/HomeCategoryProducts";
-import LatestBlogs from "../../Components/LatestBlogs/LatestBlogs";
+import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
 
 export const Home = () => {
   const [asideOpen, setAsideOpen] = useState(false);
@@ -42,6 +42,8 @@ export const Home = () => {
         </div>
 
         <NewArrival />
+
+        <VideoPlayer />
 
         <DealShop />
 
