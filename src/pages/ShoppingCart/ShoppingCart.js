@@ -14,6 +14,7 @@ import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { AppNotification } from "../../utils/helper";
 import styles from "./ShoppingCart.module.css";
+import GoToTop from "../../Components/GoToTop/GoToTop";
 
 export const ShoppingCart = () => {
   const appData = useApp();
@@ -393,6 +394,7 @@ export const ShoppingCart = () => {
           <Footer />
         </React.Fragment>
       )}
+      <GoToTop />
     </React.Fragment>
   );
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Aside } from "../../Components/Aside/Aside";
 import { BrandFocus } from "../../Components/BrandFocus/BrandFocus";
 import { CategoryShop } from "../../Components/CategoryShop/CategoryShop";
@@ -15,10 +15,30 @@ import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
 import Reviews from "../../Components/Reviews/Reviews";
 import { ShopAge } from "../../Components/ShopAge/ShopAge";
 import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
+import GoToTop from "../../Components/GoToTop/GoToTop";
+import { useLocation } from "react-router-dom";
 
 export const Home = () => {
   const [asideOpen, setAsideOpen] = useState(false);
   const [navItems, setNavItems] = useState([]);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Handle both initial load and pathname changes
+    window.scrollTo(0, 0);
+
+    // Add window.onload event handler
+    const handleLoad = () => {
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener('load', handleLoad);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('load', handleLoad);
+    };
+  }, [pathname]);
 
   return (
     <React.Fragment>̦
@@ -61,6 +81,7 @@ export const Home = () => {
 
         <LatestBlogs />
 
+        <GoToTop />
         <Footer />
       </div>
     </React.Fragment>

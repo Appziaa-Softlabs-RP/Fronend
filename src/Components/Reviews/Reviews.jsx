@@ -136,7 +136,7 @@ export default function SuccessStories() {
                 </div>
                 <div className={styles.writeReviewContainer}>
                     <a
-                        href="https://rwps.in/SHS31o"
+                        href="https://g.page/r/CfRfKFyFkUGIEBM/review"
                         target="_blank"
                         rel="noopener noreferrer"
                         className={"btnCustom2"}

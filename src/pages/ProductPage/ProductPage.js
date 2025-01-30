@@ -36,6 +36,7 @@ import { AppNotification } from "../../utils/helper";
 import ProductGalleryDesktop from "./ProdGalleryDesktop";
 import ProdGalleryMobile from "./ProdGalleryMobile";
 import styles from "./ProductPage.module.css";
+import GoToTop from "../../Components/GoToTop/GoToTop";
 
 export const ProductPage = () => {
   const appData = useApp();
@@ -321,7 +322,7 @@ export const ProductPage = () => {
       AppNotification("Error", "Please enter valid pincode.", "danger");
     }
   };
-  
+
   const copylinkUrl = () => {
     var copyText = document.getElementById("myUrlInput");
     copyText.select();
@@ -1388,6 +1389,7 @@ const ProdDetails = ({
           </div>
         )}
       </div>
+      <GoToTop />
     </div>
   </>
 }
