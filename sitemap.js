@@ -101,16 +101,16 @@ const sitemap = async () => {
   const sitemap1 = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${[
-  ...urls,
-  ...productUrls,
-  ...verticalUrls,
-  ...categoryUrls,
-  ...verticalCatUrls,
-  ...brandsUrls,
-  ...ageGroups
-]
-  .map(
-    (url) => `
+      ...urls,
+      ...productUrls,
+      ...verticalUrls,
+      ...categoryUrls,
+      ...verticalCatUrls,
+      ...brandsUrls,
+      ...ageGroups
+    ]
+      .map(
+        (url) => `
 <url>
 <loc>${appUrl}${url}</loc>
 <changefreq>weekly</changefreq>
@@ -118,36 +118,11 @@ ${[
 <lastmod>${new Date().toISOString()}</lastmod>
 </url>
 `
-  )
-  .join("\n")}
-</urlset>`;
-
-  const sitemap2 = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${[
-  ...urls,
-  ...productUrls,
-  ...verticalUrls,
-  ...categoryUrls,
-  ...verticalCatUrls,
-  ...brandsUrls,
-  ...ageGroups
-]
-  .map(
-    (url) => `
-<url>
-<loc>https://toymie.com${url}</loc>
-<changefreq>weekly</changefreq>
-<priority>0.8</priority>
-<lastmod>${new Date().toISOString()}</lastmod>
-</url>
-`
-  )
-  .join("\n")}
+      )
+      .join("\n")}
 </urlset>`;
 
   fs.writeFileSync(path.join("./public/sitemap.xml"), sitemap1);
-  fs.writeFileSync(path.join("./public/sitemap2.xml"), sitemap2);
 };
 
 sitemap();
