@@ -251,7 +251,7 @@
 }
 
 .menuName {
-  min-width: 90px;
+  /* min-width: 90px; */
   /* max-width: 150px; */
   overflow: hidden;
   text-overflow: ellipsis;

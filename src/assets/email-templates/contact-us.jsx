@@ -198,7 +198,7 @@ const ContactUsUserTemplate = `<table
           >
             <div style="width: 100%">
               <img
-                src="https://byebyemrps.com/static/media/site_logo.8370918601d7a5ea5637.png"
+                src="https://uttaranchaltrading.com/static/media/site_logo.8370918601d7a5ea5637.png"
                 style="max-height: 40px"
               /><br />
             </div>
@@ -233,7 +233,7 @@ const ContactUsUserTemplate = `<table
             <div>
               <span class="size" style="font-size: 16px"
                 >In the meantime, feel free to explore
-                <a href="https://byebyemrps.com/" target="_blank">our website</a>
+                <a href="https://uttaranchaltrading.com/" target="_blank">our website</a>
                 for the latest products and updates.<br
               /></span>
             </div>
@@ -280,7 +280,7 @@ const ContactUsUserTemplate = `<table
               "
             >
             ${enviroment.INSTAGRAM_LINK ?
-        `<a href="${enviroment.INSTAGRAM_LINK}" style="display: inline-block"
+    `<a href="${enviroment.INSTAGRAM_LINK}" style="display: inline-block"
                             ><img
                             src="https://rewardsplus.in/public/iconss/insta-white.svg"
                             alt="Instagram"
@@ -289,9 +289,9 @@ const ContactUsUserTemplate = `<table
                             height="24"
                             />
                         </a>` : ''
-    }
+  }
             ${enviroment.FACEBOOK_LINK ?
-        `<a href="${enviroment.FACEBOOK_LINK}" style="display: inline-block"
+    `<a href="${enviroment.FACEBOOK_LINK}" style="display: inline-block"
                             ><img
                             src="https://rewardsplus.in/public/iconss/facebook-white.svg"
                             alt="Facebook"
@@ -300,9 +300,9 @@ const ContactUsUserTemplate = `<table
                             height="24"
                             />
                         </a>` : ''
-    }
+  }
             ${enviroment.TWITTER_LINK ?
-        `<a href="${enviroment.TWITTER_LINK}" style="display: inline-block"
+    `<a href="${enviroment.TWITTER_LINK}" style="display: inline-block"
                             ><img
                             src="https://rewardsplus.in/public/iconss/twitter-white.svg"
                             alt="Twitter"
@@ -311,9 +311,9 @@ const ContactUsUserTemplate = `<table
                             height="24"
                             />
                         </a>` : ''
-    }
+  }
             ${enviroment.LINKEDIN_LINK ?
-        `<a href="${enviroment.LINKEDIN_LINK}" style="display: inline-block"
+    `<a href="${enviroment.LINKEDIN_LINK}" style="display: inline-block"
                             ><img
                             src="https://rewardsplus.in/public/iconss/linkedin-white.svg"
                             alt="Linkedin"
@@ -322,7 +322,7 @@ const ContactUsUserTemplate = `<table
                             height="24"
                             />
                         </a>` : ''
-    }
+  }
             <br />
             </div>
             <div style="margin-top: 10px; font-size: 12px">
@@ -356,13 +356,13 @@ const ContactUsUserTemplate = `<table
 `
 
 export const getContactUsUserEmailTemplate = ({ name }) => {
-    return ContactUsUserTemplate.replace('CustomerNameValue', name)
+  return ContactUsUserTemplate.replace('CustomerNameValue', name)
 }
 
 export const getContactUsAdminEmailTemplate = ({ name, email, phone, message }) => {
-    return ConactUsAdminTemplate.replace('CustomerNameValue', name)
-        .replace('CustomerEmailValue', email)
-        .replace('CustomerPhoneValue', phone)
-        .replace('CustomerMessageValue', message)
-        .replace('CurrentDateValue', new Date().toLocaleDateString())
+  return ConactUsAdminTemplate.replace('CustomerNameValue', name)
+    .replace('CustomerEmailValue', email)
+    .replace('CustomerPhoneValue', phone)
+    .replace('CustomerMessageValue', message)
+    .replace('CurrentDateValue', new Date().toLocaleDateString())
 }

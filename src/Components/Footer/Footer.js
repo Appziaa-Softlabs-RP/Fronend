@@ -17,7 +17,7 @@ export const Footer = () => {
           <Col lg={3} md={6} className={styles.footerColumn}>
             <h3 className={styles.columnTitle}>About the Shop</h3>
             <p className={styles.aboutText}>
-              ByeByeMRPS specializes in selling open-box home and electronic appliances, offering high-quality products at deeply discounted prices. The brand ensures that all items are thoroughly tested and certified for functionality and reliability, providing customers with excellent value for money. With a focus on affordability and sustainability, ByeByeMRPS caters to smart shoppers looking for premium appliances at unbeatable deals.
+              Uttaranchal Trading specializes in selling open-box home and electronic appliances, offering high-quality products at deeply discounted prices. The brand ensures that all items are thoroughly tested and certified for functionality and reliability, providing customers with excellent value for money. With a focus on affordability and sustainability, Uttaranchal Trading caters to smart shoppers looking for premium appliances at unbeatable deals.
             </p>
             <div className={styles.socialIcons}>
               {
@@ -89,11 +89,11 @@ export const Footer = () => {
 
             <div className={styles.contactInfo}>
               <h3 className={styles.columnTitle}>Contact Us</h3>
-              <a href={`tel:${enviroment.PHONE_NUMBER}`} style={{textDecoration: 'none'}}>
-              <p>+91 {enviroment.PHONE_NUMBER}</p>
+              <a href={`tel:${enviroment.PHONE_NUMBER}`} style={{ textDecoration: 'none' }}>
+                <p>+91 {enviroment.PHONE_NUMBER}</p>
               </a>
-              <a href={`tel:8950093336`} style={{textDecoration: 'none'}}>
-              <p>+91 8950093336</p>
+              <a href={`tel:8950093336`} style={{ textDecoration: 'none' }}>
+                <p>+91 8950093336</p>
               </a>
               <p>Monday to Sunday: 10:00 AM - 8:00 PM</p>
             </div>
@@ -101,8 +101,8 @@ export const Footer = () => {
         </Row>
 
         <div className={styles.copyrightSection}>
-          <p>© {(new Date()).getFullYear()} ByeByeMRPS India</p>
-          <p>byebyemrps.com is a property of ByeByeMRPS. Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
+          <p>© {(new Date()).getFullYear()} Uttaranchal Trading India</p>
+          <p>uttaranchaltrading.com is a property of Uttaranchal Trading. Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
         </div>
       </Container>
     </footer>

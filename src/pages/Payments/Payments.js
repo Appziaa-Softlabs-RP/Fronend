@@ -32,7 +32,7 @@ export const Payments = () => {
           <p className="c6">
             <span className="c4">
               This Payments Policy describes the payment methods available for
-              purchases on ByeByeMRPS.online (&quot;the Site&quot;).
+              purchases on Uttaranchal Trading.online (&quot;the Site&quot;).
             </span>
           </p>
           <p className="c6">
@@ -187,7 +187,7 @@ export const Payments = () => {
           </ul>
           <p className="c6">
             <span className="c1">
-              By using the ByeByeMRPS.online website, you acknowledge and agree
+              By using the Uttaranchal Trading.online website, you acknowledge and agree
               to this Payments Policy.
             </span>
           </p>

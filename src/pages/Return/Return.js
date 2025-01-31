@@ -26,7 +26,7 @@ export const Return = () => {
       }}>
         <div className="container">
           <p className="c6">
-            <span className="c7">ByeByeMRPS owned and operated by Kamal Enterprises Return Policy</span>
+            <span className="c7">Uttaranchal Trading owned and operated by Kamal Enterprises Return Policy</span>
           </p>
           <p className="c6">
             <span className="c2">Effective Date:</span>
@@ -36,7 +36,7 @@ export const Return = () => {
             <span className="c1">Return Window:</span>
           </p>
           <p className="c6">
-            <span className="c8">ByeByeMRPS owned and operated by Kamal Enterprises offers a </span>
+            <span className="c8">Uttaranchal Trading owned and operated by Kamal Enterprises offers a </span>
             <span className="c2">7-day return policy</span>
             <span className="c4">
               &nbsp;for all online and in-store purchases. This means you have 7
@@ -116,7 +116,7 @@ export const Return = () => {
             <li className="c0 li-bullet-0">
               <span className="c4">
                 You are responsible for the cost of shipping the returned
-                item(s) back to ByeByeMRPS owned and operated by Kamal Enterprises.
+                item(s) back to Uttaranchal Trading owned and operated by Kamal Enterprises.
               </span>
             </li>
             <li className="c0 li-bullet-0">
@@ -151,7 +151,7 @@ export const Return = () => {
             <li className="c0 li-bullet-0">
               <span className="c4">
                 This return policy applies only to purchases made from
-                ByeByeMRPS owned and operated by Kamal Enterprises. Items purchased from other retailers or through
+                Uttaranchal Trading owned and operated by Kamal Enterprises. Items purchased from other retailers or through
                 third-party marketplaces may have different return policies.
               </span>
             </li>

@@ -21,13 +21,13 @@ export const Cancellation = () => {
         <Header />
       )}
       <h1 className="titleMainSmall fw-bold mt-5">Cancellation Policy</h1>
-            <div className="min-vh-100 col-12 d-inline-flex flex-column pt-2" style={{
-                letterSpacing: "1px",
-                fontSize: "14px",
-            }}>
+      <div className="min-vh-100 col-12 d-inline-flex flex-column pt-2" style={{
+        letterSpacing: "1px",
+        fontSize: "14px",
+      }}>
         <div className="container">
           <p className="c6">
-            <span className="c7">ByeByeMRPS Cancellation Policy</span>
+            <span className="c7">Uttaranchal Trading Cancellation Policy</span>
           </p>
           <p className="c6">
             <span className="c2">Effective Date:</span>
@@ -37,7 +37,7 @@ export const Cancellation = () => {
             <span className="c1">Cancellation Window:</span>
           </p>
           <p className="c6">
-            <span className="c8">ByeByeMRPS offers a </span>
+            <span className="c8">Uttaranchal Trading offers a </span>
             <span className="c2">7-day Cancellation policy</span>
             <span className="c4">
               &nbsp;for all online and in-store purchases. This means you have 7
@@ -118,7 +118,7 @@ export const Cancellation = () => {
             <li className="c0 li-bullet-0">
               <span className="c4">
                 You are responsible for the cost of shipping the Cancellationed
-                item(s) back to ByeByeMRPS.
+                item(s) back to Uttaranchal Trading.
               </span>
             </li>
             <li className="c0 li-bullet-0">
@@ -153,7 +153,7 @@ export const Cancellation = () => {
             <li className="c0 li-bullet-0">
               <span className="c4">
                 This Cancellation policy applies only to purchases made from
-                ByeByeMRPS. Items purchased from other retailers or through
+                Uttaranchal Trading. Items purchased from other retailers or through
                 third-party marketplaces may have different Cancellation
                 policies.
               </span>

@@ -28,7 +28,7 @@ export default function CustomerStats() {
                             margin: "0 auto",
                         }}
                     >
-                        Join thousands of satisfied customers who trust ByeByeMRPs for open box and, neverused items.
+                        Join thousands of satisfied customers who trust Uttaranchal Trading for open box and, neverused items.
                     </p>
                 </div>
 

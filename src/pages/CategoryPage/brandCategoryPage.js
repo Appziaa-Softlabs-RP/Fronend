@@ -51,8 +51,8 @@ export const BrandCategoryPage = () => {
       parseInt(p1.mrp) < parseInt(p2.mrp)
         ? 1
         : parseInt(p1.mrp) > parseInt(p2.mrp)
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
     setProductData(originalProduct);
     setIsAscendingOrder(true);
@@ -65,8 +65,8 @@ export const BrandCategoryPage = () => {
       parseInt(p1.mrp) > parseInt(p2.mrp)
         ? 1
         : parseInt(p1.mrp) < parseInt(p2.mrp)
-        ? -1
-        : 0
+          ? -1
+          : 0
     );
     setProductData(originalProduct);
     setIsDscendingOrder(true);
@@ -83,7 +83,7 @@ export const BrandCategoryPage = () => {
           setApiPayload((prev) => ({ ...prev, page: 2 }));
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   const LoadMoreProducts = () => {
@@ -105,7 +105,7 @@ export const BrandCategoryPage = () => {
           setApiPayload((prev) => ({ ...prev, page: pageCount }));
         }
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   useEffect(() => {
@@ -131,11 +131,11 @@ export const BrandCategoryPage = () => {
         <title>
           Shop the latest&nbsp;
           {ProductData ? (ProductData[0] ? ProductData[0].brand_name : "") : ""}
-          &nbsp;merchandise at byebyemrps.com, their official store!
+          &nbsp;merchandise at uttaranchaltrading.com, their official store!
         </title>
         <meta
           name="description"
-          content="From action figures to musical instruments, byebyemrps.com has all the official <Band Name> toys to inspire creativity and rockstar dreams!"
+          content="From action figures to musical instruments, uttaranchaltrading.com has all the official <Band Name> toys to inspire creativity and rockstar dreams!"
         />
       </Helmet>
       {windowWidth === "mobile" ? (
@@ -147,9 +147,8 @@ export const BrandCategoryPage = () => {
       )}
 
       <div
-        className={`col-12 d-inline-flex flex-column ${
-          windowWidth === "mobile" ? "mt-3" : "mt-5"
-        }`}
+        className={`col-12 d-inline-flex flex-column ${windowWidth === "mobile" ? "mt-3" : "mt-5"
+          }`}
       >
         <div className="container">
           {locationState?.state?.banner !== "" &&
@@ -165,7 +164,7 @@ export const BrandCategoryPage = () => {
                 />
               </div>
             )}
-            {loading && <AdaptiveLoader />}
+          {loading && <AdaptiveLoader />}
           {loading === false && (
             <div
               className={`d-inline-flex flex-column col-12 mb-3`}
@@ -187,15 +186,13 @@ export const BrandCategoryPage = () => {
                     </div>
                   )}
                 <div
-                  className={`${
-                    windowWidth === "mobile"
+                  className={`${windowWidth === "mobile"
                       ? "col-12 pt-2"
                       : filterVert !== null && filterVert !== undefined
-                      ? "col-9"
-                      : "col-12"
-                  } ${
-                    styles.productContainer
-                  } flex-shrink-1 d-inline-flex flex-wrap`}
+                        ? "col-9"
+                        : "col-12"
+                    } ${styles.productContainer
+                    } flex-shrink-1 d-inline-flex flex-wrap`}
                 >
                   {windowWidth !== "mobile" && (
                     <div
@@ -215,18 +212,16 @@ export const BrandCategoryPage = () => {
                         <span
                           onClick={() => priceDescending()}
                           role="button"
-                          className={`${styles.priceLow} ${
-                            isDescendingOrder ? "fw-bold" : ""
-                          } d-inline-flex px-1`}
+                          className={`${styles.priceLow} ${isDescendingOrder ? "fw-bold" : ""
+                            } d-inline-flex px-1`}
                         >
                           Price: Low to High
                         </span>
                         <span
                           onClick={() => priceAscending()}
                           role="button"
-                          className={`${styles.priceLow} d-inline-flex px-1 ${
-                            isAscendingOrder ? "fw-bold" : ""
-                          }`}
+                          className={`${styles.priceLow} d-inline-flex px-1 ${isAscendingOrder ? "fw-bold" : ""
+                            }`}
                         >
                           Price: High to Low
                         </span>
@@ -245,14 +240,13 @@ export const BrandCategoryPage = () => {
                           <React.Fragment key={index}>
                             {item.name !== "" && (
                               <div
-                                className={`${
-                                  windowWidth === "mobile"
+                                className={`${windowWidth === "mobile"
                                     ? "col-6"
                                     : filterVert !== null &&
                                       filterVert !== undefined
-                                    ? "col-4"
-                                    : "col-3"
-                                } px-2 flex-shrink-0 mb-3`}
+                                      ? "col-4"
+                                      : "col-3"
+                                  } px-2 flex-shrink-0 mb-3`}
                                 key={index}
                                 role="button"
                               >
@@ -335,11 +329,9 @@ export const BrandCategoryPage = () => {
           filterVert !== null &&
           filterVert !== undefined && (
             <div
-              className={`${
-                styles.filterPopup
-              } top-0 start-0 h-100 col-12 position-fixed ${
-                filterPopup === true ? "d-inline-flex" : "d-none"
-              } flex-column overflow-y-auto`}
+              className={`${styles.filterPopup
+                } top-0 start-0 h-100 col-12 position-fixed ${filterPopup === true ? "d-inline-flex" : "d-none"
+                } flex-column overflow-y-auto`}
             >
               <div
                 className={`${styles.PageHeader} position-sticky top-0 start-0 col-12 d-inline-flex gap-2`}

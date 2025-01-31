@@ -344,7 +344,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
         </div>
       </div>
       {/* Delivering India Section */}
-      <div
+      {/* <div
         className={`${styles.topHeaderSale} hideInMobile col-12 owl-theme`}>
         <div
           className={`col-12 ${styles.dealsLinkWrapper} d-inline-flex align-items-center justify-content-center h-100`}
@@ -356,7 +356,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
             Shop Smart, Save Big! Explore Our Open-Box Collection Today!
           </span>
         </div>
-      </div>
+      </div> */}
 
       {/* Desktop Structure */}
       <div className={`hideInMobile col-12 d-inline-flex flex-column`} style={{
@@ -609,7 +609,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                   navItems.map((item, index) => (
                     <div
                       id={`menu-${index}`}
-                      className={`${styles.headerNavBox} position-relative d-inline-flex align-items-center px-4`}
+                      className={`${styles.headerNavBox} position-relative d-inline-flex align-items-center px-3`}
                       key={index}
                       role="button"
                       onMouseEnter={() => handleMouseEnter(item, index)}
@@ -622,7 +622,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                           alignItems: 'center',
                           justifyContent: 'center',
                           gap: '0.5rem',
-                          minWidth: '220px',
+                          // minWidth: '220px',
                           maxWidth: '150px',
                           overflow: 'hidden',
                           textOverflow: 'ellipsis',
