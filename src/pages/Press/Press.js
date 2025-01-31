@@ -45,6 +45,10 @@ export const ShippingPolicy = () => {
                     <br />
                     <br />
                     Product delivery will be done through reputed courier service providers.
+                    <br />
+                    <br />
+                    <p className={`fw-bold`}>In Delhi NCR, we deliver items within 0 to 1 day.</p>
+                    <p className={`fw-bold`}>Currently, we charge ₹2000 for delivery across India.</p>
                 </div>
             </div>
             <Footer />
