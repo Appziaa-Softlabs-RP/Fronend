@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContextProvider";
-import { AppNotification } from "../../utils/helper";
-import styles from './CartAside.module.css';
-import { DeleteIcon } from "../siteIcons";
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
+import { AppNotification } from "../../utils/helper";
+import { DeleteIcon } from "../siteIcons";
+import styles from './CartAside.module.css';
 
 export const CartAside = ({ setCartPop }) => {
     const [cartData, setCartData] = useState([]);
@@ -18,22 +18,8 @@ export const CartAside = ({ setCartPop }) => {
         setCartPop(false);
     }
 
-    const showProductDetail = (id) => {
-        const payload = {
-            product_id: id,
-            company_id: parseInt(enviroment.COMPANY_ID),
-            store_id: parseInt(enviroment.STORE_ID)
-        }
-        ApiService.productDetails(payload).then((res) => {
-            if (res.message === "Product Detail") {
-                navigate(`/product?id=${id}`, { state: { product: res.payload } });
-                closeDrawer();
-            } else {
-                AppNotification('Error', 'Sorry, Product detail not found.', 'danger');
-            }
-        }).catch((err) => {
-            AppNotification('Error', 'Sorry, Product detail not found.', 'danger');
-        });
+    const showProductDetail = (slug) => {
+        window.location.href = (`/product/${slug}`);
     }
 
     const updateProdQty = (e, prodID, allowQty, currQty, type, stock) => {
@@ -45,9 +31,9 @@ export const CartAside = ({ setCartPop }) => {
                 AppNotification('Error', 'You have reached the product quantity limit.', 'danger');
             } else {
                 let newQty = currQty + 1;
-                if(stock >= newQty){
+                if (stock >= newQty) {
                     cartInfo[cartProdID].quantity = newQty;
-                }else{
+                } else {
                     AppNotification('Error', 'You have reached the product quantity limit.', 'danger');
                 }
             }
@@ -55,7 +41,7 @@ export const CartAside = ({ setCartPop }) => {
             let newQty = currQty - 1;
             if (newQty === 0) {
                 let cartID = appData.appData.cartID;
-                if(appData.appData.cartSaved === true && cartID !== null && cartID != undefined){
+                if (appData.appData.cartSaved === true && cartID !== null && cartID != undefined) {
                     const payload = {
                         store_id: parseInt(enviroment.STORE_ID),
                         customer_id: userInfo.customer_id,
@@ -81,9 +67,9 @@ export const CartAside = ({ setCartPop }) => {
 
     const removeThisProd = (id) => {
         let cartInfo = appData?.appData?.cartData;
-        if(appData.appData.cartSaved === true){
+        if (appData.appData.cartSaved === true) {
             let cartID = appData.appData.cartID;
-            if(appData.appData.cartSaved === true && cartID !== null && cartID != undefined){
+            if (appData.appData.cartSaved === true && cartID !== null && cartID != undefined) {
                 const payload = {
                     store_id: parseInt(enviroment.STORE_ID),
                     customer_id: userInfo.customer_id,
@@ -147,7 +133,7 @@ export const CartAside = ({ setCartPop }) => {
                                 {cartData.map((item, indx) => {
                                     return (
                                         <div className={`${styles.drawerCartItemsWrapper} mb-2 col-12 position-relative d-inline-flex`} key={indx}>
-                                            <span className={`${styles.cartItemLink} position-absolute d-inline-block`} onClick={() => showProductDetail(item.product_id)}>
+                                            <span className={`${styles.cartItemLink} position-absolute d-inline-block`} onClick={() => showProductDetail(item.name_url)}>
                                                 <img src={item?.image} alt={item?.product_name} className="col-12 d-inline-block object-fit-contain" />
                                             </span>
                                             <div className={`${styles.productCartDetails} col-12 d-inline-block`}>

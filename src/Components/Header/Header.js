@@ -400,7 +400,7 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
                     alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
                     className="object-fit-contain my-2"
                     style={{
-                      height: "65px"
+                      height: "55px"
                     }}
                   />
                 </h1>
@@ -589,142 +589,101 @@ export const Header = ({ setAsideOpen, asideOpen }) => {
           </div>
         </div>
         <div
-          className={`${styles.headerNavList} w-100 position-relative`}
+          className={`${styles.headerNavList} col-12 d-inline-flex align-items-center position-relative`}
         >
           <div style={{
             width: 'fit-content',
-            margin: '0 auto',
+            margin: '0 auto'
           }}>
             {loading ? (
               <HeaderNavLoader />
             ) : (
               <div
-                className={`${styles.headerMenuRow} col-12`}
+                className={`${styles.headerMenuRow} d-inline-flex align-items-stretch col-12`}
+                style={{
+                  maxWidth: '100dvw',
+                  overflowX: "auto"
+                }}
               >
                 {navItems.length > 0 &&
-                  <div className={`${styles.headerMenuItems}`}>
-                    {navItems?.map((item, index) => (
+                  navItems.map((item, index) => (
+                    <div
+                      id={`menu-${index}`}
+                      className={`${styles.headerNavBox} position-relative d-inline-flex align-items-center px-4`}
+                      key={index}
+                      role="button"
+                      onMouseEnter={() => handleMouseEnter(item, index)}
+                      onClick={() => handleMouseEnter(item, index)}
+                    >
                       <div
-                        id={`menu-${index}`}
-                        className={`${styles.headerNavBox} position-relative d-inline-flex align-items-center`}
-                        key={index}
-                        role="button"
-                        onMouseEnter={() => handleMouseEnter(item, index)}
-                        onClick={() => handleMouseEnter(item, index)}
+                        className={`${styles.menuName}`}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          gap: '0.5rem',
+                          minWidth: '220px',
+                          maxWidth: '150px',
+                          overflow: 'hidden',
+                          textOverflow: 'ellipsis',
+                          whiteSpace: 'nowrap',
+                        }}
                       >
-                        <a
-                          href={`/store/${item.name_url}`}
-                          className={`${styles.menuName}`}
+                        <span
+                          className={`${styles.menuNameText}`}
                           style={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            minWidth: 'fit-content',
-                            gap: '0.5rem',
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
-                            fontSize: '1rem',
-                            textDecoration: 'none',
+                            display: 'inline-block',
+                            verticalAlign: 'middle',
                           }}
                         >
-                          <img src={getCatIcon(item.name)} alt={item.name} style={{
-                            height: '2rem',
-                            width: '2rem',
-                          }} />
-                          <span
-                            className={`${styles.menuNameText}`}
-                            style={{
-                              overflow: 'hidden',
-                              textOverflow: 'ellipsis',
-                              whiteSpace: 'nowrap',
-                              display: 'inline-block',
-                              verticalAlign: 'middle',
-                              color: 'white',
-                            }}
-                          >
-                            {item.name}
-                          </span>
-                        </a>
+                          {item.name}
+                        </span>
+                        <BackArrowIcon
+                          color="#000"
+                          role="button"
+                          style={{
+                            display: 'inline-block',
+                            verticalAlign: 'middle',
+                          }}
+                        />
                       </div>
-                    ))}
-                    <HoveredItemsList
-                      hoveredItem={hoveredItem}
-                      hoveredPosition={hoveredPosition}
-                      setHoveredItem={setHoveredItem}
-                      handleMouseLeave={handleMouseLeave}
-                      catHoveredItem={catHoveredItem}
-                      setCatHoveredItem={setCatHoveredItem}
-                    />
-                  </div>
-                }
+                    </div>
+                  ))}
               </div>
             )}
           </div>
-          {
-            isSearchOpen && (
-              <div style={{
-                position: 'relative',
-              }}>
-                <div
-                  className={`d-inline-flex align-items-center`}
-                  style={{
-                    position: 'absolute',
-                    zIndex: 90,
-                    top: '0',
-                  }}
-
-                >
-                  <span
-                    className={`${styles.searchIcon} position-absolute top-0 bottom-0 m-auto start-0 ms-3 d-inline-flex align-items-center`}
-                  >
-                    <SearchIcon color="white" />
-                  </span>
-                  <input
-                    type="text"
-                    className={`${styles.inputSearch} d-inline-flex ps-5 col-12 pe-3`}
-                    value={searchProd}
-                    onChange={(e) => searchShopProd(e, e.target.value)}
-                    placeholder={enviroment.SEARCH_PLACEHOLDER}
-                    onKeyDown={handleKeyDown}
-                  />
-                  <span
-                    onClick={() => {
-                      searchShopProd('', '')
-                      setIsSearchOpen(false)
-                    }}
-                    style={{ cursor: "pointer" }}
-                    className={`${styles.searchIcon} position-absolute top-0 bottom-0 m-auto end-0 me-4 d-inline-flex align-items-center`}
-                  >
-                    <CrossIcon color="white" />
-                  </span>
-                  {searchProdList?.length > 0 && (
-                    <div
-                      className={`${styles.showSearchList} position-absolute d-inline-flex flex-column start-0 col-12 overflow-y-auto`}
-                    >
-                      {searchProdList.map((item, idx) => {
-                        return (
-                          <span
-                            className={`${styles.searchRow} p-3 text-truncate col-12`}
-                            role="button"
-                            key={idx}
-                            onClick={() =>
-                              openProductId(item.name_url, item.name, item.product_id)
-                            }
-                          >
-                            {item.name}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  )}
-                </div>
-              </div>
-            )}
         </div>
+        {hoveredItem?.catList?.length > 0 && (
+          <div
+            className={`${styles.SubMenuList} d-inline-flex flex-column gap-1`}
+            style={{
+              position: 'absolute',
+              top: '150px',
+              left: hoveredPosition.left,
+              zIndex: 999,
+            }}
+            onMouseEnter={() => setHoveredItem(hoveredItem)}
+            onClick={() => setHoveredItem(hoveredItem)}
+            onMouseLeave={handleMouseLeave}
+          >
+            {hoveredItem.catList.map((subNme, subIdx) => (
+              <Link
+                to={`/store-product/${subNme?.name_url}`}
+                style={{ textDecoration: 'none' }}
+                key={subIdx}
+                className={`${styles.subMenuName} col-12 align-items-center px-3 d-inline-flex py-2`}
+              >
+                {subNme.name}
+              </Link>
+            ))}
+          </div>
+        )}
         {loginPop === true && <LoginPopup setLoginPop={setLoginPop} />}
         {cartPop === true && <CartAside setCartPop={setCartPop} />}
-      </div >
+      </div>
     </>
   );
 };

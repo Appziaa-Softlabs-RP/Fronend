@@ -220,7 +220,11 @@
 }
 
 .headerNavList {
-  background: var(--ADD_BUTTON_COLOR);
+  background: white;
+}
+
+.headerMenuRow {
+  height: 60px;
 }
 
 .headerMenuItems {
@@ -231,7 +235,7 @@
   justify-content: center;
   height: 100%;
   min-height: fit-content;
-  gap: 15px;
+  gap: 10px;
 }
 
 .headerNavBox {
@@ -247,15 +251,11 @@
 }
 
 .menuName {
-  min-width: 150px;
+  min-width: 90px;
   /* max-width: 150px; */
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.headerNavBox:hover .menuName {
-  /* text-decoration: underline; */
 }
 
 .menuName {
