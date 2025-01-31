@@ -70,7 +70,7 @@ export const LookingFor = () => {
                 {categories?.map((item, idx) => {
                   return (
                     <div
-                      className={`${styles.thumbItem} col-12 d-inline-flex flex-column pt-3 gap-2 mouse-cursor`}
+                      className={`${styles.thumbItem} col-12 d-inline-flex flex-column py-2 gap-2 mouse-cursor`}
                       key={idx}
                       onClick={() =>
                         subCatProduts(
