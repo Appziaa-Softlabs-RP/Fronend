@@ -15,21 +15,8 @@ export const CartSummery = ({ cartData, setOrderStatus, setShopCartId }) => {
     const [userInfo, setUserInfo] = useState({});
     const [cartSummryData, setCartSummyData] = useState(cartData);
 
-    const showProductDetail = (id) => {
-        const payload = {
-            product_id: id,
-            company_id: parseInt(enviroment.COMPANY_ID),
-            store_id: parseInt(enviroment.STORE_ID)
-        }
-        ApiService.productDetails(payload).then((res) => {
-            if (res.message === "Product Detail") {
-                navigate(`/product?id=${id}`, { state: { product: res.payload } })
-            } else {
-                AppNotification('Error', 'Sorry, Product detail not found.', 'danger');
-            }
-        }).catch((err) => {
-            AppNotification('Error', 'Sorry, Product detail not found.', 'danger');
-        });
+    const showProductDetail = (slug) => {
+        window.location.href = `/product/${slug}`;
     }
 
     const updateProdQty = (e, prodID, allowQty, currQty, type, stock) => {
@@ -41,9 +28,9 @@ export const CartSummery = ({ cartData, setOrderStatus, setShopCartId }) => {
                 AppNotification('Error', 'You have reached the product quantity limit.', 'danger');
             } else {
                 let newQty = currQty + 1;
-                if(stock >= newQty){
+                if (stock >= newQty) {
                     cartInfo[cartProdID].quantity = newQty;
-                }else{
+                } else {
                     AppNotification('Error', 'You have reached the product quantity limit.', 'danger');
                 }
             }
@@ -51,7 +38,7 @@ export const CartSummery = ({ cartData, setOrderStatus, setShopCartId }) => {
             let newQty = currQty - 1;
             if (newQty === 0) {
                 let cartID = appData.appData.cartID;
-                if(appData.appData.cartSaved === true && cartID !== null && cartID != undefined){
+                if (appData.appData.cartSaved === true && cartID !== null && cartID != undefined) {
                     const payload = {
                         store_id: parseInt(enviroment.STORE_ID),
                         customer_id: userInfo.customer_id,
@@ -77,9 +64,9 @@ export const CartSummery = ({ cartData, setOrderStatus, setShopCartId }) => {
 
     const removeThisProd = (id) => {
         let cartInfo = appData?.appData?.cartData;
-        if(appData.appData.cartSaved === true){
+        if (appData.appData.cartSaved === true) {
             let cartID = appData.appData.cartID;
-            if(appData.appData.cartSaved === true && cartID !== null && cartID != undefined){
+            if (appData.appData.cartSaved === true && cartID !== null && cartID != undefined) {
                 const payload = {
                     store_id: parseInt(enviroment.STORE_ID),
                     customer_id: userInfo.customer_id,
@@ -101,7 +88,7 @@ export const CartSummery = ({ cartData, setOrderStatus, setShopCartId }) => {
 
     const placeOrder = () => {
         let cartType = appData.appData.cartSaved;
-        if(cartType !== false || userInfo?.customer_id !== undefined && userInfo?.customer_id !== null){
+        if (cartType !== false || userInfo?.customer_id !== undefined && userInfo?.customer_id !== null) {
             const payload = {
                 company_id: parseInt(enviroment.COMPANY_ID),
                 store_id: parseInt(enviroment.STORE_ID),
@@ -109,21 +96,21 @@ export const CartSummery = ({ cartData, setOrderStatus, setShopCartId }) => {
                 cartJson: JSON.stringify(appData?.appData?.cartData)
             }
             ApiService.addMultipleCart(payload).then((res) => {
-                if(res.message === "Add successfully."){
+                if (res.message === "Add successfully.") {
                     setOrderStatus('Place Order');
-                    appData.setAppData({ ...appData.appData, cartSaved: true, cartData: res.payload_cartList_items, cartCount: res.payload_cartList_items?.length, cartID: res.payload_cartList_id  });
+                    appData.setAppData({ ...appData.appData, cartSaved: true, cartData: res.payload_cartList_items, cartCount: res.payload_cartList_items?.length, cartID: res.payload_cartList_id });
                     localStorage.setItem('cartID', res.payload_cartList_id);
                     localStorage.setItem('cartSaved', true);
                     localStorage.setItem('cartData', JSON.stringify(res.payload_cartList_items));
                     setShopCartId(res.payload_cartList_id);
-                }else{
-                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.','error');
+                } else {
+                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
                 }
             }).catch((err) => {
-                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.','error');
+                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
             });
-        }else{
-            setLoginPop(true);   
+        } else {
+            setLoginPop(true);
         }
     }
 
@@ -148,7 +135,7 @@ export const CartSummery = ({ cartData, setOrderStatus, setShopCartId }) => {
                     {cartSummryData?.length > 0 && cartSummryData?.map((item, idx) => {
                         return (
                             <div className={`${styles.cartDataBox} col-12 d-inline-flex align-items-center p-2`} key={idx}>
-                                <div className="d-inline-flex align-items-center col-3 gap-1" onClick={() => showProductDetail(item.product_id)}>
+                                <div className="d-inline-flex align-items-center col-3 gap-1" onClick={() => showProductDetail(item.name_url)}>
                                     <span className={`${styles.itemImage} d-inline-flex flex-shrink-0`}>
                                         <img src={item?.image} alt={item?.product_name} />
                                     </span>

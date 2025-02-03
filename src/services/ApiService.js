@@ -8,7 +8,7 @@ const cache = {};
 const cacheFetch = async (url, options, cacheKey, ttl = 500000) => {
   const currentTime = new Date().getTime();
 
-    if (cache[cacheKey] && cache[cacheKey].expiry > currentTime) {
+  if (cache[cacheKey] && cache[cacheKey].expiry > currentTime) {
     return JSON.parse(cache[cacheKey].response);
   }
 
@@ -614,6 +614,14 @@ ApiService.cashOnDelivery = function (data) {
 ApiService.onlinePaymentProcess = function (data) {
   return fetch({
     url: "store/onlinePaymentProcess",
+    method: "post",
+    data: data,
+  });
+};
+
+ApiService.validateCompanyTokenAmount = function (data) {
+  return fetch({
+    url: "payments/validate-company-token-amount",
     method: "post",
     data: data,
   });

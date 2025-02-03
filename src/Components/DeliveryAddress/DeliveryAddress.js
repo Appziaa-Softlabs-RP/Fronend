@@ -307,28 +307,6 @@ const PaymentMode = ({
         setPaymentType(type);
     };
 
-    const createOrderId = (payload) => {
-        ApiService.onlinePaymentProcess(payload)
-            .then((res) => {
-                if (res.message === "Online payment process successfully.") {
-                    console.log(res.payload_onlinePaymentProcess.order_id)
-                    handlePayment(res.payload_onlinePaymentProcess.order_id);
-                } else {
-                    AppNotification(
-                        "Error",
-                        "We are un-able to place your order. Please try later.",
-                        "danger"
-                    );
-                }
-            })
-            .catch((err) => {
-                AppNotification(
-                    "Error",
-                    "We are un-able to place your order. Please try later.",
-                    "danger"
-                );
-            });
-    };
 
     const handlePayment = useCallback(
         (orderId) => {
@@ -349,12 +327,6 @@ const PaymentMode = ({
                         image: `${process.env.REACT_APP_URL}/favicon.ico`,
                         order_id: orderId,
                         handler: (res) => {
-                            // const onlinePaymentSuccess = (
-                            //   orderId,
-                            //   transID,
-                            //   selectedOfferProductId,
-                            //   selectedOfferId
-                            // ) => {
                             onlinePaymentSuccess(
                                 orderId,
                                 res.razorpay_payment_id,
@@ -388,6 +360,157 @@ const PaymentMode = ({
         },
         [Razorpay])
 
+    const handleCashOnDelivery = (payload) => {
+        ApiService.cashOnDelivery(payload)
+            .then((res) => {
+                if (res.message === "Cash on delivery successfully.") {
+                    AppNotification(
+                        "Success",
+                        "Your order has been placed successfully",
+                        "success"
+                    );
+                    let emptyCartData = [];
+                    appData.setAppData({
+                        ...appData.appData,
+                        cartData: emptyCartData,
+                        cartCount: 0,
+                    });
+                    localStorage.setItem("cartData", JSON.stringify(emptyCartData));
+                    navigate("/my-orders");
+                } else {
+                    AppNotification(
+                        "Error",
+                        "We are un-able to place your order. Please try later.",
+                        "danger"
+                    );
+                }
+            })
+            .catch((err) => {
+                AppNotification(
+                    "Error",
+                    "We are un-able to place your order. Please try later.",
+                    "danger"
+                );
+            });
+    }
+
+
+    const handleTokenAmountPayment = useCallback(
+        (orderId, tokenAmount) => {
+
+            const companyIdPayload = {
+                company_id: parseInt(enviroment.COMPANY_ID),
+            };
+
+            ApiService.getRazorpayPublicKey(companyIdPayload).then(res => {
+                if (res.payload != '' || res.payload != null) {
+                    const options = {
+                        key: res.payload,// Fetching and adding razorpay key from server
+                        amount: tokenAmount,
+                        currency: "INR",
+                        name: enviroment.BUSINESS_NAME,
+                        description: "Order Purchase",
+                        image: `${process.env.REACT_APP_URL}/favicon.ico`,
+                        order_id: orderId,
+                        handler: (res) => {
+                            onlinePaymentSuccess(
+                                orderId,
+                                res.razorpay_payment_id,
+                                selectedOfferProductId,
+                                selectedOfferId
+                            );
+                        },
+                        prefill: {
+                            name: selectAddrDetail?.name,
+                            email: selectAddrDetail?.email,
+                            contact: selectAddrDetail?.contact,
+                        },
+                        notes: {
+                            address: enviroment.STORE_ADDRESS,
+                        },
+                        theme: {
+                            color: enviroment.PRIMARY_COLOR,
+                        },
+                    };
+
+                    const rzpay = new Razorpay(options);
+                    rzpay.open();
+                }
+                let emptyCartData = [];
+                appData.setAppData({
+                    ...appData.appData,
+                    cartData: emptyCartData,
+                    cartCount: 0,
+                });
+                localStorage.setItem("cartData", JSON.stringify(emptyCartData));
+                navigate("/my-orders");
+            }).catch(err => {
+                AppNotification(
+                    "Error",
+                    "We are un-able to place your order. Please try later.",
+                    "danger"
+                );
+            })
+        },
+        [Razorpay])
+
+    const validateCompanyTokenAmount = (payload, finalAmount) => {
+        const validationPayload = {
+            company_id: parseInt(enviroment.COMPANY_ID),
+            amount: finalAmount,
+        }
+        ApiService.validateCompanyTokenAmount(validationPayload)
+            .then((res) => {
+                if (parseFloat(res?.token_amount) <= 0) {
+                    handleCashOnDelivery(payload);
+                } else {
+                    payload['token_amount'] = res?.token_amount;
+                    payload['paymentmode'] = 'mix';
+                    ApiService.onlinePaymentProcess(payload)
+                        .then((res) => {
+                            if (res.message === "Online payment process successfully.") {
+                                handleTokenAmountPayment(res.payload_onlinePaymentProcess.order_id);
+                            } else {
+                                AppNotification(
+                                    "Error",
+                                    "We are un-able to place your order. Please try later.",
+                                    "danger"
+                                );
+                            }
+                        })
+                        .catch((err) => {
+                            AppNotification(
+                                "Error",
+                                "Something went wrong. Please try again.",
+                                "danger"
+
+                            );
+                        });
+                }
+            });
+    };
+
+    const createOrderId = (payload) => {
+        ApiService.onlinePaymentProcess(payload)
+            .then((res) => {
+                if (res.message === "Online payment process successfully.") {
+                    handlePayment(res.payload_onlinePaymentProcess.order_id);
+                } else {
+                    AppNotification(
+                        "Error",
+                        "We are un-able to place your order. Please try later.",
+                        "danger"
+                    );
+                }
+            })
+            .catch((err) => {
+                AppNotification(
+                    "Error",
+                    "We are un-able to place your order. Please try later.",
+                    "danger"
+                );
+            });
+    };
 
     const onlinePaymentSuccess = (
         orderId,
@@ -468,37 +591,7 @@ const PaymentMode = ({
                 slot_date: new Date(),
             };
             if (paymentType === "cash") {
-                ApiService.cashOnDelivery(payload)
-                    .then((res) => {
-                        if (res.message === "Cash on delivery successfully.") {
-                            AppNotification(
-                                "Success",
-                                "Your order has been placed successfully",
-                                "success"
-                            );
-                            let emptyCartData = [];
-                            appData.setAppData({
-                                ...appData.appData,
-                                cartData: emptyCartData,
-                                cartCount: 0,
-                            });
-                            localStorage.setItem("cartData", JSON.stringify(emptyCartData));
-                            navigate("/my-orders");
-                        } else {
-                            AppNotification(
-                                "Error",
-                                "We are un-able to place your order. Please try later.",
-                                "danger"
-                            );
-                        }
-                    })
-                    .catch((err) => {
-                        AppNotification(
-                            "Error",
-                            "We are un-able to place your order. Please try later.",
-                            "danger"
-                        );
-                    });
+                validateCompanyTokenAmount(payload, finalAmount);
             } else {
                 createOrderId(payload);
             }
@@ -610,6 +703,13 @@ const PaymentMode = ({
                                     <span className={`${styles.radioText} d-inline-flex`}>
                                         Cash on delivery
                                     </span>
+                                    <p className="text-primary fst-italic" style={{
+                                        border: "1px solid lightblue",
+                                        borderRadius: "5px",
+                                        padding: "0.2rem 0.5rem",
+                                        fontSize: "0.8rem",
+                                        width: "fit-content"
+                                    }}>A small commitment fee on COD helps us ensure genuine orders and faster deliveries!</p>
                                     {paymentFeee.digital_discount > 0 ? <span className="fw-bold text-danger"
                                         style={{
                                             fontSize: "0.6rem",
@@ -762,4 +862,4 @@ export const DeliveryAddress = ({
             />
         </React.Fragment>
     );
-};
+}; 

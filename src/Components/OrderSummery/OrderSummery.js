@@ -127,7 +127,7 @@ export const OrderSummery = ({ cartPriceTotal }) => {
                                         Add Item worth of{" "}
                                         <span
                                             style={{
-                                                color: "black",
+                                                color: "green",
                                             }}
                                         >
                                             ₹
