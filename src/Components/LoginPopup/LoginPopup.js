@@ -67,10 +67,10 @@ const LoginPassword = ({ setLoginType, setLoginPop }) => {
                     localStorage.setItem('cartData', JSON.stringify(res.payload_cartList_items));
                     window.location.reload();
                 } else {
-                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
                 }
             }).catch((err) => {
-                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
             });
         } else {
             const payload = {
@@ -226,10 +226,10 @@ const LoginVerifyOTP = ({ setLoginType, mobileVal, mobileOTP, setMobileOTP, otpO
                     localStorage.setItem('cartData', JSON.stringify(res.payload_cartList_items));
                     window.location.reload();
                 } else {
-                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
                 }
             }).catch((err) => {
-                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
             });
         } else {
             const payload = {
@@ -425,10 +425,10 @@ const RegisterVerifyOTP = ({ setLoginType, mobileVal, mobileOTP, setMobileOTP, o
                     localStorage.setItem('cartData', JSON.stringify(res.payload_cartList_items));
                     window.location.reload();
                 } else {
-                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
                 }
             }).catch((err) => {
-                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
             });
         } else {
             const payload = {

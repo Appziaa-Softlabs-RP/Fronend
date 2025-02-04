@@ -397,7 +397,6 @@ const PaymentMode = ({
 
     const handleTokenAmountPayment = useCallback(
         (orderId, tokenAmount) => {
-
             const companyIdPayload = {
                 company_id: parseInt(enviroment.COMPANY_ID),
             };
@@ -405,7 +404,7 @@ const PaymentMode = ({
             ApiService.getRazorpayPublicKey(companyIdPayload).then(res => {
                 if (res.payload != '' || res.payload != null) {
                     const options = {
-                        key: res.payload,// Fetching and adding razorpay key from server
+                        key: res.payload,
                         amount: tokenAmount,
                         currency: "INR",
                         name: enviroment.BUSINESS_NAME,
@@ -419,6 +418,16 @@ const PaymentMode = ({
                                 selectedOfferProductId,
                                 selectedOfferId
                             );
+                        },
+                        modal: {
+                            ondismiss: function () {
+                                // Handle payment modal dismissal
+                                AppNotification(
+                                    "Info",
+                                    "Payment cancelled by user",
+                                    "info"
+                                );
+                            }
                         },
                         prefill: {
                             name: selectAddrDetail?.name,
@@ -436,14 +445,6 @@ const PaymentMode = ({
                     const rzpay = new Razorpay(options);
                     rzpay.open();
                 }
-                let emptyCartData = [];
-                appData.setAppData({
-                    ...appData.appData,
-                    cartData: emptyCartData,
-                    cartCount: 0,
-                });
-                localStorage.setItem("cartData", JSON.stringify(emptyCartData));
-                navigate("/my-orders");
             }).catch(err => {
                 AppNotification(
                     "Error",
@@ -452,7 +453,8 @@ const PaymentMode = ({
                 );
             })
         },
-        [Razorpay])
+        [Razorpay]
+    )
 
     const validateCompanyTokenAmount = (payload, finalAmount) => {
         const validationPayload = {
@@ -469,7 +471,7 @@ const PaymentMode = ({
                     ApiService.onlinePaymentProcess(payload)
                         .then((res) => {
                             if (res.message === "Online payment process successfully.") {
-                                handleTokenAmountPayment(res.payload_onlinePaymentProcess.order_id);
+                                handleTokenAmountPayment(res.payload_onlinePaymentProcess.order_id, res.payload_onlinePaymentProcess.token_amount);
                             } else {
                                 AppNotification(
                                     "Error",
@@ -524,7 +526,7 @@ const PaymentMode = ({
             customer_id: userInfo.customer_id,
             offer_id: selectedOfferProductId,
             offer_product_id: selectedOfferId,
-            order_id: orderId, // Ensure this is not null
+            order_id: orderId,
             transection_id: transID,
             cart_id: shopcartID,
         };

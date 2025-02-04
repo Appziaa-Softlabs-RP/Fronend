@@ -104,10 +104,10 @@ export const CartSummery = ({ cartData, setOrderStatus, setShopCartId }) => {
                     localStorage.setItem('cartData', JSON.stringify(res.payload_cartList_items));
                     setShopCartId(res.payload_cartList_id);
                 } else {
-                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
                 }
             }).catch((err) => {
-                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
             });
         } else {
             setLoginPop(true);

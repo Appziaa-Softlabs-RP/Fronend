@@ -109,10 +109,10 @@ export const VerifyOtp = () => {
                     localStorage.setItem('cartSaved', true);
                     localStorage.setItem('cartData', JSON.stringify(res.payload_cartList_items));
                 } else {
-                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                    AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
                 }
             }).catch((err) => {
-                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'error');
+                AppNotification('Error', 'We are facing issue on shopping cart. Please try later.', 'danger');
             });
         } else {
             const payload = {
