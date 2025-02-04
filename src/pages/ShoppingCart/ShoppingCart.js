@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartSummery } from "../../Components/CartSummery/CartSummery";
 import { DeliveryAddress } from "../../Components/DeliveryAddress/DeliveryAddress";
@@ -21,6 +21,7 @@ export const ShoppingCart = () => {
   const [cartData, setCartData] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [loginPop, setLoginPop] = useState(false);
+  const [paymentType, setPaymentType] = useState(null);
   const [cartPriceTotal, setCartPriceTotal] = useState({
     price: 0,
     discount: 0,
@@ -34,6 +35,7 @@ export const ShoppingCart = () => {
   const [applicableOffers, setApplicableOffers] = useState(null);
   const [selectedOfferId, setSelectedOfferId] = useState(null);
   const [selectedOfferProductId, setSelectedOfferProductId] = useState(null);
+  const [tokenAmount, setTokenAmount] = useState(0);
   const navigate = useNavigate();
 
   const setCartTotal = (cartData) => {
@@ -89,6 +91,27 @@ export const ShoppingCart = () => {
     }
   };
 
+  const fetchTokenAmount = useCallback(() => {
+    const validationPayload = {
+      company_id: parseInt(enviroment.COMPANY_ID),
+      amount: cartPriceTotal.subTotal,
+    };
+
+    ApiService.validateCompanyTokenAmount(validationPayload)
+      .then((res) => {
+        setTokenAmount(res?.token_amount || 0);
+      })
+      .catch((err) => {
+        console.error("Error fetching token amount:", err);
+        setTokenAmount(0);
+      });
+  }, [cartPriceTotal.subTotal]);
+
+  useEffect(() => {
+    if (cartPriceTotal.subTotal > 0) {
+      fetchTokenAmount();
+    }
+  }, [cartPriceTotal.subTotal, fetchTokenAmount]);
 
   const placeOrder = () => {
     let cartType = appData.appData.cartSaved;
@@ -306,16 +329,19 @@ export const ShoppingCart = () => {
                   })}
               </div>
               <DeliveryAddress
+                paymentType={paymentType}
+                setPaymentType={setPaymentType}
                 selectedOfferProductId={selectedOfferProductId}
                 selectedOfferId={selectedOfferId}
                 cartPriceTotal={cartPriceTotal}
                 setCartPriceTotal={setCartPriceTotal}
                 shopcartID={shopcartID}
                 setOrderStatus={setOrderStatus}
+                tokenAmount={tokenAmount}
               />
               {
                 cartPriceTotal.subTotal > 0 &&
-                <OrderSummery cartPriceTotal={cartPriceTotal} />
+                <OrderSummery cartPriceTotal={cartPriceTotal} tokenAmount={tokenAmount} paymentType={paymentType} />
               }
               <div className={`${styles.cancelPolicyBox} col-12 mt-3 p-3`}>
                 <h5
@@ -372,19 +398,22 @@ export const ShoppingCart = () => {
                     </>
                   ) : orderStatus === "Place Order" ? (
                     <DeliveryAddress
+                      paymentType={paymentType}
+                      setPaymentType={setPaymentType}
                       selectedOfferProductId={selectedOfferProductId}
                       selectedOfferId={selectedOfferId}
                       cartPriceTotal={cartPriceTotal}
                       setCartPriceTotal={setCartPriceTotal}
                       shopcartID={shopcartID}
                       setOrderStatus={setOrderStatus}
+                      tokenAmount={tokenAmount}
                     />
                   ) : null}
                 </div>
                 <div className="col-3 flex-shrink-0">
                   {
                     cartPriceTotal.subTotal > 0 &&
-                    <OrderSummery cartPriceTotal={cartPriceTotal} />
+                    <OrderSummery cartPriceTotal={cartPriceTotal} tokenAmount={tokenAmount} paymentType={paymentType} />
                   }
                 </div>
               </div>

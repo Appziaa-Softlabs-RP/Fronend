@@ -295,7 +295,8 @@ const PaymentMode = ({
     paymentType,
     setPaymentType,
     paymentFeee,
-    setCartPriceTotal
+    setCartPriceTotal,
+    tokenAmount
 }) => {
     // const [paymentType, setPaymentType] = useState(null);
     const navigate = useNavigate();
@@ -361,37 +362,31 @@ const PaymentMode = ({
         [Razorpay])
 
     const handleCashOnDelivery = (payload) => {
-        ApiService.cashOnDelivery(payload)
-            .then((res) => {
-                if (res.message === "Cash on delivery successfully.") {
-                    AppNotification(
-                        "Success",
-                        "Your order has been placed successfully",
-                        "success"
-                    );
-                    let emptyCartData = [];
-                    appData.setAppData({
-                        ...appData.appData,
-                        cartData: emptyCartData,
-                        cartCount: 0,
-                    });
-                    localStorage.setItem("cartData", JSON.stringify(emptyCartData));
-                    navigate("/my-orders");
-                } else {
+        if (parseFloat(tokenAmount) <= 0) {
+            handleCashOnDelivery(payload);
+        } else {
+            payload['token_amount'] = tokenAmount;
+            payload['paymentmode'] = 'mix';
+            ApiService.onlinePaymentProcess(payload)
+                .then((res) => {
+                    if (res.message === "Online payment process successfully.") {
+                        handleTokenAmountPayment(res.payload_onlinePaymentProcess.order_id, res.payload_onlinePaymentProcess.token_amount);
+                    } else {
+                        AppNotification(
+                            "Error",
+                            "We are un-able to place your order. Please try later.",
+                            "danger"
+                        );
+                    }
+                })
+                .catch((err) => {
                     AppNotification(
                         "Error",
-                        "We are un-able to place your order. Please try later.",
+                        "Something went wrong. Please try again.",
                         "danger"
                     );
-                }
-            })
-            .catch((err) => {
-                AppNotification(
-                    "Error",
-                    "We are un-able to place your order. Please try later.",
-                    "danger"
-                );
-            });
+                });
+        }
     }
 
 
@@ -455,42 +450,6 @@ const PaymentMode = ({
         },
         [Razorpay]
     )
-
-    const validateCompanyTokenAmount = (payload, finalAmount) => {
-        const validationPayload = {
-            company_id: parseInt(enviroment.COMPANY_ID),
-            amount: finalAmount,
-        }
-        ApiService.validateCompanyTokenAmount(validationPayload)
-            .then((res) => {
-                if (parseFloat(res?.token_amount) <= 0) {
-                    handleCashOnDelivery(payload);
-                } else {
-                    payload['token_amount'] = res?.token_amount;
-                    payload['paymentmode'] = 'mix';
-                    ApiService.onlinePaymentProcess(payload)
-                        .then((res) => {
-                            if (res.message === "Online payment process successfully.") {
-                                handleTokenAmountPayment(res.payload_onlinePaymentProcess.order_id, res.payload_onlinePaymentProcess.token_amount);
-                            } else {
-                                AppNotification(
-                                    "Error",
-                                    "We are un-able to place your order. Please try later.",
-                                    "danger"
-                                );
-                            }
-                        })
-                        .catch((err) => {
-                            AppNotification(
-                                "Error",
-                                "Something went wrong. Please try again.",
-                                "danger"
-
-                            );
-                        });
-                }
-            });
-    };
 
     const createOrderId = (payload) => {
         ApiService.onlinePaymentProcess(payload)
@@ -593,7 +552,7 @@ const PaymentMode = ({
                 slot_date: new Date(),
             };
             if (paymentType === "cash") {
-                validateCompanyTokenAmount(payload, finalAmount);
+                handleCashOnDelivery(payload);
             } else {
                 createOrderId(payload);
             }
@@ -610,13 +569,17 @@ const PaymentMode = ({
         });
     }, []);
 
+    const getCodFees = useCallback(() => {
+        return (parseFloat(paymentFeee.handling_fee) / 100) * parseFloat(cartPriceTotal.subTotal);
+    }, [paymentFeee.handling_fee, cartPriceTotal.subTotal]);
+
     const addCodFees = useCallback(() => {
         resetPaymentFees();  // Ensure reset happens first
         setCartPriceTotal((prevCartPriceTotal) => {
             if (prevCartPriceTotal?.handling_fee > 0) return prevCartPriceTotal;  // Prevent adding fees again
 
             // Calculate the handling fee as a percentage of the subTotal
-            const fees = (parseFloat(paymentFeee.handling_fee) / 100) * parseFloat(prevCartPriceTotal.subTotal);
+            const fees = getCodFees();
 
             // Return updated cart totals
             return {
@@ -643,6 +606,14 @@ const PaymentMode = ({
             };
         });
     }, [paymentFeee.digital_discount, resetPaymentFees]);
+
+    const getPaymentAmount = useCallback(() => {
+        if (paymentType === "online") {
+            return cartPriceTotal.subTotal + cartPriceTotal.delivery + (cartPriceTotal.handling_fee ?? 0) - (cartPriceTotal.digital_discount ?? 0);
+        } else {
+            return tokenAmount
+        }
+    }, [cartPriceTotal, paymentType, tokenAmount]);
 
     return (
         <div className={`${styles.deliveryBox} col-12 d-inline-flex flex-column`}>
@@ -674,6 +645,13 @@ const PaymentMode = ({
                                     <span className={`${styles.radioText} d-inline-flex`}>
                                         Online Payment Options
                                     </span>
+                                    <p className="text-primary fst-italic" style={{
+                                        border: "1px solid lightblue",
+                                        borderRadius: "5px",
+                                        padding: "0.2rem 0.5rem",
+                                        fontSize: "0.8rem",
+                                        width: "fit-content"
+                                    }}>Pay online for a hassle-free, secure, and faster delivery! {getCodFees().toFixed(2) > 0 ? <span className="text-success">Also, you can save ₹{getCodFees().toFixed(2)} on your order.</span> : null}</p>
                                     {paymentFeee.digital_discount > 0 ? <span className="fw-bold text-success"
                                         style={{
                                             fontSize: "0.6rem",
@@ -719,7 +697,7 @@ const PaymentMode = ({
                                             padding: "0.2rem 0.5rem",
                                             width: "fit-content"
                                         }}
-                                    >Cash Handling Fees: ₹{((parseFloat(paymentFeee.handling_fee) / 100) * parseFloat(cartPriceTotal.prevTotal)).toFixed(2)}</span> : null}
+                                    >Cash Handling Fees: ₹{getCodFees()}</span> : null}
                                 </p>
                             </label>
                         </div>
@@ -730,16 +708,14 @@ const PaymentMode = ({
                                 onClick={() =>
                                     proceedPayment({
                                         selectedOfferProductId,
-                                        selectedOfferId,
-                                        selectedOfferProductId,
-                                        selectedOfferId,
+                                        selectedOfferId
                                     })
                                 }
                                 role="button"
                                 className={`${styles.payOrderBtn} d-inline-flex align-items-center px-3`}
                             >
                                 {" "}
-                                PLACE ORDER (₹{(cartPriceTotal.subTotal + cartPriceTotal.delivery + (cartPriceTotal.handling_fee ?? 0) - (cartPriceTotal.digital_discount ?? 0)).toLocaleString("en-IN")})
+                                Proceed for Payment (₹{getPaymentAmount().toLocaleString("en-IN")})
                             </span>
                         </div>
                     </div>
@@ -756,6 +732,9 @@ export const DeliveryAddress = ({
     setCartPriceTotal,
     shopcartID,
     setOrderStatus,
+    tokenAmount,
+    paymentType,
+    setPaymentType
 }) => {
     const appData = useApp();
     const [allAddress, setAllAddress] = useState([]);
@@ -764,7 +743,6 @@ export const DeliveryAddress = ({
     const userInfo = appData.appData.user;
     const [addressId, setAddressId] = useState("");
     const [selectAddrDetail, setSelectAddrDetail] = useState({});
-    const [paymentType, setPaymentType] = useState(null);
     const [paymentFees, setPaymentFees] = useState({
         digital_discount: 0,
         handling_fee: 0
@@ -861,6 +839,7 @@ export const DeliveryAddress = ({
                 selectAddrDetail={selectAddrDetail}
                 setCartPriceTotal={setCartPriceTotal}
                 paymentFeee={paymentFees}
+                tokenAmount={tokenAmount}
             />
         </React.Fragment>
     );
