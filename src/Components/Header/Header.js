@@ -21,11 +21,11 @@ import {
 import styles from "./Header.module.css";
 
 import { Autoplay, EffectFade, Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from "swiper/react";
 import { useAppStore } from "../../store";
 import { HeaderNavLoader } from "../Loader/Loader";
 
-import 'swiper/css';
+import "swiper/css";
 
 export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
   const appData = useApp();
@@ -86,7 +86,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
     AppNotification(
       "Logged Out",
       "You have been successfully logged out.",
-      "success"
+      "success",
     );
     navigate("/");
   };
@@ -107,7 +107,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
               setSearchProdList(res.payload_searchAI);
             }
           })
-          .catch((err) => { });
+          .catch((err) => {});
       }, 500);
     }
   };
@@ -218,7 +218,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
             </span>
             <img
               src={siteLogo}
-              alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
+              alt={enviroment.REACT_APP_BUSINESS_NAME ?? "Logo"}
               className="object-fit-contain"
             />
           </h1>
@@ -263,17 +263,22 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
           )}
         </div>
       </div>
+
       {/* Desktop Structure */}
-      <div className={`hideInMobile col-12 d-inline-flex flex-column`} style={{
-        position: 'relative'
-      }}>
-        <div className={`w-full flex items-center justify-center text-center py-2`} style={{
-          background: "#a8191e",
-          color: 'yellow',
-        }}>
-          <span
-            className={`text-sm md:text-base font-medium`}
-          >
+      <div
+        className={`hideInMobile col-12 d-inline-flex flex-column`}
+        style={{
+          position: "relative",
+        }}
+      >
+        <div
+          className={`w-full flex items-center justify-center text-center py-2`}
+          style={{
+            background: "#a8191e",
+            color: "yellow",
+          }}
+        >
+          <span className={`text-sm md:text-base font-medium`}>
             Shipping Across India || Same Day Delivery in Bengaluru
           </span>
         </div>
@@ -295,7 +300,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                 </span>
                 <img
                   src={siteLogo}
-                  alt={enviroment.REACT_APP_BUSINESS_NAME ?? 'Logo'}
+                  alt={enviroment.REACT_APP_BUSINESS_NAME ?? "Logo"}
                   className="object-fit-contain"
                 />
               </h1>
@@ -342,7 +347,9 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                   role="button"
                 >
                   <SupportIcon color="#FFF" />
-                  <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
+                  <span
+                    className={`${styles.supportText} ${styles.supportHideOnMobile}`}
+                  >
                     Support
                   </span>
                   <div
@@ -415,7 +422,9 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                   >
                     <div className="d-inline-flex align-items-center gap-2">
                       <UserIcon color="#FFF" />
-                      <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
+                      <span
+                        className={`${styles.supportText} ${styles.supportHideOnMobile}`}
+                      >
                         Account
                       </span>
                     </div>
@@ -467,7 +476,9 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                     role="button"
                   >
                     <UserIcon color="#FFF" />
-                    <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
+                    <span
+                      className={`${styles.supportText} ${styles.supportHideOnMobile}`}
+                    >
                       Account
                     </span>
                   </div>
@@ -487,7 +498,9 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                       </span>
                     )}
                   </span>
-                  <span className={`${styles.supportText} ${styles.supportHideOnMobile}`}>
+                  <span
+                    className={`${styles.supportText} ${styles.supportHideOnMobile}`}
+                  >
                     Cart
                   </span>
                 </div>
@@ -498,70 +511,74 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
         <div
           className={`${styles.headerNavList} col-12 d-inline-flex align-items-center position-relative`}
         >
-          <div style={{
-            width: 'fit-content',
-            margin: '0 auto'
-          }}>
+          <div
+            style={{
+              width: "fit-content",
+              margin: "0 auto",
+            }}
+          >
             {loading ? (
               <HeaderNavLoader />
             ) : (
               <div
                 className={`${styles.headerMenuRow} d-inline-flex align-items-stretch col-12`}
                 style={{
-                  maxWidth: '100dvw',
-                  overflowX: "auto"
+                  maxWidth: "100dvw",
+                  overflowX: "auto",
                 }}
               >
                 {navItems.length > 0 &&
                   navItems.map((item, index) => {
                     const isActive = hoveredItem?.name_url === item.name_url;
-                    return <div
-                      id={`menu-${index}`}
-                      className={`${styles.headerNavBox} position-relative d-inline-flex align-items-center px-4`}
-                      key={index}
-                      role="button"
-                      onMouseEnter={() => handleMouseEnter(item, index)}
-                      onClick={() => handleMouseEnter(item, index)}
-                    >
-                      <a
-                        href={`/store/${item.name_url}`}
-                        className={`${styles.menuName}`}
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          textDecoration: 'none',
-                          justifyContent: 'center',
-                          gap: '0.5rem',
-                          minWidth: '220px',
-                          maxWidth: '150px',
-                          overflow: 'hidden',
-                          textOverflow: 'ellipsis',
-                          whiteSpace: 'nowrap',
-                          fontWeight: isActive && 'bold',
-                        }}
+                    return (
+                      <div
+                        id={`menu-${index}`}
+                        className={`${styles.headerNavBox} position-relative d-inline-flex align-items-center px-4`}
+                        key={index}
+                        role="button"
+                        onMouseEnter={() => handleMouseEnter(item, index)}
+                        onClick={() => handleMouseEnter(item, index)}
                       >
-                        <span
-                          className={`${styles.menuNameText}`}
+                        <a
+                          href={`/store/${item.name_url}`}
+                          className={`${styles.menuName}`}
                           style={{
-                            overflow: 'hidden',
-                            textOverflow: 'ellipsis',
-                            whiteSpace: 'nowrap',
-                            display: 'inline-block',
-                            verticalAlign: 'middle',
+                            display: "flex",
+                            alignItems: "center",
+                            textDecoration: "none",
+                            justifyContent: "center",
+                            gap: "0.5rem",
+                            minWidth: "220px",
+                            maxWidth: "150px",
+                            overflow: "hidden",
+                            textOverflow: "ellipsis",
+                            whiteSpace: "nowrap",
+                            fontWeight: isActive && "bold",
                           }}
                         >
-                          {item.name}
-                        </span>
-                        <BackArrowIcon
-                          color="#000"
-                          role="button"
-                          style={{
-                            display: 'inline-block',
-                            verticalAlign: 'middle',
-                          }}
-                        />
-                      </a>
-                    </div>
+                          <span
+                            className={`${styles.menuNameText}`}
+                            style={{
+                              overflow: "hidden",
+                              textOverflow: "ellipsis",
+                              whiteSpace: "nowrap",
+                              display: "inline-block",
+                              verticalAlign: "middle",
+                            }}
+                          >
+                            {item.name}
+                          </span>
+                          <BackArrowIcon
+                            color="#000"
+                            role="button"
+                            style={{
+                              display: "inline-block",
+                              verticalAlign: "middle",
+                            }}
+                          />
+                        </a>
+                      </div>
+                    );
                   })}
               </div>
             )}
@@ -571,8 +588,8 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
           <div
             className={`${styles.SubMenuList} d-inline-flex flex-column gap-1`}
             style={{
-              position: 'absolute',
-              top: '150px',
+              position: "absolute",
+              top: "150px",
               left: hoveredPosition.left,
               zIndex: 999,
             }}
@@ -583,7 +600,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
             {hoveredItem.catList.map((subNme, subIdx) => (
               <Link
                 to={`/store-product/${subNme?.name_url}`}
-                style={{ textDecoration: 'none' }}
+                style={{ textDecoration: "none" }}
                 key={subIdx}
                 className={`${styles.subMenuName} col-12 align-items-center px-3 d-inline-flex py-2`}
               >

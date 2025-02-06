@@ -14,9 +14,9 @@ import { NewArrival } from "../../Components/NewArrival/NewArrival";
 import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
 import Reviews from "../../Components/Reviews/Reviews";
 import { ShopAge } from "../../Components/ShopAge/ShopAge";
-import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
 import GoToTop from "../../Components/GoToTop/GoToTop";
 import { useLocation } from "react-router-dom";
+import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
 
 export const Home = () => {
   const [asideOpen, setAsideOpen] = useState(false);
@@ -32,19 +32,29 @@ export const Home = () => {
       window.scrollTo(0, 0);
     };
 
-    window.addEventListener('load', handleLoad);
+    window.addEventListener("load", handleLoad);
 
     // Cleanup
     return () => {
-      window.removeEventListener('load', handleLoad);
+      window.removeEventListener("load", handleLoad);
     };
   }, [pathname]);
 
   return (
-    <React.Fragment>̦
+    <React.Fragment>
+      ̦
       <div className="col-12 d-inline-flex flex-column">
-        <Header asideOpen={asideOpen} setAsideOpen={setAsideOpen} setFetchedNavItems={setNavItems} />
-        <Aside asideOpen={asideOpen} setAsideOpen={setAsideOpen} navItems={navItems} setNavItems={setNavItems} />
+        <Header
+          asideOpen={asideOpen}
+          setAsideOpen={setAsideOpen}
+          setFetchedNavItems={setNavItems}
+        />
+        <Aside
+          asideOpen={asideOpen}
+          setAsideOpen={setAsideOpen}
+          navItems={navItems}
+          setNavItems={setNavItems}
+        />
         {/* <UnderContruction /> */}
 
         {/* hero banner */}
