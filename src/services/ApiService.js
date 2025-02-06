@@ -42,7 +42,7 @@ ApiService.banner = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -55,7 +55,7 @@ ApiService.PromoBanner = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -68,7 +68,7 @@ ApiService.productVariantInfo = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -81,7 +81,7 @@ ApiService.getAllStores = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -166,7 +166,7 @@ ApiService.AllCategory = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -179,7 +179,7 @@ ApiService.NewCategory = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -192,7 +192,7 @@ ApiService.StoreCategory = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -205,7 +205,7 @@ ApiService.StoreSubCategory = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -218,7 +218,7 @@ ApiService.StoreSubChildCategory = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -231,7 +231,7 @@ ApiService.StoreCategoryProd = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -252,7 +252,7 @@ ApiService.CategoryByProd = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -265,7 +265,7 @@ ApiService.CategoryBySubProd = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -278,7 +278,7 @@ ApiService.GetAllBrands = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -291,7 +291,7 @@ ApiService.CategoryBySubProdBySlug = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -304,7 +304,7 @@ ApiService.DealsOfProduct = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -317,7 +317,7 @@ ApiService.HotDealsProduct = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -354,7 +354,7 @@ ApiService.offers = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -367,7 +367,7 @@ ApiService.applicableOffers = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -396,7 +396,7 @@ ApiService.similarProd = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -433,7 +433,7 @@ ApiService.productDetails = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -526,7 +526,7 @@ ApiService.ageGroupBox = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -539,7 +539,7 @@ ApiService.ageGroupProduct = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -552,7 +552,7 @@ ApiService.brandInFocus = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -565,7 +565,7 @@ ApiService.newArrivals = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -578,7 +578,7 @@ ApiService.homeCategories = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -591,13 +591,13 @@ ApiService.brandProduct = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
 ApiService.getDeliveryCost = function (data) {
   return fetch({
-    url: "store/deliveryCharge",
+    url: "store/get-delivery-charge",
     method: "post",
     data: data,
   });
@@ -644,7 +644,7 @@ ApiService.storeSearch = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -657,7 +657,7 @@ ApiService.storeFilter = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -670,7 +670,7 @@ ApiService.storeFilterNew = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -683,7 +683,7 @@ ApiService.storeFilterAge = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -696,7 +696,7 @@ ApiService.storeFilterCategory = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -709,7 +709,7 @@ ApiService.storeFilterByBrand = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -722,7 +722,7 @@ ApiService.storeFilterBrand = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 
@@ -735,7 +735,7 @@ ApiService.storeFilterOption = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 ApiService.storeFilterOptionVerticalSlug = function (data) {
@@ -747,7 +747,7 @@ ApiService.storeFilterOptionVerticalSlug = function (data) {
       body: data,
       headers: { "Content-Type": "application/json" },
     },
-    cacheKey
+    cacheKey,
   );
 };
 

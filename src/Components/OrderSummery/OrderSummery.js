@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styles from "./OrderSummery.module.css";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 
-export const OrderSummery = ({ cartPriceTotal, tokenAmount, paymentType }) => {
+export const OrderSummery = ({ cartPriceTotal, tokenAmount, paymentType, orderStatus, isDeliverChargeLoading, isInitalAddressFetched }) => {
     const [finalTotal, setFinalTotal] = useState(0);
     const [discount, setDiscount] = useState(0);
 
@@ -68,23 +68,26 @@ export const OrderSummery = ({ cartPriceTotal, tokenAmount, paymentType }) => {
                             </div>
                         </div>
                         {
-                            cartPriceTotal.subTotal > 0 &&
+                            (orderStatus == "Place Order" && cartPriceTotal.subTotal > 0) &&
                             <div className="col-12 d-inline-flex align-items-center justify-content-between">
                                 <h6 className={`${styles.subTotalLabel} d-inline-flex`}>
                                     Delivery
                                 </h6>
                                 <div className={`${styles.subTotalSaving} d-inline-flex`}>
-                                    {cartPriceTotal.delivery === 0 ? (
-                                        <React.Fragment>
-                                            <b>
-                                                <del>
-                                                    ₹{(cartPriceTotal?.delivery || 0).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</del>{" "}
-                                                Free
-                                            </b>
-                                        </React.Fragment>
+                                    {(!isInitalAddressFetched || isDeliverChargeLoading) ? (
+                                        <span>Loading...</span>
                                     ) : (
-                                        <span>₹{(cartPriceTotal?.delivery || 0).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-                                    )}
+                                        cartPriceTotal.delivery === 0 ? (
+                                            <React.Fragment>
+                                                <b>
+                                                    <del>
+                                                        ₹{(cartPriceTotal?.delivery || 0).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</del>{" "}
+                                                    Free
+                                                </b>
+                                            </React.Fragment>
+                                        ) : (
+                                            <span>₹{(cartPriceTotal?.delivery || 0).toLocaleString("en-IN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                                        ))}
                                 </div>
                             </div>
                         }
