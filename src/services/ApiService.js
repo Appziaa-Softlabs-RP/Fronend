@@ -8,7 +8,7 @@ const cache = {};
 const cacheFetch = async (url, options, cacheKey, ttl = 500000) => {
   const currentTime = new Date().getTime();
 
-    if (cache[cacheKey] && cache[cacheKey].expiry > currentTime) {
+  if (cache[cacheKey] && cache[cacheKey].expiry > currentTime) {
     return JSON.parse(cache[cacheKey].response);
   }
 
@@ -550,7 +550,15 @@ ApiService.brandProduct = function (data) {
 
 ApiService.getDeliveryCost = function (data) {
   return fetch({
-    url: "store/deliveryCharge",
+    url: "store/get-delivery-charge",
+    method: "post",
+    data: data,
+  });
+};
+
+ApiService.validateCompanyTokenAmount = function (data) {
+  return fetch({
+    url: "payments/validate-company-token-amount",
     method: "post",
     data: data,
   });

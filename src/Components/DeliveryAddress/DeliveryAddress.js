@@ -10,6 +10,7 @@ import { DeleteAddressPopup } from "../DeleteAddressPopup/DeleteAddressPopup";
 import { EditAddressPopup } from "../EditAddressPopup/EditAddressPopup";
 import { DeleteIcon, EditIcon, LocationIcon } from "../siteIcons";
 import styles from "./DeliveryAddress.module.css";
+import useAddressStore from "../../lib/addressStore";
 
 const AddressDelivery = ({
   allAddress,
@@ -19,6 +20,7 @@ const AddressDelivery = ({
   setAddressSaved,
   setSelectAddrDetail,
 }) => {
+  const { selectedAddress, setSelectedAddress } = useAddressStore();
   const [selectAddress, setSelectAddress] = useState({});
   const [openAdressPop, setOpenAdressPop] = useState(false);
   const [openEditAdressPop, setOpenEditAdressPop] = useState(false);
@@ -48,21 +50,34 @@ const AddressDelivery = ({
 
   const editNewAddress = ({ addressId }) => {
     setOpenEditAdressPop(true);
-    setEditAddressId(addressId)
+    setEditAddressId(addressId);
   };
 
   const deleteAddress = ({ addressId }) => {
     setOpenDeleteAdressPop(true);
-    setDeleteAddressId(addressId)
+    setDeleteAddressId(addressId);
   };
 
   useEffect(() => {
     if (allAddress?.length > 0) {
       setSelectAddress(allAddress[0]);
+      if (setSelectedAddress && typeof setSelectedAddress === "function") {
+        console.log("Setting selected address:", allAddress[0]);
+        setSelectedAddress(allAddress[0]);
+      } else {
+        console.error("setSelectedAddress is not a function");
+      }
       setSelectAddrDetail(allAddress[0]);
       setAddressId(allAddress[0].address_id);
     }
   }, [allAddress]);
+
+  useEffect(() => {
+    if (selectedAddress) {
+      console.log("selectedAddress:", selectAddress);
+      setSelectedAddress(selectAddress);
+    }
+  }, [selectAddress]);
 
   return (
     <div
@@ -100,7 +115,13 @@ const AddressDelivery = ({
           </div>
           {allAddress?.length > 0 && (
             <React.Fragment>
-              <div className="col-12 d-inline-flex flex-wrap p-3">
+              <div
+                className="col-12 d-inline-flex flex-wrap p-3"
+                style={{
+                  maxHeight: "400px",
+                  overflowY: "auto",
+                }}
+              >
                 {allAddress?.map((item, idx) => {
                   return (
                     <div
@@ -169,8 +190,8 @@ const AddressDelivery = ({
                         <div className="position-absolute p-3 top-0 end-0 d-inline-flex justify-content-end gap-3">
                           <span
                             role="button"
-                            onClick={
-                              () => deleteAddress({ addressId: item.address_id })
+                            onClick={() =>
+                              deleteAddress({ addressId: item.address_id })
                             }
                             className={`${styles.deleteBtn} d-inline-flex align-items-center px-2`}
                           >
@@ -178,9 +199,11 @@ const AddressDelivery = ({
                           </span>
                           <span
                             role="button"
-                            onClick={() => editNewAddress({
-                              addressId: item.address_id,
-                            })}
+                            onClick={() =>
+                              editNewAddress({
+                                addressId: item.address_id,
+                              })
+                            }
                             // onClick={() => editAddress(item.address_id)}
                             className={`${styles.editBtn} d-inline-flex align-items-center px-2`}
                           >
@@ -261,14 +284,14 @@ const AddressDelivery = ({
           setAddressSaved={setAddressSaved}
         />
       )}
-      {(openEditAdressPop === true && editAddressId) && (
+      {openEditAdressPop === true && editAddressId && (
         <EditAddressPopup
           addressId={editAddressId}
           setOpenAdressPop={setOpenEditAdressPop}
           setAddressSaved={setAddressSaved}
         />
       )}
-      {(openDeleteAdressPop === true && deleteAddressId) && (
+      {openDeleteAdressPop === true && deleteAddressId && (
         <DeleteAddressPopup
           addressId={deleteAddressId}
           setAddressId={setDeleteAddressId}
@@ -292,7 +315,8 @@ const PaymentMode = ({
   paymentType,
   setPaymentType,
   paymentFeee,
-  setCartPriceTotal
+  setCartPriceTotal,
+  tokenAmount,
 }) => {
   // const [paymentType, setPaymentType] = useState(null);
   const navigate = useNavigate();
@@ -304,17 +328,190 @@ const PaymentMode = ({
     setPaymentType(type);
   };
 
+  const handlePayment = useCallback(
+    (orderId) => {
+      const companyIdPayload = {
+        company_id: parseInt(enviroment.COMPANY_ID),
+      };
+
+      ApiService.getRazorpayPublicKey(companyIdPayload)
+        .then((res) => {
+          if (res.payload != "" || res.payload != null) {
+            let finalAmount = cartPriceTotal.subTotal + cartPriceTotal.delivery;
+            const options = {
+              key: res.payload, // Fetching and adding razorpay key from server
+              amount: finalAmount,
+              currency: "INR",
+              name: enviroment.BUSINESS_NAME,
+              description: "Order Purchase",
+              image: `${process.env.REACT_APP_URL}/favicon.ico`,
+              order_id: orderId,
+              handler: (res) => {
+                onlinePaymentSuccess(
+                  orderId,
+                  res.razorpay_payment_id,
+                  selectedOfferProductId,
+                  selectedOfferId,
+                );
+              },
+              prefill: {
+                name: selectAddrDetail?.name,
+                email: selectAddrDetail?.email,
+                contact: selectAddrDetail?.contact,
+              },
+              notes: {
+                address: enviroment.STORE_ADDRESS,
+              },
+              theme: {
+                color: enviroment.PRIMARY_COLOR,
+              },
+            };
+
+            const rzpay = new Razorpay(options);
+            rzpay.open();
+          }
+        })
+        .catch((err) => {
+          AppNotification(
+            "Error",
+            "We are un-able to place your order. Please try later.",
+            "danger",
+          );
+        });
+    },
+    [Razorpay],
+  );
+
+  const handleCashOnDelivery = (payload) => {
+    if (parseFloat(tokenAmount) <= 0) {
+      ApiService.cashOnDelivery(payload)
+        .then((res) => {
+          if (res.message === "Cash on delivery successfully.") {
+            AppNotification(
+              "Success",
+              "Your order has been placed successfully",
+              "success",
+            );
+            let emptyCartData = [];
+            appData.setAppData({
+              ...appData.appData,
+              cartData: emptyCartData,
+              cartCount: 0,
+            });
+            localStorage.setItem("cartData", JSON.stringify(emptyCartData));
+            navigate("/my-orders");
+          } else {
+            AppNotification(
+              "Error",
+              "We are un-able to place your order. Please try later.",
+              "danger",
+            );
+          }
+        })
+        .catch((err) => {
+          AppNotification(
+            "Error",
+            "We are un-able to place your order. Please try later.",
+            "danger",
+          );
+        });
+    } else {
+      payload["token_amount"] = tokenAmount;
+      payload["paymentmode"] = "mix";
+      ApiService.onlinePaymentProcess(payload)
+        .then((res) => {
+          if (res.message === "Online payment process successfully.") {
+            handleTokenAmountPayment(
+              res.payload_onlinePaymentProcess.order_id,
+              res.payload_onlinePaymentProcess.token_amount,
+            );
+          } else {
+            AppNotification(
+              "Error",
+              "We are un-able to place your order. Please try later.",
+              "danger",
+            );
+          }
+        })
+        .catch((err) => {
+          AppNotification(
+            "Error",
+            "Something went wrong. Please try again.",
+            "danger",
+          );
+        });
+    }
+  };
+
+  const handleTokenAmountPayment = useCallback(
+    (orderId, tokenAmount) => {
+      const companyIdPayload = {
+        company_id: parseInt(enviroment.COMPANY_ID),
+      };
+
+      ApiService.getRazorpayPublicKey(companyIdPayload)
+        .then((res) => {
+          if (res.payload != "" || res.payload != null) {
+            const options = {
+              key: res.payload,
+              amount: tokenAmount,
+              currency: "INR",
+              name: enviroment.BUSINESS_NAME,
+              description: "Order Purchase",
+              image: `${process.env.REACT_APP_URL}/favicon.ico`,
+              order_id: orderId,
+              handler: (res) => {
+                onlinePaymentSuccess(
+                  orderId,
+                  res.razorpay_payment_id,
+                  selectedOfferProductId,
+                  selectedOfferId,
+                );
+              },
+              modal: {
+                ondismiss: function () {
+                  // Handle payment modal dismissal
+                  AppNotification("Info", "Payment cancelled by user", "info");
+                },
+              },
+              prefill: {
+                name: selectAddrDetail?.name,
+                email: selectAddrDetail?.email,
+                contact: selectAddrDetail?.contact,
+              },
+              notes: {
+                address: enviroment.STORE_ADDRESS,
+              },
+              theme: {
+                color: enviroment.PRIMARY_COLOR,
+              },
+            };
+
+            const rzpay = new Razorpay(options);
+            rzpay.open();
+          }
+        })
+        .catch((err) => {
+          AppNotification(
+            "Error",
+            "We are un-able to place your order. Please try later.",
+            "danger",
+          );
+        });
+    },
+    [Razorpay],
+  );
+
   const createOrderId = (payload) => {
     ApiService.onlinePaymentProcess(payload)
       .then((res) => {
         if (res.message === "Online payment process successfully.") {
-          console.log(res.payload_onlinePaymentProcess.order_id)
           handlePayment(res.payload_onlinePaymentProcess.order_id);
         } else {
           AppNotification(
             "Error",
             "We are un-able to place your order. Please try later.",
-            "danger"
+            "danger",
           );
         }
       })
@@ -322,75 +519,16 @@ const PaymentMode = ({
         AppNotification(
           "Error",
           "We are un-able to place your order. Please try later.",
-          "danger"
+          "danger",
         );
       });
   };
-
-  const handlePayment = useCallback(
-    (orderId) => {
-
-      const companyIdPayload = {
-        company_id: parseInt(enviroment.COMPANY_ID),
-      };
-
-      ApiService.getRazorpayPublicKey(companyIdPayload).then(res => {
-        if (res.payload != '' || res.payload != null) {
-          let finalAmount = cartPriceTotal.subTotal + cartPriceTotal.delivery;
-          const options = {
-            key: res.payload,// Fetching and adding razorpay key from server
-            amount: finalAmount,
-            currency: "INR",
-            name: enviroment.BUSINESS_NAME,
-            description: "Order Purchase",
-            image: `${process.env.REACT_APP_URL}/favicon.ico`,
-            order_id: orderId,
-            handler: (res) => {
-              // const onlinePaymentSuccess = (
-              //   orderId,
-              //   transID,
-              //   selectedOfferProductId,
-              //   selectedOfferId
-              // ) => {
-              onlinePaymentSuccess(
-                orderId,
-                res.razorpay_payment_id,
-                selectedOfferProductId,
-                selectedOfferId
-              );
-            },
-            prefill: {
-              name: selectAddrDetail?.name,
-              email: selectAddrDetail?.email,
-              contact: selectAddrDetail?.contact,
-            },
-            notes: {
-              address: enviroment.STORE_ADDRESS,
-            },
-            theme: {
-              color: enviroment.PRIMARY_COLOR,
-            },
-          };
-
-          const rzpay = new Razorpay(options);
-          rzpay.open();
-        }
-      }).catch(err => {
-        AppNotification(
-          "Error",
-          "We are un-able to place your order. Please try later.",
-          "danger"
-        );
-      })
-    },
-    [Razorpay])
-
 
   const onlinePaymentSuccess = (
     orderId,
     transID,
     selectedOfferProductId,
-    selectedOfferId
+    selectedOfferId,
   ) => {
     const payload = {
       company_id: parseInt(enviroment.COMPANY_ID),
@@ -398,18 +536,18 @@ const PaymentMode = ({
       customer_id: userInfo.customer_id,
       offer_id: selectedOfferProductId,
       offer_product_id: selectedOfferId,
-      order_id: orderId, // Ensure this is not null
+      order_id: orderId,
       transection_id: transID,
       cart_id: shopcartID,
     };
-    console.log(payload)
+
     ApiService.onlinePaymentSuccess(payload)
       .then((res) => {
         if (res.message == "Online payment successfully.") {
           AppNotification(
             "Success",
             "Your order has been placed successfully",
-            "success"
+            "success",
           );
           let emptyCartData = [];
           appData.setAppData({
@@ -423,7 +561,7 @@ const PaymentMode = ({
           AppNotification(
             "Error",
             "We are un-able to place your order. Please try later.",
-            "danger"
+            "danger",
           );
         }
       })
@@ -431,7 +569,7 @@ const PaymentMode = ({
         AppNotification(
           "Error",
           "We are un-able to place your order. Please try later.",
-          "danger"
+          "danger",
         );
       });
   };
@@ -444,7 +582,11 @@ const PaymentMode = ({
     ) {
       AppNotification("Error", "Please select payment type", "danger");
     } else {
-      let finalAmount = cartPriceTotal.subTotal + cartPriceTotal.delivery + (cartPriceTotal.handling_fee ?? 0) - (cartPriceTotal.digital_discount ?? 0);
+      let finalAmount =
+        cartPriceTotal.subTotal +
+        cartPriceTotal.delivery +
+        (cartPriceTotal.handling_fee ?? 0) -
+        (cartPriceTotal.digital_discount ?? 0);
       const payload = {
         company_id: parseInt(enviroment.COMPANY_ID),
         offer_product_id: selectedOfferId ?? null,
@@ -465,37 +607,7 @@ const PaymentMode = ({
         slot_date: new Date(),
       };
       if (paymentType === "cash") {
-        ApiService.cashOnDelivery(payload)
-          .then((res) => {
-            if (res.message === "Cash on delivery successfully.") {
-              AppNotification(
-                "Success",
-                "Your order has been placed successfully",
-                "success"
-              );
-              let emptyCartData = [];
-              appData.setAppData({
-                ...appData.appData,
-                cartData: emptyCartData,
-                cartCount: 0,
-              });
-              localStorage.setItem("cartData", JSON.stringify(emptyCartData));
-              navigate("/my-orders");
-            } else {
-              AppNotification(
-                "Error",
-                "We are un-able to place your order. Please try later.",
-                "danger"
-              );
-            }
-          })
-          .catch((err) => {
-            AppNotification(
-              "Error",
-              "We are un-able to place your order. Please try later.",
-              "danger"
-            );
-          });
+        handleCashOnDelivery(payload);
       } else {
         createOrderId(payload);
       }
@@ -512,13 +624,27 @@ const PaymentMode = ({
     });
   }, []);
 
+  const getCodFees = useCallback(() => {
+    return (
+      (parseFloat(paymentFeee.handling_fee) / 100) *
+      parseFloat(cartPriceTotal.subTotal)
+    );
+  }, [paymentFeee.handling_fee, cartPriceTotal.subTotal]);
+
+  const getDigitalDiscount = useCallback(() => {
+    return (
+      (parseFloat(paymentFeee.digital_discount) / 100) *
+      parseFloat(cartPriceTotal.subTotal)
+    );
+  }, [paymentFeee.handling_fee, cartPriceTotal.subTotal]);
+
   const addCodFees = useCallback(() => {
-    resetPaymentFees();  // Ensure reset happens first
+    resetPaymentFees(); // Ensure reset happens first
     setCartPriceTotal((prevCartPriceTotal) => {
-      if (prevCartPriceTotal?.handling_fee > 0) return prevCartPriceTotal;  // Prevent adding fees again
+      if (prevCartPriceTotal?.handling_fee > 0) return prevCartPriceTotal; // Prevent adding fees again
 
       // Calculate the handling fee as a percentage of the subTotal
-      const fees = (parseFloat(paymentFeee.handling_fee) / 100) * parseFloat(prevCartPriceTotal.subTotal);
+      const fees = getCodFees();
 
       // Return updated cart totals
       return {
@@ -530,12 +656,14 @@ const PaymentMode = ({
   }, [paymentFeee.handling_fee, resetPaymentFees]);
 
   const addDigitalDiscount = useCallback(() => {
-    resetPaymentFees();  // Ensure reset happens first
+    resetPaymentFees(); // Ensure reset happens first
     setCartPriceTotal((prevCartPriceTotal) => {
-      if (prevCartPriceTotal?.digital_discount > 0) return prevCartPriceTotal;  // Prevent adding discount again
+      if (prevCartPriceTotal?.digital_discount > 0) return prevCartPriceTotal; // Prevent adding discount again
 
       // Calculate the digital discount as a percentage of the subTotal
-      const discount = (parseFloat(paymentFeee.digital_discount) / 100) * parseFloat(prevCartPriceTotal.subTotal);
+      const discount =
+        (parseFloat(paymentFeee.digital_discount) / 100) *
+        parseFloat(prevCartPriceTotal.subTotal);
 
       // Return updated cart totals
       return {
@@ -545,6 +673,19 @@ const PaymentMode = ({
       };
     });
   }, [paymentFeee.digital_discount, resetPaymentFees]);
+
+  const getPaymentAmount = useCallback(() => {
+    if (paymentType === "online" || tokenAmount == 0) {
+      return (
+        cartPriceTotal.subTotal +
+        cartPriceTotal.delivery +
+        (cartPriceTotal.handling_fee ?? 0) -
+        (cartPriceTotal.digital_discount ?? 0)
+      );
+    } else {
+      return tokenAmount;
+    }
+  }, [cartPriceTotal, paymentType, tokenAmount]);
 
   return (
     <div className={`${styles.deliveryBox} col-12 d-inline-flex flex-column`}>
@@ -562,8 +703,8 @@ const PaymentMode = ({
                 htmlFor="online"
                 role="button"
                 onClick={() => {
-                  selectPaymentMode("online")
-                  addDigitalDiscount()
+                  selectPaymentMode("online");
+                  addDigitalDiscount();
                 }}
               >
                 <input
@@ -576,14 +717,42 @@ const PaymentMode = ({
                   <span className={`${styles.radioText} d-inline-flex`}>
                     Online Payment Options
                   </span>
-                  {paymentFeee.digital_discount > 0 ? <span className="fw-bold text-success"
+                  <p
+                    className="text-primary fst-italic"
                     style={{
-                      fontSize: "0.6rem",
-                      backgroundColor: "#D2FAC1",
+                      border: "1px solid lightblue",
+                      borderRadius: "5px",
                       padding: "0.2rem 0.5rem",
-                      width: "fit-content"
+                      fontSize: "0.8rem",
+                      width: "fit-content",
+                      marginBottom: "0px",
                     }}
-                  >Digital Payment Discount: ₹{((parseFloat(paymentFeee.digital_discount) / 100) * parseFloat(cartPriceTotal.prevTotal)).toFixed(2)}</span> : null}
+                  >
+                    Pay online for a hassle-free, secure, and faster delivery!{" "}
+                    {getCodFees().toFixed(2) > 0 ? (
+                      <span className="text-success">
+                        Also, you can save ₹
+                        {getCodFees() + getDigitalDiscount()} on your order.
+                      </span>
+                    ) : null}
+                  </p>
+                  {paymentFeee.digital_discount > 0 ? (
+                    <span
+                      className="fw-bold text-success"
+                      style={{
+                        fontSize: "0.8rem",
+                        backgroundColor: "#D2FAC1",
+                        padding: "0.2rem 0.5rem",
+                        width: "fit-content",
+                      }}
+                    >
+                      Digital Payment Discount: ₹
+                      {(
+                        (parseFloat(paymentFeee.digital_discount) / 100) *
+                        parseFloat(cartPriceTotal.prevTotal)
+                      ).toFixed(2)}
+                    </span>
+                  ) : null}
                 </p>
               </label>
             </div>
@@ -593,8 +762,8 @@ const PaymentMode = ({
                 htmlFor="cash"
                 role="button"
                 onClick={() => {
-                  selectPaymentMode("cash")
-                  addCodFees()
+                  selectPaymentMode("cash");
+                  addCodFees();
                 }}
               >
                 <input
@@ -607,14 +776,34 @@ const PaymentMode = ({
                   <span className={`${styles.radioText} d-inline-flex`}>
                     Cash on delivery
                   </span>
-                  {paymentFeee.digital_discount > 0 ? <span className="fw-bold text-danger"
-                    style={{
-                      fontSize: "0.6rem",
-                      backgroundColor: "#F8DADA",
-                      padding: "0.2rem 0.5rem",
-                      width: "fit-content"
-                    }}
-                  >Cash Handling Fees: ₹{((parseFloat(paymentFeee.handling_fee) / 100) * parseFloat(cartPriceTotal.prevTotal)).toFixed(2)}</span> : null}
+                  {tokenAmount != 0 ? (
+                    <p
+                      className="text-primary fst-italic"
+                      style={{
+                        border: "1px solid lightblue",
+                        borderRadius: "5px",
+                        padding: "0.2rem 0.5rem",
+                        fontSize: "0.8rem",
+                        width: "fit-content",
+                      }}
+                    >
+                      A small commitment fee on COD helps us ensure genuine
+                      orders and faster deliveries!
+                    </p>
+                  ) : null}
+                  {paymentFeee.digital_discount > 0 ? (
+                    <span
+                      className="fw-bold text-danger"
+                      style={{
+                        fontSize: "0.8rem",
+                        backgroundColor: "#F8DADA",
+                        padding: "0.2rem 0.5rem",
+                        width: "fit-content",
+                      }}
+                    >
+                      Cash Handling Fees: ₹{getCodFees()}
+                    </span>
+                  ) : null}
                 </p>
               </label>
             </div>
@@ -626,15 +815,14 @@ const PaymentMode = ({
                   proceedPayment({
                     selectedOfferProductId,
                     selectedOfferId,
-                    selectedOfferProductId,
-                    selectedOfferId,
                   })
                 }
                 role="button"
                 className={`${styles.payOrderBtn} d-inline-flex align-items-center px-3`}
               >
                 {" "}
-                PLACE ORDER (₹{cartPriceTotal.subTotal + cartPriceTotal.delivery + (cartPriceTotal.handling_fee ?? 0) - (cartPriceTotal.digital_discount ?? 0)})
+                Proceed for Payment (₹
+                {getPaymentAmount().toLocaleString("en-IN")})
               </span>
             </div>
           </div>
@@ -651,6 +839,10 @@ export const DeliveryAddress = ({
   setCartPriceTotal,
   shopcartID,
   setOrderStatus,
+  tokenAmount,
+  paymentType,
+  setPaymentType,
+  setSelectedAddress,
 }) => {
   const appData = useApp();
   const [allAddress, setAllAddress] = useState([]);
@@ -659,10 +851,9 @@ export const DeliveryAddress = ({
   const userInfo = appData.appData.user;
   const [addressId, setAddressId] = useState("");
   const [selectAddrDetail, setSelectAddrDetail] = useState({});
-  const [paymentType, setPaymentType] = useState(null);
   const [paymentFees, setPaymentFees] = useState({
     digital_discount: 0,
-    handling_fee: 0
+    handling_fee: 0,
   });
 
   const getAllAdress = () => {
@@ -715,7 +906,7 @@ export const DeliveryAddress = ({
   }, [fetchPaymentFees]);
 
   if (!paymentFees) {
-    return <p>Loading...</p>
+    return <p>Loading...</p>;
   }
 
   return (
@@ -756,6 +947,7 @@ export const DeliveryAddress = ({
         selectAddrDetail={selectAddrDetail}
         setCartPriceTotal={setCartPriceTotal}
         paymentFeee={paymentFees}
+        tokenAmount={tokenAmount}
       />
     </React.Fragment>
   );

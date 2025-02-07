@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CartSummery } from "../../Components/CartSummery/CartSummery";
 import { DeliveryAddress } from "../../Components/DeliveryAddress/DeliveryAddress";
@@ -14,6 +14,7 @@ import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import { AppNotification } from "../../utils/helper";
 import styles from "./ShoppingCart.module.css";
+import useAddressStore from "../../lib/addressStore";
 
 export const ShoppingCart = () => {
   const appData = useApp();
@@ -21,6 +22,7 @@ export const ShoppingCart = () => {
   const [cartData, setCartData] = useState([]);
   const [userInfo, setUserInfo] = useState({});
   const [loginPop, setLoginPop] = useState(false);
+  const [paymentType, setPaymentType] = useState(null);
   const [cartPriceTotal, setCartPriceTotal] = useState({
     price: 0,
     discount: 0,
@@ -34,6 +36,10 @@ export const ShoppingCart = () => {
   const [applicableOffers, setApplicableOffers] = useState(null);
   const [selectedOfferId, setSelectedOfferId] = useState(null);
   const [selectedOfferProductId, setSelectedOfferProductId] = useState(null);
+  const [tokenAmount, setTokenAmount] = useState(0);
+  const { selectedAddress, setSelectedAddress } = useAddressStore(); // Use Zustand store
+  const [isDeliverChargeLoading, setIsDeliverChargeLoading] = useState(false);
+  const [isInitalAddressFetched, setIsInitalAddressFetched] = useState(false);
   const navigate = useNavigate();
 
   const setCartTotal = (cartData) => {
@@ -66,20 +72,20 @@ export const ShoppingCart = () => {
 
     if (userInfo.customer_id) {
       const payload = {
+        cart_id: shopcartID,
         company_id: parseInt(enviroment.COMPANY_ID),
-        store_id: parseInt(enviroment.STORE_ID),
-        customer_id: userInfo.customer_id,
-        sub_total: allTotal,
+        pincode: selectedAddress?.pincode,
       };
       ApiService.getDeliveryCost(payload)
         .then((res) => {
-          if (res.message === "Delivery Details.") {
-            const deliveryCost = res.payload_deliveryCharge.delivery_charge;
-            const deliveryUpToCost = res.payload_deliveryCharge.delivery_upto;
+          if (res.message === "Delivery charge") {
+            setIsInitalAddressFetched(true);
+            const deliveryCost = res.payload_getDeliveryCharge.delivery_charge;
+            // const deliveryUpToCost = res.payload_deliveryCharge.delivery_upto;
             setCartPriceTotal((prevCartPriceTotal) => ({
               ...prevCartPriceTotal,
               delivery: deliveryCost,
-              deliveryUpTo: deliveryUpToCost,
+              // deliveryUpTo: deliveryUpToCost,
             }));
           }
         })
@@ -89,6 +95,27 @@ export const ShoppingCart = () => {
     }
   };
 
+  const fetchTokenAmount = useCallback(() => {
+    const validationPayload = {
+      company_id: parseInt(enviroment.COMPANY_ID),
+      amount: cartPriceTotal.subTotal,
+    };
+
+    ApiService.validateCompanyTokenAmount(validationPayload)
+      .then((res) => {
+        setTokenAmount(res?.token_amount || 0);
+      })
+      .catch((err) => {
+        console.error("Error fetching token amount:", err);
+        setTokenAmount(0);
+      });
+  }, [cartPriceTotal.subTotal]);
+
+  useEffect(() => {
+    if (cartPriceTotal.subTotal > 0) {
+      fetchTokenAmount();
+    }
+  }, [cartPriceTotal.subTotal, fetchTokenAmount]);
 
   const placeOrder = () => {
     let cartType = appData.appData.cartSaved;
@@ -117,22 +144,24 @@ export const ShoppingCart = () => {
             localStorage.setItem("cartID", res.payload_cartList_id);
             localStorage.setItem(
               "cartData",
-              JSON.stringify(res.payload_cartList_items)
+              JSON.stringify(res.payload_cartList_items),
             );
             setShopCartId(res.payload_cartList_id);
           } else {
             AppNotification(
               "Error",
+              res.message ||
               "We are facing issue on shopping cart. Please try later.",
-              "danger"
+              "danger",
             );
           }
         })
         .catch((err) => {
           AppNotification(
             "Error",
+            err.message ||
             "We are facing issue on shopping cart. Please try later.",
-            "danger"
+            "danger",
           );
         });
     } else {
@@ -160,7 +189,7 @@ export const ShoppingCart = () => {
           AppNotification(
             "Error",
             "We are facing issue on shopping cart. Please try later.",
-            "danger"
+            "danger",
           );
         });
     };
@@ -173,17 +202,46 @@ export const ShoppingCart = () => {
     setUserInfo(appData.appData.user);
   }, [appData, setCartPriceTotal, userInfo]);
 
+  useEffect(() => {
+    if (userInfo.customer_id && selectedAddress) {
+      const payload = {
+        cart_id: shopcartID,
+        company_id: parseInt(enviroment.COMPANY_ID),
+        pincode: selectedAddress.pincode,
+      };
+      setIsDeliverChargeLoading(true);
+      ApiService.getDeliveryCost(payload)
+        .then((res) => {
+          if (res.message === "Delivery charge") {
+            setIsInitalAddressFetched(true);
+            const deliveryCost = res.payload_getDeliveryCharge.delivery_charge;
+            setCartPriceTotal((prevCartPriceTotal) => ({
+              ...prevCartPriceTotal,
+              delivery: deliveryCost,
+            }));
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+        .finally(() => {
+          setIsDeliverChargeLoading(false);
+        });
+    }
+  }, [selectedAddress, userInfo.customer_id]);
+
   return (
     <React.Fragment>
       {windowWidth === "mobile" ? (
         <React.Fragment>
           <PageHeader title="Personal Cart" hide={true} />
-          {
-            cartPriceTotal.subTotal > 0 &&
-            <h1 className={`${styles.cartTitle} col-12 px-3 mt-3 d-inline-flex`}>
-              My Cart ({appData?.appData?.cartCount})
+          {cartPriceTotal.subTotal > 0 && (
+            <h1
+              className={`${styles.cartTitle} col-12 px-3 mt-3 d-inline-flex`}
+            >
+              My Cart ({appData?.appData?.cartCount})!
             </h1>
-          }
+          )}
           {orderStatus === "Cart" ? (
             <React.Fragment>
               {cartData?.length ? (
@@ -253,36 +311,48 @@ export const ShoppingCart = () => {
                         Your cart is empty
                       </p>
                       <Link to="/">
-                        <button className={`${styles.shoppingBtn}`}>Continue Shopping</button>
+                        <button className={`${styles.shoppingBtn}`}>
+                          Continue Shopping
+                        </button>
                       </Link>
-                      <p style={{
-                        fontSize: "0.8rem",
-                        marginTop: "20px",
-                        display: "flex",
-                        flexDirection: "column",
-                        textAlign: "center",
-                      }}>
-                        <span style={{
-                          fontSize: "1rem",
-                        }}>Have an account?</span>
-                        <span style={{
+                      <p
+                        style={{
+                          fontSize: "0.8rem",
+                          marginTop: "20px",
                           display: "flex",
-                          flexDirection: "row",
-                        }}>
+                          flexDirection: "column",
+                          textAlign: "center",
+                        }}
+                      >
+                        <span
+                          style={{
+                            fontSize: "1rem",
+                          }}
+                        >
+                          Have an account?
+                        </span>
+                        <span
+                          style={{
+                            display: "flex",
+                            flexDirection: "row",
+                          }}
+                        >
                           <span
                             className={`${styles.supportDrop} d-inline-flex d-inline-flex align-items-center gap-2 position-relative`}
                             role="button"
                           >
-                            <Link to='/login' className={`${styles.supportText} d-inline-flex m-1`} style={{
-                              color: "black",
-                              textDecoration: "underline",
-                            }}>
+                            <Link
+                              to="/login"
+                              className={`${styles.supportText} d-inline-flex m-1`}
+                              style={{
+                                color: "black",
+                                textDecoration: "underline",
+                              }}
+                            >
                               Log in
                             </Link>
                           </span>{" "}
-                          <span className="my-1">
-                            to checkout faster
-                          </span>
+                          <span className="my-1">to checkout faster</span>
                         </span>
                       </p>
                     </div>
@@ -306,17 +376,27 @@ export const ShoppingCart = () => {
                   })}
               </div>
               <DeliveryAddress
+                paymentType={paymentType}
+                setPaymentType={setPaymentType}
                 selectedOfferProductId={selectedOfferProductId}
                 selectedOfferId={selectedOfferId}
                 cartPriceTotal={cartPriceTotal}
                 setCartPriceTotal={setCartPriceTotal}
                 shopcartID={shopcartID}
                 setOrderStatus={setOrderStatus}
+                tokenAmount={tokenAmount}
+                setSelectedAddress={setSelectedAddress}
               />
-              {
-                cartPriceTotal.subTotal > 0 &&
-                <OrderSummery cartPriceTotal={cartPriceTotal} />
-              }
+              {cartPriceTotal.subTotal > 0 && (
+                <OrderSummery
+                  cartPriceTotal={cartPriceTotal}
+                  tokenAmount={tokenAmount}
+                  paymentType={paymentType}
+                  orderStatus={orderStatus}
+                  isDeliverChargeLoading={isDeliverChargeLoading}
+                  isInitalAddressFetched={isInitalAddressFetched}
+                />
+              )}
               <div className={`${styles.cancelPolicyBox} col-12 mt-3 p-3`}>
                 <h5
                   className={`${styles.policyHeader} col-12 d-inline-flex mb-3`}
@@ -345,7 +425,6 @@ export const ShoppingCart = () => {
                 </div>
               </div>
               {loginPop === true && <LoginPopup setLoginPop={setLoginPop} />}
-
             </React.Fragment>
           )}
           <Footer />
@@ -372,20 +451,30 @@ export const ShoppingCart = () => {
                     </>
                   ) : orderStatus === "Place Order" ? (
                     <DeliveryAddress
+                      paymentType={paymentType}
+                      setPaymentType={setPaymentType}
                       selectedOfferProductId={selectedOfferProductId}
                       selectedOfferId={selectedOfferId}
                       cartPriceTotal={cartPriceTotal}
                       setCartPriceTotal={setCartPriceTotal}
                       shopcartID={shopcartID}
                       setOrderStatus={setOrderStatus}
+                      tokenAmount={tokenAmount}
+                      setSelectedAddress={setSelectedAddress}
                     />
                   ) : null}
                 </div>
                 <div className="col-3 flex-shrink-0">
-                  {
-                    cartPriceTotal.subTotal > 0 &&
-                    <OrderSummery cartPriceTotal={cartPriceTotal} />
-                  }
+                  {cartPriceTotal.subTotal > 0 && (
+                    <OrderSummery
+                      cartPriceTotal={cartPriceTotal}
+                      tokenAmount={tokenAmount}
+                      paymentType={paymentType}
+                      orderStatus={orderStatus}
+                      isDeliverChargeLoading={isDeliverChargeLoading}
+                      isInitalAddressFetched={isInitalAddressFetched}
+                    />
+                  )}
                 </div>
               </div>
             </div>
