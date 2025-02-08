@@ -21,7 +21,7 @@ export const VerifyOtp = () => {
   const [mobileLast, setMobileLast] = useState("");
   const appData = useApp();
 
-const [btnDisable, setBtnDisable] = useState(true);
+  const [btnDisable, setBtnDisable] = useState(true);
 
   const optInput1 = useRef();
   const optInput2 = useRef();
@@ -38,7 +38,8 @@ const [btnDisable, setBtnDisable] = useState(true);
       mobileNum = mobileNum?.substr(mobileNum.length - 5);
       setMobileLast(mobileNum);
     } else {
-      navigate("/");
+      // navigate("/");
+      window.location.href = "/";
     }
   }, [locationState]);
 
@@ -110,7 +111,8 @@ const [btnDisable, setBtnDisable] = useState(true);
             localStorage.setItem("loggedIn", true);
             AppNotification("Welcome", "OTP verified successfully.", "success");
             getAddCartList(res.payload);
-            navigate("/");
+            // navigate("/");
+            window.location.href = "/";
           }
         })
         .catch((err) => {
@@ -181,11 +183,11 @@ const [btnDisable, setBtnDisable] = useState(true);
             window.location.reload();
           }
         })
-        .catch((err) => {});
+        .catch((err) => { });
     }
   };
 
- 
+
 
   useEffect(() => {
     if (optInput.otpInput1 !== "") {
