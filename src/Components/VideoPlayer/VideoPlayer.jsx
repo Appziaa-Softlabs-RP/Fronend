@@ -5,8 +5,8 @@ import { Card, Button } from "react-bootstrap"
 import { A11y, Navigation } from "swiper/modules"
 import { Swiper, SwiperSlide } from "swiper/react"
 import ApiService from "../../services/ApiService"
-import { PlayFill } from "react-bootstrap-icons"
-import styles from "./VideoPlayer.module.css"
+import { ArrowsAngleExpand, ArrowsExpand, ArrowsExpandVertical, ArrowsFullscreen, PauseFill, PlayFill, VolumeMute, VolumeUp } from "react-bootstrap-icons"
+import "./VideoPlayer.css"
 // Import Swiper styles
 import "swiper/css"
 import "swiper/css/navigation"
@@ -49,12 +49,63 @@ const VideoPlayer = () => {
 
   const VideoElement = ({ url, index }) => {
     const [isPlaying, setIsPlaying] = useState(false)
+    const [volume, setVolume] = useState(1)
+    const [progress, setProgress] = useState(0)
+    const [duration, setDuration] = useState(0)
+    const [currentTime, setCurrentTime] = useState(0)
+    const [hasPlayed, setHasPlayed] = useState(false)
+    const videoRef = useRef(null)
+
+    useEffect(() => {
+      videoRefs.current[index] = videoRef.current
+    }, [index])
+
+    const togglePlay = () => {
+      if (videoRef.current.paused) {
+        videoRef.current.play()
+        setIsPlaying(true)
+      } else {
+        videoRef.current.pause()
+        setIsPlaying(false)
+      }
+    }
+
+    const handleVolumeChange = (e) => {
+      const newVolume = parseFloat(e.target.value)
+      videoRef.current.volume = newVolume
+      setVolume(newVolume)
+    }
+
+    const handleProgress = () => {
+      const current = videoRef.current.currentTime
+      setCurrentTime(current)
+      setProgress((current / videoRef.current.duration) * 100)
+    }
+
+    const handleSeek = (e) => {
+      const newTime = (parseFloat(e.target.value) / 100) * videoRef.current.duration
+      videoRef.current.currentTime = newTime
+      setProgress(e.target.value)
+    }
+
+    const toggleFullscreen = () => {
+      if (videoRef.current.requestFullscreen) {
+        videoRef.current.requestFullscreen()
+      }
+    }
 
     const handlePlay = () => {
-      setIsPlaying(true)
-      if (videoRefs.current[index]) {
-        videoRefs.current[index].play().catch((err) => console.log("Playback failed:", err))
+      if (!hasPlayed) {
+        setHasPlayed(true)
       }
+      videoRef.current.play().catch((err) => console.log("Playback failed:", err))
+      setIsPlaying(true)
+    }
+
+    // Helper to format the countdown (negative minutes remaining)
+    const formatCountdown = (remainingSeconds) => {
+      if (remainingSeconds <= 0) return "0.00"
+      return `-${(remainingSeconds / 60).toFixed(2)}`
     }
 
     if (isYoutubeUrl(url)) {
@@ -72,23 +123,98 @@ const VideoPlayer = () => {
     }
 
     return (
-      <div className="position-relative h-100">
+      <div className="position-relative videoElement h-100" onClick={!isPlaying ? handlePlay : undefined}>
         <video
-          ref={(el) => (videoRefs.current[index] = el)}
-          className="w-100 h-100"
-          style={{ objectFit: "cover", borderRadius: "5px" }}
+          ref={videoRef}
+          className="custom-video"
           loop
           playsInline
-          controls={isPlaying}
+          onLoadedMetadata={() => setDuration(videoRef.current.duration)}
+          onTimeUpdate={handleProgress}
+          onClick={togglePlay}
         >
           <source src={url} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-        {!isPlaying && (
-          <Button className={`position-absolute top-50 start-50 translate-middle ${styles.customPlayerButton}`} onClick={handlePlay}
+        {/* Overlay big play button when not playing */}
+        {!isPlaying && !hasPlayed && (
+          <Button
+            className="position-absolute top-50 start-50 translate-middle customPlayerButton"
+            onClick={(e) => {
+              e.stopPropagation()
+              handlePlay()
+            }}
           >
-            <PlayFill size={50} />
+            <PlayFill className="big-control-icon" />
           </Button>
+        )}
+        {/* Custom Controls */}
+        {hasPlayed && (
+          <div className="video-controls">
+            {/* Left Group: Play/Pause and Volume */}
+            <div className="left-group">
+              <button onClick={togglePlay} className="control-btn">
+                {isPlaying ? (
+                  <PauseFill className="control-icon" />
+                ) : (
+                  <PlayFill className="control-icon" />
+                )}
+              </button>
+              <div className="volume-container">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    const newVolume = volume === 0 ? 1 : 0
+                    videoRef.current.volume = newVolume
+                    setVolume(newVolume)
+                  }}
+                  className="control-btn"
+                >
+                  {volume === 0 ? (
+                    <VolumeMute className="control-icon" />
+                  ) : (
+                    <VolumeUp className="control-icon" />
+                  )}
+                </button>
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.01"
+                  value={volume}
+                  onChange={handleVolumeChange}
+                  className="volume-control"
+                />
+              </div>
+            </div>
+
+            {/* Middle Group: Progress Control */}
+            <div className="middle-group">
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="0.1"
+                value={progress}
+                onChange={handleSeek}
+                className="progress-control"
+              />
+            </div>
+
+            {/* Right Group: Timer and Fullscreen */}
+            <div className="right-group">
+              <span className="time-display">
+                {formatCountdown(duration - currentTime)}
+              </span>
+              <button onClick={toggleFullscreen} className="control-btn">
+                <ArrowsFullscreen className="control-icon"
+                  style={{
+                    fontSize: "0.8em"
+                  }}
+                />
+              </button>
+            </div>
+          </div>
         )}
       </div>
     )
@@ -118,7 +244,7 @@ const VideoPlayer = () => {
           {videoBanners.map((video, index) => (
             <SwiperSlide key={index}>
               <Card className="h-100">
-                <div style={{ aspectRatio: "3/5", overflow: "hidden"}}>
+                <div style={{ aspectRatio: "3/5", overflow: "hidden" }}>
                   <VideoElement url={video?.video_url} index={index} />
                 </div>
               </Card>
