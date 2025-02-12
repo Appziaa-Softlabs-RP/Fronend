@@ -233,10 +233,10 @@ const VideoPlayer = () => {
           pagination={{ clickable: true }}
           breakpoints={{
             340: {
-              slidesPerView: 2,
+              slidesPerView: 1,
             },
             768: {
-              slidesPerView: 4,
+              slidesPerView: 3,
             },
             1024: {
               slidesPerView: 3.5,
