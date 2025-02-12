@@ -147,6 +147,7 @@
     transition: width 0.3s ease, margin-left 0.3s ease, opacity 0.3s ease;
     margin-left: 0;
     opacity: 0;
+    transform: translateY(2px);
 }
 
 /* Reveal slider when hovering over the volume icon button or the slider itself */
@@ -180,6 +181,7 @@ input.progress-control {
     border-radius: 2px;
     -webkit-appearance: none;
     appearance: none;
+    transform: translateY(2px);
 }
 
 /* Customize progress slider thumb */

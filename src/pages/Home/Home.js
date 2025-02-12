@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Aside } from "../../Components/Aside/Aside";
 import { BrandFocus } from "../../Components/BrandFocus/BrandFocus";
 import { CategoryShop } from "../../Components/CategoryShop/CategoryShop";
 import { DealShop } from "../../Components/DealShop/DealShop";
 import { Footer } from "../../Components/Footer/Footer";
+import GoToTop from "../../Components/GoToTop/GoToTop";
 import { Header } from "../../Components/Header/Header";
 import { HeroBanner } from "../../Components/HeroBanner/HeroBanner";
 import { HomeCategories } from "../../Components/home-category-products/HomeCategoryProducts";
@@ -14,31 +15,29 @@ import { NewArrival } from "../../Components/NewArrival/NewArrival";
 import { PromoBanner } from "../../Components/PromoBanner/PromoBanner";
 import Reviews from "../../Components/Reviews/Reviews";
 import { ShopAge } from "../../Components/ShopAge/ShopAge";
-import GoToTop from "../../Components/GoToTop/GoToTop";
-import { useLocation } from "react-router-dom";
 import VideoPlayer from "../../Components/VideoPlayer/VideoPlayer";
 
 export const Home = () => {
   const [asideOpen, setAsideOpen] = useState(false);
   const [navItems, setNavItems] = useState([]);
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
-  useEffect(() => {
-    // Handle both initial load and pathname changes
-    window.scrollTo(0, 0);
+  // useEffect(() => {
+  //   // Handle both initial load and pathname changes
+  //   window.scrollTo(0, 0);
 
-    // Add window.onload event handler
-    const handleLoad = () => {
-      window.scrollTo(0, 0);
-    };
+  //   // Add window.onload event handler
+  //   const handleLoad = () => {
+  //     window.scrollTo(0, 0);
+  //   };
 
-    window.addEventListener("load", handleLoad);
+  //   window.addEventListener("load", handleLoad);
 
-    // Cleanup
-    return () => {
-      window.removeEventListener("load", handleLoad);
-    };
-  }, [pathname]);
+  //   // Cleanup
+  //   return () => {
+  //     window.removeEventListener("load", handleLoad);
+  //   };
+  // }, [pathname]);
 
   return (
     <React.Fragment>

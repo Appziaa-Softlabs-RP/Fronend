@@ -203,13 +203,15 @@ const VideoPlayer = () => {
 
             {/* Right Group: Timer and Fullscreen */}
             <div className="right-group">
-              <span className="time-display">
+              <span className="time-display" style={{
+                transform: "translateY(3px)"
+              }}>
                 {formatCountdown(duration - currentTime)}
               </span>
               <button onClick={toggleFullscreen} className="control-btn">
                 <ArrowsFullscreen className="control-icon"
                   style={{
-                    fontSize: "0.8em"
+                    fontSize: "0.6em"
                   }}
                 />
               </button>
@@ -238,10 +240,7 @@ const VideoPlayer = () => {
             },
             1024: {
               slidesPerView: 3.5,
-            },
-            1400: {
-              slidesPerView: 4,
-            },
+            }
           }}
         >
           {videoBanners.map((video, index) => (
