@@ -25,23 +25,11 @@ export const NewArrival = () => {
         });
     }, []);
 
-    const responsiveItems =
-        window.innerWidth >= 1300
-            ? 4
-            : window.innerWidth >= 1100
-                ? 4
-                : window.innerWidth >= 1000
-                    ? 3
-                    : window.innerWidth >= 500
-                        ? 2
-                        : 1;
-
-
     return (
         <React.Fragment>
             {productData?.length > 0 &&
                 <div className={`col-12 py-5 ${styles.container} ${windowWidth === "desktop" && 'p-3 mt-2'} d-inline-flex`}>
-                    <div className={`container-fluid`}>
+                    <div className={`container`}>
                         {/* <div className={`col-12 ${windowWidth === 'mobile' ? 'p-3' : 'mt-3'} position-relative d-inline-flex flex-column`}> */}
                         <div className={`col-12 d-inline-flex flex-column`} style={{
                             maxWidth: "100%",

@@ -221,7 +221,7 @@ const VideoPlayer = () => {
   }
 
   return (
-    <div className="container-fluid py-4">
+    <div className="container py-4">
       {videoBanners.length > 0 && (
         <Swiper
           modules={[Navigation, A11y]}
@@ -238,6 +238,9 @@ const VideoPlayer = () => {
             },
             1024: {
               slidesPerView: 3.5,
+            },
+            1400: {
+              slidesPerView: 4,
             },
           }}
         >
