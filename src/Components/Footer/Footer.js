@@ -102,7 +102,12 @@ export const Footer = () => {
 
         <div className={styles.copyrightSection}>
           <p>© {(new Date()).getFullYear()} ByeByeMRPS India</p>
-          <p>byebyemrps.com is a property of ByeByeMRPS. Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
+          <p>byebyemrps.com is a property of ByeByeMRPS.</p>
+          <p
+            style={{
+              display: "none"
+            }}
+          >Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
         </div>
       </Container>
     </footer>

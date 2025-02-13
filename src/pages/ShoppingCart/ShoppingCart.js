@@ -222,10 +222,10 @@ export const ShoppingCart = () => {
                                     </div>
                                     <button
                                         aria-label="Place Order"
-                                        className={`${styles.checkoutBtn} d-inline-flex align-items-center justify-content-center col-6 text-uppercase`}
+                                        className={`${styles.checkoutBtn} text-white d-inline-flex align-items-center justify-content-center col-6 text-uppercase`}
                                         onClick={() => placeOrder()}
                                     >
-                                        Place Order
+                                        Place Order!
                                     </button>
                                 </div>
                             </React.Fragment>
