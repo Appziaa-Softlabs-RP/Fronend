@@ -59,9 +59,9 @@ export const AddAddressForm = ({
         } else if (addressObj.house_no === "") {
             AppNotification("Error", "Enter your house number.", "danger");
         } else if (addressObj.street === "") {
-            AppNotification("Error", "Please enter valid PinCode.", "danger");
+            AppNotification("Error", "Please enter valid Street.", "danger");
         } else if (addressObj.city === "") {
-            AppNotification("Error", "Please enter valid PinCode.", "danger");
+            AppNotification("Error", "Please enter valid City.", "danger");
         } else if (addressObj.state === "") {
             AppNotification("Error", "Enter your state name.", "danger");
         } else if (addressObj.pincode === "") {
