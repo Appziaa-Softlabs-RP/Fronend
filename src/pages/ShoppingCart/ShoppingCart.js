@@ -225,7 +225,7 @@ export const ShoppingCart = () => {
                                         className={`${styles.checkoutBtn} text-white d-inline-flex align-items-center justify-content-center col-6 text-uppercase`}
                                         onClick={() => placeOrder()}
                                     >
-                                        Place Order!
+                                        Place Order
                                     </button>
                                 </div>
                             </React.Fragment>
