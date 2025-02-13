@@ -18,7 +18,8 @@
 .placeOrderBtn,
 .payOrderBtn,
 .addAddressBtn {
-    height: 45px;
+    min-width: none;height: 45px;
+    padding: 25px 10px;
     border: 1px solid var(--ADD_BUTTON_COLOR);
     background: var(--ADD_BUTTON_COLOR);
     color: #FFF;

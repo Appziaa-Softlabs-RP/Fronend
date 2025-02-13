@@ -110,7 +110,12 @@ export const Footer = () => {
 
         <div className={styles.copyrightSection}>
           <p>© {(new Date()).getFullYear()} Ashi Electronics India</p>
-          <p>ashielectronics.com is a property of Ashi Electronics. Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
+          <p>ashielectronics.com is a property of Ashi Electronics.</p>
+          <p
+            style={{
+              display: "none"
+            }}
+          >Developed & Marketed by <a href='https://rewardsplus.in' className='text-white' rel={'noreferrer'} target='_blank'>RewardsPlus</a></p>
         </div>
       </Container>
     </footer>

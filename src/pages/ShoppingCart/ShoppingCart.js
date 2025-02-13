@@ -398,7 +398,7 @@ export const ShoppingCart = () => {
                 />
               )}
               <div className={`${styles.cancelPolicyBox} col-12 mt-3 p-3`}>
-                <h5
+                {/* <h5
                   className={`${styles.policyHeader} col-12 d-inline-flex mb-3`}
                 >
                   Cancelation Policy
@@ -422,7 +422,7 @@ export const ShoppingCart = () => {
                       issues, a full refund will be provided.
                     </p>
                   </div>
-                </div>
+                </div> */}
               </div>
               {loginPop === true && <LoginPopup setLoginPop={setLoginPop} />}
             </React.Fragment>
