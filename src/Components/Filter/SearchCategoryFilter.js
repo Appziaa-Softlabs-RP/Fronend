@@ -134,6 +134,7 @@ export const SearchCategoryFilter = ({
             store_id: enviroment.STORE_ID,
             category_name_url: categorySlug,
             vertical_id: filterVert,
+            vertical_slug: filterVert,
             from_price: allfilterVal.priceMin,
             to_price: allfilterVal.priceMax,
             brand_id: selectedBrandId ?? null,
@@ -143,7 +144,17 @@ export const SearchCategoryFilter = ({
             result_per_page: 1000,
         };
 
-        ApiService.storeFilterCategory(payload)
+        if(filterVert){
+        ApiService.storeFilterVertical(payload)
+            .then((res) => {
+                if (res.message === "Fetch successfully.") {
+                    setProductData(res.payload_FilterByProductVertical);
+                    setProductActualData(res.payload_FilterByProductVertical);
+                }
+            })
+            .catch((err) => { });
+        }else{
+            ApiService.storeFilterCategory(payload)
             .then((res) => {
                 if (res.message === "Fetch successfully.") {
                     setProductData(res.payload_FilterByProductCategory);
@@ -151,6 +162,7 @@ export const SearchCategoryFilter = ({
                 }
             })
             .catch((err) => { });
+        }
     };
 
     useEffect(() => {

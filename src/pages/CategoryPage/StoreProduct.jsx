@@ -164,7 +164,7 @@ export const StoreProductCategory = () => {
                                         >
                                             <SearchCategoryFilter
                                                 categorySlug={category}
-                                                filterVert={filterVert}
+                                                filterVert={null}
                                                 filterCatg={filterCatg}
                                                 setProductData={setProductData}
                                                 setProductActualData={setProductActualData}
@@ -349,7 +349,7 @@ export const StoreProductCategory = () => {
                             </div>
                             <SearchCategoryFilter
                                 categorySlug={category}
-                                filterVert={filterVert}
+                                filterVert={null}
                                 filterCatg={filterCatg}
                                 setProductData={setProductData}
                                 setProductActualData={setProductActualData}

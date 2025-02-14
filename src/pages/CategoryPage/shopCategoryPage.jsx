@@ -161,8 +161,8 @@ export const ShopCategoryPage = () => {
                       className={`${styles.filterSticky} hideInMobile col-3 position-sticky flex-shrink-1 d-inline-flex overflow-y-auto`}
                     >
                       <SearchCategoryFilter
-                        filterVert={filterVert}
-                        filterCatg={filterCatg}
+                        filterVert={verticalSlug}
+                        filterCatg={null}
                         setProductData={setProductData}
                         setProductActualData={setProductActualData}
                         brands={brands}
@@ -326,8 +326,8 @@ export const ShopCategoryPage = () => {
                 </div>
               </div>
               <SearchCategoryFilter
-                filterVert={filterVert}
-                filterCatg={filterCatg}
+                filterVert={verticalSlug}
+                filterCatg={null}
                 setProductData={setProductData}
                 setProductActualData={setProductActualData}
                 brands={brands}

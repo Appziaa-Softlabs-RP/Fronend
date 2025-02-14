@@ -700,6 +700,19 @@ ApiService.storeFilterCategory = function (data) {
   );
 };
 
+ApiService.storeFilterVertical = function (data) {
+  const cacheKey = "/store/FilterByProductVertical" + JSON.stringify(data);
+  return cacheFetch(
+    "/store/FilterByProductVertical",
+    {
+      method: "post",
+      body: data,
+      headers: { "Content-Type": "application/json" },
+    },
+    cacheKey,
+  );
+};
+
 ApiService.storeFilterByBrand = function (data) {
   const cacheKey = "/store/FilterByProducBrand" + JSON.stringify(data);
   return cacheFetch(
