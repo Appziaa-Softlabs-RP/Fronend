@@ -31,6 +31,7 @@ export const ShopCategoryPage = () => {
   const [apiPayload, setApiPayload] = useState(null);
   const [isDescendingOrder, setIsDscendingOrder] = useState(false);
   const [isAscendingOrder, setIsAscendingOrder] = useState(false);
+  const [brands, setBrands] = useState([]);
 
   const resetSortFilter = () => {
     let originalProduct = [...ProductActualData];
@@ -56,7 +57,7 @@ export const ShopCategoryPage = () => {
   const priceDescending = () => {
     let originalProduct = [...ProductData];
     originalProduct.sort((p1, p2) =>
-      parseInt(p1.mrp) > parseInt(p2.mrp) 
+      parseInt(p1.mrp) > parseInt(p2.mrp)
         ? 1
         : parseInt(p1.mrp) < parseInt(p2.mrp)
           ? -1
@@ -71,9 +72,10 @@ export const ShopCategoryPage = () => {
     ApiService.StoreCategoryProd(data)
       .then((res) => {
         if (res.message === "Fetch successfully.") {
-          setProductData(res.payload_VerticalByProduct);
-          setProductActualData(res.payload_VerticalByProduct);
+          setProductData(res.payload_VerticalByProductNew?.products);
+          setProductActualData(res.payload_VerticalByProductNew?.brands);
           setLoading(false);
+          setBrands(res.payload_VerticalByProductNew?.brands);
           setApiPayload((prev) => ({ ...prev, page: 2 }));
         }
       })
@@ -88,7 +90,7 @@ export const ShopCategoryPage = () => {
         if (res.message === "Fetch successfully.") {
           let prevProdArr = [];
           prevProdArr = ProductData;
-          let newProd = res.payload_VerticalByProduct;
+          let newProd = res.payload_VerticalByProductNew?.products;
           for (let i = 0; i < newProd.length; i++) {
             prevProdArr.push(newProd[i]);
           }
@@ -146,7 +148,7 @@ export const ShopCategoryPage = () => {
                 />
               </div>
             )} */}
-            {loading && <AdaptiveLoader />}
+          {loading && <AdaptiveLoader />}
           {loading === false && (
             <div
               className={`d-inline-flex flex-column col-12 mb-3 `}
@@ -163,6 +165,7 @@ export const ShopCategoryPage = () => {
                         filterCatg={filterCatg}
                         setProductData={setProductData}
                         setProductActualData={setProductActualData}
+                        brands={brands}
                       />
                     </div>
                   )}
@@ -327,6 +330,7 @@ export const ShopCategoryPage = () => {
                 filterCatg={filterCatg}
                 setProductData={setProductData}
                 setProductActualData={setProductActualData}
+                brands={brands}
               />
               <div
                 className={`${styles.productBtnBox} d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}

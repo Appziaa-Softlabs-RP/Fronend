@@ -115,7 +115,7 @@ export const SearchCategoryFilter = ({
     const searchBrandName = (val) => {
         setSearchBrand(val);
         if (val?.length > 0) {
-            var result = brands?.filter(searchByFirstName);
+            var result = allBrands?.filter(searchByFirstName);
             setAllBrands(result);
         } else {
             setAllBrands(brands);
@@ -219,6 +219,7 @@ export const SearchCategoryFilter = ({
                                 <input
                                     type="search"
                                     placeholder="Search Brand"
+                                    onChange={(e)=>searchBrandName(e.target.value)}
                                     className={`${styles.filterSearchInput} col-12 d-inline-flex p-3`}
                                 />
                             </li>

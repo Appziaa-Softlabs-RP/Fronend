@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import AdaptiveLoader from "../../Components/AdaptiveLoader/AdaptiveLoader";
 import { SearchCategoryFilter } from "../../Components/Filter/SearchCategoryFilter";
 import { Footer } from "../../Components/Footer/Footer";
 import { Header } from "../../Components/Header/Header";
-import { ProductListLoader } from "../../Components/Loader/Loader";
 import { PageHeader } from "../../Components/PageHeader/PageHeader";
 import { ProductCard } from "../../Components/ProductCard/ProductCard";
 import {
@@ -16,7 +16,6 @@ import {
 import { enviroment } from "../../enviroment";
 import ApiService from "../../services/ApiService";
 import styles from "./CategoryPage.module.css";
-import AdaptiveLoader from "../../Components/AdaptiveLoader/AdaptiveLoader";
 
 export const StoreProductCategory = () => {
     const locationState = useLocation();
