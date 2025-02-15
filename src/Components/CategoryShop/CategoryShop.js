@@ -38,6 +38,29 @@ export default function CategoryShop() {
       .catch((err) => { });
   }, []);
 
+  const getCatIcon = (catName) => {
+    switch (catName) {
+      case "Televisions":
+        return "/images/tv.svg";
+      case "Refrigerator":
+        return "/images/fridge.svg";
+      case "Washing Machines":
+        return "/images/washing-machine.svg";
+      case "Air Care":
+        return "/images/air-conditioner.svg";
+      case "Home Appliances":
+        return "/images/old-television.svg";
+      case "Lifestyle":
+        return "/images/cycle.svg";
+      case "Mobiles & Laptops":
+        return "/images/laptop-webcam.svg";
+      case "Sound systems":
+        return "/images/speakers.svg";
+      default:
+        return "/images/tv.svg";
+    }
+  }
+
   return <div style={{
     marginTop: '3rem'
   }}>
@@ -60,6 +83,12 @@ export default function CategoryShop() {
               loop={false}
               nav={true}
               stagePadding={2}
+              responsive={{
+                  0: { items: 2.3 },
+                  768: { items: 2 },
+                  992: { items: 3 },
+                  1210: { items: 6 },
+              }}
             >
               {shopCategory
                 ?.sort((a, b) => b.stock - a.stock)
@@ -76,10 +105,14 @@ export default function CategoryShop() {
                         className={`${styles.imgBox} d-inline-flex align-items-center justify-content-center overflow-hidden`}
                       >
                         <img
-                          src={item.image}
+                          src={getCatIcon(item.name)}
                           onError={(e) => setNoImage(e)}
                           alt={item?.name}
-                          className="object-fit-cover h-100 col-12 d-inline-block start-0 top-0"
+                          className="object-fit-contain h-100 col-12 d-inline-block"
+                          style={{
+                            padding: "25px",
+                            background: "linear-gradient(to left, #1F3461,rgb(10, 82, 236), #1F3461)"
+                          }}
                         />
                       </div>
                       <p
