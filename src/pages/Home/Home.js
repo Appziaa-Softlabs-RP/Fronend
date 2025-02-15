@@ -14,6 +14,7 @@ import { ShopAge } from "../../Components/ShopAge/ShopAge";
 import WhoAreWe from "../../Components/WhoAreWe/WhoAreWe";
 import { HomeCategories } from "../../Components/home-category-products/HomeCategoryProducts";
 import { useApp } from "../../context/AppContextProvider";
+import CategoryShop from "../../Components/CategoryShop/CategoryShop";
 // import WeGrow from "../../Components/WeGrow/WeGrow";
 
 export const Home = () => {
@@ -35,9 +36,9 @@ export const Home = () => {
         {/* hero banner */}
         <HeroBanner />
         {/* what are you looking for ? */}
-        {/* {!isMobile && <LookingFor />} */}
+        {/* {!isMobile && <LookingForBannerLoader />} */}
 
-        {/* {isMobile && <CategoryShop />} */}
+        {isMobile && <CategoryShop />}
 
         <DealShop />
 

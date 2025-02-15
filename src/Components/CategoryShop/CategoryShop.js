@@ -5,8 +5,11 @@ import { enviroment } from "../../enviroment";
 import { useNavigate } from "react-router-dom";
 import { useApp } from "../../context/AppContextProvider";
 import noImage from "../../assets/images/image-not-available.jpg";
+import ReactOwlCarousel from 'react-owl-carousel';
+import 'owl.carousel/dist/assets/owl.carousel.css';
+import 'owl.carousel/dist/assets/owl.theme.default.css';
 
-export const CategoryShop = () => {
+export default function CategoryShop() {
   const [shopCategory, setShopCategory] = useState([]);
   const navigate = useNavigate();
   const appData = useApp();
@@ -32,61 +35,67 @@ export const CategoryShop = () => {
       .then((res) => {
         setShopCategory(res?.payload_verticalList?.vertical);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   }, []);
-  return (
-    <React.Fragment>
-      {shopCategory.length > 0 && (
-        <div className="col-12 d-inline-flex flex-column p-3">
-          <div
-            className={`${styles.categoryBox} col-12 d-inline-flex flex-column py-2`}
-          >
-            {windowWidth === "desktop" && (
-              <h2
-                className={`${styles.categoryHeaderTitle} col-12 d-inline-flex justify-content-center mt-4 mb-3 fs-2 `}
+
+  return <div style={{
+    marginTop: '3rem'
+  }}>
+    {shopCategory?.length > 0 &&
+      <div className={`col-12  ${windowWidth === "desktop" && 'px-3'} d-inline-flex`}>
+        <div className={`${windowWidth === "mobile" && 'p-0'} container`}>
+          <div className={`col-12 ${windowWidth === 'mobile' ? 'px-3' : 'm-0'} d-inline-flex flex-column`}>
+            <div className="titlesWrapper">
+              <h4
+                className={`subTitleLarge col-12`}
               >
                 Shop By Category
-              </h2>
-            )}
-            {windowWidth === "mobile" && (
-              <h2
-                className={`${styles.exploreByCategoryHeader} mb-2 ps-3 d-inline-block col-12 text-black fs-3 py-2`}
-              >
-                Shop By Category
-              </h2>
-            )}
-            <div
-              className={`${styles.lookingContainer} col-12 px-2 d-inline-flex flex-wrap align-items-stretch p-0 row-gap-3`}
-            >
-              {shopCategory.map((item, index) => {
-                return (
-                  <div
-                    key={index}
-                    className={`${styles.categoryblock} d-inline-flex flex-column gap-2`}
-                    onClick={() => getCategoryProd(item?.name, item?.name_url)}
-                  >
-                    <div
-                      className={`${styles.imgBox} d-inline-flex align-items-center justify-content-center overflow-hidden`}
-                    >
-                      <img
-                        src={item.image}
-                        onError={(e) => setNoImage(e)}
-                        alt={item?.name}
-                        className="object-fit-cover h-100 col-12 d-inline-block start-0 top-0"
-                      />
-                    </div>
-                    <p
-                      className={`${styles.categoryProdName} col-12 text-center m-0 fs-6`}
-                    >
-                      {item?.name}
-                    </p>
-                  </div>
-                );
-              })}
+              </h4>
             </div>
+            <ReactOwlCarousel
+              className="owl-theme"
+              margin={5}
+              dots={false}
+              items={2.3}
+              loop={false}
+              nav={true}
+              stagePadding={2}
+            >
+              {shopCategory
+                ?.sort((a, b) => b.stock - a.stock)
+                .map((item, index) => (
+                    <div
+                      key={index}
+                      className={`${styles.categoryblock} d-inline-flex flex-column gap-2 w-100`}
+                      onClick={() => getCategoryProd(item?.name, item?.name_url)}
+                      style={{
+                        zIndex: 100
+                      }}
+                    >
+                      <div
+                        className={`${styles.imgBox} d-inline-flex align-items-center justify-content-center overflow-hidden`}
+                      >
+                        <img
+                          src={item.image}
+                          onError={(e) => setNoImage(e)}
+                          alt={item?.name}
+                          className="object-fit-cover h-100 col-12 d-inline-block start-0 top-0"
+                        />
+                      </div>
+                      <p
+                        className={`${styles.categoryProdName} col-12 text-center m-0`}
+                        style={{
+                          fontSize: "12px"
+                        }}
+                      >
+                        {item?.name}
+                      </p>
+                    </div>
+                ))}
+            </ReactOwlCarousel>
           </div>
         </div>
-      )}
-    </React.Fragment>
-  );
+      </div>
+    }
+  </div>
 };
