@@ -138,7 +138,7 @@ const VideoPlayer = () => {
           className="custom-video"
           loop
           style={{
-            display: video?.thumbnail ? (!(isPlaying && hasPlayed) ? 'none' : 'block') : 'block'
+            display: video?.thumbnail ? (!(isPlaying|| hasPlayed) ? 'none' : 'block') : 'block'
           }}
           playsInline
           onLoadedMetadata={() => setDuration(videoRef.current.duration)}
