@@ -47,7 +47,7 @@ const VideoPlayer = () => {
     return `https://www.youtube.com/embed/${videoId}?rel=0`
   }
 
-  const VideoElement = ({ url, index }) => {
+  const VideoElement = ({ url, index, video }) => {
     const [isPlaying, setIsPlaying] = useState(false)
     const [volume, setVolume] = useState(1)
     const [progress, setProgress] = useState(0)
@@ -124,10 +124,22 @@ const VideoPlayer = () => {
 
     return (
       <div className="position-relative videoElement h-100" onClick={!isPlaying ? handlePlay : undefined}>
+        {video?.thumbnail && !isPlaying && !hasPlayed && (
+          <img src={video?.thumbnail}
+            style={{
+              objectFit: "cover",
+              height: "100%",
+              width: "100%",
+            }}
+            alt="Video Thumbnail" />
+        )}
         <video
           ref={videoRef}
           className="custom-video"
           loop
+          style={{
+            display: video?.thumbnail ? (!(isPlaying && hasPlayed) ? 'none' : 'block') : 'block'
+          }}
           playsInline
           onLoadedMetadata={() => setDuration(videoRef.current.duration)}
           onTimeUpdate={handleProgress}
@@ -247,7 +259,7 @@ const VideoPlayer = () => {
             <SwiperSlide key={index}>
               <Card className="h-100">
                 <div style={{ aspectRatio: "3/5", overflow: "hidden" }}>
-                  <VideoElement url={video?.video_url} index={index} />
+                  <VideoElement url={video?.video_url} index={index} video={video} />
                 </div>
               </Card>
             </SwiperSlide>
