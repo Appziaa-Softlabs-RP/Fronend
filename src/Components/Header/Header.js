@@ -20,12 +20,12 @@ import {
 } from "../siteIcons";
 import styles from "./Header.module.css";
 
-import { Autoplay, EffectFade, Navigation } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
 import { useAppStore } from "../../store";
 import { HeaderNavLoader } from "../Loader/Loader";
 
-import "swiper/css";
+import ReactOwlCarousel from "react-owl-carousel";
+import "owl.carousel/dist/assets/owl.carousel.css";
+import "owl.carousel/dist/assets/owl.theme.default.css";
 
 export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
   const appData = useApp();
@@ -107,7 +107,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
               setSearchProdList(res.payload_searchAI);
             }
           })
-          .catch((err) => {});
+          .catch((err) => { });
       }, 500);
     }
   };
@@ -268,19 +268,58 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
       <div
         className={`hideInMobile col-12 d-inline-flex flex-column`}
         style={{
-          position: "relative",
+          position: "sticky",
+          top: "0px",
+          zIndex: "150",
+          background: "#a8191e",
         }}
       >
-        <div
-          className={`w-full flex items-center justify-center text-center py-2`}
-          style={{
-            background: "#a8191e",
-            color: "yellow",
-          }}
-        >
-          <span className={`text-sm md:text-base font-medium`}>
-            Shipping Across India || Same Day Delivery in Bengaluru
-          </span>
+        <div className="hideInMobile">
+          <ReactOwlCarousel
+            className={`${styles.brandSilder} brandSilder col-12 owl-theme`}
+            margin={10}
+            dots={false}
+            items={`1`}
+            loop={true}
+            nav={false}
+            autoplay={true}
+            stagePadding={`0`}
+          >
+            <div
+              className={`w-full flex items-center justify-center text-center m-0`}
+              style={{
+                background: "#a8191e",
+                color: "yellow",
+              }}
+            >
+              <span className={`text-sm md:text-base font-medium gap-2`}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              >
+                <span>We are also available on Amazon</span>
+                <img src="/amazon.svg" alt="amazon"
+                  style={{
+                    maxHeight: '40px',
+                    width: "auto"
+                  }}
+                />
+              </span>
+            </div>
+            <div
+              className={`w-full flex items-center justify-center text-center py-2 m-0`}
+              style={{
+                background: "#a8191e",
+                color: "yellow",
+              }}
+            >
+              <span className={`text-sm md:text-base font-medium`}>
+                Shipping Across India || Same Day Delivery in Bengaluru
+              </span>
+            </div>
+          </ReactOwlCarousel>
         </div>
         <div
           className={`${styles.headerRow} col-12 d-inline-flex align-items-center`}
@@ -589,7 +628,7 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
             className={`${styles.SubMenuList} d-inline-flex flex-column gap-1`}
             style={{
               position: "absolute",
-              top: "150px",
+              top: "154px",
               left: hoveredPosition.left,
               zIndex: 999,
             }}
