@@ -67,7 +67,7 @@ export const Filter = ({
           getAgeBrandOption(allBrand);
         }
       })
-     
+
       getAgeBrandOption();
 
   }, [filterCatg]);
