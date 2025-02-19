@@ -1,16 +1,16 @@
+import React, { useEffect, useState, useRef } from "react";
+import ReactReactOwlCarousel from "react-owl-carousel";
 import "owl.carousel/dist/assets/owl.carousel.css";
 import "owl.carousel/dist/assets/owl.theme.default.css";
-import React, { useEffect, useRef, useState } from "react";
-import InfiniteScroll from "react-infinite-scroll-component";
-import ReactReactOwlCarousel from "react-owl-carousel";
-import { useApp } from "../../context/AppContextProvider";
-import { enviroment } from "../../enviroment";
-import ApiService from "../../services/ApiService";
-import { ProductCard } from "../ProductCard/ProductCard";
 import styles from "./SubCategory.module.css";
+import ApiService from "../../services/ApiService";
+import { enviroment } from "../../enviroment";
+import { ProductCard } from "../ProductCard/ProductCard";
+import { useApp } from "../../context/AppContextProvider";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 let currentCat = "";
-export const SubCategory = ({ verticalSlug }) => {
+export const SubCategory = ({ categoryID }) => {
   const slideRef = useRef([]);
   const [shopCategory, setShopCategory] = useState([]);
   const [subShopCategory, setSubShopCategory] = useState([]);
@@ -80,11 +80,11 @@ export const SubCategory = ({ verticalSlug }) => {
   const fetchProducts = () => {
     const catpayload = {
       store_id: parseInt(enviroment.STORE_ID),
-      vertical_slug: verticalSlug,
+      vertical_id: categoryID,
     };
     const payload = {
       store_id: parseInt(enviroment.STORE_ID),
-      vertical_slug: verticalSlug,
+      vertical_id: categoryID,
       page: 1,
       result_per_page: 10,
     };
@@ -120,10 +120,7 @@ export const SubCategory = ({ verticalSlug }) => {
           let newProduct = [...prevProdArr];
           setShopCategoryProd(newProduct);
         })
-        .catch((err) => {})
-        .finally(() => {
-          setApiPayload((prev) => ({ ...prev, page: pageCount }));
-        });
+        .catch((err) => {});
     } else if (activeApi === "categorySub") {
       ApiService.CategoryBySubProd(apiPayload)
         .then((res) => {
@@ -136,10 +133,7 @@ export const SubCategory = ({ verticalSlug }) => {
           let newProduct = [...prevProdArr];
           setShopCategoryProd(newProduct);
         })
-        .catch((err) => {})
-        .finally(() => {
-          setApiPayload((prev) => ({ ...prev, page: pageCount }));
-        });
+        .catch((err) => {});
     } else if (activeApi === "subChild") {
       ApiService.CategoryByProd(apiPayload)
         .then((res) => {
@@ -152,10 +146,7 @@ export const SubCategory = ({ verticalSlug }) => {
           let newProduct = [...prevProdArr];
           setShopCategoryProd(newProduct);
         })
-        .catch((err) => {})
-        .finally(() => {
-          setApiPayload((prev) => ({ ...prev, page: pageCount }));
-        });
+        .catch((err) => {});
     }
   };
 
@@ -180,8 +171,8 @@ export const SubCategory = ({ verticalSlug }) => {
   }, [shopCategory]);
   return (
     <React.Fragment>
-      {shopCategory?.length ? (
-        <div className="hideInDesktop">
+      {shopCategory?.length && windowWidth === "mobile" ? (
+        <React.Fragment>
           <div
             className={`${styles.lookingContainer} ps-3 py-3 col-12 d-inline-flex align-items-stretch gap-3`}
           >
@@ -214,7 +205,6 @@ export const SubCategory = ({ verticalSlug }) => {
                   All
                 </p>
               </div>
-
               {shopCategory?.map((item, index) => {
                 return (
                   <div
@@ -274,11 +264,13 @@ export const SubCategory = ({ verticalSlug }) => {
               })}
             </div>
           )}
-        </div>
+        </React.Fragment>
       ) : null}
 
       <div
-        className={`col-12 d-inline-flex mt-4`}
+        className={`col-12 d-inline-flex ${
+          windowWidth === "desktop" && "mt-5"
+        }`}
       >
         <div className={`${windowWidth === "mobile" && "p-0"} container`}>
           <InfiniteScroll

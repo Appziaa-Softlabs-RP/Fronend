@@ -18,7 +18,6 @@ import ApiService from "../../services/ApiService";
 import styles from "./CategoryPage.module.css";
 
 export const StoreProductCategory = () => {
-    const locationState = useLocation();
     const { category } = useParams();
     const navigate = useNavigate();
     const [ProductData, setProductData] = useState([]);
@@ -49,6 +48,18 @@ export const StoreProductCategory = () => {
                     ? -1
                     : 0
         );
+
+        // Move out of stock items to the end
+        originalProduct.sort((p1, p2) => {
+            if (p1.stock <= 0) {
+                return 1;
+            } else if (p2.stock <= 0) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+
         setProductData(originalProduct);
         setIsAscendingOrder(true);
         setIsDscendingOrder(false);
@@ -56,13 +67,27 @@ export const StoreProductCategory = () => {
 
     const priceDescending = () => {
         let originalProduct = [...ProductData];
-        originalProduct.sort((p1, p2) =>
-            parseInt(p1.mrp) > parseInt(p2.mrp)
-                ? 1
-                : parseInt(p1.mrp) < parseInt(p2.mrp)
-                    ? -1
-                    : 0
-        );
+        originalProduct.sort((p1, p2) => {
+            if (parseInt(p1.mrp) > parseInt(p2.mrp)) {
+                return 1;
+            } else if (parseInt(p1.mrp) < parseInt(p2.mrp)) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+
+        // Move out of stock items to the end
+        originalProduct.sort((p1, p2) => {
+            if (p1.stock <= 0) {
+                return 1;
+            } else if (p2.stock <= 0) {
+                return -1;
+            } else {
+                return 0;
+            }
+        });
+
         setProductData(originalProduct);
         setIsDscendingOrder(true);
         setIsAscendingOrder(false);
@@ -111,12 +136,8 @@ export const StoreProductCategory = () => {
             category_slug: category,
         };
         setFilterVert(category)
-        // setFilterVert(locationState?.state?.verticalId);
-        // setFilterCatg(locationState?.state?.categoryId);
         payload.page = 1;
         payload.result_per_page = 10;
-        console.log(payload);
-        console.log(locationState);
         setApiPayload(payload);
         fetchProductsList(payload);
     }, [category, navigate]);
@@ -136,19 +157,6 @@ export const StoreProductCategory = () => {
             <div
                 className={`mt-4 col-12 d-inline-flex flex-column`}>
                 <div className="hero">
-                    {locationState?.state?.banner !== "" &&
-                        locationState?.state?.banner !== null &&
-                        locationState?.state?.banner !== undefined && (
-                            <div
-                                className={`${styles.ageBannerRow} col-12 d-inline-flex mb-4`}
-                            >
-                                <img
-                                    src={locationState.state.banner[0]?.image}
-                                    alt="Banner"
-                                    className="col-12 d-inline-block"
-                                />
-                            </div>
-                        )}
                     {loading && <ProductListLoader />}
                     {loading === false && (
                         <div

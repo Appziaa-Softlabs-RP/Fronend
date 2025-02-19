@@ -555,7 +555,8 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                           whiteSpace: 'nowrap',
                         }}
                       >
-                        <span
+                        <a
+                          href={`/store/${item?.name_url}`}
                           className={`${styles.menuNameText}`}
                           style={{
                             overflow: 'hidden',
@@ -563,10 +564,12 @@ export const Header = ({ setAsideOpen, asideOpen, setFetchedNavItems }) => {
                             whiteSpace: 'nowrap',
                             display: 'inline-block',
                             verticalAlign: 'middle',
+                            color: 'black',
+                            textDecoration: "none"
                           }}
                         >
                           {item.name}
-                        </span>
+                        </a>
                         <BackArrowIcon
                           color="#000"
                           role="button"

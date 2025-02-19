@@ -29,6 +29,3 @@
 .productsItemsName.active{
     border: 1px solid var(--PRIMARY_COLOR);
 }
-.specialActive{
-    border: 1px solid var(--PRIMARY_COLOR);
-}

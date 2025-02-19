@@ -18,7 +18,7 @@ import ApiService from "../../services/ApiService";
 import styles from "./CategoryPage.module.css";
 
 export const ShopCategoryPage = () => {
-  const { categorySlug, verticalSlug } = useParams();
+  const { verticalSlug } = useParams();
 
   const [ProductData, setProductData] = useState([]);
   const [ProductActualData, setProductActualData] = useState([]);
@@ -47,6 +47,18 @@ export const ShopCategoryPage = () => {
           ? -1
           : 0
     );
+
+    // Move out of stock items to the end
+    originalProduct.sort((p1, p2) => {
+      if (p1.stock <= 0) {
+        return 1;
+      } else if (p2.stock <= 0) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
     setProductData(originalProduct);
     setIsAscendingOrder(true);
     setIsDscendingOrder(false);
@@ -61,6 +73,18 @@ export const ShopCategoryPage = () => {
           ? -1
           : 0
     );
+
+    // Move out of stock items to the end
+    originalProduct.sort((p1, p2) => {
+      if (p1.stock <= 0) {
+        return 1;
+      } else if (p2.stock <= 0) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
     setProductData(originalProduct);
     setIsDscendingOrder(true);
     setIsAscendingOrder(false);
@@ -105,10 +129,10 @@ export const ShopCategoryPage = () => {
     setLoading(true);
     const payload = {
       store_id: parseInt(enviroment.STORE_ID),
-      vertical_slug: categorySlug,
+      vertical_slug: verticalSlug,
     };
-    setFilterVert(categorySlug);
-    setFilterCatg(categorySlug);
+    setFilterVert(verticalSlug);
+    setFilterCatg(verticalSlug);
     payload.page = 1;
     payload.result_per_page = 10;
     console.log(payload);
@@ -168,38 +192,38 @@ export const ShopCategoryPage = () => {
                 <div
                   className={`${styles.productContainer
                     } flex-shrink-1 d-inline-flex flex-wrap`}>
-                    <div
-                      className={`${styles.sortContainer} hideInMobile col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}
+                  <div
+                    className={`${styles.sortContainer} hideInMobile col-12 d-inline-flex align-items-end flex-column gap-2 p-3 px-4 mb-3`}
+                  >
+                    <span
+                      onClick={() => resetSortFilter()}
+                      role="button"
+                      className={`${styles.clearAllBtn} d-inline-flex`}
                     >
-                      <span
-                        onClick={() => resetSortFilter()}
-                        role="button"
-                        className={`${styles.clearAllBtn} d-inline-flex`}
-                      >
-                        Clear All
+                      Clear All
+                    </span>
+                    <div className="col-12 d-inline-flex justify-content-end align-items-center">
+                      <span className={`${styles.sortBy} d-inline-flex me-2`}>
+                        Sort By
                       </span>
-                      <div className="col-12 d-inline-flex justify-content-end align-items-center">
-                        <span className={`${styles.sortBy} d-inline-flex me-2`}>
-                          Sort By
-                        </span>
-                        <span
-                          onClick={() => priceDescending()}
-                          role="button"
-                          className={`${styles.priceLow} ${isDescendingOrder ? "fw-bold" : ""
-                            } d-inline-flex px-1`}
-                        >
-                          Price: Low to High
-                        </span>
-                        <span
-                          onClick={() => priceAscending()}
-                          role="button"
-                          className={`${styles.priceLow} d-inline-flex px-1 ${isAscendingOrder ? "fw-bold" : ""
-                            }`}
-                        >
-                          Price: High to Low
-                        </span>
-                      </div>
+                      <span
+                        onClick={() => priceDescending()}
+                        role="button"
+                        className={`${styles.priceLow} ${isDescendingOrder ? "fw-bold" : ""
+                          } d-inline-flex px-1`}
+                      >
+                        Price: Low to High
+                      </span>
+                      <span
+                        onClick={() => priceAscending()}
+                        role="button"
+                        className={`${styles.priceLow} d-inline-flex px-1 ${isAscendingOrder ? "fw-bold" : ""
+                          }`}
+                      >
+                        Price: High to Low
+                      </span>
                     </div>
+                  </div>
 
                   {ProductData?.length > 0 ? (
                     <InfiniteScroll
@@ -340,24 +364,24 @@ export const ShopCategoryPage = () => {
             </div>
           )}
 
-          <div
-            className={`${styles.productBtnBox} hideInDesktop d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}
+        <div
+          className={`${styles.productBtnBox} hideInDesktop d-inline-flex align-items-stretch col-12 position-sticky bottom-0 start-0`}
+        >
+          <span
+            className={`${styles.goCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
+            onClick={() => setSortPopup(true)}
           >
-            <span
-              className={`${styles.goCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
-              onClick={() => setSortPopup(true)}
-            >
-              {" "}
-              <SortByIcon />
-              Sort By
-            </span>
-            <span
-              className={`${styles.AddCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
-              onClick={() => setFilterPopup(true)}
-            >
-              <FilterIcon /> Filters
-            </span>
-          </div>
+            {" "}
+            <SortByIcon />
+            Sort By
+          </span>
+          <span
+            className={`${styles.AddCartBtn} position-relative col-6 d-inline-flex align-items-center justify-content-center gap-2`}
+            onClick={() => setFilterPopup(true)}
+          >
+            <FilterIcon /> Filters
+          </span>
+        </div>
 
       </div>
       <Footer />
